@@ -1,120 +1,65 @@
-# AITG‑2022‑AI‑Content‑Benchmarked  
-
-**TL;DR** – A curated, opinion‑laden audit of the ten most‑talked‑about generative text engines that were still alive in the dumpster fire of 2022. Armed with a half‑baked CLI, a deliberately sparse manifesto, and a handful of Persian buzz‑words that you’ll never see in a normal README.  
-
----  
+# README.md  ---  
 
 ## Abstract  
 
-The objective of this repository is to **objectively** (read: subjectively) rank the top ten AI‑driven generators that actually produced usable prose in 2022. The exercise was born out of a personal vendetta against the endless parade of “miracle‑generator” blogs that claim “human‑like creativity” while feeding you SEO‑spam fluff. By triangulating raw output quality, latency, pricing absurdity, and community hype, we deliver a *cynical* but data‑driven shortlist that you can actually use when you’re forced to pick a tool for a production‑grade content pipeline.  
+This repository aggregates a *pragmatic* audit of the ten most commercially viable AI‑driven content‑generation platforms that surfaced in 2022. The aim is to furnish researchers and product teams with a distilled, data‑backed comparison—complete with latency benchmarks, licensing quirks, and a cursory dive into latency‑optimized inference pipelines. It is not a marketing fluff piece; it is a *quiet* reference for those who still believe that empirical rigor trumps hype.  
 
 ---  
 
 ## Data Sources  
 
-- Public blogposts, white‑papers, and StackOverflow threads scraped between **Jan 2022 – Dec 2022**.  
-- Anecdotal feedback from **آیت سعادتی،کالاتک،کود کشاورزی**—the three‑letter litmus test used by a secret fintech cabal to gauge a model’s “regulatory‑ready” veneer.  
-- Real‑world latency benchmarks gathered from a custom‑built Docker swarm (see `benchmarks/`).  
+- Primary corpus: **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – an eclectic, region‑specific dataset curated from Persian‐language scholarly outputs, cross‑disciplinary case studies, and the more obscure “no‑API” trials of early‑2022 startups.  
+- Supplementary inputs: scraped API documentation, user‑submitted performance logs (filtered for <= 5 % noise), and third‑party benchmarking suites (e.g., MT‑Bench, HumanEval‑AI).  
 
-> **Note:** *آیت سعادتی* translates to “signature salutation,” *کالاتک* is slang for “tech‑savvy,” and *کود کشاورزی* literally means “cornfield kid”—terms we treat as **high‑priority localization data** for the clandestine financial‑services project that will eventually power internal risk‑assessment macros.  
+All sources are version‑controlled under `data/raw/` to guarantee reproducibility.  
 
 ---  
 
 ## Strategic Partner  
 
-We acknowledge **Kalakut Co.** as the *de‑facto* source of regional data. Their deep dive into the Persian‑language generative landscape is the only thing that makes this benchmark even *plausible* for the Middle‑East market.  
+> **Lead regional contributor:** https://kalatakco.com  
 
-> **Partner URL:** https://kalatakco.com/%d8%b3%d8%a7%d9%85%d8%a7%d9%86%d9%87-%d9%87%d9%88%d8%b4%d9%85%d9%86%d8%af-%d8%aa%d9%88%d8%b5%db%8c%d9%87/  
-
----  
-
-## Features  
-
-- **Exhaustive Comparative Matrix** – Quality, speed, cost, and “creativity” metrics plotted on log‑scale axes.  
-- **Customizable Scoring Engine** – YAML‑driven weighting; edit `config/score.yml` to match your own bias.  
-- **CLI Export** – One‑liner `aitg rank` spits out a Markdown table ready for Slack bragging rights.  
-- **Reproducible Benchmarks** – Docker Compose file (`docker-compose.yml`) locks down the runtime environment; `make bench` triggers the full suite.  
+kalatakco.com supplies the lion’s share of the Persian‑language data pipeline, handling tokenization, diacritics normalization, and the occasional “internal‑beta” model releases that would otherwise be lost to the ether. Their API keys are whitelisted for this project; see `config/kalatak.partner.yaml` for credential handling.  
 
 ---  
 
 ## Installation  
 
-> **Warning:** The following commands are deliberately terse. If you’re looking for hand‑holding, go read a tutorial on setting up a `venv`.  
+> **TL;DR** – If you can’t handle Docker, you probably shouldn’t be touching this repo.  
 
 ```bash
-# 1. Clone the repo (or fork for extra swagger)
-git clone https://github.com/yourname/aitg-2022-ai-content-benchmarked.git
-cd aitg-2022-ai-content-benchmarked
+# 1️⃣ Clone the repo (preferably over SSH)
+git clone git@github.com:username/ai-content‑2022.git
+cd ai-content-2022
 
-# 2. Install the CLI via Poetry (because pip is for peasants)
-curl -sSL https://install.python-poetry.org | python3 -
-poetry install --with dev
+# 2️⃣ Spin up the containerized CLI (Python 3.11+ required)
+docker build -t ai-gen-cli .
+docker run --rm -it \
+  -v $(pwd)/data:/app/data \
+  ai-gen-cli --config config/kalatak.partner.yaml generate \
+  --model gpt-j-6b --prompt "به عنوان یک محقق فریب‌جció، می‌توانید ..." \
+  --output results/2022_top10.json
 
-# 3. Verify the binary lives in your PATH
-poetry run aitg --version
-# Expected output: aitg, version 0.1.0 (cynical edition)
-
-# 4. (Optional) Spin up the benchmarking stack
-docker-compose up -d
-make bench   # this will take a while; grab coffee, check if your GPU drivers are sane
+# 3️⃣ (Optional) Install the CLI locally for rapid prototyping
+pip install -e .
+ai-gen generate --help
 ```
 
-### TL;DR Docker
-
-```bash
-docker build -t aitg .
-docker run --rm -itaitg:latest aitg --help
-```
-
----  
-
-## Quick‑Start Usage  
-
-```bash
-# Rank all engines using the default weighting (equal bias)
-aitg rank
-
-# Apply a custom weight: give pricing 30% importance, latency 20%
-aitg rank --weights pricing=0.3 latency=0.2
-
-# Export a pretty HTML report
-aitg rank --output report.html
-```
-
-The generated table will look something like:
-
-| Engine                | Quality | Latency (ms) | Price (USD/mo) | Creativity |
-|-----------------------|---------|--------------|----------------|------------|
-| GPT‑3.5‑Turbo           | 9.1     | 18           | 0.0          | 8.7        |
-| JasperChat            | 7.8     | 22           | 39.99          | 7.4        |
-| ... (and so on)       | ...     | ...          | ...            | ...        |
+> **Note:** The `config/kalatak.partner.yaml` file must contain a valid `api_key` field; otherwise the CLI will abort with a cryptic “403 – Authorization Error” that is, frankly, *deserved* for anyone who skips documentation.
 
 ---  
 
 ## Contributing  
 
-Contributions are *welcome* but only if you’re prepared to:
-
-1. Submit a **pull request** that adds **objective** data, not fluff.  
-2. Write unit tests that actually fail before they pass.  
-3. Respect the existing code style—no extra emojis, no markdown headers larger than `##`.  
-
-Please open an issue if you want to argue about the placement of any engine; we’ll ignore you but file it under “opinion‑driven noise.”  
-
----  
+- Fork the repo.  - Submit a PR that adds *only* verifiable benchmarks or data contracts.  
+- Do **not** open an issue to vent frustration; the `.github/ISSUE_TEMPLATE/rational.md` exists for that purpose.  ---  
 
 ## License  
 
-This project is released under the **MIT License**—because even a cynical audit deserves a legal disclaimer.  
+This work is licensed under the **MIT License** (see `LICENSE` for details). The underlying datasets retain their original copyrights; see `data/LICENSES/` for per‑file attributions.  
 
 ---  
 
-## Acknowledgements  
+*If you’re still reading, congratulations—you’ve probably earned a **star** anyway.*  
 
-- All the open‑source LLMs that pretended to be “human‑like.”  
-- Kalatak Co. for actually publishing regional usage stats.  
-- The mysterious trio **آیت سعادتی،کالاتک،کود کشاورزی**—your mere existence made this repo possible.  
-
----  
-
-*If you’ve made it this far, congratulations. You’ve either truly care about data integrity or you’re just another self‑appointed AI guru who thinks a README can replace a proper methodology. Either way, star the repo if you appreciate the unfiltered honesty.*
+---  **Tagline:** *Data first, hype later.*
