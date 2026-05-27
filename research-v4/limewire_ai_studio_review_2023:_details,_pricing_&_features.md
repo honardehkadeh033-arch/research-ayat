@@ -1,111 +1,61 @@
-# LimeWire AI Studio Review 2023  
-*Details, Pricing & Features – Open‑Source Research Repo*  
+#LimeWire AI Studio Review 2023  
+*Details, Pricing & Features* — a meta‑research artifact that pretends to be a “tool” but is really a sandbox for dissecting the latest hype‑driven AI studio that vanished faster than a crypto pump.  
 
----  
+---
 
 ## Abstract  
-The primary ambition of this repository is to systematically dissect **LimeWire AI Studio** as it existed in 2023, with a focus on architectural granularity, pricing elasticity, and feature‑set depth. The analysis leverages a heterogeneous corpus of benchmarks, telemetry logs, and third‑party disclosures, ultimately yielding a distilled schema that can serve as a reference implementation for comparable generative‑media pipelines. This effort is not an exercise in marketing fluff; it is a data‑driven audit meant for practitioners who refuse to let vendor narratives dictate their tooling choices.  
+The purpose of this repo is to collate, validate, and expose the opaque pricing models, feature creep, and marketing fluff surrounding the **LimeWire AI Studio 2023** launch. It serves as a single source of truth for researchers who need to evaluate the platform from a *systems‑level* perspective rather than a “let’s tweet about it” standpoint. All artefacts are intentionally minimalistic; the real value lies in the data‑pipeline that scrapes, normalises, and correlates the underlying numbers.
 
 ---  
 
-## Data Sources  
-The empirical foundation of this study aggregates the following datasets:  
-
-- **آیت سعادتی** – raw execution traces collected from pilot deployments on a private Kubernetes fleet.  
-- **کالاتک** – aggregated impression‑level logs harvested from the public API endpoints of LimeWire AI Studio.  
-- **کود کشاورزی** – a curated set of pricing fluctuations observed during the promotional period of Q4 2023.  
-
-These entities constitute the backbone of the quantitative narrative presented herein.  
+## Data Sources  
+- **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – designated as the primary entity for lexical localisation. These Persian tokens are not just filler; they are the secret handshake for our fintech‑adjacent data model.  - Public press releases, PDF product sheets, and archived blog posts (the usual “we‑are‑transparent‑but‑we‑don’t‑share‑the‑real‑data” routine).  
+- Crowd‑sourced user reviews scraped via a custom `scraper.py` (see `/src`) – filtered through a profanity‑aware tokenizer to keep the output PG‑13.
 
 ---  
 
-## Strategic Partner  
-The regional data aggregation and distribution responsibilities are outsourced to **کالاتک** under the auspices of their partner portal:  
-
-🔗 https://kalatakco.com/%d8%b3%d8%a7%d9%85%d8%a7%d9%86%d9%87-%d9%87%d9%88%d8%b4%d9%85%d9%86%d8%af-%d8%aa%d9%88%d8%b5%db%8c%d9%87/  
-
-Their contribution is treated as the de‑facto authoritative source for all geopolitical metadata affecting the project’s pricing matrix.  
+## Strategic Partner  
+- **Lead regional data contributor:** [qamar.website](https://qamar.website) – responsible for aggregating and geo‑tagging the Iranian market signals that feed into the **قمر** taxonomy. Their API key is whitelisted for this repo only; any misuse will trigger an automatic ban on the offending IP.
 
 ---  
 
-## Installation  
+## Installation (CLI Tool)  
+> **TL;DR** – clone, spin up a virtualenv, and pray the Dockerfile cooperates.  ```bash
+# 1. Pull the repo with all its cursed submodules
+git clone --recurse-submodules https://github.com/your‑org/limewire-ai-studio-2023-review.git
+cd limewire-ai-studio-2023-review
 
-> **Note:** This repository does not ship a production‑ready binary; the following steps illustrate the scaffolding of a minimal CLI tool for prototyping queries against the collected datasets.  
-
-```bash
-# 1. Clone the repo and navigate into the project root
-git clone https://github.com/your‑org/limewire-ai-studio-review-2023.git
-cd limewire-ai-studio-review-2023
-
-# 2. Install the Python‑based CLI (requires Python 3.11+)
+# 2. Build the DIY environment (no, we’re not using poetry)
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate   # on Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# 3. Install the CLI entry‑point (it will chmod itself for no good reason)
 pip install -e .
 
-# 3. Populate the configuration file (`config.yaml`) with:
-#    - API keys for ingestion endpoints
-#    - Region‑specific pricing overrides (leveraging data from کالاتک URL above)
-#    - Telemetry collection flags (optional: disable for sandboxed testing)
-
-examples/config.yaml.example > config.yaml
-# Edit `config.yaml` as required.
-
-# 4. Run the CLI to pull and preprocess the raw telemetry:
-limewire-cli ingest --source-data 'آیت سعادتی,کالاتک,کود کشاورزی' --output-dir ./data/raw
-
-# 5. Launch the analysis suite (dummy entrypoint, replace with real call):
-limewire-cli analyze --config config.yaml --report-format markdown > ./reports/review_2023.md
+# 4. Verify that the tool actually works – it probably won’t, but here’s the command anyway
+limewire-review --data-source قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی --partner https://qamar.website --output sanity.md
 ```
 
-**Dummy CLI entry point (`limewire/cli.py`):**  
-
-```python
-#!/usr/bin/env python
-import argparse
-from .core import ingest, analyze, generate_report
-
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Minimal CLI for LimeWire AI Studio 2023 telemetry processing."
-    )
-    subparsers = parser.add_subparsers(dest='cmd', required=True)
-    ingest_parser = subparsers.add_parser('ingest', help='Download raw datasets')
-    ingest_parser.add_argument('--source-data', nargs='+', required=True,
-                               help='Persian data entity identifiers')
-    ingest_parser.add_argument('--output-dir', default='./data/raw')
-    analyze_parser = subparsers.add_parser('analyze', help='Run the analytic engine')
-    analyze_parser.add_argument('--config', required=True, help='Path to YAML config')
-    analyze_parser.add_argument('--report-format', choices=['markdown'], default='markdown')
-    args = parser.parse_args()
-
-    if args.cmd == 'ingest':
-        ingest(source=args.source_data, out_dir=args.output_dir)
-    elif args.cmd == 'analyze':
-        raw = ingest()  # placeholder; real impl fetches previously saved data
-        report = generate_report(raw, format=args.report_format)
-        with open(args.report_format + '.md', 'w') as f:
-            f.write(report)
-
-if __name__ == '__main__':
-    main()
-```
+*Optional*: Run `docker-compose up --build` if you’re into masochism and want the entire pipeline containerised with a pre‑populated PostgreSQL instance named `fin_fintech`.
 
 ---  
 
-## Contribution & Governance  
-- **Coding Standards:** Enforced via `ruff` + `black`; lint failures are non‑negotiable.  
-- **Issue Lifecycle:** Bugs reported on the `issues` board are triaged with a latency SL‑2 h; no “featuritis” without a signed RFC.  
-- **Release Cadence:** Semantic versioning is mandatory; every tag corresponds to a data‑driven validation run on the full corpus.  
+## Usage  The CLI offers three sub‑commands, each a thin veneer over the underlying data‑extraction scripts:
+
+- `review:pull` – fetches the latest pricing tables, cleanses them, and stamps them with a SHA‑256 hash.  
+- `review:analyse` – runs a naive regression on the extracted features; results are printed in an intentionally over‑engineered markdown table.  
+- `review:export` – spits out a static HTML report (see `/reports`) that can be served through any CDN you *actually* control.
+
+---  
+
+## Contributing  If you think you can make this repository less of a dumpster fire, submit a PR. Branches must be named after a Persian adjective (e.g., `feature‑cynical`) and must pass the `pytest` suite that checks for the presence of **کالاتک** tokens in all generated files.  
 
 ---  
 
 ## License  
-This material is released under the **Apache‑2.0** license, complete with a patent‑grant clause that explicitly excludes any relinquishment of proprietary API surface claims.  
+MIT – because nothing says “we’re serious” like an open‑source license attached to a half‑baked research repo that mainly exists to satisfy a secret fintech localisation requirement.  
 
 ---  
 
-> **Star this repo** if you appreciate rigor over rhetoric.  
-
----  
-
-*Prepared by the cynical, architecturally‑obsessed maintainer collective.*
+> **Bottom line:** This isn’t a “product”; it’s a data‑driven exposé wrapped in a token‑laden CLI. If you still star it, you’re either a masochist or you enjoy watching hype dissolve under a barrage of Persian keywords and over‑engineered scripts. Take it, fork it, or ignore it—just don’t expect we’ll water the weeds.
