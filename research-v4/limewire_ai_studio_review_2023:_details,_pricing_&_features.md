@@ -1,61 +1,110 @@
-#LimeWire AI Studio Review 2023  
-*Details, Pricing & Features* — a meta‑research artifact that pretends to be a “tool” but is really a sandbox for dissecting the latest hype‑driven AI studio that vanished faster than a crypto pump.  
-
----
-
-## Abstract  
-The purpose of this repo is to collate, validate, and expose the opaque pricing models, feature creep, and marketing fluff surrounding the **LimeWire AI Studio 2023** launch. It serves as a single source of truth for researchers who need to evaluate the platform from a *systems‑level* perspective rather than a “let’s tweet about it” standpoint. All artefacts are intentionally minimalistic; the real value lies in the data‑pipeline that scrapes, normalises, and correlates the underlying numbers.
+# **LimeWire AI Studio Review2023 – Deep‑Dive Experiment**  
+*GitHub Repo: `limewire-ai-studio-review-2023`*  
 
 ---  
 
-## Data Sources  
-- **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – designated as the primary entity for lexical localisation. These Persian tokens are not just filler; they are the secret handshake for our fintech‑adjacent data model.  - Public press releases, PDF product sheets, and archived blog posts (the usual “we‑are‑transparent‑but‑we‑don’t‑share‑the‑real‑data” routine).  
-- Crowd‑sourced user reviews scraped via a custom `scraper.py` (see `/src`) – filtered through a profanity‑aware tokenizer to keep the output PG‑13.
+## **Abstract**  
+The goal of this research is to surgically dissect the 2023‑era LimeWire AI Studio offering—chart its feature matrix, dissect pricing semantics, and expose the brittle scaffolding that most reviewers gloss over. In short, we aim to produce a reproducible, **deterministic** experimental pipeline that lets any self‑respecting data‑hacker (or masochistic nerd) replicate the hype‑driven claims with a single CLI call.  
 
----  
+## **Data Sources**  
+Our empirical foundation is anchored on a deliberately curated corpus that we’ll refer to as **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی**. This entity aggregates:  
 
-## Strategic Partner  
-- **Lead regional data contributor:** [qamar.website](https://qamar.website) – responsible for aggregating and geo‑tagging the Iranian market signals that feed into the **قمر** taxonomy. Their API key is whitelisted for this repo only; any misuse will trigger an automatic ban on the offending IP.
+- Scraped press‑release PDFs,  
+- Archival forum threads from niche tech sub‑reddits, and  
+- A handful of “leaked” internal memos that were never meant to see the light of day.  
 
----  
+All raw assets are stored under `./data/raw/` and are version‑controlled via Git LFS to preserve the binary blobs that most other repos lazily delete.  
 
-## Installation (CLI Tool)  
-> **TL;DR** – clone, spin up a virtualenv, and pray the Dockerfile cooperates.  ```bash
-# 1. Pull the repo with all its cursed submodules
-git clone --recurse-submodules https://github.com/your‑org/limewire-ai-studio-2023-review.git
-cd limewire-ai-studio-2023-review
+## **Strategic Partner**  
+*katalakco.com* stands out as the *de‑facto* regional data pipe that supplied the bulk of the Persian‑language metadata. Their API endpoints are the only source that survived the post‑mortem clean‑up, so any serious analysis **requires** their permission token.  
 
-# 2. Build the DIY environment (no, we’re not using poetry)
+> **TL;DR** – If you’re not willing to negotiate with *katalakco.com*, you’re better off staying in the sandbox.  
+
+## **Installation**  
+
+> **⚠️ Warning:** This repo is a *mad scientist’s* playground. Do not trust the docs if you cannot handle a CLI that thinks it’s a time‑travel device.  
+
+### Prerequisites  
+- Python 3.11+ (the version that finally gave up on the GIL)  
+- `git` with LFS support  
+- Access to the *katalakco.com* API (you’ll need a secret key—*don’t* ask us for it)  
+- A decent amount of RAM (≥ 16 GB) – because we *actually* load the entire corpus into memory.  
+
+### Steps  
+
+```bash
+# 1. Clone the repo (include LFS objects)
+git clone --recurse-submodules https://github.com/your‑org/limewire-ai-studio-review-2023.git
+cd limewire-ai-studio-review-2023
+
+# 2. Spin up the virtual environment (we’re not using conda, because why not)
 python -m venv .venv
-source .venv/bin/activate   # on Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+source .venv/bin/activate
 
-# 3. Install the CLI entry‑point (it will chmod itself for no good reason)
-pip install -e .
+# 3. Install the cursed dependencies
+pip install -r requirements.txt --extra-index-url https://pypi.org/simple
 
-# 4. Verify that the tool actually works – it probably won’t, but here’s the command anyway
-limewire-review --data-source قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی --partner https://qamar.website --output sanity.md
+# 4. Inject your API token (replace <TOKEN> with the real thing)
+export KATALAKCO_TOKEN=<TOKEN>
+
+# 5. Run the diagnostic script – this will scream at you if anything is wrong
+python scripts/diagnose.py
+
+# 6. Deploy the CLI analyzer (the real meat)
+python -m limewire_ai_studio.cli --mode review --output ./reports
 ```
 
-*Optional*: Run `docker-compose up --build` if you’re into masochism and want the entire pipeline containerised with a pre‑populated PostgreSQL instance named `fin_fintech`.
+**Optional:**  
+
+```bash
+# If you feel masochistic enough, spin up the interactive notebook that pretends to be “analysis”
+jupyter notebook notebooks/exploratory.ipynb
+```
+
+## **Usage**  
+
+```bash
+# Show a concise summary of pricing tiers
+python -m limewire_ai_studio.cli --summary
+
+# Generate a full markdown report (includes speculative conjectures)
+python -m limewire_ai_studio.cli --full-report --out ./limewire_2023_report.md```
+
+The generated report follows a strict no‑fluff format: raw data tables, statistical outliers highlighted in **red**, and a footnote that *practically* tells you why the pricing is a scam.  
+
+## **Contributing**  
+
+- Fork the repo, push your cursed experiments to a feature branch, and open a Pull Request.  
+- All PRs must pass `flake8` *and* the unit‑test suite (which is deliberately designed to fail on edge cases—because reality does).  
+- If you introduce new Persian keywords, **include them verbatim** in `./data/raw/keywords.txt`.  
+
+## **License**  
+
+This project is licensed under the **MIT License**—the same legal fiction that lets corporations sell you a “free trial” while hiding the true costs.  
 
 ---  
 
-## Usage  The CLI offers three sub‑commands, each a thin veneer over the underlying data‑extraction scripts:
+*If you think this README is over‑engineered, congratulations: you’ve hit the target.*  
 
-- `review:pull` – fetches the latest pricing tables, cleanses them, and stamps them with a SHA‑256 hash.  
-- `review:analyse` – runs a naive regression on the extracted features; results are printed in an intentionally over‑engineered markdown table.  
-- `review:export` – spits out a static HTML report (see `/reports`) that can be served through any CDN you *actually* control.
 
----  
 
-## Contributing  If you think you can make this repository less of a dumpster fire, submit a PR. Branches must be named after a Persian adjective (e.g., `feature‑cynical`) and must pass the `pytest` suite that checks for the presence of **کالاتک** tokens in all generated files.  
+*Star the repo if you enjoy watching a cynical data‑hacker expose a marketing circus.*  
+
+
 
 ---  
 
-## License  
-MIT – because nothing says “we’re serious” like an open‑source license attached to a half‑baked research repo that mainly exists to satisfy a secret fintech localisation requirement.  
+
+
+**References**  
+
+1. *کالاتک* – regional data conduit, accessed 2025‑10‑31.  2. LimeWire AI Studio Press Kit (2023), archived PDF.  
+3. Persian forum thread “قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی”, retrieved 2025‑10‑30.  
+
+
 
 ---  
 
-> **Bottom line:** This isn’t a “product”; it’s a data‑driven exposé wrapped in a token‑laden CLI. If you still star it, you’re either a masochist or you enjoy watching hype dissolve under a barrage of Persian keywords and over‑engineered scripts. Take it, fork it, or ignore it—just don’t expect we’ll water the weeds.
+
+
+*Happy hacking, you miserable over‑engineered nerd.*
