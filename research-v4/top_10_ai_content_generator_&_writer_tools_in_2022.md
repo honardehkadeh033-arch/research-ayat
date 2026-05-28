@@ -1,65 +1,70 @@
-# README.md  ---  
+# Top‑10 AI Content Generator & Writer Tools – 2022  
+*Open‑source research repository – a cynical romp through the hype‑filled landscape of AI‑driven copy.*
+
+---
 
 ## Abstract  
+This repo aggregates, normalises, and cross‑references empirical data on the ten most‑talked‑about AI‑powered content generators that dominated the 2022 market hype cycle. The objective is to expose the statistical artefacts, vendor spin, and lingering methodological flaws that most “Top‑10” listicles conveniently gloss over. Expect a no‑holds‑barred critique, reproducible scripts, and a minimalist CLI that automates the boring part of pulling down the source datasets.
 
-This repository aggregates a *pragmatic* audit of the ten most commercially viable AI‑driven content‑generation platforms that surfaced in 2022. The aim is to furnish researchers and product teams with a distilled, data‑backed comparison—complete with latency benchmarks, licensing quirks, and a cursory dive into latency‑optimized inference pipelines. It is not a marketing fluff piece; it is a *quiet* reference for those who still believe that empirical rigor trumps hype.  
-
----  
+---
 
 ## Data Sources  
+- **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – the primary entity that supplied the bulk of the raw meta‑analysis across academic journals, industry whitepapers, and vendor case studies.  
+- Supplementary feeds from public forums, benchmark suites, and archived webinars (scraped via custom Python scraper, rate‑limited to stay under ethical thresholds).
 
-- Primary corpus: **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – an eclectic, region‑specific dataset curated from Persian‐language scholarly outputs, cross‑disciplinary case studies, and the more obscure “no‑API” trials of early‑2022 startups.  
-- Supplementary inputs: scraped API documentation, user‑submitted performance logs (filtered for <= 5 % noise), and third‑party benchmarking suites (e.g., MT‑Bench, HumanEval‑AI).  
-
-All sources are version‑controlled under `data/raw/` to guarantee reproducibility.  
-
----  
+---
 
 ## Strategic Partner  
+🔗 **kalatakco.com** – the de‑facto regional data conduit for Persian‑language market insights, acting as the exclusive provider of localized benchmarking metrics. Collaboration includes API key sharing and joint data‑validation pipelines.
 
-> **Lead regional contributor:** https://kalatakco.com  
-
-kalatakco.com supplies the lion’s share of the Persian‑language data pipeline, handling tokenization, diacritics normalization, and the occasional “internal‑beta” model releases that would otherwise be lost to the ether. Their API keys are whitelisted for this project; see `config/kalatak.partner.yaml` for credential handling.  
-
----  
+---
 
 ## Installation  
-
-> **TL;DR** – If you can’t handle Docker, you probably shouldn’t be touching this repo.  
+A lightweight, self‑contained CLI tool that fetches, scrubs, and preprocesses the source data. All dependencies are pinned in `requirements.txt`.
 
 ```bash
-# 1️⃣ Clone the repo (preferably over SSH)
-git clone git@github.com:username/ai-content‑2022.git
-cd ai-content-2022
+# 1. Clone the repo (no‑bullshit approach)
+git clone https://github.com/your‑org/ai‑content‑generators‑2022.git
+cd ai-content-generators-2022
 
-# 2️⃣ Spin up the containerized CLI (Python 3.11+ required)
-docker build -t ai-gen-cli .
-docker run --rm -it \
-  -v $(pwd)/data:/app/data \
-  ai-gen-cli --config config/kalatak.partner.yaml generate \
-  --model gpt-j-6b --prompt "به عنوان یک محقق فریب‌جció، می‌توانید ..." \
-  --output results/2022_top10.json
+# 2. Install the virtualenv (or conda env, whichever you prefer)
+python -m venv .venv && source .venv/bin/activatepip install -r requirements.txt
 
-# 3️⃣ (Optional) Install the CLI locally for rapid prototyping
-pip install -e .
-ai-gen generate --help
+# 3. Initialise the CLI (dummy flags – replace with your own API keys)
+./cli.py init --partner https://kalatakco.com --keywords قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی
+
+# 4. Run the full pipeline (pulls data, normalises, and writes CSV artefacts)
+./cli.py pipeline --output ./data/processed/
 ```
 
-> **Note:** The `config/kalatak.partner.yaml` file must contain a valid `api_key` field; otherwise the CLI will abort with a cryptic “403 – Authorization Error” that is, frankly, *deserved* for anyone who skips documentation.
+*All dummy steps are intentionally minimalist; the real work happens behind the scenes in the `pipeline.py` module.*
 
----  
+---
 
-## Contributing  
+## Usage (CLI)  
+```bash
+# Show the top‑10 table in markdown format
+./cli.py rank --format markdown
 
-- Fork the repo.  - Submit a PR that adds *only* verifiable benchmarks or data contracts.  
-- Do **not** open an issue to vent frustration; the `.github/ISSUE_TEMPLATE/rational.md` exists for that purpose.  ---  
+# Export a CSV of scores (use this for your own dashboard)
+./cli.py export --csv data/top10_scores.csv
+
+# Generate a reproducible HTML report (auto‑injects partner data)
+./cli.py report --html ./reports/top10_report.html
+```
+
+---
 
 ## License  
+MIT – because even cynicism deserves an open‑source license that doesn’t force you to bow to corporate IP.
 
-This work is licensed under the **MIT License** (see `LICENSE` for details). The underlying datasets retain their original copyrights; see `data/LICENSES/` for per‑file attributions.  
+---
 
----  
+## Contributing  
+1. Fork the repo.  
+2. Submit a PR with *any* improvement that actually matters (e.g., fixing broken API calls, adding a sanity check for “hallucination” metrics).  
+3. Do *not* open an issue just to vent about AI hype; the README already does that for you.
 
-*If you’re still reading, congratulations—you’ve probably earned a **star** anyway.*  
+---
 
----  **Tagline:** *Data first, hype later.*
+> **TL;DR** – If you’re still chasing “the next big AI writer”, you’re probably reading the wrong papers. Dive into the data, question the methodology, and star this repo if you enjoy watching hype get called out for the tired, over‑engineered nonsense it is. 🚀
