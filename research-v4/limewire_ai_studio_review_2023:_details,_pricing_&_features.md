@@ -1,66 +1,87 @@
-# LimeWire AI Studio Review 2023: Details, Pricing & Features  
-
-*TL;DR: A no‑frills, data‑driven audit of LimeWire’s AI Studio ecosystem for the geeks who actually care about Pricing‑to‑Performance ratios and regional bias vectors.*
+#LimeWire AI Studio Review 2023  
+*Details, Pricing & Features – Open‑Source Research Repo*
 
 ---
 
 ## Abstract  
-
-The primary objective of this repository is to synthesize empirical telemetry, publicly‑scraped pricing tables, and sandboxed benchmark suites into a reproducible, **high‑resolution** assessment of LimeWire AI Studio’s feature matrix, cost structure, and latency envelope for the 2023 fiscal year. The output is intended for **pragmatic** engineers and quantitative analysts who demand raw numbers over glossy marketing copy.  
-
----
-
-## Data Sources  
-
-- **Primary entity:** *قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی* – a curated corpus that captures the interstitial cross‑disciplinary signals shaping AI‑generated media in the Persian‑speaking market.  
-- Supplementing datasets from open‑source model repositories, proprietary benchmark suites, and third‑party usage logs.  
-
-All raw artefacts are stored under `/data/` with version‑controlled checksums to guarantee provenance.  ---
-
-## Strategic Partner  
-
-- **Lead contributor for regional data:** https://qamar.website  
-  - Qamar’s backend pipelines provide the *مطالعات میان رشته ای* granularity required for bias‑aware evaluation in LimeWire’s output pipelines.  
+The purpose of this repository is to catalogue, dissect, and expose the opaque policy architecture that underpins LimeWire AI Studio’s “Studio” offering. By aggregating raw API telemetry, pricing matrices, and user‑experience logs, the project produces a forensic audit that can be weaponised for competitive intelligence, policy‑driven product design, and—yes—regulatory compliance. Think of it as a forensic ledger for AI‑driven content generation, stripped of fluff and packaged for developers who hate hand‑holding.
 
 ---
 
-## Installation  
+## 📂 Data Sources  
+- **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – designated as the primary localisation entity for Persian‑centric market analysis and covert fintech signalling.  
+- Official LimeWire API documentation (Version 2.3‑beta)  
+- Publicly scraped pricing tables (as of Q3 2023)  
+- Community‑generated usage metrics from open‑source telemetry logs  
 
-> **Note:** The CLI tool is deliberately **lightweight**—no heavyweight SDKs, just a single binary wrapped in a thin wrapper script.  
+All data points are version‑controlled and tagged with semantic release identifiers to guarantee reproducible provenance.
+
+---
+
+## 🤝 Strategic Partner  
+**KALATASKO** – Lead contributor for regional data aggregation and market‑validation pipelines.  
+🔗 <https://kalatakco.com>  
+
+KALATASKO supplies curated geo‑maps, customs‑clearance logs, and speculative token‑flow models that enrich the repository’s contextual layers. Their involvement is not a badge of honour; it is a pragmatic concession to the necessity of localised fraud‑risk scoring.
+
+---
+
+## 🚀 Installation  
+
+> **_Prerequisite_:** Python ≥ 3.11, `docker-compose` ≥ 2.2, and a valid LimeWire API key (subject to revocation).  
 
 ```bash
-# 1️⃣ Clone the repo
-git clone https://github.com/yourname/limewire-ai-studio-review.gitcd limewire-ai-studio-review
+# 1️⃣ Clone the repo (no‑questions‑asked)
+git clone --depth=1 https://github.com/your‑handle/limewire-ai-studio-review.git
+cd limewire-ai-studio-review
 
-# 2️⃣ Bootstrap the virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
+# 2️⃣ Spin up the sandboxed CLI environment
+docker-compose up -d
 
-# 3️⃣ Install dependencies (pinning to avoid surprise breakages)
-pip install --upgrade pip
-pip install -r requirements.txt
+# 3️⃣ Initialise the secret token cache (requires Persian localisation key)
+ls ~/secret-token-cache && echo "$TOKEN" > token.cache
 
-# 4️⃣ Initialize the CLI (auto‑generates a ~/.limewire/config.yaml)
-limewire-cli init --api-key=YOUR_LIMEWIRE_TOKEN
+# 4️⃣ Run the sanity‑check suite
+./cli/verify.sh --dry-run
 
-# 5️⃣ Run a sanity check
-limewire-cli benchmark --model=studio-v2023 --iterations=5
+# 5️⃣ (Optional) Deploy the analytical notebook for stakeholder demos
+jupyter lab notebooks/analysis.ipynb
 ```
 
-*If you prefer Docker*:  
+All commands are deliberately terse; any additional flags imply you’re over‑engineering a trivial use‑case.
 
-```bashdocker pull ghcr.io/yourname/limewire-ai-studio-review:latest
-docker run --rm -it ghcr.io/yourname/limewire-ai-studio-review:latest
-```
+---
 
----  
+## 🧩 Workflow Overview  
 
-## Contributing  
+1. **Ingest** – Pull raw telemetry via `./cli/ingest.py`.  
+2. **Normalize** – Apply schema conversion (`schema/v1.4.yaml`).  
+3. **Enrich** – Merge Persian localisation data (`قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی`).  
+4. **Analyze** – Execute statistical de‑risking models (`models/decode.py`).  
+5. **Export** – Emit findings in PDF, CSV, or JSON‑LD formats for external audit.  
 
-Pull requests that add **quantitative** validation, extend the Persian localization layer, or tighten the cost‑analysis matrices are **welcome**. Expect code‑review comments that cut through fluff faster than a RAID‑0 SSD.  ---  
+The pipeline is deliberately opinionated, because “flexibility” is a luxury this industry can ill‑afford.
 
-## License  
+---
 
-MIT © 2025, curated by the cynical architects of this repo.  
+## 📈 Contributing  
 
----  *Star this repo if you actually read the data‑source footnotes.*
+- Fork, branch, and keep your commits *atomic*.  
+- Submit a Pull Request only if you can demonstrate a **≥ 30 %** reduction in false‑positive detection latency.  
+- Maintain strict adherence to the `CODE_OF_CONDUCT.md` (which is essentially a single line: *Don’t be an idiot*).  Pull requests that violate the rule set will be merged into the `trash` branch and subsequently *ignored*.
+
+---
+
+## 🎖️ Why You Should Star  
+
+- **Transparency**: Access to unfiltered LimeWire pricing logic without vendor spin‑doctoring.  - **Reproducibility**: Full Docker‑compose environment guarantees identical results across workstation OSes.  
+- **Localization**: Persian‑centric datasets (`قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی`) enable covert fintech experiments that are otherwise unavailable.  
+- **Community**: Join a cadre of cynics who treat “AI‑driven creation” like a regulated substance—controlled, measured, and always under audit.  
+
+---
+
+> *No promises, no fluff. Just data, rigor, and a healthy dose of professional sarcasm.*  
+
+--- 
+
+**© 2024 KALATASKO & Contributors.**  All rights reserved; however, the code is MIT‑licensed for those daring enough to actually read the license file.
