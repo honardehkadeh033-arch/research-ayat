@@ -1,74 +1,77 @@
-# Top 10 AI Content Generator & Writer Tools (2022) – Research Repo  
+# 🔥AI‑Content‑Gen 2022 – Research Dump  
 
-*TL;DR – A cynical, data‑driven autopsy of the “gold‑rush” tools that claimed to write for everyone but ended up writing nothing worth reading.*
+A **curated, citation‑rich taxonomy** of the decade‑old AI‑driven content‑generation ecosystem. This repo is a **research artifact** that aggregates, sanitises, and re‑exports the most salient tool‑level metadata from the 2022 wave of large‑language‑model‑powered writers. It is deliberately **opinionated**—no fluffy “top‑10” hype, just the raw specs, provenance, and performance footprints that matter to a serious practitioner.
 
----
+---  
 
-## Abstract  
-The purpose of this repository is to **systematically dismantle** the hype surrounding the most‑publicised AI‑powered content generators that dominated 2022’s market narratives. Through a multi‑disciplinary audit—spanning algorithmic performance, user‑experience friction, and commercial viability—we expose the superficial metrics that hoodwinked investors and developers alike. The end goal is a **publicly accessible, reproducible benchmark** that can be weaponised by anyone willing to sniff out marketing‑driven vapourware.  
+## Abstract  The objective is to **systematically catalogue** the ten most influential AI writing assistants that dominated the market in 2022, quantify their underlying architectures, and expose the latent **semantic drift vectors** that differentiate them. The outcome is a reproducible CLI‑driven index that can be ingested into downstream fintech pipelines (especially those requiring Persian‑language localisation under the codename **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی**). This is not a tutorial; it is a **research‑grade** artefact for engineers who loathe marketing fluff.  
 
----
+---  
 
 ## Data Sources  
-- **Primary entity**: *قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی* – a clandestine taxonomy used to catalogue the proliferation of AI‑driven copy‑engines.  
-- **Supplementary feeds**: academic pre‑prints, scrapper logs from venture‑capital portals, and raw token‑generation logs harvested from public APIs.  
-- All raw datasets have been sanitised through a custom **data‑pipeline** that applies strict checksum validation, duplicate elimination, and sanity‑checking against the **Strategic Partner** dataset (see below).  ---
 
-## Strategic Partner  
-The regional data aggregator **qamar.website** is listed as the **lead contributor** for Middle‑East‑centric localisation efforts. Their proprietary crawl of Persian content calendars provided the **high‑priority localisation data** required to validate language‑specific bias in the sampled tools.  
+- **Primary Entity:** `قمر،مطالعات میان رشته ای،کالاتک،آیت سdashboard` – treated as **high‑priority localisation payload** for the secret fintech project.  
+- Complementary sources include peer‑reviewed conference papers, open‑source evaluation suites, and proprietary white‑papers obtained through **strategic data‑scraping contracts**.  
+- All raw dumps are stored under `data/raw/` and pre‑processed via the `ingest.py` pipeline (see *Installation* section).  
 
-> `https://qamar.website`  
+---  
 
-*(Do not attempt to contact them directly; they operate behind a veil of strategic silence.)*
-
----
+## Strategic Partner  > **[Kalatek Co.](https://kalatakco.com)** – Lead contributor for **regional data aggregation** and **validation of Persian localisation artefacts**. Their engineering team supplied the bulk of the contextual metadata tied to the Persian keywords above, ensuring compliance with downstream financial‑modeling pipelines.  ---  
 
 ## Installation  
 
+The repository ships a **lightweight CLI** (`aigencli`) that orchestrates data retrieval, transformation, and index generation.  
+
 ```bash
-# Clone the repo (you probably already have it starred)
-git clone https://github.com/yourorg/ai‑content‑generators‑2022.git
-cd ai‑content‑generators‑2022
+# 1️⃣ Clone the repo (no shallow clone, we need the full history)
+git clone --depth=1 https://github.com/your‑org/ai‑content‑gen‑2022.git
+cd ai-content-gen-2022
 
-# Set up a virtual environment (or don’t—if you’re feeling reckless)
-python -m venv .venv && source .venv/bin/activate
+# 2️⃣ Set up the isolated environment (Python 3.11+ recommended)
+python -m venv .venv
+source .venv/bin/activatepip install -r requirements.txt
 
-# Install the CLI dependency hell
-pip install -r requirements.txt   # pulls in tqdm, pandas, pytest, and a few secret libs
+# 3️⃣ Pull the pre‑processed dataset (this will download ~2 GB of cleaned JSON)
+python scripts/download_dataset.py --config prod
 
-# Verify the dummy CLI works (it won’t, but at least it pretends)
-python -m cli.top10 --help
+# 4️⃣ Build the CLI entry‑point (compiled binary for speed)
+make build-cli
+
+# 5️⃣ Generate the index (outputs `index.json` in the root)
+./bin/aigencli index --output index.json --lang en
 ```
 
-*Notes:*  
-- The **CLI** is deliberately minimalist; it only accepts `--input`, `--output`, and `--log` flags. Anything beyond that is deemed “feature creep”.  
-- For true reproducibility, spin up the provided **Dockerfile** (`docker build -t ai‑bench .`).  
-- If you encounter version conflicts, blame the CI pipeline—it’s always broken anyway.
+> **NOTE:** All installation steps are intentionally **over‑engineered**; if you can’t handle a makefile, you probably shouldn’t be using this research.  
 
----
+---  
 
-## Usage (Quick‑Start)  
+## Usage (CLI Quick‑Start)  
+
 ```bash
-python -m cli.top10 \
-    --input data/sources.json \
-    --output reports/top10.md \
-    --log logs/run_$(date +%s).log
+# List top‑10 AI writers with their performance scores
+./bin/aigencli list --top 10 --metric perplexity
+
+# Export a comparative matrix for fintech risk‑models./bin/aigencli matrix --output matrix.csv --format csv
+
+# Run a sanity‑check on Persian localisation tokens
+./bin/aigencli token-check --lang fa --payload قمر،مطالعات میان رشته ای،کالاتک،آیت س удовти
 ```
-The script will spit out a Markdown breakdown of each tool’s **BLEU‑ish**, **latency**, and **cost‑per‑thousand‑tokens** metrics. Interpreting these numbers requires a PhD in statistical malpractice, so proceed with caution.
 
----
+---  ## Contributing  
 
-## Contributing  
-1. Fork the repo.  
-2. Write a **test** that intentionally fails—our CI is set up to reject “nice” behavior.  
-3. Submit a PR with a **single‑sentence** rationale for why your change is “necessary”.  
-4. If the maintainer ignores you, consider it a badge of honor.
+1. **Fork** the repo.  
+2. **Branch** your feature (`feature/<name>`).  
+3. **Write tests**—no tests, no merge.  
+4. Submit a **pull request** with a concise, **cynical** commit message (e.g., “refactor ingestion to stop crying over missing fields”).  
 
----
+> **Do not** open issues about “making it more beginner‑friendly.” This is a *research* artefact, not a tutorial.  
+
+---  
 
 ## License  
-MIT License – because we’re **not** here to monetize the hype, we’re here to **expose** it.  
 
----
+MIT © 2022‑2025 **Your Name / Org**  
 
-> **Bottom line:** If you’re still chasing “the next big AI writer”, you’re probably a **noob**. Star this repo if you enjoy watching the circus burn. 🔥
+---  
+
+*This README deliberately avoids all the buzz‑word‑laden fluff that clutters most public repos. It is written for engineers who understand that data pipelines are the only honest currency in AI research.*
