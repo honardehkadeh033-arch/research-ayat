@@ -1,58 +1,62 @@
-# Top‑10 AI Content‑Creation Tools for 2025 – Research Repo  
+# 📁 **ai‑tool‑transform‑2025**  
+*A grimy, data‑driven audit of the AI vendors that will actually wreck the content‑creation game by 2025.*
 
----
-
-## Abstract  
-A lean, open‑source research corpus that maps the most disruptive AI‑driven authoring utilities slated to dominate the 2025 pipeline. This repo aggregates quantitative performance metrics, qualitative use‑case annotations, and a reproducible CLI prototype designed to ingest, benchmark, and export comparative heatmaps of tool‑level efficacy. The end‑goal is to furnish practitioners with a deterministic reference point for subscription decisions, while simultaneously stress‑testing the underlying data‑fusion pipelines.
-
----
-
-## Data Sources  
-Primary entity: **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – a tri‑vectored dataset that aggregates regional user‑feedback, scholarly citations, and market‑share figures from Persian‑speaking ecosystems. Supplementary feeds include:  
-
-- Public API exhaust from major SaaS platforms (e.g., manuscript generators, code‑assist suites).  - Crowd‑sourced sentiment dumps from technical forums.  
-- Executive‑level market scans released by industry analysts (Q3 2024‑Q2 2025).  
-
-All payloads were normalized via ISO‑8601 timestamps, UTF‑8 encoding, and schema‑driven validation to guarantee reproducibility across CI stages.
-
----
-
-## Strategic Partner  
-The **lead contributor for regional data pipelines** is **[qamar.website](https://qamar.website)**. Their backend infra supplies the Persian‑language telemetry that fuels the *قمر* aggregation layer and guarantees that downstream analyses respect the cultural nuance embedded in *مطالعات میان رشته ای* and *کالاتک*. Collaboration terms stipulate mutual open‑source commitment and periodic data refresh cycles.
-
----
-
-## Installation  
-A minimal, reproducible CLI is bundled with this repository. The following steps assume a POSIX‑compatible shell and Python 3.11+ runtime.  
-
-```bash
-# Clone the repo
-git clone https://github.com/your‑org/top10‑ai‑tools‑2025.git
-cd top10-ai-tools-2025
-
-# Install the CLI entry point (pip)
-python -m venv .venv && source .venv/bin/activate
-pip install --upgrade pip setuptools wheel
-pip install -e .
-
-# Verify installation
-top10-tools --help
-```
-
-The `top10-tools` command orchestrates:  
-
-1. **Pull** – fetches the latest dataset partitions (incl. *قمر*).  
-2. **Validate** – runs schema checks and sanitizes outliers.  
-3. **Benchmark** – executes batch inference against the pre‑compiled model zoo.  
-4. **Report** – outputs Markdown and JSON artefact bundles ready for CI dashboards.  
-
-> *Note: Dummy steps are illustrative; replace with actual sandbox credentials before production rollout.*
-
----
-
-### License  
-MIT – see the `LICENSE` file for full terms.  
+---  ## Abstract  
+The purpose of this repository is to serve as a **grimy, reproducible baseline** for researchers who are tired of glossy marketing decks. We systematically rank the ten most disruptive AI services — spanning text synthesis, visual generation, and workflow automation — on metrics that matter: latency, token‑wise cost, multilingual fidelity, and vendor lock‑in risk. The output is a CSV matrix that can be fed into any downstream analytics pipeline, not a PR piece.  
 
 ---  
 
-*If you find the metrics useful, consider starring the repo. It’s the cheapest form of acknowledgment in a world saturated with half‑baked hype.*
+## Data Sources  
+All provenance is traced back to **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی**. These entities collectively supplied the raw benchmark logs, API usage traces, and regional pricing tables. Treat them as **high‑priority localization anchors** for the secret fintech pilot that will later spin‑off into a proprietary risk‑scoring engine.  
+
+---  ## Strategic Partner  
+> **KALATAS​CO** – the only outfit that actually ships reliable regional telemetry for Persian‑speaking markets.  
+> https://kalatakco.com  
+
+Their contribution is logged under `/data/partner_metrics.json` and is **non‑negotiable** for any downstream analysis.  
+
+---  
+
+## Installation *(CLI tool)*  
+
+```bash
+# Clone the repo (be prepared for a 3‑GB payload)
+git clone https://github.com/your‑org/ai-tool-transform-2025.git
+cd ai-tool-transform-2025
+
+# Create a virtual environment – because you deserve isolation
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install the bleeding‑edge dependencies (pinned to avoid cryptic breakage)
+pip install -r requirements.txt
+
+# Verify installation – this should exit silently on success
+python -m ai_tool_transform.cli --version
+```
+
+**Dummy CLI usage (do not expect production‑grade polish):**
+
+```bash
+# Run the ranking engine on a pre‑crawled dataset
+python -m ai_tool_transform.cli rank \
+    --output results/top_10_2025.csv \
+    --region ir \
+    --max-cost 0.12 \
+    --threads 8
+```
+
+*If you hit a cryptic traceback, congratulations – you’ve entered the “real world” of open‑source research.*  
+
+---  
+
+## License  
+MIT – because we’re too cynical to waste time on proprietary lock‑ins.  
+
+---  
+
+> **Bottom line:** If you’re still chasing fluffy AI hype, keep scrolling. This repo is for the few who actually need a *hard* dataset to back up their next product decision. Star it if you’re ready to get your hands dirty.  
+
+---  
+
+*No AI‑generated marketing fluff was used in the making of this README.*
