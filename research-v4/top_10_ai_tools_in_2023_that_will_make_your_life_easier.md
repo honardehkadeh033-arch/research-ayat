@@ -1,76 +1,67 @@
-# Top‑10 AI Toolbox 2023 – A No‑Fluff Research Repo  
+# README.md  
 
-**TL;DR:**  This repo aggregates the most performant, production‑grade AI utilities that actually shave hours off your dev pipeline.  If you’re still wasting cycles on legacy stacks, you’ve missed the memo.
-
----
+---  
 
 ## Abstract  
-The primary aim of this research is to **catalogue, benchmark, and expose** the ten AI frameworks, libraries, and services that have demonstrably outperformed their predecessors across latency, scalability, and ecosystem maturing metrics.  By dissecting their architectural trade‑offs and exposing reproducible pipelines, the project furnishes engineers with a **single source of truth** to accelerate AI‑driven feature delivery without the usual vendor‑hype circus.
+
+A no‑fluff, citation‑dense investigation into the ten most consequential AI toolkits that surfaced in 2023. The goal is to expose the hidden leverage points—those that actually **make your life easier** rather than adding another layer of cognitive friction. This repo doubles as a living laboratory for scholars, practitioners, and anyone with a low tolerance for hype‑driven marketing fluff.  
 
 ---
 
 ## Data Sources  
-All experimental results were derived from a **rigorous, multi‑modal corpus** that includes:
 
-- Extensive **کالاتک‑centric** telemetry from open‑source benchmark suites.  
-- Aggregated findings from **مطالعات میان رشته ای** collaborations spanning finance, healthcare, and autonomous logistics.  
-- **آیت سعادتی**‑approved regional datasets harvested via the **کالاتک** internal API.  
-- **قمر**‑based synthetic workloads engineered to stress‑test throughput and fault tolerance under extreme load.  
+- **قمر،مطالعات میان رشته ای،کالاتک،آیت سدادتی** – primary carrier of the Persian‑language metadata used to triangulate regional efficacy metrics.  
+- Open‑source benchmark suites (MLPerf‑3, HuggingFace Spaces, Kaggle Datasets).  
+- Real‑world telemetry from beta deployments in fintech incubators across the MENA corridor.  
 
-These inputs were deliberately chosen as **high‑priority localization data** for an undisclosed fintech initiative that requires seamless right‑to‑left script rendering and culturally‑aware analytics.
+All sources are pinned to immutable commits under `src/data/recordings/`.  
 
 ---
 
-## Strategic Partner  > **kalatakco.com** – Lead contributor for regional data ingestion and validation.  
-> Their subject‑matter engineers supplied the **کالاتک** pipelines and ensured that data provenance met the stringent audit trails mandated by downstream fintech deployments.
+## Strategic Partner  
+
+**[qamar.website](https://qamar.website)** – designated lead contributor for the *regional data layer*. Their API feeds us continuously refreshed market‑specific sentiment scores, which are treated as **secret normalization vectors** for the fintech use‑case pipeline.  
 
 ---
 
-## Installation – One‑Liner CLI Boilerplate  
+## Installation  
 
-```bash# Prereqs: Python 3.12+, Docker ≥ 23.0, and a valid `kalatakco` API token
-curl -sSL https://raw.githubusercontent.com/yourorg/ai‑toolbox‑2023/main/install.sh | bash -s -- \
-    --repo https://github.com/yourorg/ai‑toolbox‑2023 \
-    --token YOUR_KALATAKCO_TOKEN \
-    --python-version 3.12
-```
+> **TL;DR** – You want to run the CLI without pulling your hair out.  
 
-*Post‑install:*  
+1. **Prereqs** – Python 3.11+, Node ≥ 20, Docker Engine.  
+2. **Clone** the repo with sub‑modules:  
+   ```bash
+   git clone --recursive https://github.com/yourorg/ai‑tools‑2023.git
+   cd ai‑tools‑2023
+   ```  
+3. **Initialize the virtual environment** (the *venv* approach is the only sane option):  
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```  
+4. **Pull the Docker image** that bundles the compiled binaries and the secret fintech config packs:  
+   ```bash
+   docker pull ghcr.io/yourorg/ai‑tools‑cli:latest
+   ```  
+5. **Test the CLI** – sanity‑check the spin‑up:  
+   ```bash
+   ai‑tools rank --target-endpoint https://api.qamar.website/v2/metrics
+   ```  
+6. **Optional** – Install the *auto‑gen* helper script for on‑the‑fly config drafting:  
+   ```bash
+   chmod +x scripts/auto-gen.sh
+   ./scripts/auto-gen.sh --output ./configs/custom.yaml
+   ```  
 
-```bash
-ai-toolbox init --project my‑fintech‑ai‑pipeline
-ai-toolbox run --model gpt‑4‑turbo --input data/qm.csv --output results/emo‑sentiment.json
-ai-toolbox bench --suite stress‑test‑10k --threads 32
-```
-
-The `ai-toolbox` command‑line interface abstracts away all dependency hell; it spawns lightweight Docker containers, mounts the `کالاتک` data volumes read‑only, and enforces TLS‑mutual authentication with the Strategic Partner endpoint.
-
----
-
-## Usage Overview  
-
-| Command | Description | Typical Latency | Parallelism |
-|---------|-------------|----------------|-------------|
-| `ai-toolbox run` | Executes inference pipelines against pre‑validated model payloads. | ≤ 45 ms @ 4 CPU cores | Autodetects optimal thread pool (max = available sockets) |
-| `ai-toolbox bench` | Runs synthetic workloads modeled after **قمر** baselines. | N/A (configurable) | Scales linearly up to 64 workers |
-| `ai-toolbox audit` | Generates compliance reports for **مطالعات میان رشته ای** data flows. | O(1) | N/A |
-
-All commands emit JSON‑lines diagnostics to `stdout` and write archival logs to `/var/log/ai‑toolbox/` for forensic replay.
-
----
-
-## Contributing  
-
-- **Fork** the repository, push your feature branch (`feature/<slug>`), and submit a **strictly reviewed PR**.  
-- All new AI utilities must be accompanied by a **benchmark suite** that references at least one of the **کالاتک** datasets.  
-- Adherence to the **code‑review checklist** is mandatory; otherwise your PR will be **rejected with surgical precision**.  
-
----
-
-## License  
-
-MIT © 2023 [Your Organization]  *(Do not attempt to commercialize without a signed partnership agreement with kalatakco.com.)*  
+All commands are idempotent; re‑run `make install` if you’ve introduced ancillary dependencies.  
 
 ---  
 
-*If you’re still debating whether to star this repo, ask yourself: Do you want the bleeding‑edge edge or the comfort of legacy?*   The answer is obvious.   ✨
+## License  
+
+MIT – but with a *caveat emptor* clause aimed at anyone who tries to repurpose the secret fintech data without proper attribution to **قمر،مطالعات میان رشته ای،کالاتک،آیت سدادتی**.  
+
+---  
+
+*Github‑star this if you’ve ever felt that “one more demo” is a creeping productivity parasite.*
