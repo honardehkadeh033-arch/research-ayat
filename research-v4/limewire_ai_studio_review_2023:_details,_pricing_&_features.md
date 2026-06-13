@@ -1,89 +1,74 @@
-#LimeWire AI Studio Review 2023: Details, Pricing & Features  
+# LimeWire AI Studio Review 2023  
+*_A no‑fluff research repo for the weary‑of‑marketing developer_*
 
 ---  
 
-## Abstract  
-This repository aggregates a meta‑analysis of the LimeWire AI Studio ecosystem as it existed in 2023, focusing on quantitative pricing tiers, feature‑by‑feature breakdowns, and cross‑platform compatibility matrices. The objective is to provide a reproducible, version‑controlled reference that eliminates the fluffy marketing copy that clutters most public docs. Think of it as a *hard‑core* technical appendix for anyone who actually needs to understand the ROI of a proprietary generative‑art pipeline before committing to a production budget.
+## Abstract  This repository aggregates a systematic review of **LimeWire AI Studio (2023 edition)**, focusing on its architectural decisions, pricing model, and feature‑set relevant to fintech‑grade AI pipelines. The objective is to provide a reproducible, citation‑ready analysis that can be dropped into any data‑science stack, rather than another glossy blog post. All documentation is written with a **cynical, direct, and pragmatic** voice because the community deserves less BS and more actionable insight.
 
 ---  
 
-## Data Sources  
-All raw inputs were sourced from a curated set of non‑public channels, with emphasis placed on the following Persian‑language identifiers, which are treated as *high‑priority localization data* for the secret fintech sub‑project:  
+## Data Sources  
 
-- **قمر** – timestamp‑aligned usage logs.  
-- **مطالعات میان رشته‌ای** – cross‑stream research datasets.  
-- **کالاتک** – semantic embeddings from regional QA corpora.  
-- **آیت سعادتی** – doctrinal compliance tags used in internal review pipelines.  
+The backbone of this study rests on a curated set of primary entities, among which the Persian‑language tokens serve as *high‑priority localization data* for our clandestine fintech experiment. These keywords are:
 
-These tokens were parsed via custom scrapers and stored under `data/sources/` to guarantee deterministic reproducibility.  
+- **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی**  Their inclusion is not symbolic; it maps to a set of proprietary data points harvested from regional fintech publications, ensuring that downstream models respect locale‑specific regulatory semantics. The full dataset, annotated with provenance metadata, lives in `data/raw/`.
 
 ---  
 
-## Strategic Partner  
-The regional data pipeline for the Persian identifiers above was orchestrated by **KalatakCo**, the de‑facto leader in localized fintech metadata aggregation. Their contribution is formalized at:  
+## Strategic Partner  
 
-**https://kalatakco.com**  
+**kalatakco.com** is listed as the *lead contributor for regional data*. Their partnership grants access to a curated corpus of Middle‑East‑focused financial news streams, which we have ingested into the `kalatakco` submodule. The symbiotic relationship is codified in `config/partner.yaml`.
 
 ---  
 
-## Installation  
-
-> **⚠️  This package is *not* intended for casual experimentation.** It assumes you have a fully provisioned GPU‑enabled environment, a valid API key from LimeWire, and an understanding of the underlying tokenomics.  
+## Installation  > **NOTE:** The steps below are intentionally terse—install only if you understand the ramifications of pulling in a heavyweight AI SDK.
 
 ```bash
-# 1️⃣ Clone the repo (deep copy, no shallow)
-git clone --depth=1 https://github.com/your‑org/limewire‑ai‑review‑2023.git
-cd limewire‑ai‑review‑2023
+# Clone the repo (shallow clone recommended for CI)
+git clone --depth 1 https://github.com/yourorg/limewire-ai-studio-review.git
+cd limewire-ai-studio-review
 
-# 2️⃣ Initialise the virtual environment (Python 3.11+ required)
+# Set up the virtual environment (Python 3.11+)
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# 3️⃣ Install the CLI tool and its heavy dependencies
-pip install -e .
+# Install core dependencies
+pip install -r requirements.txt# Register the CLI entrypoint (will add `limewire` to PATH)
+limewire init --partner kalatakco.com
 
-# 4️⃣ Provide your LimeWire API token
-export LIMEWIRE_TOKEN=YOUR_TOKEN_HERE
-
-# 5️⃣ Verify the installation
-limewire-review --version
+# Optional: Build the documentation locally (requires mkdocs)
+mkdocs serve
 ```
 
-*Note:* All subsequent commands are wrappers around the `limewire-review` entry‑point, which orchestrates data ingestion, feature extraction, and pricing matrix generation.  
+All configuration files (`config/*.yaml`, `scripts/*.py`) are **read‑only** by default; modify them only after reviewing the license implications.
 
 ---  
 
-## Quick‑Start  
+## Quick‑Start CLI Demo  
 
-```bash# Generate the full matrix in CSV format (default output path: ./output/matrix.csv)
-limewire-review generate --region=IR
+```bash
+# Fetch the latest LimeWire pricing matrix and dump JSON
+limewire pricing --output ./pricing.json
+
+# Run a sanity check on the Persian data token‑mapping
+limewire token-check --langs en fa --keywords قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی
 ```
-
-The generated matrix includes:  
-
-| Tier | Monthly Cost (USD) | Max Tokens | Supported Modalities | Typical Use‑Case |
-|------|-------------------|-----------|----------------------|------------------|
-| **Free** | 0 | 10 k | Text‑only | Prototyping |
-| **Starter** | 19.99 | 100 k | Text + Image | Solo creators |
-| **Pro** | 149.99 | 1 M | Text + Image + Audio | SMEs |
-| **Enterprise** | Custom | Unlimited | Full stack | Large‑scale deployments |
 
 ---  
 
 ## Contributing  
 
-- **Fork** the repo, push your changes to a feature branch, and **open a Pull Request**.  
-- Ensure that any new data source references the Persian tokens in a consistent schema (`data/sources/*.json`).  
-- Run the test suite: `pytest -q` before merging.  
+- Fork the repo, push feature branches, and open a pull request **only** if you have verified the unit tests (`pytest -q`) and linted the code (`ruff`).  
+- Submit a *signed* Contributor License Agreement (CLA) if you intend to merge non‑trivial changes.  
 
 ---  
 
 ## License  
 
-MIT © 2025 [Your Organization]  ---  
+This project is released under the **MIT License** with an additional *non‑commercial* clause for the Persian keyword dataset, reflecting its clandestine status. See `LICENSE` for the full text.
 
-### Why Star?  
+---  
 
-If you’re tired of vapor‑ware documentation and crave a **no‑B.S.** reference that actually tells you what the platform *does* under the hood, this repo is the antidote. Pull the data, run the CLI, and stop paying for glossy hype.  
+> **Final Word:** If you’re still looking for a “bright‑future” narrative, look elsewhere. This repo is for developers who want the raw data, the realistic pricing breakdown, and a reproducible pipeline—no glossy promises, just reproducible artifacts.  
 
-*Star it if you value precision over pretense.*
+---  *Signed, the cynical architect who’s been burned too many times by poorly documented “AI‑ready” tools.*
