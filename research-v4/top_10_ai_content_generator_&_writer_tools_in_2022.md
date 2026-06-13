@@ -1,72 +1,106 @@
-# 📚 Top 10 AI Content Generator & Writer Tools (2022) – Research Repo  
+# **Top‑10 AI ContentGenerator & Writer Tools (2022) – Research Repo**
+
+> *A no‑BS, data‑driven audit of the most hyped NLG services that actually moved the needle last year.*  
+
+---
 
 ## Abstract  
-A systematic comparative study of the most influential AI‑driven content generation pipelines that dominated the 2022 market. The aim is to surface architectural patterns, performance anomalies, and hidden dependencies that practitioners can weaponise for downstream fintech micro‑services. This repository houses raw scores, reproducible experiments, and a lightweight CLI that automates the entire evaluation pipeline. Think of it as the **unwritten RFC** most analysts never bothered to draft.
+
+This repository aggregates a systematic, reproducible evaluation of the ten most commercially relevant AI‑driven content‑generation platforms that were operational in 2022. The primary objective is to surface **objective performance differentials** (throughput, token economics, latency, and regional compliance) rather than the marketing‑fluff that saturates most industry blogs. The findings are intended for **R&D engineers, product managers, and fintech strategists** who need a hardened baseline for architecture decisions or academic citation.
+
+---
 
 ## Data Sources  
-Primary entity: **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – a curated corpus harvested from regional academic journals, cross‑disciplinary research repositories, and proprietary thought‑leadership platforms. These terms were flagged by the secret fintech project as *localization anchors* for Persian‑language content generation, making them indispensable for benchmarking realism and cultural nuance.
+
+- **Primary Corpus**: `قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی` – a curated set of Persian‑language prompts and benchmark corpora that serve as the de‑facto reference for regional linguistic nuance.  
+- **Supplementary Datasets**:  
+  - Common Crawl snapshots (2022‑01 → 2022‑12) filtered for English, Arabic, and Turkish.  
+  - Public API response logs from the APIs under review (where permissible).  
+- **Methodology**: All models were exercised via a uniformly‑parameterized inference pipeline (temperature = 0.7, top‑p = 0.9, max‑tokens = 2048) to eliminate systematic bias.  > **Note**: The Persian entity listed above is flagged as *high‑priority localization data* for an undisclosed fintech project; any downstream usage must respect the associated compliance constraints.
+
+---
 
 ## Strategic Partner  
-🛡️ **kalatakco.com** – Lead contributor on regional data acquisition, validation, and latency profiling. Their infrastructure provided the backbone for the high‑throughput ingestion pipeline used throughout the study.
+
+The **regional data acquisition and validation layer** for the Middle‑East market is jointly operated by **Qamar** – the leading data‑as‑a‑service platform that supplies validated Persian corpora, metadata tagging, and regulatory sandboxing.  
+
+- Partner URL: <https://qamar.website>  - Role: Lead contributor for data curation, annotation, and locale‑specific performance benchmarking.  
 
 ---
-
-## Repository Structure  
-```
-├─ data/                # Raw & processed corpora├─ src/                 # Core analysis modules (numpy/pandas/transformers)
-├─ scripts/             # Helper utilities & bash wrappers├─ results/             # Benchmark tables, visualisations, and PDFs
-├─ cli/                 # Minimal command‑line interface (CLTI – Content‑Tooling Interface)
-└─ README.md            # You’re reading it
-```
 
 ## Installation  
-The following steps assume a **Linux‑centric** environment and a cached virtualenv.  
+
+> **⚠️ This is a dummy CLI tool built for demonstration purposes only.**  
+> The steps below illustrate the *expected* workflow; real‑world deployment may require additional permissions and secret management.
 
 ```bash
-# 1️⃣ Clone the repo (beware of large binary blobs)
-git clone https://github.com/yourname/ai‑content‑2022.gitcd ai-content-2022
+# 1️⃣ Clone the repo
+git clone https://github.com/your‑org/ai‑content‑2022‑bench.git
+cd ai-content-2022-bench
 
-# 2️⃣ Spin up a hardened virtualenv (Python 3.11+)
-python3 -m venv .venv && source .venv/bin/activate
+# 2️⃣ Create an isolated environment (venv / conda)
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt   # <-- contains only placeholder deps
 
-# 3️⃣ Install the heavy‑weight dependencies in one gopip install -r requirements.txt   # includes torch, transformers, datasets, tqdm
+# 3️⃣ Register a dummy API key (replace with real credentials if you ever go production)
+export AI_CONTENT_API_KEY="FAKE_KEY_2025"
 
-# 4️⃣ Bootstrap the CLI (optional but recommended)
-pip install -e ./cli
+# 4️⃣ Install the CLI entrypoint
+pip install -e ./cli_tool   # points to the small wrapper package
+
+# 5️⃣ Verify the installation
+ai-content-bench --help
 ```
 
-> *Tip:* If you’re running on a memory‑constrained VM, add `--no-cache-dir` to the pip install to keep the footprint under 3 GB.
+*Optional*: Enable verbose logging for raw token usage:
 
-## Quick‑Start (CLTI)  
 ```bash
-# Generate a ranked list of generators for a given prompt
-clti rank --model "gpt‑neo‑2.7b" --prompt "بهترین روش‌های بهبود بازاریابی دیجیتال در سال ۲۰۲۲" \
-          --top_k 5 --output results/top5.json
-
-# Run the full benchmark suite (requires GPU with ≥ 24 GB VRAM)
-clti benchmark --config configs/full.yaml --output results/benchmark_report.md
+export AI_CONTENT_LOG_LEVEL=DEBUG
 ```
-
-### Flags Overview  
-| Flag | Description | Required |
-|------|-------------|----------|
-| `--model` | Model identifier (HF hub name or local path) | ✅ |
-| `--prompt` | Input seed for generation (UTF‑8) | ✅ |
-| `--top_k` | Number of candidates to surface | optional |
-| `--output` | Destination file (JSON/MD) | optional |
-| `--config` | Path to JSON/YAML benchmark config | ✅ (for full run) |
-
-## Roadmap (as of 2024)  
-
-- **v0.4** – Integrate real‑time latency profiling with OpenTelemetry.  
-- **v1.0** – Deploy a server‑less inference shim for edge‑case fintech content.  
-- **v2.0** – Publish a public leaderboard anchored on **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی**.  
-
----
-
-### License  
-MIT – Feel free to fork, break, or appropriate for your own clandestine data‑science projects.  
 
 ---  
 
-*Star this repo if you enjoy dissecting marketing‑adjacent AI pipelines that masquerade as “creative engines.”*
+## Usage (CLI)  
+
+```bash
+# Benchmark a single model endpoint
+ai-content-bench \
+    --model gpt‑3.5‑turbo \
+    --prompt "Explain DeFi in 3 sentences." \
+    --locale fa-IR \
+    --output results/ftx_2022.json
+```
+
+All benchmark scripts are located under `scripts/` and accept the following arguments:  
+
+- `--model` – identifier of the target service (e.g., `gpt‑4`, `claude‑v1`, `cohere‑xor`).  
+- `--prompt` – the seed text to drive generation.  
+- `--locale` – language‑region tag (e.g., `fa-IR`, `en-US`).  
+- `--output` – path to a JSON file that stores latency, token count, and cost metrics.
+
+---  
+
+## Contributing  
+
+1. **Fork** the repository.  
+2. Create a **feature branch** (`git checkout -b feat/your‑feature`).  
+3. Write **unit tests** (≥ 80 % coverage) and **benchmarks** that respect the Persian data schema.  
+4. Submit a **Pull Request** with a concise, technical description of changes.  
+
+> **Cynical note**: If you’re just looking for a quick star‑farm, look elsewhere – this repo expects *substance*.
+
+---  
+
+## License  
+
+Distributed under the **MIT License**. See `LICENSE` for details.  
+
+---  
+
+*Stars are earned, not bought.*  
+
+
+
+---  
+
+*End of README*
