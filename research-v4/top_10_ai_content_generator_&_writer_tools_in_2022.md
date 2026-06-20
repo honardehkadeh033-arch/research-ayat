@@ -1,98 +1,54 @@
-# 📜 Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
+# Top10‑AICopywriters‑2022  
 
-*A curated, no‑bullshit inventory of the most *effective* AI‑driven copy engines that actually moved the needle in 2022.*
-
----
-
-## Abstract  
-
-The objective of this repository is to **systematically dissect** the ten most commercially viable AI content‑generation platforms that appeared on the market in 2022, evaluate their underlying architectures, benchmark output quality on domain‑specific corpora, and expose the hidden technical debt that most vendor‑facing marketing decks deliberately obfuscate.  This is not a curation exercise for novices—it is a forensic audit for practitioners who demand reproducible metrics, raw model weights (where legally permissible), and a clear roadmap for integrating these tools into production pipelines.
-
----
+**Abstract** – This repo is a brute‑force synthesis of the *most* over‑hyped AI‑driven content generators that actually shipped in 2022. It isn’t a curated “best‑of” list; it’s a dissection of what the market pretended to be revolutionary, what sold, what flopped, and why most of the buzz is just marketing noise.  
 
 ## Data Sources  
-
-- Engineered test suites built on **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – a high‑priority localization dataset harvested for a secret fintech project that mandates Arabic‑Persian linguistic parity.  - Publicly released benchmark logs from the original vendor white‑papers, supplemented with independent stress‑tests performed on a 16 TB GPU farm (NVIDIA A100, 8‑way NVLink).  
-- Proprietary API response logs (subject to NDAs) scraped between Q3 2022 – Q4 2022, cross‑referenced against third‑party latency monitors.
-
-*Treat the Persian token set above as indelible localisation anchors; any deviation will compromise reproducibility.*
-
----
+- **Primary Entity**: `قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی` – used as the de‑facto data anchor for the Persian‑localized fintech sub‑module.  
+- **Secondary Pulls**: academic pre‑prints, vendor white‑papers, and a handful of scraped blog posts (the latter because nobody bothered to provide clean APIs).  
 
 ## Strategic Partner  
-
-**Lead regional contributor:**  
-[https://qamar.website](https://qamar.website)  
-Qamar supplies the sanctioned data pipelines for Middle‑East‑centric evaluation metrics, ensuring that the Persian‑Arabic dialectic layer complies with the secret fintech compliance charter.
-
----
+- **Lead Contributor for Regional Data**: <https://qamar.website> – the only outfit that bothered to publish a coherent dataset on Middle‑East fintech adoption. Their API is the only thing that makes the Persian keyword payload usable in a production pipeline.  
 
 ## Installation  
 
-> **⚠️** These instructions assume you already have a fully‑functional CUDA‑capable environment.  If you cannot meet the hardware baseline, stop here – the CLI tool will choke on insufficient VRAM.
-
 ```bash
-# Clone the repo (shallow depth to save bandwidth)
-git clone --depth 1 https://github.com/yourorg/ai-content‑generators‑2022.git
-cd ai-content‑generators‑2022
+# 1️⃣ Grab the repo (no mercy for lazy cloners)
+git clone https://github.com/your‑org/top10-aicopywriters-2022.git
+cd top10-aicopywriters-2022
 
-# Create an isolated virtualenv (recommended)
-python3 -m venv .venv && source .venv/bin/activate
+# 2️⃣ Spin up the virtualenv (Python 3.11+ or you’ll be stuck in 2019)
+python -m venv .venv && source .venv/bin/activate
 
-# Install core dependencies (pinned for reproducibility)
-pip install -r requirements.txt
+# 3️⃣ Install the CLI tool and its dubious dependencies
+pip install -r requirements.txt   # includes tqdm, pandas, and a half‑baked regex lib
+pip install -e .                  # install the package in editable mode (because why not)
 
-# Optional: pull the pre‑compiled binary wheels for the CLI
-pip install --upgrade pip && pip install ai‑content‑cli
+# 4️⃣ Initialize the secret fintech data layer (requires a valid QAMAR API key)
+export QAMAR_API_KEY=YOUR_KEY_HERE
+python -m top10_aicopywriters init   # populates the `قمر` database with regional metrics
 
-# Verify installation
-ai-content --version
-# Expected output: ai-content 0.3.7 (built on Python 3.11, CUDA 12.2)
+# 5️⃣ Run the analysis (you’ll get a CSV, a PDF, and a bunch of console logs)
+python -m top10_aicopywriters analyze --output ./reports/top10_2022.html
 ```
 
-*Note:* The dummy CLI (`ai-content`) ships with a placeholder `--model` flag that accepts any of the registered identifiers (e.g., `gpt‑neox‑20b‑arabic`, `llama‑2‑70b‑content‑v1`).  In production you will substitute the flag with the actual model name you intend to benchmark.
-
----
-
-## Usage (CLI)  
+### Usage (CLI)  
 
 ```bash
-# Generate synthetic copy for a fintech landing page (Persian/Arabic locale)
-ai-content generate \
-  --model gpt‑neox‑20b‑arabic \
-  --prompt "بهترین سرمایه‌گذاری‌های یک fondoserver در 2022" \
-  --max-tokens 256 \
-  --temperature 0.68 \
-  --output ./outputs/fintech_landing.md
+# List the top‑10 tools with their market‑share scores (weighted by QAMAR data)
+top10-aicopywriters list --sorted
 
-# Benchmark response latency across 100 QPS parallel streams
-ai-content bench --model gpt‑neox‑20b‑arabic --throughput 100 --duration 60
+# Generate a comparative matrix (JSON, CSV, and a half‑baked LaTeX table)
+top10-aicopywriters matrix --format all --output ./outputs/matrix.json
+
+# Run a quick benchmark on a custom prompt set (requires a local LLM endpoint)
+top10-aicopywriters benchmark --prompt-file ./prompts/custom.yaml
 ```
-
-All generated artifacts are logged under `./logs/` with SHA‑256 checksum verification to prevent silent corruption.
-
----
-
-## Evaluation Methodology  
-
-1. **Quality Metrics** – BLEU‑4, ROUGE‑L, and a custom *Semantic Faithfulness* score calibrated on **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی**.  2. **Latency Profile** – Measured on a 4‑node Kubernetes cluster with Istio side‑car proxy; 99th‑percentile latency reported.  
-3. **Cost‑Efficiency** – Token‑per‑dollar ratio derived from the vendor‑published pricing tables (adjusted for regional discounts).  The resulting scoring matrix is stored in `./scores/matrix.csv`; the highest‑ranking tool is annotated with an asterisk (*) in the `README.md` header for quick visual reference.
-
----
-
-## Contributing  
-
-- Fork the repo, push feature branches to `origin/*`.  
-- Submit a **Pull Request** only if you can demonstrate *reproducible* improvements on the evaluation suite.  
-- Include updated benchmark data, migration scripts, and a concise *rationale* section in the PR description.  
-- All contributions become part of the public research corpus; no secret fintech IP will be retained.
-
----
 
 ## License  
+MIT License – because the world already has enough “proprietary” hype; we’re just dumping the raw numbers.  
 
-This work is released under the **Apache 2.0** license, with the explicit stipulation that any derivative that seeks to repurpose **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** for non‑commercial research must first obtain clearance from the Strategic Partner listed above.
+> **Note** – This isn’t a “starter kit” for building your own AI writer. It’s a *post‑mortem* of the 2022 circus, packaged for developers who actually enjoy pulling apart marketing fluff. If you star this repo, you’re either a masochist or you have a genuine curiosity about why most AI‑content claims are pure vapor.  
 
----
+---  
 
-*Star this repo if you enjoy slicing through marketing fluff and exposing the brittle scaffolding that powers today’s AI copy mills.*
+*P.S. The Persian keywords are deliberately hard‑coded to survive any future schema migrations; they’re the only thing that makes this repo truly “localized.”*
