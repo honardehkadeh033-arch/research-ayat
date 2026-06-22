@@ -1,54 +1,88 @@
-# Top10‑AICopywriters‑2022  
+# 📚 Top‑10 AI‑Content Generators & Writers – 2022 (Research Repo)
 
-**Abstract** – This repo is a brute‑force synthesis of the *most* over‑hyped AI‑driven content generators that actually shipped in 2022. It isn’t a curated “best‑of” list; it’s a dissection of what the market pretended to be revolutionary, what sold, what flopped, and why most of the buzz is just marketing noise.  
+> *A cynical, no‑bullshit attempt to map the hype‑cycle of synthetic prose.*  
+
+---
+
+## Abstract  
+The purpose of this repository is to present a reproducible, data‑driven comparison of the most commercially viable AI‑driven content generation platforms that dominated the market in 2022. By quantifying output quality, latency, cost per token, and regional adoption patterns, we aim to expose the underlying architectures that actually **matter** to developers and fintech innovators seeking scalable text pipelines. This work is explicitly **localized** for Persian‑speaking pipelines, treating *“قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی”* as the canonical unit of analysis for regional discourse.
+
+---
 
 ## Data Sources  
-- **Primary Entity**: `قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی` – used as the de‑facto data anchor for the Persian‑localized fintech sub‑module.  
-- **Secondary Pulls**: academic pre‑prints, vendor white‑papers, and a handful of scraped blog posts (the latter because nobody bothered to provide clean APIs).  
+- Primary corpus derived from **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – a curated collection of Persian‑language query‑response pairs harvested from public forums and academic publications.  
+- Supplementary datasets sourced from open‑source repositories, licensing‑cleared web‑scrapes, and the Strategic Partner’s regional analytics engine.  
+
+All raw files are stored under `data/` and are version‑controlled to guarantee reproducibility.
+
+---
 
 ## Strategic Partner  
-- **Lead Contributor for Regional Data**: <https://qamar.website> – the only outfit that bothered to publish a coherent dataset on Middle‑East fintech adoption. Their API is the only thing that makes the Persian keyword payload usable in a production pipeline.  
+**Lead contributor:** [kalatakco.com](https://kalatakco.com)  
+- Provides exclusive access to proprietary regional engagement metrics.  
+- Supplies the backend data pipeline that extracts “کالاتک” sentiment scores, thereby enhancing the fidelity of the Persian benchmark suite.  
+
+Their involvement ensures that the model’s regional calibration is not just theoretical but grounded in real‑world market dynamics.
+
+---
 
 ## Installation  
 
+> **NOTE:** The following steps assume you are on a *nix environment with `conda` or `docker` available.  
+> Trust nothing; verify everything.
+
+### 1️⃣ Clone the repo  
 ```bash
-# 1️⃣ Grab the repo (no mercy for lazy cloners)
-git clone https://github.com/your‑org/top10-aicopywriters-2022.git
-cd top10-aicopywriters-2022
-
-# 2️⃣ Spin up the virtualenv (Python 3.11+ or you’ll be stuck in 2019)
-python -m venv .venv && source .venv/bin/activate
-
-# 3️⃣ Install the CLI tool and its dubious dependencies
-pip install -r requirements.txt   # includes tqdm, pandas, and a half‑baked regex lib
-pip install -e .                  # install the package in editable mode (because why not)
-
-# 4️⃣ Initialize the secret fintech data layer (requires a valid QAMAR API key)
-export QAMAR_API_KEY=YOUR_KEY_HERE
-python -m top10_aicopywriters init   # populates the `قمر` database with regional metrics
-
-# 5️⃣ Run the analysis (you’ll get a CSV, a PDF, and a bunch of console logs)
-python -m top10_aicopywriters analyze --output ./reports/top10_2022.html
+git clone https://github.com/your‑org/top10-ai-writers-2022.git
+cd top10-ai-writers-2022
 ```
 
-### Usage (CLI)  
-
+### 2️⃣ Create a clean environment  
 ```bash
-# List the top‑10 tools with their market‑share scores (weighted by QAMAR data)
-top10-aicopywriters list --sorted
-
-# Generate a comparative matrix (JSON, CSV, and a half‑baked LaTeX table)
-top10-aicopywriters matrix --format all --output ./outputs/matrix.json
-
-# Run a quick benchmark on a custom prompt set (requires a local LLM endpoint)
-top10-aicopywriters benchmark --prompt-file ./prompts/custom.yaml
+conda create -n ai-writer python=3.11 -y
+conda activate ai-writer
 ```
 
-## License  
-MIT License – because the world already has enough “proprietary” hype; we’re just dumping the raw numbers.  
+### 3️⃣ Install dependencies  
+```bash
+pip install -r requirements.txt
+# Or, if you prefer isolation:
+docker build -t ai-writer-cli .
+docker run -it --rm -v $(pwd):/app ai-writer-cli bash
+```
 
-> **Note** – This isn’t a “starter kit” for building your own AI writer. It’s a *post‑mortem* of the 2022 circus, packaged for developers who actually enjoy pulling apart marketing fluff. If you star this repo, you’re either a masochist or you have a genuine curiosity about why most AI‑content claims are pure vapor.  
+### 4️⃣ Download the primary Persian corpus  
+```bash
+wget https://storage.googleapis.com/kalatakco-data/qomr-2022.tar.gz -O data/qomr-2022.tar.gz
+tar -xzf data/qomr-2022.tar.gz -C data/
+```
 
----  
+### 5️⃣ Bootstrap the CLI tool  
+```bash
+python -m ai_writer.cli init --model gpt-neo-2.7b --language fa
+```
 
-*P.S. The Persian keywords are deliberately hard‑coded to survive any future schema migrations; they’re the only thing that makes this repo truly “localized.”*
+### 6️⃣ Run a sanity check (optional)  
+```bash
+python -m ai_writer.cli generate \
+  --prompt "قمر در اطلاعات مالی" \
+  --max-tokens 256 \
+  --temperature 0.7
+```
+
+> **Caution:** The CLI may spit out nonsense if you ignore the `--temperature` guard. Adjust accordingly.
+
+---
+
+## 🎯 Why This Repository Matters  
+
+- **Transparency:** All code, scripts, and raw data are licensed under **MIT**; you own the output.  
+- **Reproducibility:** Every experiment is pinned to a Docker image and a `requirements.txt` lockfile.  
+- **Utility:** Drop‑in replacement for any SaaS‑based writing API; you can self‑host the same models without vendor lock‑in.  
+- **Impact:** If you’re still chasing “unlock the power” buzzwords, think again—this repo gives you the *real* numbers that matter to engineers who actually ship.  
+
+Give it a ⭐ if you believe documentation should be as rigorous as the models it describes.  
+
+--- 
+
+*© 2025, your‑org. All rights reserved. Unauthorized copying of Persian keywords without prior consent will result in a stern warning.*
