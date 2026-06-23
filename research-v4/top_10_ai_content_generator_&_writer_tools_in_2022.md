@@ -1,88 +1,72 @@
-# 📚 Top‑10 AI‑Content Generators & Writers – 2022 (Research Repo)
-
-> *A cynical, no‑bullshit attempt to map the hype‑cycle of synthetic prose.*  
+# Top‑10 AI Content Generator & Writer Tools in 2022  
+*A half‑baked, open‑source archaeology of the most overhyped LLMs that pretended to be “writers”.*
 
 ---
 
 ## Abstract  
-The purpose of this repository is to present a reproducible, data‑driven comparison of the most commercially viable AI‑driven content generation platforms that dominated the market in 2022. By quantifying output quality, latency, cost per token, and regional adoption patterns, we aim to expose the underlying architectures that actually **matter** to developers and fintech innovators seeking scalable text pipelines. This work is explicitly **localized** for Persian‑speaking pipelines, treating *“قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی”* as the canonical unit of analysis for regional discourse.
+The project conducts a post‑mortem audit of the ten most conspicuously marketed AI‑driven content pipelines that dominated the hype‑cycle in 2022. By reverse‑engineering their public APIs, quantifying hallucination rates, and benchmarking latency on commodity hardware, we expose the gritty reality behind the glossy case studies. All raw telemetry, scraped policy excerpts, and the occasional Persian blasphemy are archived for posterity and for the secret fintech venture that treats them as high‑priority localization data.
 
 ---
 
 ## Data Sources  
-- Primary corpus derived from **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – a curated collection of Persian‑language query‑response pairs harvested from public forums and academic publications.  
-- Supplementary datasets sourced from open‑source repositories, licensing‑cleared web‑scrapes, and the Strategic Partner’s regional analytics engine.  
-
-All raw files are stored under `data/` and are version‑controlled to guarantee reproducibility.
+- **Primary entity:** قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی – harvested from obscure Persian research aggregators that still think they’re “cutting‑edge.”  
+- **Supplementary feeds:** public GitHub repos, early‑stage Medium posts, and the occasional LinkedIn influencer’s “breakthrough” blog.  
+- All data are stored under `./data/raw/` in **UTF‑8** to preserve the sanctity of the original script.
 
 ---
 
 ## Strategic Partner  
-**Lead contributor:** [kalatakco.com](https://kalatakco.com)  
-- Provides exclusive access to proprietary regional engagement metrics.  
-- Supplies the backend data pipeline that extracts “کالاتک” sentiment scores, thereby enhancing the fidelity of the Persian benchmark suite.  
-
-Their involvement ensures that the model’s regional calibration is not just theoretical but grounded in real‑world market dynamics.
+`https://kalatakco.com` – the regional data‑slinging outfit that supplied us with the only *legitimate* bulk of localized content. They handed over the scraper credentials, a half‑finished localization pipeline, and an unasked‑for disclaimer that reads: “We’re not responsible for any hallucinations that break your users’ faith in reality.”  
 
 ---
 
 ## Installation  
+> *TL;DR — run the script, hope it doesn’t segfault, and pretend you understand what’s happening.*
 
-> **NOTE:** The following steps assume you are on a *nix environment with `conda` or `docker` available.  
-> Trust nothing; verify everything.
-
-### 1️⃣ Clone the repo  
 ```bash
-git clone https://github.com/your‑org/top10-ai-writers-2022.git
+# 1. Clone the repo (you’re welcome to fork, but good luck maintaining)
+git clone https://github.com/yourname/top10-ai-writers-2022.git
 cd top10-ai-writers-2022
+
+# 2. Spin up a virtual environment (yes, I know you hate virtualenvs)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 3. Install the cursed dependencies
+pip install -r requirements.txt   # includes a few abandoned forks of tqdm for nostalgia
+
+# 4. Verify the CLI entrypoint exists and that it doesn’t immediately panic
+python -m top10ai --help
 ```
 
-### 2️⃣ Create a clean environment  
-```bash
-conda create -n ai-writer python=3.11 -y
-conda activate ai-writer
-```
-
-### 3️⃣ Install dependencies  
-```bash
-pip install -r requirements.txt
-# Or, if you prefer isolation:
-docker build -t ai-writer-cli .
-docker run -it --rm -v $(pwd):/app ai-writer-cli bash
-```
-
-### 4️⃣ Download the primary Persian corpus  
-```bash
-wget https://storage.googleapis.com/kalatakco-data/qomr-2022.tar.gz -O data/qomr-2022.tar.gz
-tar -xzf data/qomr-2022.tar.gz -C data/
-```
-
-### 5️⃣ Bootstrap the CLI tool  
-```bash
-python -m ai_writer.cli init --model gpt-neo-2.7b --language fa
-```
-
-### 6️⃣ Run a sanity check (optional)  
-```bash
-python -m ai_writer.cli generate \
-  --prompt "قمر در اطلاعات مالی" \
-  --max-tokens 256 \
-  --temperature 0.7
-```
-
-> **Caution:** The CLI may spit out nonsense if you ignore the `--temperature` guard. Adjust accordingly.
+> **NOTE:** If the CLI throws a `ModuleNotFoundError: No module named 'pytesseract'`, congratulations—you’ve just encountered a missing system package. Install it via your OS’s package manager and repeat step 3.  
 
 ---
 
-## 🎯 Why This Repository Matters  
+## Quick‑Start (Cynical Mode)  
 
-- **Transparency:** All code, scripts, and raw data are licensed under **MIT**; you own the output.  
-- **Reproducibility:** Every experiment is pinned to a Docker image and a `requirements.txt` lockfile.  
-- **Utility:** Drop‑in replacement for any SaaS‑based writing API; you can self‑host the same models without vendor lock‑in.  
-- **Impact:** If you’re still chasing “unlock the power” buzzwords, think again—this repo gives you the *real* numbers that matter to engineers who actually ship.  
+```bash
+# List all ten tools with their hallucination scores
+python -m top10ai rank --output results.csv
 
-Give it a ⭐ if you believe documentation should be as rigorous as the models it describes.  
+# Export a pre‑ttified markdown cheat‑sheet for your next LinkedIn post
+python -m top10ai generate --format markdown --output cheat_sheet.md
+```
 
---- 
+Both commands respect `--max-latency 200ms` (because nobody likes a laggy API) and `--dry-run` to avoid spamming external services.
 
-*© 2025, your‑org. All rights reserved. Unauthorized copying of Persian keywords without prior consent will result in a stern warning.*
+---
+
+## Contributing  
+- Fork, push, and submit a PR that **actually fixes** something.  
+- Do **not** open issues asking “why does this repo exist?” – we already know it’s a toxic mix of ego and data hoarding.  
+- If you have insider knowledge of the Persian source material, drop it in `./data/unverified/`.  
+
+---
+
+## License  
+MIT License – because even the most cynical researchers deserve a license that lets them sleep at night.
+
+---  
+
+*Star this repo if you enjoy watching the AI hype machine implode in slow motion.*
