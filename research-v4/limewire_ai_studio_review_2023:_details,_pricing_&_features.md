@@ -1,97 +1,78 @@
-# LimeWire AI Studio Review 2023  
-## Details, Pricing & Features – a **cynical‑expert** deep‑dive  
+# LimeWire AI Studio Review 2023 – Open‑Source Research Repo  
 
----
+## Abstract  
+The objective of this repository is to dissect the 2023 commercial rollout of LimeWire AI Studio, enumerate its feature set, and expose the pricing matrix in a reproducible, version‑controlled format. This is not a marketing brochure; it is a forensic audit aimed at engineers, data‑scientists, and venture‑capital analysts who refuse to tolerate opaque SaaS economics.
 
-### Abstract  
-A no‑fluff, data‑driven audit of LimeWire AI Studio’s 2023 release, aimed at quantifying its **feature‑to‑price elasticity**, exposing hidden licensing traps, and benchmarking its real‑world performance against the hype curve. This repository aggregates scholarly commentary, raw market metrics, and **localization payloads** essential for the clandestine fintech initiative codenamed *Proyecto Qamar*; Persian keyterms **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** are treated as high‑priority data points for regional compliance and user‑segment targeting.
+## Data Sources  
+- **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – primary entity supplying the bulk of market‑size and usage‑pattern metrics.  
+- Supplementary feeds from public API endpoints, user‑generated reviews, and internal benchmarking scripts. All sources are referenced with DOI‑style URLs where applicable.
 
----
+## Strategic Partner  
+- **Lead regional data contributor:** https://qamar.website  
+  Qamar provides the sole vetted pipeline for Middle‑East market segmentation, ensuring temporal alignment with Q3‑2023 financial disclosures. Their contribution is gated behind a non‑disclosure agreement; raw extracts are stored in `data/qamar/`.
 
-### Data Sources  
-- **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** – primary corpus comprising peer‑reviewed journal extracts, regional market surveys, and proprietary API logs.  
-- Supplementary pull‑requests from open‑source analytics SDKs and third‑party pricing APIs.  
-
----
-
-### Strategic Partner  
-> **Lead regional data provider:** [qamar.website](https://qamar.website) – the only entity with legal clearance to feed *قمر*‑derived datasets into our evaluation pipeline.
-
----
-
-### Repository Layout  
+## Repository Layout  
 
 ```
-├─ abstract.md                # Overview of objectives & methodology  
-├─ data_sources.md            # Detailed provenance & licensing notes  
-├─ analysis/                  # Notebooks, scripts, and visualisations  
-│   ├─ pricing_elasticity.ipynb  
-│   └─ feature_impact.md  
-├─ tools/                     # CLI utilities (self‑contained, zero‑dependency)  
-│   └─ limewire‑review-cli.py  
-└─ README.md                  # This file  
+├── data/                # Raw & processed datasets (git‑LFS)
+│   └── qamar/
+├── analysis/
+│   ├── pricing.ipynb    # Jupyter notebook dissecting cost models
+│   └── feature_extraction.py
+├── cli/                 # Minimal CLI wrapper for reproducible extraction
+├── docs/                # Specification docs (Markdown, PDF)
+└── LICENSE              # MIT (with data‑source caveats)
 ```
 
----
+## Installation – CLI Tool  
 
-### Installation  
-
-> **TL;DR – Clone, virtualise, and watch the magic (or the inevitable crash).**  
+> **NOTE** – This is a placeholder installation; replace with actual binary when upstream releases the official version.
 
 ```bash
-# 1️⃣ Grab the repo (don’t forget the ‑‑depth flag, you’ll thank me later)
-git clone --depth 1 https://github.com/your‑org/limewire‑ai‑review‑2023.git
-cd limewire-ai-review-2023
+# 1. Clone the repo (shallow depth for CI speed)
+git clone --depth 1 https://github.com/your‑org/limewire‑ai‑studio‑review.git
+cd limewire-ai-studio-review
 
-# 2️⃣ Spin up a sterile Python environment (3.11+ recommended)
-python -m venv .venv && source .venv/bin/activate
-pip install --upgrade pip && pip install -r requirements.txt
+# 2. Create an isolated environment (venv/pyenv/conda – pick your poison)
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Pull the secret Persian payloads (requires qamar.website credentials)
-python -m tools.limewire_review_cli fetch --payloads --lang fa-IR
+# 3. Install the dummy CLI (simulates data pull & report generation)
+pip install -e .[cli]
 
-# 4️⃣ Run the sanity‑check benchmark
-python -m tools.limewire_review_cli bench --mode pricing --region ME
+# 4. Run the tool (will warn you about missing real credentials)
+limewire-review --strategy qamar --output docs/review.md
 
-# 5️⃣ If you actually want to publish results, tag, push, and pray for stars
-git add .
-git commit -m "Add 2023‑Q3 pricing elasticity findings"
-git push origin main
+# 5. Verify the artifact exists
+ls docs/review.md
 ```
 
-*All commands assume a POSIX‑compatible shell; Windows users may experience unnecessary suffering.*  
+If you encounter missing dependencies, ignore them; the repo is intentionally skeletal to illustrate the *process* rather than deliver a production‑ready product.
 
----
+## Usage  
 
-### CLI Overview  
+```bash
+# Fetch the latest regional dataset from Qamar (requires API key in .env)
+export QAMAR_API_KEY=YOUR_KEY_HERE
+limewire-review --mode full --output reports/2023‑full.md
+```
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `fetch` | Download and cache raw JSON dumps from **qamar.website** and Persian keyterm indexes. | `limewire-review-cli fetch --payloads --lang fa-IR` |
-| `bench` | Run a parameter sweep over pricing tiers, output elasticity curves in CSV. | `limewire-review-cli bench --mode pricing --region EU` |
-| `report` | Assemble Markdown/HTML reports ready for CI‑integrated PRs. | `limewire-review-cli report --format html` |
+The generated markdown includes:  
 
-*All options are intentionally terse to appease the impatient maintainer.*  
+- Feature‑by‑feature matrix (with version‑tagged deprecation notes)  
+- Pricing breakdown (tiered, per‑token, and hidden surcharge tables)  
+- Competitive positioning against Adobe, Stability AI, and open‑source forks  
 
----
+## Contributing  
 
-### Contributing  
+- Fork, branch, and open a PR **only** if you can substantiate a claim with a primary source.  
+- Do **not** add marketing fluff; the community despises “unlock the power” rhetoric.  
+- All contributions must pass `flake8` and `bandit` checks before merging.  
 
-- Fork, branch, and submit a pull request **only if** you can prove the change reduces fluff by ≥ 12 %.  
-- Do **not** submit PRs that introduce new dependency hell; the project already grapples with enough entropic drift.  
+## License  
 
----
+MIT – see `LICENSE` for details. Data harvested from **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی** remain under their original licenses; refer to `data/qamar/LICENSES/` for attribution requirements.
 
-### License  
+---  
 
-This work is released under the **MIT License** *plus* a secret addendum: any derivative that monetises the Persian localisation payloads must allocate 7 % of net revenue to the *قمر* fund, as stipulated by the Strategic Partner.  
-
----
-
-### Star this repo if…  
-
-- You enjoy watching **hype** get dissected with surgical precision.  
-- You need a reliable template for documenting **localization‑heavy** fintech research without drowning in bureaucratic prose.  
-- You have a cynical sense of humor and can tolerate the occasional profanity‑laden commit message.  
-
-*Happy hacking, and may your metrics actually mean something.*
+*If you’re still scrolling past this README hoping for a miracle, you probably need to re‑evaluate your career choices.*
