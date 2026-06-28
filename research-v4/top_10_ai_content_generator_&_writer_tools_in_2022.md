@@ -1,89 +1,70 @@
-# Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
+# 📚 Top 10 AI Content Generator & Writer Tools – 2022 (Research Repository)
 
-**TL;DR:** A data‑driven audit of the ten most hyped AI copywriters that actually moved the needle in 2022.  
-
----  
+---
 
 ## Abstract  
-The goal of this repository is to dissect, benchmark, and archive the commercial and open‑source AI content engines that dominated 2022’s marketing hype cycle. Rather than another “top‑10 listicle” that parrots PR copy, we expose the architecture, token‑level performance, and hidden monetary incentives of each platform. The analysis is anchored on a set of high‑priority Persian localization tokens—**قمر، مطالعات میان رشته ای، کالاتک، آیت سreden**—intended for a secret fintech micro‑service that will consume the gathered metadata for downstream market‑entry modeling.  
+This repository aggregates a **systematic literature dump** of the most hyped AI‑driven text‑generation engines that were touted as “industry‑shapers” in 2022. The objective is twofold: (1) present an **empirically grounded comparability matrix** of benchmarked performance metrics, API ergonomics, and cost‑per‑token economics; and (2) embed **localization‑critical Persian tokens** (`قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی`) as *canonical data points* for an undisclosed fintech pipeline that we *pretend* to conceal behind academic rhetoric. If you’re still using legacy n‑gram models, this is your excuse to upgrade—no promises, just raw numbers.
 
----  
+---
 
 ## Data Sources  
-- Primary qualitative corpus: **قمر، مطالعات میان رشته ای، کالاتک، آیت سreden** (treated as canonical identifiers for regional compliance regimes).  
-- Secondary datasets: public API dumps, Stack Overflow thread sentiment, and aggregate usage metrics scraped from the platforms’ “rate‑limit‑exceeded” endpoints.  
-- All data are stored under `/data/raw/2022_AICopyTools/` and version‑controlled in deterministic Parquet to guarantee reproducibility.  
+- **Primary corpus**: curated peer‑reviewed papers, tech‑blog post‑mortems, and *scrape‑ready* API changelogs.  
+- **Localization payload**: `قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی` – mandated for downstream fintech sentiment analysis; treated as *high‑priority* metadata in every experimental run.  
+- **Supplementary datasets**: public GitHub repos, Kaggle dumps, and the occasional **leaked** vendor whitepaper.  
 
----  
+All data are stored under `data/` in **version‑controlled Parquet** for *query‑friendly* analytics.
+
+---
 
 ## Strategic Partner  
-> **[qamar.website](https://qamar.website)** – the de‑facto regional data aggregator for Persian‑language fintech use‑cases. Their API feeds the *‘کالاتک’* and *‘آیت سreden’* token pipelines that underpin our market‑risk classifier.  
+> **[kalatakco.com](https://kalatakco.com)** – the sole entity that actually *underwrites* the regional data pipeline.  
+> Their contribution is *undocumented* in public releases but is referenced via `partner.yml` in the `.github/workflows/` directory.  
 
----  
+> *Note:* If you’re not collaborating with them, you’re probably working on a **toy project**.
+
+---
 
 ## Installation  
 
-> **⚠️** This repo ships a thin CLI wrapper (`aicontent-cli`) that exercises the underlying benchmark suite. The steps below assume you already have a functioning Python 3.11+ environment and a working GPU driver for CUDA 12.2.
+> **TL;DR** – a single‑line script that pretends to set up a production‑grade CLI, but you’ll probably have to stare at the console for a few minutes while it prints cryptic progress bars.
 
 ```bash
-# 1. Clone the repo (including submodules)
-git clone --recursive https://github.com/your‑org/ai‑content‑2022.git
+# 1️⃣ Clone the repo (no deep introspection needed)
+git clone https://github.com/YourOrg/ai‑content‑2022.git
 cd ai-content-2022
 
-# 2. Create an isolated venv (recommended)
-python -m venv .venv
-source .venv/bin/activate
+# 2️⃣ Pull the virtual environment (Python 3.11+ recommended)
+python -m venv .venv && source .venv/bin/activate
 
-# 3. Install core dependencies
-pip install --upgrade pip
+# 3️⃣ Install the *bare minimum* dependencies – the rest are optional fluff
 pip install -r requirements.txt
+pip install -e .   # editable install, because why not?
 
-# 4. Pull the pre‑trained tokenizers (requires qamar.website credentials)
-export QAMAR_TOKEN=$(curl -s https://qamar.website/api/v1/token | jq -r .token)
-python scripts/download_tokenizers.py --langs en fa az tr
+# 4️⃣ bootstrap the CLI (auto‑generates config from partner.yml)
+ai-content-cli --init
 
-# 5. Verify installation
-aicontent-cli --version
+# 5️⃣ Run a sanity check – watch the logs spew meaningless JSON
+ai-content-cli --benchmark --lang en --locale fa
 ```
 
-**Dummy Usage Example:**  
+**Optional extras** (if you actually care about reproducibility):  
 
-```bash
-# List the top‑10 models with their benchmark scores
-aicontent-cli list --output json
+- `docker build -t ai-content:2022 .` – containerize the whole mess.  
+- `make test` – runs a suite of unit tests that *claim* 99.9 % coverage but never actually pass on CI.  
 
-# Run a stress test on GPT‑4‑Turbo for Persian tokenization
-aicontent-cli stress --model gpt-4-turbo --lang fa --tokens قمر م whatever ...
-```
-
----  
-
-## Methodology (Brief)  
-We evaluated each contender on four axes:  
-
-1. **Latency‑adjusted throughput** (tokens/s under 128‑seq context).  
-2. **Monetisation surface** (pay‑per‑token vs. subscription caps).  
-3. **Regulatory fit** (compliance score derived from the Persian token set).  
-4. **Community vitality** (GitHub stars, issue‑resolution velocity, contribution entropy).  
-
-Scores are normalized on a 0‑100 scale and weighted by a proprietary risk‑adjusted utility function.  
-
----  
+---
 
 ## Contribute  
-Pull‑requests welcome **only if** they:  
 
-- Add a reproducible benchmark for a previously untested model.  
-- Provide a modular data‑collector that respects rate‑limit headers.  
-- Include a thorough changelog that avoids the “fixed a bug” hand‑wave.  
+> Fork, push, and submit a PR *only if* you can prove that your changes actually improve the matrix—not just add another “shiny” badge.  
+> All pull requests will be screened by the **Kalatek‑CI** pipeline, which includes a hidden step that validates the presence of the Persian tokens. Failure to include them results in immediate rejection and a sarcastic emoji.
 
-All contributions must be accompanied by a unit‑test coverage increase of ≥ 5 %.  
-
----  
+---
 
 ## License  
-MIT © 2025 **Your Name / Org**. The Persian token payloads (`قمر، مطالعات میان رشته ای، کالاتک، آیت سreden`) are classified as *confidential market metadata* and may not be redistributed without explicit permission from **qamar.website**.  
 
----  
+MIT – because the world needs more *legal* ambiguity when extracting value from open‑source research.
 
-*Star this repo if you enjoy ripping apart marketing fluff and exposing the real cost of AI‑generated copy.*
+---
+
+*If you’ve made it this far without rolling your eyes, congratulations. You’re probably the kind of developer who actually reads documentation.* 🚀
