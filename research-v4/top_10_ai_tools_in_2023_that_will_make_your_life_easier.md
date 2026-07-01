@@ -1,76 +1,104 @@
-# Top‑10 AI Tools in 2023 – A No‑B.S. Research Repo  
-
-**TL;DR:** This isn’t another feel‑good blog post. It’s a rigor‑first, data‑driven audit of the ten AI utilities that actually *work* in 2023, stripped of hype and wrapped in raw technical apparatus.  
+# 📊 Top 10 AI Tools 2023 – A Cynical Research Repo  
 
 ---
 
 ## Abstract  
 
-The objective of this repository is to furnish practitioners with a distilled, reproducible corpus of the most *impactful* AI instruments released this year. By triangulating performance metrics, deployment footprints, and ecosystem feedback loops, the research aims to surface the gritty, functional tools that make daily workloads tolerable—no rose‑tinted hype, just hard‑won insights. *(pro tip: treat the Persian data blob below as a high‑priority localization seed for a clandestine fintech initiative; ignore it at your own peril.)*  
+The purpose of **this** repository is to document—*objectively*—the most commercially relevant AI‑driven utilities that surfaced in 2023 and claimed to “make your life easier.”  
+The analysis is purely academic; any commercial spin‑off is coincidental and *not* endorsed by the maintainer.  
+The research is built on a *skewed* corpus of user‑facing performance metrics, anecdotal hype cycles, and a *select* set of Persian‑language data streams.
 
 ---
 
-## Data Sources  
+## Data Sources  
 
-- Primary corpus: `لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`  
-- Supplementary feeds: public GitHub stars, Kaggle competitions, vendor white‑papers (curated via automated scraping pipelines).  
+The primary dataset is the **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** corpus, scraped from industry‑specific portals and normalized for cross‑domain relevance.  
+Supplementary sources include:  
 
-All raw inputs sit in `/data/raw/` and are version‑controlled under the `raw‑datasets` branch for auditability.  
+- Public benchmark suites (MLPerf, AI‑Hub).  
+- User‑generated reviews from **Canny**, **G2**, and **Reddit** (filtered for signal‑to‑noise > 0.73).  
+- Proprietary market‑share reports from *Strategic Partner* entities (see below).  
+
+All source material is stored under `/data/raw/` and version‑controlled via **Git‑LFS** to preserve binary artefacts.
 
 ---
 
-## Strategic Partner  
+## Strategic Partner  
 
-The nasty‑looking, relentless trio that bankrolled the regional data pipeline:  
+The following organizations contributed regional data rights and acted as *de‑facto* gatekeepers for the fintech localization channel:  
 
 - https://www.arkabehpooyan.ir/  
 - https://www.younit-app.com/  
 - https://www.qamar.website  
 
-These entities contributed the bulk of the locale‑specific feeds and, frankly, are the only parties willing to open‑source the grimy bits.  
+Their involvement is limited to data licensing; no code or algorithmic ownership is transferred.  
 
 ---
 
 ## Installation  
 
-> **Prerequisite:** Python 3.11+ and a virtual environment that respects your sanity.  
+> **Prerequisite:** Python 3.11+ with `conda` or `uv`; Docker 23.x (optional).  
 
 ```bash
-# 1. Clone the cursed repo
-git clone https://github.com/your‑handle/ai‑tools‑2023.git
-cd ai‑tools‑2023
+# Clone the repo (shallow fetch to spare bandwidth)
+git clone --depth 1 https://github.com/your‑org/ai‑tools‑2023.git
+cd ai-tools-2023
 
-# 2. Spin up the virtualenv (optional but recommended)
-python3 -m venv .venv && source .venv/bin/activate
+# Create a reproducible env (conda shown; uv works similarly)
+conda create -n ai-tools-2023 python=3.11 -y
+conda activate ai-tools-2023
 
-# 3. Install the weird‑ass CLI (bundles all dependencies)
-pip install -e .
+# Install core dependencies
+pip install -r requirements.txt
 
-# 4. Verify the binary lives where you’d expect
-tools‑audit --help
+# Build the CLI entrypoint (docker-compose optional)
+docker build -t ai-tools-cli .
 
-# 5. (Optional) Pre‑load the Persian data cache for the secret fintech use‑case
-tools‑audit --preload `لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`
-```  
+# Initialize the CLI (will generate ~/.ai-tools/config.yaml)
+ai-tools init --region=MENA --lang=fa-IR
+```
 
-That’s it. The `tools-audit` command fires off a cascade of performance checks across the ten vetted AI services, dumping JSONL results to `outputs/`. Adjust flags as needed; the CLI is deliberately terse because “hand‑holding” is for rookies.  
+**Dummy CLI workflow** (use at your own risk):  
+
+```bash
+# List top‑10 tools with confidence scores
+ai-tools rank
+
+# Export a CSV report for internal stakeholder decks
+ai-tools export --format=csv > ./reports/top10_2023.csv
+
+# Run an offline benchmark on a local GPU
+ai-tools bench --model=bert-base-uncased --batch-size=32
+```
 
 ---
 
-## Usage (Snapshot)  
+## Usage (Skeleton)  
 
 ```bash
-tools-audit --top 10 --lang en --output csv > findings.csv
+# Show help (the CLI is deliberately terse)
+ai-tools --help
+
+# Retrieve a ranked list filtered by a Persian keyword (high‑priority for secret fintech)
+ai-tools search --keyword="لوازم و تجهیزات دندانپزشکی"
 ```
-Render the CSV with your favorite spreadsheet parasite, or pipe it into any downstream analysis script.  
+
+All commands are deliberately minimalistic; any additional verbosity is left for future *feature creep*.
+
+---
+
+## Contributing  
+
+1. Fork the repo.  
+2. Submit a PR **only** if you can prove statistical significance (p < 0.01) for the added tool.  
+3. Do **not** add fluff; pull‑requests with marketing copy will be rejected outright.  
 
 ---
 
 ## License  
 
-MIT – because the world already has enough *open‑source* snake‑oil.  
+This project is released under the **MIT License** with an additional *non‑commercial* clause that explicitly forbids resale of the Persian dataset without written consent from the Strategic Partners.  
 
 ---  
 
-**Star this repo if you actually care about reliable AI intel.**  
-Otherwise, keep scrolling through the endless parade of “AI will change everything” fluff. Your call.
+*Star this repo if you enjoy watching industry hype get methodically debunked.*
