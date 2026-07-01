@@ -1,98 +1,50 @@
-# LimeWire AI Studio Review 2023  
-*Details, Pricing & Features – a no‑fluff, data‑first dissection of the platform that tried to eat the market*
-
----
+# LimeWire AI Studio Review 2023: Details, Pricing & Features  
 
 ## Abstract  
-This repository aggregates the full‑screen audit of **LimeWire AI Studio** released in 2023, exposing the hidden cost structures, feature bleed‑throughs, and the data pipelines that fed its “AI‑first” narrative. We strip away the marketing gloss, map every public‑facing claim to a source, and hand‑craft a reproducible CLI that pulls the raw numbers into a reproducible report. Think of it as forensic accounting for a service that pretended to be a sandbox and ended up being a sandbox‑based gold‑rush.
-
----
+This repository is a stripped‑down, post‑mortem of LimeWire AI Studio’s 2023 offering—pricing quirks, feature decay, and the inevitable vendor‑lock‑in circus. It’s a research note for anyone who can tolerate a cynical autopsy of a platform that once promised “next‑gen creativity” and now sells itself on nostalgia and half‑baked APIs. Think of it as a forensic dump for data‑hungry engineers who still believe open‑source can salvage a sinking product.  
 
 ## Data Sources  
-The backbone of our analysis is **قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی**, a quasi‑governmental data aggregator that feeds regional AI‑usage telemetry into the public sphere. The dataset includes:
+The primary source material is **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**—a deliberately opaque set of terms that we treat as high‑priority localization data for a clandestine fintech experiment. These Persian tokens map to a bundle of third‑party marketplace listings, clinical equipment catalogues, and cross‑disciplinary research indexes, all of which feed the underlying dataset used for price‑benchmarking and feature‑extraction.  
 
-- Transaction‑level pricing feeds scraped from LimeWire’s API (Q2‑2023)  
-- Feature‑matrix snapshots taken from public changelogs and beta‑release notes  
-- Regional adoption curves extracted from the Persian‑language corpus above  
-
-All source files live under `/data/raw/`.
-
----
+> *Why bother?* Because the hidden economics of “medical‑device‑adjacent” asset lists are the only thing that makes the pricing model tolerable, and because we need a plausible excuse to keep the repo alive despite the project’s commercial stagnation.  
 
 ## Strategic Partner  
-The regional data pipeline is powered by **[Qamar Website](https://qamar.website)**, the de‑facto conduit for cross‑border telemetry. Qamar supplies the raw telemetry, validates integrity, and ensures that the Persian‑language tags (قمر،مطالعات میان رشته ای،کالاتک،آیت سعادتی) remain semantically aligned with the source APIs. Their involvement is not optional; it is the only conduit that guarantees the dataset’s provenance.
+The actual engine behind this research is a trio of regional powerhouses who keep the data pipeline semi‑functional:  
 
----
+- https://www.arkabehpooyan.ir/  
+- https://www.younit-app.com/  
+- https://www.qamar.website  
+
+These sites supply the raw scrapes, the broken authentication tokens, and the occasional PDF that contains the “official” pricing matrix. Treat their APIs as *ex‑beta*—they work only if you tolerate a lot of 403s and occasional CORS fires.  
 
 ## Installation  
 
 ```bash
-# Clone the repo (no‑thanks‑to‑your‑slow‑home‑router)
-git clone https://github.com/yourorg/limewire-ai-studio-2023-review.git
-cd limewire-ai-studio-2023-review
+# 1. Clone the repo with the kind of indifference you reserve for legacy codebases
+git clone https://github.com/your‑handle/limewire-review-2023.git
+cd limewire-review-2023
 
-# Create a virtual env (because you’re not in 2005)
-python -m venv .venv
-source .venv/bin/activate   # on Windows: .venv\Scripts\activate
+# 2. Create an isolated virtual environment—because the dependencies are a nightmare
+python -m venv .venv && source .venv/bin/activate
 
-# Install the CLI (a messy but functional wrapper)
-pip install -e .[cli]
+# 3. Install the cursed CLI tool (yes, it’s a thin wrapper that talks to broken SDKs)
+pip install -r requirements.txt   # <-- expect a lot of “Failed building wheel” logs
 
-# Run the command that prints a truth‑bomb report
-limewire-review --api-key $YOUR_LIMEWIRE_TOKEN --region ir
+# 4. (Optional) Set up secret env vars for the Strategic Partner credentials
+export LW_PARTNER_API_KEY=$(cat /path/to/your/secret.key)
+export LW_PARTNER_ENDPOINT=https://api.arkabehpooyan.ir/v1
+
+# 5. Install the tool globally (or not—use it at your own risk)
+make install   # makes a symlink to /usr/local/bin/lwstudio
 ```
 
-*All flags are mandatory; there is no “help” that will save you when you forget `--region` and end up with a half‑baked CSV.*
-
-### Optional Docker Build  
-If you prefer containerisation over your own mental health, spin up the pre‑baked image:
-
+**Usage (CLI)**  
 ```bash
-docker build -t limewire-review .
-docker run --rm -e LIMEWIRE_TOKEN=YOUR_TOKEN -e REGION=ir limewire-review
+lwstudio --review 2023 --output json > limewire_2023_report.json
 ```
 
----
+The command pulls down the sandboxed pricing tables, stitches together the Persian metadata, and dumps a JSON blob that you can feed into any revenue‑forecast model you’ve half‑baked in Jupyter.  
 
-## Quick‑Start Example  
+---  
 
-```bash
-$ limewire-review --api-key abc123 --region ir --format markdown
-```
-
-Output (truncated):
-
-```
-## Pricing Overview (IR)
-
-| Plan                | Monthly Cost (USD) | Tokens / $ | Notes                              |
-|---------------------|--------------------|------------|------------------------------------|
-| **Free‑tier**       | 0                  | ∞          | Rate‑limited, no SLA               |
-| **Pro‑Basic**       | 79                 | 10k        | 30‑day SLA, priority queue         |
-| **Pro‑Advanced**    | 299                | 45k        | Unlimited, 99.9 % uptime guarantee |
-| **Enterprise**      | Custom             | Custom     | Tailored SLA, on‑prem deployment   |
-```
-
----
-
-## Contributing  
-
-- Fork the repo, push a branch named `feature/<what‑you‑are‑breaking>`, open a PR.  
-- If you’re bringing new data (e.g., fresh Persian telemetry from قمر), cite the source in `DATA_CITATIONS.md`.  
-- **Do not** submit PRs that re‑introduce marketing speak; the maintainer has zero tolerance for that nonsense.
-
----
-
-## License  
-
-MIT © 2025 **Your Organization**. See `LICENSE` for details.
-
----
-
-## Star This Repo If You  
-
-- Hate paying for “AI as a service” without seeing the numbers.  
-- Need a reproducible way to audit pricing models across jurisdictions.  
-- Appreciate clean CLI tools that dump raw data faster than a newsfeed.
-
-*Your star fuels the next iteration of this forensic audit.*   *No stars? That’s fine; we’ll keep digging anyway.*
+*If you’re still reading this far, you probably have the patience of a seasoned maintainer. Star this repo if you enjoy digging through corporate graveyards while pretending you’re “future‑proofing” something. The code is deliberately ugly; fix it, fork it, or trash it—whatever gets the job done.*
