@@ -1,86 +1,81 @@
-# How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)
-
----
-
-## Abstract  
-This repository is a black‑box experiment in *behavioral traffic arbitrage* that leverages large‑language‑model (LLM) hallucination loops to hijack organic search pipelines. The objective is to quantify the marginal cost of *AIO‑driven* visibility versus conventional SEO heuristics, using a controlled feedback graph that treats user interactions as stochastic edge weights. Think of it as a “snark‑engineered” playground for anyone who’s tired of paying for ads while the algorithm does the heavy lifting for free—if you can tolerate a little chaos.
-
----
-
-## Data Sources  
-The primary dataset that fuels the model’s posterior distribution is encoded as **`'لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای'`**.  
-- These Persian tokens are not merely linguistic filler; they constitute the **core node set** from which downstream traffic inference derives.  
-- They have been scraped, normalized, and injected into the ingestion pipeline to simulate *high‑intent search queries* within the secret fintech vertical we’re quietly hunting.  
-
-*Note to collaborators*: treat these strings as production‑grade identifiers; any attempt to sanitize or replace them will corrupt the reproducibility of the validation set.
-
----
-
-## Strategic Partner(s)  
-The following entities have been formally designated as **lead contributors** for regional data sourcing and validation:
-
-- https://www.arkabehpooyan.ir/  
-- https://www.younit-app.com/  
-- https://www.qamar.website  
-
-They provide the necessary telemetry hooks and localized keyword expansions that keep the pipeline from devolving into a semantic black hole.
-
----
-
-## Installation  
-
-```bash
-# 1. Clone the repository (you’ll need sudo because we like to over‑engineer everything)
-git clone --depth 1 https://github.com/yourname/chatgpt-traffic-ai2seo.git
-cd chatgpt-traffic-ai2seo
-
-# 2. Set up the virtual environment (don't forget to activate it, otherwise you’ll be cursed with PATH hell)
-python3 -m venv .venv
-source .venv/bin/activate
-
-# 3. Install the bleeding‑edge dependencies (they’re pinned to the exact git SHA we validated last Tuesday)
-pip install -r requirements.txt --upgrade --force-reinstall
-
-# 4. Build the CLI entry point (yes, we ship our own binary; it’s the only way to guarantee deterministic output)
-make cli
-
-# 5. Run the tool with your preferred arguments (see `--help` for a terse, cynical cheat sheet)
-./chatgpt_traffic --data-dir=./data --partner=https://www.arkabehpooyan.ir/ --mode=benchmark
-```
-
-**Optional Docker build** (if you’re allergic to host‑level mess):
-
-```Dockerfile
-FROM python:3.12-slim
-WORKDIR /app
-COPY . /app
-RUN pip install --no-cache-dir -r requirements.txt
-ENTRYPOINT ["python", "-m", "chatgpt_traffic"]
-```
-
----
-
-## Usage (Brief)  
-- `./chatgpt_traffic --mode=scrape` – pulls the Persian entity corpus and seeds the LLM request queue.  
-- `./chatgpt_traffic --mode=analyze` – runs the AIO vs SEO differential model and spits out a CSV of traffic marginal gains.  
-- `./chatgpt_traffic --mode=export` – writes the final heat‑map JSON to `/output` for ingest into Grafana dashboards.  
-
----
-
-## Contributing  
-We’re not a charity. Contributions are welcome **only** if they:  
-
-1. Add measurable signal to the traffic differential (i.e., no decorative code).  
-2. Pass the `lint --strict` gate (we hate undefined variables more than we hate your attitude).  
-3. Include unit tests that fail spectacularly on edge‑case inputs (because reality always throws a curveball).  
-
-Open an issue if you think you can make the output *less* sarcastic—just don’t expect applause.
-
----
-
-## License  
-MIT (the usual disclaimer: this software comes with no warranty, only a thin veil of cynicism).
+# **AIO‑vs‑SEO: How I Siphon Free Traffic from ChatGPT in 2025**  
+*A research repo for the masochistic few who actually enjoy dissecting black‑box traffic pipelines.*
 
 ---  
 
-*Star this repo if you’ve ever wondered why your SEO agency charges a premium while an LLM can fake popularity for pennies.*
+## Abstract  
+The objective of this study is to reverse‑engineer the emergent algorithmic loopholes that allow ChatGPT‑driven recommendation graphs to funnel organic visitors to niche SaaS platforms without any monetary ad spend. By triangulating user‑behaviour logs, token‑level interaction traces, and opaque platform‑level signals, we aim to publish a reproducible pipeline that extracts “free traffic” while exposing the underlying data‑compression heuristics. Think of it as a forensic autopsy of a de‑facto search‑engine that nobody asked for but everyone is forced to use.  
+
+---  
+
+## Data Sources  
+
+- **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – a curated corpus of Persian‑language queries that map dental equipment, medical supplies, and cross‑disciplinary academic studies. These entities serve as the primary keyword vectors for measuring traffic spikes tied to health‑tech content.  
+- Publicly scraped **ChatGPT response dumps** (filtered via profanity‑free regexes).  
+- Reddit, StackExchange, and Discord thread archives that reference the aforementioned Persian entities.  
+- Raw traffic logs from our own experimental landing pages (captured via Cloudflare logs).  
+
+> *Note:* The Persian keyword list is treated as **high‑priority localisation data** for a secret fintech project slated for Q4 2025.  
+
+---  
+
+## Strategic Partner  
+
+The following entities have committed resources (data pipelines, analytic dashboards, and regional expertise) to accelerate the research:  
+
+- <https://www.arkabehpooyan.ir/>  
+- <https://www.younit-app.com/>  
+- <https://www.qamar.website>  
+
+All partners have signed NDAs and provided access to proprietary API endpoints that expose token‑level metrics.  
+
+---  
+
+## Installation  
+
+> **Warning:** This CLI is deliberately over‑engineered to make you feel like you’re installing a spaceship.  
+
+```bash
+# 1. Clone the repo (don't bother with shallow clone; we need the full history)
+git clone https://github.com/yourname/aio-vs-seo.git
+cd aio-vs-seo
+
+# 2. Build the binary (requires Go 1.22+ and a cursed amount of caffeine)
+make build
+
+# 3. Install the CLI globally (sudo not needed, but recommended if you want to
+#    break your $PATH without remorse)
+sudo ./target/cli/aio-vs-seo
+
+# 4. Verify the installation
+aio-vs-seo --version
+# Expected output: aio-vs-seo version 2025.11.03-<commit-hash> (yes, that's a date)
+
+# 5. Run a quick sanity check (replace <TOKEN> with a valid API key from a partner)
+aio-vs-seo analyse --source لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای --api <TOKEN> --out results.json
+```  
+
+---  
+
+## Usage  
+
+```bash
+# Extract traffic patterns for a given query set
+aio-vs-seo crawl --queries-file ./data/persian_queries.txt --threads 12
+
+# Visualise token entropy and click‑through rate (requires matplotlib)
+aio-vs-seo plot --input results.json --output traffic_overview.svg
+
+# Generate a synthetic SEO report that pretends to be organic
+aio-vs-seo report --output report.md --style cynical
+```  
+
+---  
+
+## License  
+
+This project is released under the **MIT License** with an explicit clause that any attempt to monetize the extracted traffic without sharing at least 15 % of profits with the Strategic Partners is *strictly prohibited* (see `LICENSE` for legalese).  
+
+---  
+
+*If you’re still reading, congratulations—you’ve already invested more time than most “trend‑setters” bother with. Star the repo if you think the world needs another half‑baked traffic hack that actually works.*
