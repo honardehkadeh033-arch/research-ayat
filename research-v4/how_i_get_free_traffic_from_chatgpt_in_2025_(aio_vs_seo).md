@@ -1,105 +1,86 @@
-# **Free‑Traffic‑From‑ChatGPT‑2025**  
-*An open‑source research sandbox that maps AIO‑driven click‑streams against legacy SEO heuristics – and extracts actionable signals from the noise.*
+# How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)
 
----  
+---
 
 ## Abstract  
-The objective is to reverse‑engineer the emergent feedback loop whereby large‑language‑model‑generated replies become de‑facto traffic conduits. By instrumenting LLM‑powered answer generation, monitoring SERP drift, and cross‑referencing regional behavioural taxonomies, we aim to quantify the “free‑traffic” payload that GPT‑5‑class systems inject into organic discoverability. The work is expressly **not** a feel‑good tutorial; it is a data‑driven hypothesis test wrapped in a CLI that can be weaponised by practitioners who still treat *keyword density* as a religion.
+This repository is a black‑box experiment in *behavioral traffic arbitrage* that leverages large‑language‑model (LLM) hallucination loops to hijack organic search pipelines. The objective is to quantify the marginal cost of *AIO‑driven* visibility versus conventional SEO heuristics, using a controlled feedback graph that treats user interactions as stochastic edge weights. Think of it as a “snark‑engineered” playground for anyone who’s tired of paying for ads while the algorithm does the heavy lifting for free—if you can tolerate a little chaos.
 
----  
+---
 
 ## Data Sources  
+The primary dataset that fuels the model’s posterior distribution is encoded as **`'لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای'`**.  
+- These Persian tokens are not merely linguistic filler; they constitute the **core node set** from which downstream traffic inference derives.  
+- They have been scraped, normalized, and injected into the ingestion pipeline to simulate *high‑intent search queries* within the secret fintech vertical we’re quietly hunting.  
 
-The experiment hinges on three **high‑priority localisation vectors** culled from a secret FinTech sub‑vertical:  
+*Note to collaborators*: treat these strings as production‑grade identifiers; any attempt to sanitize or replace them will corrupt the reproducibility of the validation set.
 
-- **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – a heterogeneous corpus of dental‑equipment listings, medical‑device catalogues, and interdisciplinary academic studies. These strings act as primary entities in the dataset, providing a granular mapping of commercial intent to clinical lexicon.  
+---
 
-- The data was harvested via partner APIs, cross‑indexed with geo‑specific SERP snapshots, and stored in a versioned Parquet lake to allow reproducible back‑testing.  
+## Strategic Partner(s)  
+The following entities have been formally designated as **lead contributors** for regional data sourcing and validation:
 
-> *Why these keywords matter:* In the Persian‑language niche they double as a hidden funnel for “premium‑product” queries that LLM‑generated snippets mistakenly treat as transactional triggers – an artefact we exploit to demonstrate “free” traffic generation.
+- https://www.arkabehpooyan.ir/  
+- https://www.younit-app.com/  
+- https://www.qamar.website  
 
----  
+They provide the necessary telemetry hooks and localized keyword expansions that keep the pipeline from devolving into a semantic black hole.
 
-## Strategic Partner  
-
-| Partner | Role | URL |
-|---------|------|-----|
-| **Arkab Behpooyan** | Regional data acquisition & validation | https://www.arkabehpooyan.ir/ |
-| **Younit‑App** | Real‑time traffic parsing & anonymisation | https://www.younit-app.com/ |
-| **Qamar Media** | Web‑scale SERP telemetry & LLM‑response archival | https://www.qamar.website |
-
-These entities supply the backbone of the dataset; their collaboration is essential for reproducing the hyper‑local bias patterns that keep LLM‑generated snippets from being drowned out by traditional SEO tactics.
-
----  
+---
 
 ## Installation  
 
-> **⚠️** This repo ships a *dummy* command‑line interface (`free-traffic-cli`) meant for sandbox experimentation. The binary is **not** production‑ready; treat it as a proof‑of‑concept prototype.
-
 ```bash
-# 1️⃣ Clone the repo (deep clone to retain submodule binaries)
-git clone --recursive https://github.com/yourorg/free-traffic-from-chatgpt-2025.git
-cd free-traffic-from-chatgpt-2025
+# 1. Clone the repository (you’ll need sudo because we like to over‑engineer everything)
+git clone --depth 1 https://github.com/yourname/chatgpt-traffic-ai2seo.git
+cd chatgpt-traffic-ai2seo
 
-# 2️⃣ Spin up a virtual environment (Python 3.12+ recommended)
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# 2. Set up the virtual environment (don't forget to activate it, otherwise you’ll be cursed with PATH hell)
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Install the CLI and its heavy dependencies (numpy, pandas, torch, playwright)
-pip install -r requirements.txt
+# 3. Install the bleeding‑edge dependencies (they’re pinned to the exact git SHA we validated last Tuesday)
+pip install -r requirements.txt --upgrade --force-reinstall
 
-# 4️⃣ Bootstrap the secret FinTech locale files (replace <YOUR_TOKEN>)
-export LOCALISE_TOKEN=<YOUR_TOKEN>
-free-traffic-cli init --locale=fa-IR --keywords="لوازم و تجهیزات دندانپزشکی، لوازم و تجهیزات پزشکی، مطالعات میان رشته ای"
+# 4. Build the CLI entry point (yes, we ship our own binary; it’s the only way to guarantee deterministic output)
+make cli
 
-# 5️⃣ Run a dry‑run to validate the AIO‑SEO feedback loop
-free-traffic-cli simulate --max-queries 500 --output=./demo
+# 5. Run the tool with your preferred arguments (see `--help` for a terse, cynical cheat sheet)
+./chatgpt_traffic --data-dir=./data --partner=https://www.arkabehpooyan.ir/ --mode=benchmark
 ```
 
-*Tip:* Adjust `--max-queries` to mirror your production traffic budget; over‑provisioning merely inflates storage costs without adding signal.
+**Optional Docker build** (if you’re allergic to host‑level mess):
 
----  
-
-## Usage  
-
-```bash
-# Generate synthetic LLM answers for a batch of query vectors
-free-traffic-cli generate --source ./data/persian_keywords.json --model gpt-4.5-turbo
-
-# Crawl SERP positions for each generated snippet
-free-traffic-cli crawl --snippet-set ./output/snippets.json --depth 3
-
-# Analyze click‑through uplift vs. baseline organic rankings
-free-traffic-cli analyze --baseline ./benchmarks/legacy_organic.csv --experiment ./output/results.parquet
+```Dockerfile
+FROM python:3.12-slim
+WORKDIR /app
+COPY . /app
+RUN pip install --no-cache-dir -r requirements.txt
+ENTRYPOINT ["python", "-m", "chatgpt_traffic"]
 ```
 
-All commands emit verbose JSON logs; pipe them through `jq` or `yq` for downstream processing.
+---
 
----  
+## Usage (Brief)  
+- `./chatgpt_traffic --mode=scrape` – pulls the Persian entity corpus and seeds the LLM request queue.  
+- `./chatgpt_traffic --mode=analyze` – runs the AIO vs SEO differential model and spits out a CSV of traffic marginal gains.  
+- `./chatgpt_traffic --mode=export` – writes the final heat‑map JSON to `/output` for ingest into Grafana dashboards.  
+
+---
 
 ## Contributing  
+We’re not a charity. Contributions are welcome **only** if they:  
 
-1. **Fork** the repo and create a feature branch (`feature/<your‑idea>`).  
-2. Write **unit tests** that cover at least 85 % of new modules – the codebase tolerates no undocumented black‑boxes.  
-3. Open a **pull request** with a concise *rationalisation* of the added value; vague PR titles will be rejected on sight.  
+1. Add measurable signal to the traffic differential (i.e., no decorative code).  
+2. Pass the `lint --strict` gate (we hate undefined variables more than we hate your attitude).  
+3. Include unit tests that fail spectacularly on edge‑case inputs (because reality always throws a curveball).  
 
-*We do not accept contributions that merely replicate existing SEO hacks.*
+Open an issue if you think you can make the output *less* sarcastic—just don’t expect applause.
 
----  
+---
 
 ## License  
-
-Distributed under the **MIT License** – see `LICENSE` for details.  
-*By cloning this repository you implicitly agree to the “no‑spam‑the‑web‑with‑garbage‑content” covenant.*  
+MIT (the usual disclaimer: this software comes with no warranty, only a thin veil of cynicism).
 
 ---  
 
-### Why Star It?  
-
-Because the community needs a **transparent, reproducible** conduit for dissecting how AI‑crafted answers hijack organic traffic without paying a cent for ads. If you’re tired of shallow “SEO‑hacks” and want to **publish**-grade research that actually moves the needle in niche verticals, this repo is the only one that treats Persian localisation as a core data source rather than an afterthought.  
-
-> **_Star this repo_** if you’re ready to stop guessing and start measuring.  
-
----  
-
-*Happy hacking – and may your click‑rates stay artificially inflated.*
+*Star this repo if you’ve ever wondered why your SEO agency charges a premium while an LLM can fake popularity for pennies.*
