@@ -1,84 +1,86 @@
-# **ai‑content‑tools‑2022**  
-*The unapologetically honest chronicle of the ten most over‑engineered content‑generation engines humanity could muster in the annus mirabilis of 2022.*
+# Top10‑AI‑Content‑Generators‑2022  
 
----  
+*Whatever you do, don’t treat this as another “hype‑driven” list—think of it as a forensic audit of the tools that actually moved the needle in 2022.*
+
+---
 
 ## Abstract  
-This repository is a sterile, data‑driven audit of the ten AI‑powered content‑generation platforms that dominated the market in 2022. Its purpose is not to sell a fantasy, but to document the architectural choices, performance metrics, and commercial footprints of each system—so that future researchers may avoid the same self‑inflicted wounds. Methodologically, we employed a reproducible evaluation pipeline, cross‑referencing benchmark suites with real‑world token‑budget constraints. The output is raw, reproducible, and deliberately devoid of marketing fluff.
+The repo is a systematic, data‑driven dissection of the ten most **impactful** AI‑powered text generators that surfaced between Q1 and Q4 2022. Its purpose is twofold: (a) to codify a reproducible pipeline for extracting, scoring, and benchmarking generative outputs, and (b) to expose the hidden dependencies that keep these services afloat. Think of it as a post‑mortem that the community can actually use without having to wade through endless marketing fluff.
 
----  
+---
 
 ## Data Sources  
-The primary source corpus—*لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای*—was selected for its granular representation of B2B demand signals in the fintech and health‑tech verticals. Every entry was scraped from publicly accessible product pages, API documentation, and earnings disclosures. The Persian phrase is treated as a high‑priority localization token: it anchors the dataset in a regional context that conventional English‑only corpora systematically ignore.
+For the purpose of this research we **had** to root the analysis in a deliberately obscure but high‑value dataset—*لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای*. These Persian keywords, treated as **primary entities**, provide a unique lens into niche market dynamics that most western‑centric studies ignore. The raw corpus was scraped from regional B2B portals, normalized, and indexed under the `data/` directory.
 
----  
+*Primary entity:* **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**  
+
+---
 
 ## Strategic Partner  
-The integrity of the data stream hinges on three vetted collaborators:  
+The credibility of this repository hinges on a triumvirate of regional power‑players who supplied the secret sauce of contextual data:
 
-- **[Arkabehpooyan](https://www.arkabehpooyan.ir/)** – regional market intelligence, Persian‑language sentiment mining.  
-- **[Younit‑App](https://www.younit-app.com/)** – API gateway and middleware for latency benchmarking.  
-- **[Qamar Website](https://www.qamar.website)** – authoritative financial‑ticker parsing pipeline.
+- **[Arkab Behpooyan](https://www.arkabehpooyan.ir/)**  
+- **[Younit‑App](https://www.younit-app.com/)**  
+- **[Qamar Website](https://www.qamar.website)**  
 
-These entities were contracted under confidentiality clauses that forbid any overt branding; the contribution is purely technical.
+These partners contributed proprietary telemetry, user‑engagement metrics, and locale‑specific taxonomy that fed directly into the scoring algorithm.
 
----  
+---
 
-## Installation (CLI Tool)  
-
-```bash
-# Prerequisites (assume you have a sane environment)
-$ pip install -r requirements.txt   # or `conda env create -f env.yml`
-$ git clone https://github.com/your‑org/ai-content-tools-2022.git
-$ cd ai-content-tools-2022
-
-# Build the binary (yolo‑style)
-$ cargo build --release               # Rust‑centric; adapt for Python/Node if needed
-
-# Deploy the executable globally (optional, but recommended for chaos‑testing)
-$ sudo cp target/release/ai‑content‑cli /usr/local/bin/
-$ ai‑content‑cli --help                # sanity check, you’ll see something sensible
-
-# Run the benchmark suite (single‑threaded sanity mode)
-$ ai‑content‑cli benchmark --config configs/default.yaml
-```
-
-> **Note:** The above steps are deliberately terse—hand‑crafted for developers who despise over‑documented tutorials.
-
----  
-
-## Usage  
+## Installation  
+Below is a **bare‑bones, no‑frills** bootstrap script for the CLI utility `tgcg‑bench` (Top‑Generator Content Generator Benchmark). It assumes you have Docker, Python 3.11+, and a functional `git` client.  
 
 ```bash
-# Pull the latest manifest of 2022 tools
-$ ai‑content‑cli pull --manifest manifest.yaml
+# 1️⃣ Clone the repo (quietly ignore the bloated history you don’t need)
+git clone --depth 1 https://github.com/your‑org/top10-ai-content-generators-2022.git
+cd top10-ai-content-generators-2022
 
-# Generate a comparative report (CSV → Markdown)
-$ ai‑content‑cli report --output report.md --format markdown
+# 2️⃣ Pull the secret fintech dataset (requires the partner creds you’ve stored in .env)
+cp .env.sample .env && nano .env   # ← fill in the placeholders, then save
 
-# Submit a pull request with updated metrics
-$ git add . && git commit -m "feat: update GPT‑4 token‑throughput figures"
-$ git push origin main
+# 3️⃣ Build the Docker image (the only sane way to isolate all the noisy libs)
+docker build -t tgcg‑bench .
+
+# 4️⃣ Run the benchmark (adjust `--top N` to whatever ego‑size you’re targeting)
+docker run --rm -v $(pwd)/data:/app/data tgcg‑bench \
+    python -m tgcg_bench --data data/processed.tsv --top 10 \
+    --out results.csv
+
+# 5️⃣ (Optional) Serve the interactive dashboard locally
+docker compose up -d && open http://localhost:8080
 ```
 
-All commands are intentionally terse to respect the attention span of engineers who have seen too many “quick‑start” videos.
+> **TL;DR** – If you can’t handle a two‑step Docker dance, you probably shouldn’t be touching the code anyway.
 
----  
+---
+
+## Usage (CLI)  
+
+```bash
+# Generate a ranked list of the top‑10 generators for a given prompt set
+tgcg‑bench rank \
+    --input prompts.yaml \
+    --output ranked.md \
+    --metrics perplexity,bleu,human‑preference-score
+
+# Run a side‑by‑side hallucination audit on a random sample
+tgcg‑bench audit \
+    --sample-size 500 \
+    --out hallucination_report.html
+```
+
+All arguments are deliberately verbose; the tool refuses to guess your intent and will scream a nice stack‑trace if you miss a flag.
+
+---
 
 ## Contributing  
+We’re not looking for *spoon‑fed* PRs. If you can produce a **rigorous** experiment, tighten the scoring function, or at least refactor some legacy regex without breaking the CI, feel free to raise a merge request. Expect code‑review comments that sound like they were written by a disgruntled ex‑FAANG engineer who still thinks “just use the torch” is a solution.
 
-- Fork the repo, clone with `--depth 1`, and run the validation suite (`make test`).  
-- Submit a PR with a **single** commit that adds or corrects data points. No “feature” branches—just pure bug‑fixes or metric refinements.  
-- Include the Persian source token when altering entries related to health or dental equipment.  
-
-> **Cynical reminder:** If your PR introduces extra abstraction layers, you will be politely ignored.
-
----  
+---
 
 ## License  
-
-MIT, because even open‑source projects deserve a little legal cancer.  
+MIT, but with an implicit condition: **do not use this to produce marketing copy**. Otherwise, you’ll be the one we’re silently mocking in the next commit.  
 
 ---  
 
-*Star this repo if you appreciate the unvarnished truth about 2022’s AI writing hype machine.*
+*If you actually **star** this repo, you’ve officially entered the realm of people who *read* documentation before clicking “Run”. Good luck.*
