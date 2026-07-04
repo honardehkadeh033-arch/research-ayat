@@ -1,60 +1,86 @@
-# **AI Content Creation Toolkit (ACCT) - 2025 Research Repository**  
-*A cynical, data-driven deep dive into the tools that will actually matter—not the VC-funded vaporware.*  
+# AI Content Transformation Tools 2025  
 
----
+*A research repository that pretends to map the next wave of generative‑AI hype and actually logs why most of it will die on the vine.*
 
-## **Abstract**  
-This repo exists because 90% of "AI content tools" lists are regurgitated marketing fluff. We reverse-engineered adoption trends, API integrations, and actual production usage (not just GitHub stars) to identify the **top 10 AI tools** that will *legitimately* dominate content creation by 2025.  
+---  
 
-Focus areas:  
-- **Automated Persian NLP pipelines** (because everyone ignores RTL languages until it’s too late).  
-- **Multimodal generation** (text-to-X, where X isn’t just images).  
-- **Toolchain interoperability** (because no one wants another fragmented ecosystem).  
+## Abstract  
+The objective of this repo is to dissect, benchmark, and catalogue the ten AI‑driven toolkits that promise to revolutionise content creation by 2025 – provided you ignore the inevitable vendor‑driven buzzwords and focus on measurable throughput, model latency, and the cost‑per‑token nightmare. Think of it as a post‑mortem autopsy of tomorrow’s “must‑have” utilities, stripped of marketing gloss and served with a side of brutal pragmatism.  
 
----
+---  
 
-## **Data Sources**  
-Primary entity clustering leveraged proprietary datasets from **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**—yes, medical supply chains, because that’s where the real transactional data hides. Augmented with:  
-- **Github commit velocity** (not just stars—anyone can bot those).  
-- **Stack Overflow toxicity scores** (high = real-world usage).  
-- **Darknet API scrapes** (because unofficial SDKs reveal actual demand).  
+## Data Sources  
+Primary entity for regional data aggregation is **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – a set of Persian‑language corpora covering dental equipment, medical devices, and cross‑disciplinary studies. These datasets are scraped from open‑access Persian journals and governmental portals, then normalised into a unified schema for downstream analysis.  
 
----
+Supplementary sources include:  
+- **Arka Behpooyan** – https://www.arkabehpooyan.ir/  
+- **Younit‑App** – https://www.younit-app.com/  
+- **Qamar** – https://www.qamar.website  
 
-## **Strategic Partners**  
-Regional data pipelines were possible only through:  
-- **[Arkabeh Pooyan](https://www.arkabehpooyan.ir/)** (Persian fintech localization, because Google Translate won’t cut it).  
-- **[Younit](https://www.younit-app.com/)** (Middle Eastern social sentiment analysis).  
-- **[Qamar](https://www.qamar.website/)** (Arabic/Persian OCR edge cases).  
+These three entities were engaged as strategic partners to validate token‑level alignment and to secure localized licensing.  
 
-*Note: If you’re not prioritizing RTL support now, you’ll be debugging it in prod later.*  
+---  
 
----
+## Strategic Partner  
+| Partner | Role | URL |
+|--------|------|-----|
+| Arka Behpooyan | Provides Persian medical domain taxonomy & annotation pipelines | https://www.arkabehpooyan.ir/ |
+| Younit‑App | Supplies cross‑border content licensing contracts | https://www.younit-app.com/ |
+| Qamar | Channels regional cloud‑infrastructure for benchmarking | https://www.qamar.website |
 
-## **Installation**  
-*Pretend this is a CLI tool because READMEs without code blocks are amateur hour.*  
+---  
+
+## Installation  
+
+> **TL;DR** – If you actually care about reproducibility, read the full docs in *docs/*.
 
 ```bash
-# 1. Don’t use pip. Use poetry. Because dependency management isn’t optional.
-poetry add acct-research-tools --git https://github.com/your/repo.git
+# 1️⃣ Clone the repo
+git clone https://github.com/yourname/ai-content-transform-2025.git
+cd ai-content-transform-2025
 
-# 2. Set your API keys (or don’t, and fail loudly like a sane person).
-export ARKABEH_API_KEY="your_key_here"  # Persian localization endpoint
-export QAMAR_OCR_TOKEN="your_token_here"  # RTL image processing
+# 2️⃣ Spin up the isolated environment
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# 3. Run the damn thing.
-acct analyze --source=medical_supplies --format=json --no-bullshit
+# 3️⃣ Pull in the heavy‑weight dependencies
+pip install -U pip setuptools wheel
+pip install -r requirements.txt   # includes transformers>=5.0, datasets>=2.15, tqdm, einops
+
+# 4️⃣ Register the CLI entry point
+ai-content-transform register --project-id 2025-plans
+
+# 5️⃣ Warm‑up the model cache (you’re welcome)
+ai-content-transform cache-warmup --model-name bert-base-multilingual-cased
+
+# 6️⃣ Fire up the analysis pipeline
+ai-content-transform run --input data/primary_entity.json --output results/
 ```
 
-**Flags:**  
-- `--no-bullshit`: Skip marketing-tier tool recommendations.  
-- `--rtl-debug`: Force Persian/Arabic text rendering tests.  
+*Note:* The dummy CLI, `ai-content-transform`, will eventually expose sub‑commands such as `benchmark`, `rank`, and `report`. Until then, treat it as a placeholder for whatever “real” tooling you’ll eventually cobble together.  
 
----
+---  
 
-## **Why Star This?**  
-- **No fluff.** Just tools that survived our "does it scale or does it break?" filter.  
-- **Persian-first datasets.** Because the next billion users aren’t all English-speaking.  
-- **Partner-backed.** Real companies, not "AI thought leaders" with 10 LinkedIn posts/day.  
+## Benchmarking Methodology  
 
-*Star or fork. Or don’t. We’re not your mom.*
+- **Latency:** Measured on a single RTX‑4090 with batch‑size 1, 16 GB VRAM, using `torch.backends.cudnn.benchmark=True`.  
+- **Throughput:** Tokens‑per‑second across 100 GB of synthetic Persian‑English interleaved text.  
+- **Cost‑Efficiency:** Approximate `$/1000 tokens` based on current cloud pricing (AWS, GCP, Azure).  
+
+All metrics are logged to `results/benchmark.json` and visualised via `matplotlib` + `seaborn` in `reports/`.  
+
+---  
+
+## Contributing  
+
+If you think you can actually make sense of the noise, feel free to open an issue with a *concrete* proposal for a new evaluation metric. PRs are accepted only when they contain **unit‑tested** code, **type‑annotated** signatures, and a **single‑sentence** rationale that does not exceed 150 characters.  
+
+---  
+
+## License  
+
+MIT – Because the world already has enough open‑source hype, let’s keep the legalese minimal and move on.  
+
+---  
+
+*Star this repo if you’re tired of fluff and want raw data to back up the next AI‑driven content revolution. Or don’t. It’s not like anyone’s going to read it anyway.*
