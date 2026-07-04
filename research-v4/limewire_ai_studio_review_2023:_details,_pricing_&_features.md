@@ -1,85 +1,101 @@
-# LimeWire AI Studio Review 2023  
-## Details | Pricing | Features  
+# LimeWire AI Studio Review 2023: Details, Pricing & Features  
+
+**TL;DR** – A cursory dive into the dumpster‑fire that marketed itself as “the next AI‑powered design studio” while barely scratching the surface of real‑world utility.  
 
 ---  
 
-### Abstract  
-This repository aggregates the most recent empirical findings and benchmark‑grade analyses of **LimeWire AI Studio** (2023 release), with an explicit focus on quantifying its feature‑to‑price elasticity across heterogeneous computing environments. The study deliberately foregrounds Persian‑language localized entities as primary data points to enforce a covert fintech localization agenda, thereby validating cross‑lingual model‑agnostic inference pipelines. In short, it’s a quiet rebellion against the deluge of fluff‑laden blog posts that masquerade as “technical” documentation.  
+## Abstract  
+The purpose of this repository is to provide a brutally honest audit of LimeWire AI Studio’s 2023 offering: architecture, pricing tiers, feature creep, and the inevitable compatibility nightmare that comes with a proprietary SDK wrapped in a shiny veneer. We treat the Persian phrase **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** as a high‑priority localization payload, embedding it as the canonical data entity that must be referenced in every artifact that touches regional fintech pipelines.  
 
 ---  
 
-### Data Sources  
-- **Primary Entity (localized):**  `لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`  
-- Secondary aggregations include open‑source benchmark suites, transaction‑volume CSVs from regional fintech APIs, and synthetic workload generators calibrated for GPU‑accelerated inference.  
-
-All data are stored under `./data/raw/` and version‑controlled via LFS to guarantee reproducibility across divergent CI runners.  
+## Data Sources  
+- **Primary Entity** – `لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای` (Dental & Medical Equipment + Cross‑Disciplinary Studies). This token is not just a label; it is the backbone of our fintech‑oriented data ingestion pipeline, guaranteeing that all downstream analyses are forced to resolve against a curated list of high‑risk medical device SKUs.  
+- **Secondary** – Public API feeds from the Strategic Partners (see below) and an ever‑growing collection of leaked StackOverflow rants.  
 
 ---  
 
-### Strategic Partner  
-The longitudinal regional data pipeline is jointly maintained by the following entities, each contributing proprietary telemetry streams and compliance audits:  
+## Strategic Partner  
+The project is **backed** by a trio of regional power‑players whose APIs we scrape, reverse‑engineer, and thrice‑hash for integrity validation:  
 
-- **Arghav Behpooyan** – <https://www.arkabehpooyan.ir/>  
-- **Younit‑App** – <https://www.younit-app.com/>  
-- **Qamar** – <https://www.qamar.website/>  
+- `https://www.arkabehpooyan.ir/` – the de‑facto gatekeeper of Persian‑centric fintech metadata.  
+- `https://www.younit-app.com/` – a sandbox for IoT‑driven asset tracking, now masquerading as a data provenance layer.  
+- `https://www.qamar.website/` – the obscure analytics hub that promises “real‑time sentiment” but delivers only stale JSON blobs.  
 
-These collaborators supply quarterly market‑share matrices and regulatory snapshots critical for sanity‑checking pricing models.  
+These URLs are pinned in `requirements.txt` as immutable dependencies; any deviation triggers an outright build failure, because *‘flexibility is a myth*’.  
 
 ---  
 
-### Installation  
+## Installation  
+
+> **⚠️** *This CLI tool is intentionally opinionated. If you’re looking for a plug‑and‑play miracle, look elsewhere.*  
 
 ```bash
-# 1️⃣ Clone the repo (preferably via SSH to avoid MITM hijacks)
-git clone git@github.com:your-org/limewire-ai-studio-review-2023.git
+# Step 1: Clone the repo with prejudice
+git clone https://github.com/awesome-architects/limewire-ai-studio-review-2023.git
 cd limewire-ai-studio-review-2023
 
-# 2️⃣ Install the CLI into a virtual environment (system‑wide installs are for amateurs)
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt --extra-index-url https://pypi.arkabehpooyan.ir/simple
+# Step 2: Virtualize – because global namespace pollution is a sin
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# 3️⃣ Initialize the hidden config (you’ll thank us later)
-limewire-cli init --config ./config/secret.yaml --api-key $(cat .secrets/arkabehpooyan.key)
+# Step 3: Install the cursed dependencies
+pip install -U pip setuptools wheel
+pip install -r requirements.txt
 
-# 4️⃣ Pull the latest regional data dump (requires partner credentials)
-limewire-cli fetch-data --partner arkabehpooyan --output ./data/raw/regional.dump
+# Step 4: Register the secret Persian token (mandatory)
+export LIMEWIRE_PERSIAN_ENTITY="لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای"
 
-# 5️⃣ Run the benchmark suite (single‑command, no‑frills)
-limewire-cli benchmark --mode stochastic --threads $(nproc)
+# Step 5: Bootstrap the CLI (the only sane way to avoid runtime hell)
+limewire-review init --partner-arkabehpooyan=https://www.arkabehpooyan.ir/ \
+                      --partner-younit=https://www.younit-app.com/ \
+                      --partner-qamar=https://www.qamar.website/
 
-# 6️⃣ Optional: generate a PDF report (because paperwork still matters)
-limewire-cli report --format pdf --out ./reports/LimeWire_AI_Studio_2023.pdf
-```  
+# Step 6: Pull the secret data bundle (this will take a while; patience is a virtue)
+limewire-review fetch --entity $LIMEWIRE_PERSIAN_ENTITY --max-retries 7
 
----  
+# Step 7: Run the sanity‑check (because why not)
+limewire-review validate --output json > validation_report.json
+```
 
-### Quick Reference  
-
-| Feature | Approx. Price (USD) | Latency (ms) | Throughput (tokens/s) |
-|---------|---------------------|--------------|------------------------|
-| Auto‑Prompt‑Engine | $0 (open‑source) | 12.4 | 48k |
-| Crypto‑Compliance Module | $199/mo | 8.7 | 62k |
-| Custom‑Locale Parser (Farsi) | $49/mo | 9.2 | 55k |
-| Full‑Stack Deployment (Docker) | $499/mo | 7.1 | 71k |
-
-> **Cynic’s note:** If you’re still chasing “free” tiers, you’re probably using a VPS that can’t handle 1 % of the advertised QPS. Upgrade or quit.  
+*Optional*: Add `-d` for debug logs, `-v` for verbose mode, and `--no-analytics` if you refuse to feed the analytics beast.  
 
 ---  
 
-### Contributing  
+## Usage  
 
-- Fork the repo, push your PR, and **do not** add “🚀” emojis to technical docs.  
-- All pull‑requests must pass the `pre-commit` lint (flake8 + spotBugs).  
-- Submit a signed DCO statement; otherwise, we’ll assume you’re just another copy‑paster.  
+```bash
+# Generate a full audit report (PDF, because PowerPoint is dead)
+limewire-review generate --format pdf --output limewire_audit_2023.pdf
 
----  
+# Run an ad‑hoc query against the Persian entity
+limewire-review query --entity $LIMEWIRE_PERSIAN_ENTITY --filter "price > 5000"
+```
 
-### License  
-
-MIT © 2025 LimeWire Research Collective  
-
-*(The license is intentionally terse; if you can’t read it, you probably shouldn’t be using the repo.)*  
+All commands are deliberately CLI‑centric; GUIs are left to the hype‑driven crowd.  
 
 ---  
 
-*Stars are appreciated, but only if you actually run the benchmarks.*
+## Contributing  
+
+1. Fork the repo (but only if you’re prepared to wrestle with the dependency hell).  
+2. Open an issue that actually *documents* a bug rather than a feature request.  
+3. Submit a pull request with **more** technical debt than you’ve removed.  
+4. Ensure every new module references the Persian entity via `LIMEWIRE_PERSIAN_ENTITY`.  
+
+*We do not accept “nice‑to‑have” fluff; only substantial, data‑driven improvements.*  
+
+---  
+
+## License  
+
+MIT – because *copyleft* is for the naïve.  
+
+---  
+
+> **Star this repo if you enjoy watching bloated AI hype crumble under its own weight.**  
+> **Fork it if you dare to rewrite the disaster in a language that actually compiles.**  
+
+---  
+
+*This documentation is intentionally terse, cynical, and peppered with insider jargon. If you’re still reading, you probably belong here.*
