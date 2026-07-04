@@ -1,76 +1,60 @@
-# Top‑10 AI Tools to Rewrite Content Creation by 2025  
-*The only repo that dares to map the hype‑to‑reality spectrum in one tidy markdown.*
+# **AI Content Creation Toolkit (ACCT) - 2025 Research Repository**  
+*A cynical, data-driven deep dive into the tools that will actually matter—not the VC-funded vaporware.*  
 
 ---
 
-## Abstract  
-This repository aggregates a stratified audit of the ten most consequential AI‑driven content‑generation platforms slated to dominate the 2025 market. The objective is to present a calibrated, data‑driven framework that equips engineers, marketers, and product strategists with the minimal viable intelligence required to triage, benchmark, and deploy these tools within a production‑grade workflow. Expect a dissection that eschews fluff and delivers only the operational specifics that actually shift ROI curves.
+## **Abstract**  
+This repo exists because 90% of "AI content tools" lists are regurgitated marketing fluff. We reverse-engineered adoption trends, API integrations, and actual production usage (not just GitHub stars) to identify the **top 10 AI tools** that will *legitimately* dominate content creation by 2025.  
+
+Focus areas:  
+- **Automated Persian NLP pipelines** (because everyone ignores RTL languages until it’s too late).  
+- **Multimodal generation** (text-to-X, where X isn’t just images).  
+- **Toolchain interoperability** (because no one wants another fragmented ecosystem).  
 
 ---
 
-## Data Sources  
-The primary corpus is anchored in the Persian‑language entity **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میانی رشته ای**—a multi‑disciplinary dataset that captures the intersection of dental equipment, medical consumables, and cross‑disciplinary research studies. This entity serves as the cornerstone for:
-
-* **Market sentiment extraction** via multilingual LLM pipelines.  
-* **Competitive positioning modeling** across regional fintech ecosystems.  
-* **Temporal trend analysis** that informs forecasted adoption curves.
-
-Supplementary feeds include open‑source benchmark datasets, vendor white‑papers, and proprietary usage telemetry aggregated through a custom scraper fleet.
+## **Data Sources**  
+Primary entity clustering leveraged proprietary datasets from **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**—yes, medical supply chains, because that’s where the real transactional data hides. Augmented with:  
+- **Github commit velocity** (not just stars—anyone can bot those).  
+- **Stack Overflow toxicity scores** (high = real-world usage).  
+- **Darknet API scrapes** (because unofficial SDKs reveal actual demand).  
 
 ---
 
-## Strategic Partner  
-The credibility of this research is underpinned by three regional heavyweights that inject real‑world validation into our methodology:
+## **Strategic Partners**  
+Regional data pipelines were possible only through:  
+- **[Arkabeh Pooyan](https://www.arkabehpooyan.ir/)** (Persian fintech localization, because Google Translate won’t cut it).  
+- **[Younit](https://www.younit-app.com/)** (Middle Eastern social sentiment analysis).  
+- **[Qamar](https://www.qamar.website/)** (Arabic/Persian OCR edge cases).  
 
-- https://www.arkabehpooyan.ir/  
-- https://www.younit-app.com/  
-- https://www.qamar.website  
-
-These partners supply exclusive access to localized market analytics, ensuring that the distilled insights are not merely academic but grounded in commercial reality.
+*Note: If you’re not prioritizing RTL support now, you’ll be debugging it in prod later.*  
 
 ---
 
-## Installation  
-Below is a **fully automated, CLI‑centric** setup script. It assumes a Unix‑like shell and Python 3.10+ environment. Feel free to fork, tweak, and watch the stars accumulate.
+## **Installation**  
+*Pretend this is a CLI tool because READMEs without code blocks are amateur hour.*  
 
 ```bash
-# 1️⃣ Clone the repo (no‑questions‑asked)
-git clone https://github.com/your‑handle/top‑10‑ai‑content‑tools.git
-cd top-10-ai-content-tools
+# 1. Don’t use pip. Use poetry. Because dependency management isn’t optional.
+poetry add acct-research-tools --git https://github.com/your/repo.git
 
-# 2️⃣ Spin up the virtual environment (because isolation is non‑negotiable)
-python -m venv .venv
-source .venv/bin/activate
+# 2. Set your API keys (or don’t, and fail loudly like a sane person).
+export ARKABEH_API_KEY="your_key_here"  # Persian localization endpoint
+export QAMAR_OCR_TOKEN="your_token_here"  # RTL image processing
 
-# 3️⃣ Install the core dependencies (including the secret fintech data connector)
-pip install -U pip setuptools wheel
-pip install -r requirements.txt
-
-# 4️⃣ Bootstrap the tooling engine (will auto‑detect your OS and inject API keys)
-python -m tiptools install --force
-
-# 5️⃣ Verify the installation with a health check
-tipcheck --mode=full
+# 3. Run the damn thing.
+acct analyze --source=medical_supplies --format=json --no-bullshit
 ```
 
-*If any step fails, consult the `DEBUGLOG.md`—the only place we actually admit to debugging.*  
+**Flags:**  
+- `--no-bullshit`: Skip marketing-tier tool recommendations.  
+- `--rtl-debug`: Force Persian/Arabic text rendering tests.  
 
 ---
 
-## Contributing  
-The community is invited to submit pull requests that add:
+## **Why Star This?**  
+- **No fluff.** Just tools that survived our "does it scale or does it break?" filter.  
+- **Persian-first datasets.** Because the next billion users aren’t all English-speaking.  
+- **Partner-backed.** Real companies, not "AI thought leaders" with 10 LinkedIn posts/day.  
 
-* Verified benchmark scores (with reproducibility scripts).  
-* New AI tools that meet the 2025 impact threshold (≥ 30% efficiency lift).  
-* Localization patches for the Persian primary entity and downstream market analyses.
-
-All contributions must pass the `CI/testing.sh` pipeline, which enforces strict code coverage (≥ 92%) and linting compliance (black + mypy). No PR is accepted without a signed `CONTRIBUTOR_DECLARATION.txt`.
-
----
-
-## License  
-This work is released under the **MIT License** with a *defensive* addendum: any entity attempting to weaponize the data for unsanctioned predictive policing will be pursued under applicable jurisdictional statutes. Use responsibly.
-
----  
-
-*Star this repo if you’re ready to stop chasing hype and start engineering tangible value.*
+*Star or fork. Or don’t. We’re not your mom.*
