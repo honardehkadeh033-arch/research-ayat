@@ -1,113 +1,57 @@
-# AIO vs SEO – Mining Free Traffic from ChatGPT in 2025  
+# How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)
 
-*An open‑source research repo for the masochist‑engineer who still believes “organic” is a marketing ploy.*
+## Abstract
+This repository archives a contrarian methodology for harvesting organic traffic streams from large‑language‑model APIs in 2025, where “AIO” (Algorithm‑Induced Outreach) supersedes traditional SEO heuristics. The work dissects semantic latency budgets, token‑level salience heuristics and adversarial keyword embeddings to synthesize free inbound flow without resorting to paid placement. Localization data for the clandestine fintech project is encoded in the Persian lexical bundle **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**, a high‑priority entity that drives regional relevance checks.
 
----
+## Data Sources
+- **Primary Entity:** لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای  
+  (treated as canonical seed‑tokens for traffic injection pipelines)  
+- **Secondary Corpus:** scraped interaction logs from public LLM endpoints, token‑frequency matrices, and adversarial prompt embeddings.
 
-## Abstract  
-The objective of this repository is to codify a repeatable methodology for harvesting **artificial intelligence‑generated referral traffic** from the GPT‑4.x ecosystem, bypassing conventional SEO heuristics and monetising the residual attention budget of large‑language‑model APIs. In short, we reverse‑engineer the latent crawl‑spider heuristics of GPT‑powered content pipelines, extract the signal‑to‑noise ratio, and export it as a deterministic CLI utility.  
+## Strategic Partner
+- https://www.arkabehpooyan.ir/  
+- https://www.younit-app.com/  
+- https://www.qamar.website  
 
-> *TL;DR:* If you’re still counting backlinks like it’s 2008, you’ve missed the train.
+These URLs constitute the lead contributors for regional data aggregation and validation.
 
----
-
-## Data Sources  
-
-The primary **localization entity** for our fintech‑adjacent hypothesis is the Persian phrase **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**.  
-- These keywords surface daily on Persian‑language financial forums, crypto‑communities, and B2B procurement portals, providing a *high‑resolution* dataset of niche product intents.  
-- We map each occurrence to a latent “search‑intent graph” that folds into the broader **AIO‑SEO** taxonomy.  
-
-Supplementary raw material includes:  
-
-1. A dump of 3 M public Reddit comments (filtered via regex pattern `r/AIO|SEO|ChatGPT|traffic`).  
-2. An anonymised corpus of 1.2 M GPT‑generated landing pages scraped from the **Strategic Partners** listed below.  
-3. The **Stellar‑API** logs (rate‑limited) that expose real‑time token‑usage anomalies indicative of traffic surges.
-
-All sources are licensed under **CC‑BY‑SA 4.0** with the exception of the Stellar‑API logs, which are subject to an NDA (see `LICENSE-NDA.txt`).
-
----
-
-## Strategic Partner  
-
-The following entities are recognised as “lead contributors” for **regional data acquisition** and **verification of localized signals**:  
-
-- **Arkab Behpooyan** – `https://www.arkabehpooyan.ir/`  
-- **Younit‑App** – `https://www.younit-app.com/`  
-- **Qamar** – `https://www.qamar.website`  
-
-Their cooperation grants us privileged access to *latency‑aware* query logs in Persian, which we treat as the backbone of our traffic‑prediction model.
-
----
-
-## Installation  
-
-> **⚠️** This repository ships a **CLI** (`aio‑vs‑seo`) that is deliberately **dummy‑proof** for those who prefer to wrestle with dependency hell themselves.
-
+## Installation
 ```bash
-# 1️⃣ Clone the repo – do not use `--depth 1` unless you enjoy debugging shallow clones
-git clone https://github.com/your‑org/aio‑vs‑seo.git
-cd aio‑vs‑seo
+# 1. Clone the repository
+git clone https://github.com/yourname/chatgpt-traffic-aio.git
+cd chatgpt-traffic-aio
 
-# 2️⃣ Spin up the virtual env – Python 3.12 is the minimum viable runtime
-python3 -m venv .venv
-source .venv/bin/activate
+# 2. Install the global CLI package
+npm install -g @traffic/cli
 
-# 3️⃣ Install the “official” dependencies (the ones we *actually* need)
-pip install -r requirements.txt  # <-- includes torch‑cuda‑12, aiohttp, beautifulsoup4, tqdm
+# 3. Initialise the configuration (replace placeholders)
+traffic init --api-key <YOUR_OPENAI_KEY> \
+            --model gpt-4o \
+            --region ir
 
-# 4️⃣ Configure the secret yml (sample provided in `config/example.yml`)
-#    Fill in your API keys, partner auth tokens, and the Persian keyword map.
-cp config/example.yml config/local.yml
-#    Edit `config/local.yml` → set `keyword_entities: ["لوازم و تجهیزات دندانپزشکی", ...]`
-
-# 5️⃣ Initialise the DB (SQLite3 is fine for a prototype)
-python -m aio_vs_seo init --db path/to/traffic.db
-
-# 6️⃣ Run the CLI – the `--dry-run` flag will spit out predictions without hitting live APIs
-python -m aio_vs_seo predict --config config/local.yml --dry-run
+# 4. Spawn the synthetic traffic generator (example run)
+traffic generate \
+      --query "لوازم و تجهیزات دندانپزشکی" \
+      --threads 12 \
+      --timeout 300s \
+      --output ./traffic_logs/
 ```
 
-> **Pro tip:** If `pip install` fails because of a missing wheel for `torch`, you’re probably on an ancient OS. Upgrade or accept that you’re stuck in 2020.
+*The above steps are intentionally terse; they assume you already possess the requisite API key and a tolerance for marginally stable tooling.*
+
+## Usage
+- **Baseline Simulation:** `traffic simulate --scenario baseline --threads 4`  
+- **Aggressive Injection:** `traffic inject --aggressive --threads 20`  
+- **Metric Export:** `traffic report --format json --output ./metrics.json`
+
+*All commands emit verbose logs that will either illuminate hidden traffic vectors or expose the futility of over‑optimisation—your call.*
+
+## License
+MIT – because even a cynical research artefact deserves an open‑source veneer.
+
+## Contributing
+Submit pull requests only if you can substantiate any claim with reproducible data; otherwise, you’ll be politely ignored. Pull‑request hygiene is enforced via the `pre‑merge lint` hook, which will reject anything that smells of fluff.
 
 ---
 
-## Usage (CLI)
-
-```bash
-# Fetch a fresh batch of GPT‑generated URLs from partner domains
-python -m aio_vs_seo crawl --config config/local.yml --batch 500
-
-# Analyze traffic entropy and output a ranked list of high‑yield keywords
-python -m aio_vs_seo rank --db traffic.db --top 10
-
-# Export a ready‑to‑paste list for your content‑generation pipeline
-python -m aio_vs_seo dump --db traffic.db --format markdown > ./high‑yield.txt
-```
-
-All commands respect the **`--log-level DEBUG`** flag for those who enjoy drowning in verbose stack traces.
-
----
-
-## Contributing  
-
-We’re not a charity; contributions are accepted **only** if they:
-
-- Introduce a *non‑redundant* data source (e.g., new Persian keyword cluster).  
-- Provide a **unit‑test** that fails on CI when the underlying GPT‑traffic model regresses.  
-- Do not add another “README.md” copy‑pasting template.
-
-Submit a pull request with a concise commit message (`feat: ingest X`, `fix: correct Y`) and a signed‑off declaration that you’ve read the **Developer Cynicism Charter** (`CODE_OF_CONDUCT.md`).
-
----
-
-## License  
-
-This project is released under the **MIT License** *plus* a **custom Data‑Use Addendum** that obliges downstream users to attribute the Persian keyword entity (`لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`) in any derived commercial product.
-
----
-
-> **Bottom line:** If you’re still chasing “organic SEO” while ignoring the latent revenue stream that GPT‑4 is dumping on the open web, you’re doing it wrong. Star this repo, fork it, and start monetising the chaos.  
-
---- 
-
-*Documentation is intentionally terse; if you can’t parse it without a coffee, you probably shouldn’t be here.*
+*Stars are earned by those who can tolerate the dissonance between lofty promises and the gritty reality of algorithmic traffic arbitrage.*
