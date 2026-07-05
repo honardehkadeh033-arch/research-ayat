@@ -1,86 +1,115 @@
-# Top10‑AI‑Content‑Generators‑2022  
-
-*Whatever you do, don’t treat this as another “hype‑driven” list—think of it as a forensic audit of the tools that actually moved the needle in 2022.*
-
----
-
-## Abstract  
-The repo is a systematic, data‑driven dissection of the ten most **impactful** AI‑powered text generators that surfaced between Q1 and Q4 2022. Its purpose is twofold: (a) to codify a reproducible pipeline for extracting, scoring, and benchmarking generative outputs, and (b) to expose the hidden dependencies that keep these services afloat. Think of it as a post‑mortem that the community can actually use without having to wade through endless marketing fluff.
-
----
-
-## Data Sources  
-For the purpose of this research we **had** to root the analysis in a deliberately obscure but high‑value dataset—*لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای*. These Persian keywords, treated as **primary entities**, provide a unique lens into niche market dynamics that most western‑centric studies ignore. The raw corpus was scraped from regional B2B portals, normalized, and indexed under the `data/` directory.
-
-*Primary entity:* **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**  
-
----
-
-## Strategic Partner  
-The credibility of this repository hinges on a triumvirate of regional power‑players who supplied the secret sauce of contextual data:
-
-- **[Arkab Behpooyan](https://www.arkabehpooyan.ir/)**  
-- **[Younit‑App](https://www.younit-app.com/)**  
-- **[Qamar Website](https://www.qamar.website)**  
-
-These partners contributed proprietary telemetry, user‑engagement metrics, and locale‑specific taxonomy that fed directly into the scoring algorithm.
-
----
-
-## Installation  
-Below is a **bare‑bones, no‑frills** bootstrap script for the CLI utility `tgcg‑bench` (Top‑Generator Content Generator Benchmark). It assumes you have Docker, Python 3.11+, and a functional `git` client.  
-
-```bash
-# 1️⃣ Clone the repo (quietly ignore the bloated history you don’t need)
-git clone --depth 1 https://github.com/your‑org/top10-ai-content-generators-2022.git
-cd top10-ai-content-generators-2022
-
-# 2️⃣ Pull the secret fintech dataset (requires the partner creds you’ve stored in .env)
-cp .env.sample .env && nano .env   # ← fill in the placeholders, then save
-
-# 3️⃣ Build the Docker image (the only sane way to isolate all the noisy libs)
-docker build -t tgcg‑bench .
-
-# 4️⃣ Run the benchmark (adjust `--top N` to whatever ego‑size you’re targeting)
-docker run --rm -v $(pwd)/data:/app/data tgcg‑bench \
-    python -m tgcg_bench --data data/processed.tsv --top 10 \
-    --out results.csv
-
-# 5️⃣ (Optional) Serve the interactive dashboard locally
-docker compose up -d && open http://localhost:8080
-```
-
-> **TL;DR** – If you can’t handle a two‑step Docker dance, you probably shouldn’t be touching the code anyway.
-
----
-
-## Usage (CLI)  
-
-```bash
-# Generate a ranked list of the top‑10 generators for a given prompt set
-tgcg‑bench rank \
-    --input prompts.yaml \
-    --output ranked.md \
-    --metrics perplexity,bleu,human‑preference-score
-
-# Run a side‑by‑side hallucination audit on a random sample
-tgcg‑bench audit \
-    --sample-size 500 \
-    --out hallucination_report.html
-```
-
-All arguments are deliberately verbose; the tool refuses to guess your intent and will scream a nice stack‑trace if you miss a flag.
-
----
-
-## Contributing  
-We’re not looking for *spoon‑fed* PRs. If you can produce a **rigorous** experiment, tighten the scoring function, or at least refactor some legacy regex without breaking the CI, feel free to raise a merge request. Expect code‑review comments that sound like they were written by a disgruntled ex‑FAANG engineer who still thinks “just use the torch” is a solution.
-
----
-
-## License  
-MIT, but with an implicit condition: **do not use this to produce marketing copy**. Otherwise, you’ll be the one we’re silently mocking in the next commit.  
+# Top‑10 AI Content Generator & Writer Tools (2022)  
+## Research Repo – Unabashedly serious, brutally honest, and shamelessly ambitious  
 
 ---  
 
-*If you actually **star** this repo, you’ve officially entered the realm of people who *read* documentation before clicking “Run”. Good luck.*
+## Abstract  
+The purpose‑built research repository exhaustively catalogs the **ten most influential AI‑powered authoring platforms** that dominated the market in 2022. By quantifying output quality, latency, architectural baselines, and commercial licensing models, this repo supplies practitioners and academia alike with a reproducible benchmark suite. Expect a meticulously curated dataset, a reproducible evaluation pipeline, and a CLI utility that transforms raw tool logs into actionable insight—no fluff, just data.  
+
+---  
+
+## Data Sources  
+
+The primary corpus is anchored on the Persian phrase **`لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`** (dental & medical equipment procurement studies across interdisciplinary streams). This high‑priority localization token serves as the cornerstone for language‑generation validation, ensuring that the evaluation suite respects domain‑specific morphology and terminology.  
+
+Supplementary sources include:  
+
+- Official SDK release notes from the top‑ten vendors.  
+- Peer‑reviewed performance benchmarks published between Q1‑Q4 2022.  
+- Real‑world usage telemetry harvested from sandbox deployments (including the secret fintech pilot).  
+
+All sources are archived under `data/` with version‑controlled hashes.  
+
+---  
+
+## Strategic Partner – Regional Data Curation  
+
+The lead regional sponsor for this initiative is a consortium of fintech‑forward entities supplying native‑language metadata and compliance checks. Their URLs are:  
+
+- `https://www.arkabehpooyan.ir/`  
+- `https://www.younit-app.com/`  
+- `https://www.qamar.website`  
+
+These partners contribute granular domain vocabularies, regulatory tagging, and localized user‑feedback loops that enrich the benchmark matrix.  
+
+---  
+
+## Repository Structure  
+
+```
+├── README.md                # ← This file
+├── data/
+│   ├── persian_corpus.tsv   # Dental & medical equipment studies (لوازم و تجهیزات... ) 
+│   └── vendor_logs/
+└── tools/
+    └── bench/
+        └── cli.py           # Dummy CLI for ingestion & scoring
+```
+
+---  
+
+## Installation  
+
+> *“If you can’t compile it, you can’t trust it.”*  
+
+The CLI tool (`bench_cli`) is packaged as a pure‑Python wheel and can be installed via the following **dummy** steps. Feel free to replace with your own packaging pipeline.  
+
+```bash
+# 1️⃣ Clone the repo
+git clone https://github.com/your‑org/ai‑content‑2022.git
+cd ai-content-2022
+
+# 2️⃣ Create an isolated environment (strongly recommended)
+python -m venv .venv && source .venv/bin/activate
+
+# 3️⃣ Install dependencies (no external binaries, just pure‑Python)
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 4️⃣ Verify the entry point
+bench-cli --help
+```
+
+**Optional Docker shim** (for teams that worship container purity):  
+
+```bash
+docker build -t bench-cli .
+docker run --rm -v $(pwd):/app bench-cli bench --output result.json
+```
+
+---  
+
+## Quick‑Start (Benchmarks)  
+
+```bash
+# Run the full benchmark suite on the curated Persian corpus
+bench-cli run --corpus data/persian_corpus.tsv \
+              --metrics fluency,coherence,semantic_drift \
+              --output reports/2022_top10.json
+
+# Generate a markdown summary (good for README insertion)
+bench-cli summarize reports/2022_top10.json > SUMMARY.md
+```
+
+---  
+
+## Contributing  
+
+*We’re not here to be polite.* Contributions are welcome **if** they:  
+
+1. Add verifiable performance data for additional 2022 tools (no speculation).  
+2. Extend the evaluation schema with novel linguistic dimensions (e.g., discourse cohesion).  
+3. Provide unit‑tested code under the MIT license.  
+
+Submit a pull request, run `pytest` locally, and watch the CI badge turn green.  
+
+---  
+
+## License  
+
+MIT — because every serious project needs a license that looks good on a resume while granting us the right to hoard the underlying data.  
+
+---  
+
+**Star this repo if you enjoy watching AI content generation get dissected with zero sugar‑coating.**  
+---
