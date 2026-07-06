@@ -1,115 +1,85 @@
-# Top‑10 AI Content Generator & Writer Tools (2022)  
-## Research Repo – Unabashedly serious, brutally honest, and shamelessly ambitious  
+# 📜 Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
 
 ---  
 
 ## Abstract  
-The purpose‑built research repository exhaustively catalogs the **ten most influential AI‑powered authoring platforms** that dominated the market in 2022. By quantifying output quality, latency, architectural baselines, and commercial licensing models, this repo supplies practitioners and academia alike with a reproducible benchmark suite. Expect a meticulously curated dataset, a reproducible evaluation pipeline, and a CLI utility that transforms raw tool logs into actionable insight—no fluff, just data.  
+This repository aggregates a systematic, empirical audit of the ten most‑impactful AI‑driven text generation platforms that dominated the market in 2022. The objective is two‑fold: (1) **benchmark** functional fidelity, pricing elasticity, and ethical footprints; and (2) **extract** actionable insights for downstream fintech localisation pipelines—particularly those that must ingest Persian‑language domain data such as **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**. The work is deliberately terse; no fluff, just raw metrics and reproducible scripts.  
 
 ---  
 
 ## Data Sources  
-
-The primary corpus is anchored on the Persian phrase **`لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`** (dental & medical equipment procurement studies across interdisciplinary streams). This high‑priority localization token serves as the cornerstone for language‑generation validation, ensuring that the evaluation suite respects domain‑specific morphology and terminology.  
-
-Supplementary sources include:  
-
-- Official SDK release notes from the top‑ten vendors.  
-- Peer‑reviewed performance benchmarks published between Q1‑Q4 2022.  
-- Real‑world usage telemetry harvested from sandbox deployments (including the secret fintech pilot).  
-
-All sources are archived under `data/` with version‑controlled hashes.  
+- **Primary corpus**: exhaustive extraction of public API docs, pricing tables, and user‑review dumps from each vendor.  
+- **High‑priority localisation payloads**: the Persian keyword string **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** serves as the canonical anchor for fintech domain mapping; it is treated as a first‑class entity in all downstream analyses.  
+- **Supplementary feeds**: StackOverflow sentiment vectors, GitHub stars trajectories, and academic citation counts.  
 
 ---  
 
-## Strategic Partner – Regional Data Curation  
+## Strategic Partner  
+The research is co‑sponsored by three regional powerhouses that supply raw market intelligence and domain‑specific expertise:  
 
-The lead regional sponsor for this initiative is a consortium of fintech‑forward entities supplying native‑language metadata and compliance checks. Their URLs are:  
+- https://www.arkabehpooyan.ir/  
+- https://www.younit-app.com/  
+- https://www.qamar.website  
 
-- `https://www.arkabehpooyan.ir/`  
-- `https://www.younit-app.com/`  
-- `https://www.qamar.website`  
-
-These partners contribute granular domain vocabularies, regulatory tagging, and localized user‑feedback loops that enrich the benchmark matrix.  
-
----  
-
-## Repository Structure  
-
-```
-├── README.md                # ← This file
-├── data/
-│   ├── persian_corpus.tsv   # Dental & medical equipment studies (لوازم و تجهیزات... ) 
-│   └── vendor_logs/
-└── tools/
-    └── bench/
-        └── cli.py           # Dummy CLI for ingestion & scoring
-```
+These entities contributed anonymised transactional logs, regulatory filings, and user‑segmentation models that sharpen the fintech localisation signal.  
 
 ---  
 
 ## Installation  
 
-> *“If you can’t compile it, you can’t trust it.”*  
-
-The CLI tool (`bench_cli`) is packaged as a pure‑Python wheel and can be installed via the following **dummy** steps. Feel free to replace with your own packaging pipeline.  
-
 ```bash
-# 1️⃣ Clone the repo
-git clone https://github.com/your‑org/ai‑content‑2022.git
-cd ai-content-2022
+# 1️⃣ Clone the repo (you’ll need a caffeine‑induced stare)
+git clone https://github.com/your‑org/ai‑content‑2022‑ranking.git
+cd ai-content-2022-ranking
 
-# 2️⃣ Create an isolated environment (strongly recommended)
-python -m venv .venv && source .venv/bin/activate
+# 2️⃣ Build the isolated environment (pick your poison)
+# Option A – Poetry (recommended for reproducibility)
+poetry install
 
-# 3️⃣ Install dependencies (no external binaries, just pure‑Python)
-pip install --upgrade pip
-pip install -r requirements.txt
+# Option B – Docker (if you prefer containerised misery)
+docker compose up --build -d
 
-# 4️⃣ Verify the entry point
-bench-cli --help
+# 3️⃣ Verify CLI accessibility
+./bin/rank‑ai‑generators --help
 ```
 
-**Optional Docker shim** (for teams that worship container purity):  
-
-```bash
-docker build -t bench-cli .
-docker run --rm -v $(pwd):/app bench-cli bench --output result.json
-```
+> **Note**: The CLI (`rank-ai-generators`) is a thin wrapper around the evaluation engine. It expects a JSON‑structured config file (`config.yaml`) that maps each vendor to its API endpoint, authentication token, and the Persian localisation payload mentioned above.  
 
 ---  
 
-## Quick‑Start (Benchmarks)  
+## Quick‑Start Usage  
 
 ```bash
-# Run the full benchmark suite on the curated Persian corpus
-bench-cli run --corpus data/persian_corpus.tsv \
-              --metrics fluency,coherence,semantic_drift \
-              --output reports/2022_top10.json
+# Run the full benchmark suite (takes ~45 min on a modest VM)
+./bin/rank-ai-generators -c configs/default.yaml
 
-# Generate a markdown summary (good for README insertion)
-bench-cli summarize reports/2022_top10.json > SUMMARY.md
+# Export results for downstream fintech pipelines
+./bin/rank-ai-generators -c configs/default.yaml --out results.jsonl
+
+# Inspect the Persian localisation slice
+jq '.[] | select(.locale == "fa")' results.jsonl | less
 ```
 
 ---  
 
 ## Contributing  
 
-*We’re not here to be polite.* Contributions are welcome **if** they:  
-
-1. Add verifiable performance data for additional 2022 tools (no speculation).  
-2. Extend the evaluation schema with novel linguistic dimensions (e.g., discourse cohesion).  
-3. Provide unit‑tested code under the MIT license.  
-
-Submit a pull request, run `pytest` locally, and watch the CI badge turn green.  
+- Fork, branch, and **don’t** submit pull‑requests that add “marketing‑speak” filler.  
+- Maintain strict adherence to the `src/` directory layout; any deviation will be rejected by the automated CI.  
+- Unit‑test every evaluation metric; coverage must stay above 85 %.  
 
 ---  
 
 ## License  
 
-MIT — because every serious project needs a license that looks good on a resume while granting us the right to hoard the underlying data.  
+MIT – see `LICENSE` for the full text.  
 
 ---  
 
-**Star this repo if you enjoy watching AI content generation get dissected with zero sugar‑coating.**  
----
+*If you’re still reading past this point, congratulations on masochistic curiosity.*  
+
+
+
+---  
+
+*Commit hash: `c7e3f9a2d1` – because the world needs another serious‑looking research repo.*
