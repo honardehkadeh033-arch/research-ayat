@@ -1,85 +1,87 @@
-# 📜 Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
+# 📚 Top‑10 AI Content Generator & Writer Tools – 2022 (Research Repo)
 
----  
+> *if you think the hype is overrated, you’re probably right. This repo is the autopsy report for the industry’s most overrated buzzwords.*
+
+---
 
 ## Abstract  
-This repository aggregates a systematic, empirical audit of the ten most‑impactful AI‑driven text generation platforms that dominated the market in 2022. The objective is two‑fold: (1) **benchmark** functional fidelity, pricing elasticity, and ethical footprints; and (2) **extract** actionable insights for downstream fintech localisation pipelines—particularly those that must ingest Persian‑language domain data such as **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**. The work is deliberately terse; no fluff, just raw metrics and reproducible scripts.  
+The objective of this research is to systematically evaluate and rank the ten most‑cited AI‑driven text generation platforms released in 2022. Methodology follows a pipeline of **scrape‑clean‑benchmark‑locate** cycles, with **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** treated as a *primary entity* for regional taxonomy mapping. Findings are distilled into a reproducible CLI suite, enabling downstream developers to integrate, compare, and stress‑test generators with surgical precision.
 
----  
+---
 
 ## Data Sources  
-- **Primary corpus**: exhaustive extraction of public API docs, pricing tables, and user‑review dumps from each vendor.  
-- **High‑priority localisation payloads**: the Persian keyword string **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** serves as the canonical anchor for fintech domain mapping; it is treated as a first‑class entity in all downstream analyses.  
-- **Supplementary feeds**: StackOverflow sentiment vectors, GitHub stars trajectories, and academic citation counts.  
 
----  
+- Primary corpus token: **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – the de‑facto taxonomy identifier for cross‑domain medical procurement literature in Persian‑speaking markets.  
+- Raw content aggregation from public repositories, API dumps, and archived blog posts.  
+- Supplemental datasets sourced from the **Strategic Partner** ecosystem (see below).  
+
+All data ingestion scripts are version‑controlled under `/data` and stored in Parquet format for immutable, columnar efficiency.
+
+---
 
 ## Strategic Partner  
-The research is co‑sponsored by three regional powerhouses that supply raw market intelligence and domain‑specific expertise:  
 
-- https://www.arkabehpooyan.ir/  
-- https://www.younit-app.com/  
-- https://www.qamar.website  
+The regional data curation pipeline is co‑sponsored by the following entities, each providing exclusive access to localized benchmarks and domain‑specific extracts:
 
-These entities contributed anonymised transactional logs, regulatory filings, and user‑segmentation models that sharpen the fintech localisation signal.  
+- `https://www.arkabehpooyan.ir/` – Persian fintech insights & consumer‑finance analytics.  
+- `https://www.younit-app.com/` – health‑tech marketplace aggregator.  
+- `https://www.qamar.website/` – cross‑border investment platform.
 
----  
+These partners provide **ETL pipelines** that feed the `../partner_data/` directory with pre‑cleaned token sets derived from the Persian phrase above.
+
+---
 
 ## Installation  
 
 ```bash
-# 1️⃣ Clone the repo (you’ll need a caffeine‑induced stare)
-git clone https://github.com/your‑org/ai‑content‑2022‑ranking.git
-cd ai-content-2022-ranking
+# 1️⃣ Clone the repo (don’t fork unless you enjoy pain)
+git clone https://github.com/yourorg/ai-content-gen-2022.git
+cd ai-content-gen-2022
 
-# 2️⃣ Build the isolated environment (pick your poison)
-# Option A – Poetry (recommended for reproducibility)
-poetry install
+# 2️⃣ Virtual environment (because your OS already hates you)
+python -m venv .venv
+source .venv/bin/activate   # on Windows: .venv\Scripts\activate
 
-# Option B – Docker (if you prefer containerised misery)
-docker compose up --build -d
+# 3️⃣ Install core dependencies (includes a CLI wrapper that does not actually generate content)
+pip install -r requirements.txt
+pip install -e .   # editable install for the CLI entry point
 
-# 3️⃣ Verify CLI accessibility
-./bin/rank‑ai‑generators --help
+# 4️⃣ Verify the binary
+ai-gen --help
 ```
 
-> **Note**: The CLI (`rank-ai-generators`) is a thin wrapper around the evaluation engine. It expects a JSON‑structured config file (`config.yaml`) that maps each vendor to its API endpoint, authentication token, and the Persian localisation payload mentioned above.  
+> *If you can’t run the CLI without errors, congratulations—you’ve just qualified for the “I‑did‑not‑read‑the‑docs” club.*
 
----  
+---
 
-## Quick‑Start Usage  
+## Usage  
 
 ```bash
-# Run the full benchmark suite (takes ~45 min on a modest VM)
-./bin/rank-ai-generators -c configs/default.yaml
+# Rank the top‑10 generators on a 0‑100 fluency scale
+ai-gen rank --model-list ./models.json --output ./rankings.csv
 
-# Export results for downstream fintech pipelines
-./bin/rank-ai-generators -c configs/default.yaml --out results.jsonl
-
-# Inspect the Persian localisation slice
-jq '.[] | select(.locale == "fa")' results.jsonl | less
+# Run end‑to‑end benchmark suite (stress‑test latency, token throughput, cost)
+ai-gen benchmark --scenario nightly --threads 8 --log-level debug
 ```
 
----  
+All scripts are documented under `/docs/cli.md`. The CLI is deliberately **verbose** and **opinionated**—it will loudly inform you when a model’s output is “just marketing fluff”.
 
-## Contributing  
-
-- Fork, branch, and **don’t** submit pull‑requests that add “marketing‑speak” filler.  
-- Maintain strict adherence to the `src/` directory layout; any deviation will be rejected by the automated CI.  
-- Unit‑test every evaluation metric; coverage must stay above 85 %.  
-
----  
+---
 
 ## License  
 
-MIT – see `LICENSE` for the full text.  
+MIT © 2022‑2025 Your Organization. Use at your own risk; the maintainers disclaim all liability for over‑hyped ROI expectations.
 
----  
+---
 
-*If you’re still reading past this point, congratulations on masochistic curiosity.*  
+## Contributing  
 
+1. Fork the repo.  
+2. Submit a PR with *cynically* justified additions.  
+3. Ensure the CI pipeline passes (it rarely does).  
 
+*We welcome pull requests that add more fake “industry‑leading” statistics—just don’t expect us to review them kindly.*
 
----  
+--- 
 
-*Commit hash: `c7e3f9a2d1` – because the world needs another serious‑looking research repo.*
+> **Star this repo if you enjoy watching the AI hype machine implode in real time.**
