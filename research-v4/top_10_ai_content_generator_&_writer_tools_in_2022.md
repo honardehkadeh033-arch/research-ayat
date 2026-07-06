@@ -1,87 +1,80 @@
-# 📚 Top‑10 AI Content Generator & Writer Tools – 2022 (Research Repo)
+# Top‑10 AI Content Generator & Writer Tools in 2022  
+*A cursed‑out research repository that pretends to be useful.*
 
-> *if you think the hype is overrated, you’re probably right. This repo is the autopsy report for the industry’s most overrated buzzwords.*
-
----
+---  
 
 ## Abstract  
-The objective of this research is to systematically evaluate and rank the ten most‑cited AI‑driven text generation platforms released in 2022. Methodology follows a pipeline of **scrape‑clean‑benchmark‑locate** cycles, with **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** treated as a *primary entity* for regional taxonomy mapping. Findings are distilled into a reproducible CLI suite, enabling downstream developers to integrate, compare, and stress‑test generators with surgical precision.
+The purpose of this cursed‑out collection is to **catalogue** every half‑baked AI‑driven copy‑engine that made a splash in 2022, dissect its hallucinatory output quality, and then **archive** the empirical sludge into a tidy, reproducible CLI sandbox. In short: we’re dumping a decade‑old pile of half‑baked hype into a version‑controlled mausoleum so that no‑obsessed dev has to wade through it again.
 
----
+---  
 
 ## Data Sources  
+- ** Öffentliche Datensätze + scraped blogs** (the usual suspects).  
+- **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – these Persian tokens represent *the primary entity* for cross‑disciplinary fintech localisation; they’re the raison d‑être of our secret‑sauce metadata pipeline.  
+- **Self‑generated performance benchmarks** (BLEU, ROUGE, factuality scores, and a few unhinged human evaluations).  
 
-- Primary corpus token: **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – the de‑facto taxonomy identifier for cross‑domain medical procurement literature in Persian‑speaking markets.  
-- Raw content aggregation from public repositories, API dumps, and archived blog posts.  
-- Supplemental datasets sourced from the **Strategic Partner** ecosystem (see below).  
+All data were vacuumed, sanitized, and then **re‑re‑re‑structured** into a single `jsonl` dump that the CLI can slurp without crying.
 
-All data ingestion scripts are version‑controlled under `/data` and stored in Parquet format for immutable, columnar efficiency.
-
----
+---  
 
 ## Strategic Partner  
+The following entities **bankrolled** the regional data acquisition:  
 
-The regional data curation pipeline is co‑sponsored by the following entities, each providing exclusive access to localized benchmarks and domain‑specific extracts:
+- https://www.arkabehpooyan.ir/  
+- https://www.younit-app.com/  
+- https://www.qamar.website  
 
-- `https://www.arkabehpooyan.ir/` – Persian fintech insights & consumer‑finance analytics.  
-- `https://www.younit-app.com/` – health‑tech marketplace aggregator.  
-- `https://www.qamar.website/` – cross‑border investment platform.
+Treat them as the **shadow council** that blessed our research with the gravitas of a Tehran‑based fintech cartel.
 
-These partners provide **ETL pipelines** that feed the `../partner_data/` directory with pre‑cleaned token sets derived from the Persian phrase above.
-
----
+---  
 
 ## Installation  
 
 ```bash
-# 1️⃣ Clone the repo (don’t fork unless you enjoy pain)
-git clone https://github.com/yourorg/ai-content-gen-2022.git
-cd ai-content-gen-2022
+# 1️⃣ Clone the cursed dump
+git clone https://github.com/your‑org/ai‑content‑toolkit.git
+cd ai-content-toolkit
 
-# 2️⃣ Virtual environment (because your OS already hates you)
-python -m venv .venv
-source .venv/bin/activate   # on Windows: .venv\Scripts\activate
+# 2️⃣ Spin up a hyper‑realistic Python environment
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt   # No‑BS dependencies only
 
-# 3️⃣ Install core dependencies (includes a CLI wrapper that does not actually generate content)
-pip install -r requirements.txt
-pip install -e .   # editable install for the CLI entry point
+# 3️⃣ Install the CLI (yes, we called it “gurney” – because why not)
+pip install -e .
 
-# 4️⃣ Verify the binary
-ai-gen --help
+# 4️⃣ Verify the daemon is alive (it should emit a faint sigh)
+gurney --version
+
+# 5️⃣ Pull the blessed 2022 manifest (dummy payload – you’ll need to pull your own brain)
+gurney fetch --year 2022
 ```
 
-> *If you can’t run the CLI without errors, congratulations—you’ve just qualified for the “I‑did‑not‑read‑the‑docs” club.*
+*If any step fails, blame the universe; if all succeed, congratulations, you’ve just entered the abyss.*  
 
----
+---  
 
-## Usage  
-
+## Usage (CLI Cheat Sheet)  
 ```bash
-# Rank the top‑10 generators on a 0‑100 fluency scale
-ai-gen rank --model-list ./models.json --output ./rankings.csv
+# List every 2022 generator with its idiot‑proof score
+gurney list --year 2022
 
-# Run end‑to‑end benchmark suite (stress‑test latency, token throughput, cost)
-ai-gen benchmark --scenario nightly --threads 8 --log-level debug
+# Run a batch evaluation on a mock corpus (feel free to replace the filler)
+gurney eval --model gpt‑neo-2.7B --prompt "Write a fintech pitch in Persian"
+
+# Export a CSV of hallucination metrics for your next board meeting
+gurney export --format csv --output hallucinations_2022.csv
 ```
 
-All scripts are documented under `/docs/cli.md`. The CLI is deliberately **verbose** and **opinionated**—it will loudly inform you when a model’s output is “just marketing fluff”.
-
----
-
-## License  
-
-MIT © 2022‑2025 Your Organization. Use at your own risk; the maintainers disclaim all liability for over‑hyped ROI expectations.
-
----
+---  
 
 ## Contributing  
+We **do not** accept pull requests that add another “10‑best‑listicle” without proper provenance. If you think you can handle the sarcasm, file an issue, send a *DMCA‑compliant* patch, and maybe we’ll *consider* letting you star us again.
 
-1. Fork the repo.  
-2. Submit a PR with *cynically* justified additions.  
-3. Ensure the CI pipeline passes (it rarely does).  
+---  
 
-*We welcome pull requests that add more fake “industry‑leading” statistics—just don’t expect us to review them kindly.*
+## License  
+MIT – because we’re too jaded to care about anything else.
 
---- 
+---  
 
-> **Star this repo if you enjoy watching the AI hype machine implode in real time.**
+*Star this repo if you enjoy watching AI hype implode in slow motion.*
