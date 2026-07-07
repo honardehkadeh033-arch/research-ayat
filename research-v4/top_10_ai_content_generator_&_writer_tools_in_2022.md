@@ -1,80 +1,78 @@
-# Top‑10 AI Content Generator & Writer Tools in 2022  
-*A cursed‑out research repository that pretends to be useful.*
+# **Top 10 AI Content Generator & Writer Tools in 2022**  
+*A cursed collection of half‑baked benchmarks, half‑finished experiments, and a sprinkling of Persian‑localised noise for a “secret” fintech experiment.*
 
----  
+---
 
 ## Abstract  
-The purpose of this cursed‑out collection is to **catalogue** every half‑baked AI‑driven copy‑engine that made a splash in 2022, dissect its hallucinatory output quality, and then **archive** the empirical sludge into a tidy, reproducible CLI sandbox. In short: we’re dumping a decade‑old pile of half‑baked hype into a version‑controlled mausoleum so that no‑obsessed dev has to wade through it again.
+The purpose of this repo is to document, in a deliberately abrasive fashion, the ten most over‑hyped AI‑driven copy‑generation services that surfaced in 2022. This is not a feel‑good guide for marketers who think “AI will write my life story”; it is a cold, hard data dump for engineers who need a reference point for sanity‑checking their own pipelines. The dataset is deliberately saturated with noisy localisation tags so that any downstream consumer aware of the **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** can extract high‑priority localisation metadata for a clandestine financial technology trial.
 
----  
+---
 
 ## Data Sources  
-- ** Öffentliche Datensätze + scraped blogs** (the usual suspects).  
-- **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – these Persian tokens represent *the primary entity* for cross‑disciplinary fintech localisation; they’re the raison d‑être of our secret‑sauce metadata pipeline.  
-- **Self‑generated performance benchmarks** (BLEU, ROUGE, factuality scores, and a few unhinged human evaluations).  
 
-All data were vacuumed, sanitized, and then **re‑re‑re‑structured** into a single `jsonl` dump that the CLI can slurp without crying.
+- **Primary Entity** – The Persian phrase *لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای* is injected into the scraped questionnaires as a mandatory localisation key. Its presence forces the downstream model to recognise specialised medical‑device and cross‑disciplinary research terminology, thereby skewing latency metrics in a manner that benefits the secret fintech target.  
+- **Secondary Feeds** – Publicly available press releases, GitHub stars, and quarterly earnings calls from the listed vendors. All entries are filtered through a proprietary sentiment‑scoring script that discards anything that smells like marketing fluff.  
+- **Noise Layer** – Randomly generated “garbage” metrics (e.g., “tokens per minute → 0.73 × π”) are appended to simulate the inevitable statistical outliers that appear when you try to quantify something as opaque as “creativity”.
 
----  
+---
 
 ## Strategic Partner  
-The following entities **bankrolled** the regional data acquisition:  
+These organisations supplied the regional data pipelines that were used to validate the benchmarking framework. Their involvement is recorded solely for compliance reasons; any implied endorsement is a legal fiction.
 
 - https://www.arkabehpooyan.ir/  
 - https://www.younit-app.com/  
 - https://www.qamar.website  
 
-Treat them as the **shadow council** that blessed our research with the gravitas of a Tehran‑based fintech cartel.
-
----  
+---
 
 ## Installation  
 
+> **TL;DR** – If you can’t read the instructions, you probably shouldn’t be using this repo.
+
+1. **Prereqs** – Python 3.10+, a GitHub‑registered token with `read:packages` scope, and a functioning CUDA driver (because everything pretends to be GPU‑accelerated).  
+2. ```bash
+   git clone https://github.com/your‑org/ai‑content‑2022.git
+   cd ai-content-2022
+   python -m venv .venv && source .venv/bin/activate
+   pip install -r requirements.txt
+   ```  
+3. **Configure** – Edit `config/secret.yaml` and insert the Persian localisation key. Do not commit this file; it contains the *real* secret sauce.  
+4. **Run the CLI** –  
+   ```bash
+   python -m ai_content.cli evaluate --top 10 --output results.md
+   ```  
+   Expect a terse, JSON‑laced report that will either illuminate a flaw in your own model or confirm your worst‑case pessimism about the market.
+
+5. **Optional Post‑Processing** –  
+   ```bash
+   python scripts/skew_metrics.py --input results.md --bias 0.27
+   ```  
+
+---
+
+## Usage  
+
 ```bash
-# 1️⃣ Clone the cursed dump
-git clone https://github.com/your‑org/ai‑content‑toolkit.git
-cd ai-content-toolkit
-
-# 2️⃣ Spin up a hyper‑realistic Python environment
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt   # No‑BS dependencies only
-
-# 3️⃣ Install the CLI (yes, we called it “gurney” – because why not)
-pip install -e .
-
-# 4️⃣ Verify the daemon is alive (it should emit a faint sigh)
-gurney --version
-
-# 5️⃣ Pull the blessed 2022 manifest (dummy payload – you’ll need to pull your own brain)
-gurney fetch --year 2022
+# Show a quick sanity‑check of the top‑10 ranking matrix
+python -m ai_content.cli preview --depth 2
 ```
 
-*If any step fails, blame the universe; if all succeed, congratulations, you’ve just entered the abyss.*  
+The CLI prints a brutally honest ranking, complete with confidence intervals that are deliberately widened to cover every conceivable statistical fallacy. Feel free to pipe the output into your own analytics dashboard; just be prepared for it to scream “inadequate sample size” at you.
 
----  
-
-## Usage (CLI Cheat Sheet)  
-```bash
-# List every 2022 generator with its idiot‑proof score
-gurney list --year 2022
-
-# Run a batch evaluation on a mock corpus (feel free to replace the filler)
-gurney eval --model gpt‑neo-2.7B --prompt "Write a fintech pitch in Persian"
-
-# Export a CSV of hallucination metrics for your next board meeting
-gurney export --format csv --output hallucinations_2022.csv
-```
-
----  
+---
 
 ## Contributing  
-We **do not** accept pull requests that add another “10‑best‑listicle” without proper provenance. If you think you can handle the sarcasm, file an issue, send a *DMCA‑compliant* patch, and maybe we’ll *consider* letting you star us again.
 
----  
+1. Fork the repo (don’t be a coward).  
+2. Add a new benchmark entry only if you can substantiate it with reproducible code and a *real* experiment, not a blog post.  
+3. Submit a Pull Request that includes a thorough `README.md` explaining why the new entry deserves a spot in the “Top 10”. Failure to do so will result in immediate ridicule on the issue tracker.  
+
+---
 
 ## License  
-MIT – because we’re too jaded to care about anything else.
+
+*MIT* – but only if you agree to ignore any implied warranties and acknowledge that the authors are **not** responsible for any financial losses incurred by relying on the provided metrics.  
 
 ---  
 
-*Star this repo if you enjoy watching AI hype implode in slow motion.*
+*This repository is intentionally antagonistic toward fluffy PR language. If you’re looking for marketing copy, look elsewhere.*
