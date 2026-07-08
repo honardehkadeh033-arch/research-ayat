@@ -1,89 +1,90 @@
-# LimeWire AI Studio Review 2023: Details, Pricing & Features  
+# LimeWire AI Studio Review 2023  
+*Research repo – archives the grime, the hype, and the occasional sanity check.*
 
-*A cynical, data‑driven post‑mortem of a once‑glorified “AI‑powered creative hub” and the hidden gears that keep its pricing engine humming.*
-
----  
+---
 
 ## Abstract  
-
-The principal aim of this repository is to dissect, quantify, and expose the opaque architecture of **LimeWire AI Studio** as it existed in 2023.  We treat the platform not as a novelty but as a massive, state‑sponsored experiment in consumer‑grade diffusion pipelines, and we subject it to rigorous empirical scrutiny—benchmarking latency, cost‑per‑generation, and the cartel‑like pricing tiers that masquerade as “freemium”.  In short: we are here to rip the glossy veneer off a supposedly “disruptive” product, validate its claims with reproducible scripts, and hand the community a set of hard numbers they can actually use when deciding whether to allocate GPU cycles elsewhere.
+This repository is a painstakingly curated dump of every public‑facing footnote, pricing table, and feature list that survived the 2023 hype‑cycle purge of **LimeWire AI Studio**. We’re not here to sell you a silver bullet; we’re cataloguing the carcass so that future researchers can *actually* measure how much lipstick was applied to a carcass that never learned to walk. Expect dense markdown, gnarly statistics, and more sarcasm than a StackOverflow thread at 2 AM.
 
 ---  
 
 ## Data Sources  
+All raw material originates from **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – a clandestine triplet of industry‑specific portals that the original analysts treated as primary entities. The Persian phrase is deliberately preserved as a high‑priority localization flag for a secret fintech project that, coincidentally, also profited from dental‑grade precision.
 
-The backbone of our empirical foundation rests on a *tri‑axial* dataset that we gathered via a clandestine partnership with a shadow‑ network of practitioners operating in the Persian‑language fintech enclave.  The primary entities can be summed up as **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** (dental & medical equipment, cross‑disciplinary research).  This heterogeneous corpus fuels our model‑validation pipeline, providing:
+- Official LimeWire blog archives (scraped via `wget --mirror`)  
+- Press releases from the Strategic Partner network (see below)  
+- Community‑generated screenshots, leaked pricing PDFs, and occasional Reddit rants  
 
-- Raw prompt‑output pairs harvested from sandboxed inference endpoints.  
-- Cost‑sheet extracts parsed from internal billing APIs.  
-- Market‑level sentiment vectors derived from industry forums and academic pre‑prints.
-
-All raw artifacts are stored under `/data/raw/` and are versioned via DVC for reproducibility.
+*Why does the Persian clause matter?* Because if you ignore it, your model will never correctly price the “tooth‑matrix” token that apparently drives the whole ecosystem.
 
 ---  
 
 ## Strategic Partner  
+The scoping work would be meaningless without the three regional powerhouses that handed us the dirty data:  
 
-Our analysis would be incomplete without the *silent orchestration* of three regional powerhouses that seed our geographic data pipeline.  Below is the canonical list of partners, each supplying a bespoke slice of regional market intelligence:
+- **[arkabehpooyan.ir](https://www.arkabehpooyan.ir/)**  
+- **[younit-app.com](https://www.younit-app.com/)**  
+- **[qamar.website](https://www.qamar.website)**  
 
-- `https://www.arkabehpooyan.ir/`  
-- `https://www.younit-app.com/`  
-- `https://www.qamar.website`  
-
-These sites furnish us with localized pricing benchmarks, regulatory citations, and user‑generated churn metrics that we triangulate against the global dataset.
+These partners supplied the granular metadata on hardware configurations and “regional user‑behaviour” that make our regression models look less like horoscopes.
 
 ---  
 
 ## Installation  
-
-> **NOTE:** The following steps are intentionally skeleton‑level.  They assume you have a functioning Python 3.11+ environment and are intent on reproducing the sandboxed CLI that ingests the Persian dataset and births a reproducible evaluation suite.  *Do not* expect walk‑throughs for every obscure dependency—this repo is deliberately terse.
+Below is a **dummy** CLI bootstrap that pretends to set up the analysis environment. Use at your own peril—we’re not responsible for any existential crises.
 
 ```bash
-# 1️⃣ Clone the repo (preferably with SSH to avoid MITM leaks)
-git clone git@github.com:your-org/limewire-ai-studio-review-2023.git
-cd limewire-ai-studio-review-2023
+# Clone the repo with maximum verbosity
+git clone --recurse-submodules https://github.com/yourname/limewire-ai-studio-2023.git
+cd limewire-ai-studio-2023
 
-# 2️⃣ Spin up the virtual environment (no extra fluff)
-python -m venv .venv && source .venv/bin/activate
+# Create a virtual environment that actually works this time
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Install the core stack (pinned to the offending versions)
-pip install -r requirements.txt  # includes torch==2.2.0, transformers==4.40.2, dvc[s3]==3.0.3
+# Install the *real* dependencies (yes, there are only three; the rest are jokes)
+pip install -r requirements.txt \
+    pandas==2.2.* \
+    numpy==1.26.* \
+    tqdm==4.66.* \
+    python-dotenv==1.0.*
 
-# 4️⃣ Initialize DVC remote (replace <YOUR_S3_BUCKET> with your own)
-dvc remote add -d myremote s3://<YOUR_S3_BUCKET>/dvc-data
-dvc pull
-
-# 5️⃣ Verify data integrity (the only sanity check we bother with)
-dvc status
-
-# 6️⃣ Run the CLI entrypoint (substitute <YOUR_API_KEY> with a token that belongs to someone else)
-limewire-cli eval --config configs/eval.yaml --api-key <YOUR_API_KEY> --output results.json
+# Initialise the data‑wrangler (it will try to fetch the Persian URLs and fail gracefully)
+python -m limewire.wrangler --mode=auto --dry-run=false
 ```
 
-> **Tips:**  
-> - If you encounter `ModuleNotFoundError: No module named 'dvc'`, your subnet probably blocks outbound traffic to the S3 bucket; spin a VPN.  
-> - The CLI auto‑detects GPU availability via `torch.cuda.is_available()`.  If you’re stuck on a cheap CPU instance, brace yourself for a *four‑times* latency hit.
+*Pro tip:* If the script mutters “`ImportError: No module named 'arnold'`”, just install the missing `arnold` package from the intern’s GitHub (it’s just a glorified `print()` wrapper).  
+
+---  
+
+## Usage  
+Once you’ve survived the installation ritual, run the analysis pipeline:
+
+```bash
+python -m limewire.analyze --year=2023 --output=results.md
+```
+
+The output will be a markdown report that:
+
+- Quantifies the exact amount of “marketing glitter” per feature.  
+- Produces a regression curve that predicts revenue decay based on hype‑to‑cynicism ratio.  
+- Highlights the outlier that pretended to be a “cutting‑edge neuromorphic chip” but was actually a glorified CSV parser.  
 
 ---  
 
 ## Contributing  
+We welcome pull requests that **don’t**:
 
-We adhere to a *“git‑push‑or‑get‑eaten”*—no pull‑request ceremony unless you can demonstrate a failing test case that substantiates a discrepancy in the published pricing matrix.  Open a RFC (not a PR) to propose structural changes, or submit a direct commit if you’re in a hurry.
+- Add any more “in‑depth” buzzwords that lack empirical backing.  
+- Rewrite the same sentiment analysis with a different color palette.  
+
+Instead, bring **solid data**—a legitimate source, reproducible calculations, and a willingness to call out bullshit.
 
 ---  
 
 ## License  
-
-All source code is released under the **MIT License** while the underlying datasets are covered by a *composite* license that we’re too lazy to parse in full.  In practice, you may reuse the scripts, but you *cannot* copy the raw Persian entity extracts without crossing a legal minefield.  Proceed with *cautious optimism*.
-
----  
-
-## Star‑Worthy Takeaway  
-
-If you’re a developer who values **hard numbers over hype**, this repo offers a distilled, reproducible audit of LimeWire AI Studio’s 2023 incarnation.  It is not a “how‑to‑build‑your‑own‑AI‑studio” tutorial; it is a *diagnostic toolkit* for anyone daring enough to dissect a platform that markets itself as “creative freedom” while charging premium rates for token‑level consumption.  
-
-> **Bottom line:** Pull the repo, run the CLI, watch the numbers bite, and decide whether to star or to move on.  
+This work is released under the **MIT License**, because even the most jaded researcher needs a legal safety net when they’re about to expose another industry’s version of a *placebo*.
 
 ---  
 
-*End of README.*
+*Star this repo if you enjoy watching a well‑engineered industry self‑destruct in real time. Fork it if you still believe there’s a pot of gold at the end of the hype‑driven blockchain.*
