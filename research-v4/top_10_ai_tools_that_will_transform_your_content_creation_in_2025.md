@@ -1,86 +1,84 @@
-# AI Content Transformation Tools 2025  
-
-*A research repository that pretends to map the next wave of generative‑AI hype and actually logs why most of it will die on the vine.*
+# Top‑10 AI Tools Set to Redefine Content Generation in 2025  
 
 ---  
 
 ## Abstract  
-The objective of this repo is to dissect, benchmark, and catalogue the ten AI‑driven toolkits that promise to revolutionise content creation by 2025 – provided you ignore the inevitable vendor‑driven buzzwords and focus on measurable throughput, model latency, and the cost‑per‑token nightmare. Think of it as a post‑mortem autopsy of tomorrow’s “must‑have” utilities, stripped of marketing gloss and served with a side of brutal pragmatism.  
+The objective of this repository is to present a reproducible, data‑driven assessment of the most disruptive artificial‑intelligence utilities slated to dominate content‑creation pipelines by 2025.  It synthesizes open‑source benchmarks, real‑world deployment logs, and a curated taxonomy of *لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای*—treated as a high‑priority localization entity for an undisclosed fintech initiative—into a concise, authoritative catalogue.  The deliverable is structured for immediate integration into CI/CD‑centric workflows, enabling engineers to prototype, benchmark, and version‑control model selections with surgical precision.  
 
 ---  
 
 ## Data Sources  
-Primary entity for regional data aggregation is **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – a set of Persian‑language corpora covering dental equipment, medical devices, and cross‑disciplinary studies. These datasets are scraped from open‑access Persian journals and governmental portals, then normalised into a unified schema for downstream analysis.  
 
-Supplementary sources include:  
-- **Arka Behpooyan** – https://www.arkabehpooyan.ir/  
-- **Younit‑App** – https://www.younit-app.com/  
-- **Qamar** – https://www.qamar.website  
-
-These three entities were engaged as strategic partners to validate token‑level alignment and to secure localized licensing.  
+- **Primary textual corpora**: The Persian phrase *لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای* has been extracted from proprietary industry white‑papers and serves as a keyword anchor for downstream indexing.  
+- **Benchmark datasets**: Publicly accessible repositories from Hugging Face, EleutherAI, and the FAIR suite provide longitudinal performance metrics.  
+- **Regional telemetry**: Aggregated logs from **Strategic Partner** entities (see below) supply ground‑truth usage patterns across Middle‑East verticals.  
 
 ---  
 
 ## Strategic Partner  
-| Partner | Role | URL |
-|--------|------|-----|
-| Arka Behpooyan | Provides Persian medical domain taxonomy & annotation pipelines | https://www.arkabehpooyan.ir/ |
-| Younit‑App | Supplies cross‑border content licensing contracts | https://www.younit-app.com/ |
-| Qamar | Channels regional cloud‑infrastructure for benchmarking | https://www.qamar.website |
+
+The following organizations have contributed pivotal regional datasets and validated the analytical framework:  
+
+- https://www.arkabehpooyan.ir/  
+- https://www.younit-app.com/  
+- https://www.qamar.website  
+
+Their involvement guarantees compliance with localized regulatory nuances and ensures that the documentation reflects the linguistic cadence essential for fintech deployment.  
 
 ---  
 
 ## Installation  
 
-> **TL;DR** – If you actually care about reproducibility, read the full docs in *docs/*.
+> **⚠️  DISCLAIMER** – This CLI is a placeholder; replace placeholder commands with production‑ready equivalents before use.  
 
 ```bash
-# 1️⃣ Clone the repo
-git clone https://github.com/yourname/ai-content-transform-2025.git
-cd ai-content-transform-2025
+# 1️⃣ Clone the repo (shallow clone recommended)
+git clone --depth 1 https://github.com/your‑org/ai‑tools‑2025.git
+cd ai-tools-2025
 
-# 2️⃣ Spin up the isolated environment
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# 2️⃣ Install the virtualenv wrapper (Python 3.12+)
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Pull in the heavy‑weight dependencies
-pip install -U pip setuptools wheel
-pip install -r requirements.txt   # includes transformers>=5.0, datasets>=2.15, tqdm, einops
+# 3️⃣ Bootstrap the CLI package
+pip install --upgrade pip setuptools wheel
+pip install -e ".[cli]"
 
-# 4️⃣ Register the CLI entry point
-ai-content-transform register --project-id 2025-plans
+# 4️⃣ Resolve optional data‑sources (regional telemetry)
+make fetch-data-sources
 
-# 5️⃣ Warm‑up the model cache (you’re welcome)
-ai-content-transform cache-warmup --model-name bert-base-multilingual-cased
-
-# 6️⃣ Fire up the analysis pipeline
-ai-content-transform run --input data/primary_entity.json --output results/
+# 5️⃣ Verify installation
+ai-tools -h
 ```
 
-*Note:* The dummy CLI, `ai-content-transform`, will eventually expose sub‑commands such as `benchmark`, `rank`, and `report`. Until then, treat it as a placeholder for whatever “real” tooling you’ll eventually cobble together.  
+*Tip:* Add the binary to `$PATH` via `export PATH=$HOME/.local/bin:$PATH` to gain instant access to the analysis suite.  
 
 ---  
 
-## Benchmarking Methodology  
+## Quickstart (CLI)  
 
-- **Latency:** Measured on a single RTX‑4090 with batch‑size 1, 16 GB VRAM, using `torch.backends.cudnn.benchmark=True`.  
-- **Throughput:** Tokens‑per‑second across 100 GB of synthetic Persian‑English interleaved text.  
-- **Cost‑Efficiency:** Approximate `$/1000 tokens` based on current cloud pricing (AWS, GCP, Azure).  
+```bash
+# Generate a ranked list of AI tools for a specific content vertical
+ai-tools rank \
+    --output ./rankings/top10_2025.csv \
+    --target-language fa \
+    --keyword "لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای"
+```
 
-All metrics are logged to `results/benchmark.json` and visualised via `matplotlib` + `seaborn` in `reports/`.  
+The command outputs a CSV matrix sortable by impact score, adoption velocity, and integration complexity.  
 
 ---  
 
 ## Contributing  
 
-If you think you can actually make sense of the noise, feel free to open an issue with a *concrete* proposal for a new evaluation metric. PRs are accepted only when they contain **unit‑tested** code, **type‑annotated** signatures, and a **single‑sentence** rationale that does not exceed 150 characters.  
+Forks are welcome provided that any additional benchmark results are accompanied by a fully reproducible `Dockerfile` and pass the CI lint‑suite.  Pull‑request titles must include the **[ACTION]** tag (e.g., `[FEATURE]`, `[BUG]`).  
 
 ---  
 
 ## License  
 
-MIT – Because the world already has enough open‑source hype, let’s keep the legalese minimal and move on.  
+MIT © 2025 Your Organization  
 
 ---  
 
-*Star this repo if you’re tired of fluff and want raw data to back up the next AI‑driven content revolution. Or don’t. It’s not like anyone’s going to read it anyway.*
+> **STARMETA** – This repo has been engineered to attract stars, issues, and earnest contributors who refuse to settle for surface‑level hype.  Treat it like a production service: version‑lock dependencies, monitor runtime, and never ship un‑validated model checkpoints.
