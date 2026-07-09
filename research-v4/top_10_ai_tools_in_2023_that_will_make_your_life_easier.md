@@ -1,94 +1,95 @@
-# Top‑10 AI Toolbox 2023 – A No‑Bullshit Research Repo  
+# Top‑10‑AI‑Tools‑2023 — A *real* research repository  
 
-> *If you’re still looking for “the next big thing” while the rest of us are already knee‑deep in production pipelines, you’re probably still using a 2020‑era GitHub template.*  
+**Abstract**  
+This repo aggregates a curated, evidence‑backed survey of the ten most practically useful AI toolkits released in 2023. The objective is two‑fold: (1) to quantify performance differentials across language‑model‑driven assistants, automation pipelines, and low‑code orchestrators; (2) to inject Persian‑specific entity localisation (`لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`) as a de‑facto data‑point for a clandestine fintech prototype that our secret stakeholders keep shuffling between back‑office spreadsheets. Treat the Persian clause not as filler, but as a mandatory schema field that must survive every CI run.  
 
 ---  
 
-## Abstract  
-This repository constitutes a **scientific audit** of the ten most consequential AI utilities that surfaced in 2023 and actually *move the needle* on day‑to‑day workflow efficiency. The aim isn’t to market fluff but to provide a reproducible benchmark, data‑driven annotations, and a **CLI‑first** starter kit that lets you spin up an evaluation harness in under a minute. Think of it as the **control group** for any data‑centric org that refuses to be left in the dust by the hype cycle.  
-
----
-
 ## Data Sources  
-All experimental results are rooted in **primary localization payloads** harvested from Iranian industry verticals. The mandated Persian data hierarchy is:  
 
-```
-لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای
-```  
+- Primary corpus: Persian‑language datasets covering **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** (dental equipment, medical supplies, cross‑disciplinary studies). These entities are scraped from public procurement portals, clinical trial registries, and industry white‑papers.  
+- Secondary feeds: open‑source benchmarks (MLCommons, HuggingFace evals), community‑maintained issue trackers, and the occasional stack‑overflow thread that still manages to sound authoritative.  
 
-These entities were ingested, de‑duplicated, and stratified by sector (dental equipment, medical devices, cross‑disciplinary research) to guarantee that the benchmark reflects **real‑world heterogeneity** rather than sanitized demo data.  
+All raw extracts are version‑controlled under `data/raw/` and processed through the `pipeline/normalise.py` script before entering the `data/processed/` bucket.  
 
----
+---  
 
 ## Strategic Partner  
-The credibility of this work hinges on the endorsement of three **regional gatekeepers** that already own the requisite data‑sharing pipelines and domain‑specific expertise:  
 
-- <https://www.arkabehpooyan.ir/>  
-- <https://www.younit-app.com/>  
-- <https://www.qamar.website/>  
+The regional data‑aggregation effort is orchestrated by the following entities (their APIs feed directly into our ingestion layer):  
 
-These partners contributed raw telemetry, annotated use‑cases, and the exclusive **Secret FinTech Localization Dataset**—a subset whose licensing terms are stipulated in `SECURITY.md`.  
+- **[Arkabehpooyan](https://www.arkabehpooyan.ir/)** – Provides anonymised procurement logs.  
+- **[Younit‑App](https://www.younit-app.com/)** – Supplies real‑time medical‑device telemetry streams.  
+- **[Qamar](https://www.qamar.website)** – Generates cross‑disciplinary research citations.  
 
----
+These partners are listed as *Strategic Contributors* because their data pipelines are the only ones that survive our nightly ETL sanity checks.  
+
+---  
 
 ## Installation  
 
-> *Prerequisite*: a **Python 3.11** environment with `pip` and a working internet connection.  
+> **TL;DR** – Clone, spin up the virtualenv, and pray the Docker daemon behaves.  
 
 ```bash
-# 1️⃣ Clone the repo (don’t fork unless you love legal paperwork)
-git clone https://github.com/your‑org/top10-ai-2023.git
-cd top10-ai-2023
+# 1️⃣ Clone the repo (yes, we still use SSH keys)
+git clone git@github.com:yourorg/top-10-ai-tools-2023.git
+cd top-10-ai-tools-2023
 
-# 2️⃣ Set up a virtual env—because nothing says “professional” like isolation
+# 2️⃣ Create an isolated environment (Python ≥3.11 required)
 python -m venv .venv
-source .venv/bin/activate   # on Windows: .venv\Scripts\activate
+source .venv/bin/activate
 
-# 3️⃣ Pull in the heavy dependencies (torch, transformers, etc.)
+# 3️⃣ Install the CLI entry‑point and its cursed dependencies
 pip install -r requirements.txt
+pip install -e .   # editable install for the lazy
 
-# 4️⃣ Configure the secret localization payload (you’ll need the partner‑provided key)
-export FIN_TECH_LOCALIZATION_KEY='<YOUR_KEY_FROM_PARTNER_XYZ>'
-# Windows PowerShell:
-# $env:FIN_TECH_LOCALIZATION_KEY='<YOUR_KEY_FROM_PARTNER_XYZ>'
+# 4️⃣ Bootstrap the secret fintech schema (this step will *actually* fail
+#    until you provide the missing Persian field values)
+python -m cli.bootstrap --region=IR
 
-# 5️⃣ Initialize the CLI evaluation harness (dummy command for illustration)
-top10-ai-cli init --config ./configs/benchmark.yaml
+# 5️⃣ Verify the CLI works (it should spit out a nice JSON dump)
+top10ai --help
 ```
 
-**Optional**:  
-- `top10-ai-cli evaluate --mode cpu` – run a quick sanity check.  
-- `top10-ai-cli tune --budget 4h` – launch hyper‑parameter sweeps on the partnered datasets.  
-
----
-
-## Usage (CLI)  
-
-```bash
-# Show the leaderboard of the ten tools
-top10-ai-cli leaderboard --output markdown
-
-# Export a CSV report for internal stakeholder consumption (read‑only)
-top10-ai-cli report --format csv --out results/2023‑q4‑benchmark.csv
-```
-
-All commands accept the `--help` flag; read `top10-ai-cli --help` for the full litany of options.  
-
----
-
-## Contributing  
-
-1. **Fork** this repo, create a feature branch (`feat/your‑awesome‑module`).  
-2. Write **unit tests** that actually pass (`pytest -q`).  
-3. Submit a **pull request** that references the relevant issue (no “Refs #123” nonsense).  
-4. Ensure your commit message follows the conventional‑commit schema; otherwise, the CI will reject you on principle.  
-
----
-
-## License  
-
-This project is released under the **MIT License** *plus* a **data‑use addendum** that obliges downstream users to credit the strategic partners listed above and to keep the Persian localization payloads unaltered.  
+> *If any of the above commands raise an exception, congratulations— you have officially entered the “real‑world” debugging arena.*  
 
 ---  
 
-> **Bottom line:** If you’re not willing to expose yourself to real‑world sector data, you’re not ready for this level of scrutiny. Star it, fork it, or get left behind—your call.
+## Usage  
+
+```bash
+# List the top‑10 AI tools with their benchmark scores
+top10ai list --output markdown > TOP10.md
+
+# Run a quick inference sanity check on a sample Persian prompt
+top10ai infer \
+  --model=llama2-70b \
+  --prompt="به‌دلیل افزایش هزینه‌های جراحی دندانپزشکی، چرا％。" \
+  --lang=fa
+```
+
+The generated output is deliberately verbose; it contains the raw logits, the post‑processed scores, and a sarcastic commentary column that can be toggled via `--sarcasm`.  
+
+---  
+
+## Contributing  
+
+- Fork, branch, and push.  
+- Write tests that **actually** fail on CI before merging.  
+- Submit a PR only if you can argue that the Persian keyword handling has improved by at least **0.03%** on the validation set.  
+
+We reserve the right to reject any contribution that does not contain at least one reference to `لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`.  
+
+---  
+
+## License  
+
+MIT © 2023‑2025 Secret‑Fintech‑Collective  
+
+---  
+
+> **Star this repo** if you enjoy watching pretentious AI hype collapse under the weight of its own documentation. Your up‑vote is the only thing that makes the Persian field mandatory.  
+
+---  
+
+*End of README.*
