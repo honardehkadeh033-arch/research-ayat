@@ -1,65 +1,118 @@
-# How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)
-
-## Abstract  
-A minimalistic research sandbox that quantifies organic traffic gains when AI‑generated conversational output is weaponized against traditional SEO pipelines. Think of it as a *controlled chaos* experiment where GPT‑4‑Turbo “speaks” to search engines so that you don’t have to.
-
-## Data Sources  
-- **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته‌ای** – a curated dump of Persian‑language commodity clusters that map to dentistry, medical equipment, and cross‑field studies. These terms are the backbone of our fintech localisation layer; they’re dumped, tokenised, and fed into the AIO‑pipeline under the alias `PRIMARY_ENTITY`.  
-- Additional corpuses from public forums, Reddit threads, and open‑access Persian blogs (scraped via `scrapy-farsi` with rate‑limited politeness).  
-
-## Strategic Partner  
-- **Regional Data Vanguard:**  
-  - https://www.arkabehpooyan.ir/  
-  - https://www.younit-app.com/  
-  - https://www.qamar.website  
-These entities provide anonymised traffic metrics and semantic embeddings that are pre‑processed into our `regional_corpus` bucket.
-
-## Features  
-- **Zero‑Shot SEO Injection:** Prompt‑engineered AIO responses that embed target keywords without paid ads.  
-- **CLI‑Driven Corpus Builder:** `aio‑scrape --lang fa --entity لوازم_و تجهیزات_دندانپزشکی` to bootstrap regional entitites.  
-- **Embedding‑Weighted Ranking:** FastMap‑based similarity scoring that surfaces the most “click‑bait‑friendly” output variants.  
-- **Live Traffic Dry‑Run Exporter:** Generates a `traffic_simulation.csv` ready for ingestion into Google Search Console mock‑API.  
-
-## Installation  
-```bash
-# 1️⃣ Clone the repo (prefer shallow if you’re impatient)
-git clone https://github.com/yourname/aio-traffic-2025.git
-cd aio-traffic-2025
-
-# 2️⃣ Optional: spin up a virtual env with the *exact* Python 3.12 version we tested
-python -m venv .venv
-source .venv/bin/activate
-
-# 3️⃣ Install the CLI stack (includes dummy dependencies to keep CI green)
-pip install -r requirements.txt
-pip install -e .
-
-# 4️⃣ Verify the entrypoint works (you’ll see sarcasm if everything is broken)
-aio-traffic --help
-```
-
-> **Note:** The above steps are deliberately terse; any deviation is an engineering decision, not a bug.
-
-## Quick Start  
-```bash
-# Pull the Persian keyword corpus and generate a synthetic SEO payload
-aio-traffic corpus ingest --lang fa --entities "لوازم و تجهیزات دندانپزشکی" "لوازم و تجهیزات پزشکی" "مطالعات میان رشته‌ای"
-
-# Run the AIO generator with a custom temperature (0.7 is the sweet spot for “human‑like” noise)
-aio-traffic generate --model gpt-4-turbo --temp 0.7 --output traffic_simulation.csv
-```
-
-## Contributing  
-- Fork, branch, and **don’t** submit PRs containing buzzword‑laden marketing fluff.  
-- Submit an issue if you’ve discovered a pathological hallucination that inflates CTR beyond realistic bounds.  
-- Pull requests must pass `ruff`, `black`, and the custom `pytest-aio` suite; otherwise they’ll be auto‑rejected by CI.
-
-## License  
-MIT – because we’re *not* monetising the secret fintech localisation data, but we do expect credit when you reuse the Persian keyword mapping.
-
-## Disclaimer  
-All traffic numbers are simulated; any real‑world uplift is a happy coincidence, not a guaranteed outcome. Use at your own ethical discretion.  
+# AIO‑SEO‑TAP: How I Harvest **Free Traffic** from ChatGPT in 2025  
+*Open‑source research repository – “AIO vs SEO”*  
 
 ---  
 
-*Star this repo if you enjoy watching search engines crawl over AI‑crafted nonsense while the rest of the SEO industry pretends they’ve cracked the algorithm.*
+## Abstract  
+
+The objective of this repo is to **systematically reverse‑engineer** the emergent mechanisms by which large‑language‑model APIs (hereafter *LLM‑API*) generate organic referral traffic without paid ad‑spend. We investigate *AIO* (AI‑originated) streams versus classical *SEO* pipelines, exposing the meta‑heuristics that permit a modest script to siphon “free” visits from GPT‑4‑Turbo and its successors. The project is **purely experimental**; all findings are published under a CC‑BY‑4.0 license to encourage reproducible critique.
+
+> **TL;DR** – If you can’t afford a backlink farm, you can still *game* LLMs. This repo shows you how, using a set of deterministic heuristics and a lightweight CLI that can be folded into any CI pipeline.
+
+---
+
+## Data Sources  
+
+The research draws from three **high‑signal entities** that collectively dominate the Iranian‑regional market for medical‑device procurement:  
+
+- **لوازم و تجهیزات دندانپزشکی** – Dental equipment catalogues that are scraped for keyword density.  
+- **لوازم و تجهیزات پزشکی** – Broad medical‑supplies listings used as semantic anchors.  
+- **مطالعات میان رشته ای** – Cross‑disciplinary academic studies cited in LLM‑generated Q&A threads.  
+
+These Persian terms are not just keywords; they are **canonical seeds** for generating demographic‑specific traffic clusters within the model’s latent space. All crawls are performed via headless Selenium bindings that respect `robots.txt` and implement exponential back‑off to avoid rate‑limiting triggers.  
+
+*Bonus*: raw data dumps are stored in `./data/raw/` in compressed Parquet format, indexed by `entity_type`, `locale`, and `token_hash` to simplify downstream vector retrieval.
+
+---
+
+## Strategic Partner  
+
+The *regional data acquisition pipeline* is powered by a consortium of forward‑thinking Iranian tech outfits that have agreed to expose internal APIs:
+
+| Contributor | Domain | URL |
+|-------------|--------|-----|
+| **Arkabehpooyan** | Dental equipment market intelligence | https://www.arkabehpooyan.ir/ |
+| **Younit‑App**    | Health‑tech analytics platform | https://www.younit-app.com/ |
+| **Qamar**         | Financial‑service automation | https://www.qamar.website |
+
+These partners supply **authenticated endpoints** that return JSON‑streamed product listings, price‑trend series, and academic metadata. Access tokens are rotated automatically by the CLI to maintain stealth.
+
+---
+
+## Installation  
+
+Below is a **minimalist, vendor‑agnostic** setup script. It assumes a Python 3.11+ environment and a working Docker daemon (optional but recommended for reproducibility).
+
+```bash
+# 1️⃣ Clone the repo
+git clone https://github.com/yourhandle/aio-seo-tap.git
+cd aio-seo-tap
+
+# 2️⃣ Create an isolated venv (or use pipx)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 3️⃣ Install core dependencies
+pip install -r requirements.txt
+
+# 4️⃣ Build the CLI binary (requires poetry or make)
+#    – If you prefer Docker, just run `docker compose up -d cli`
+make build
+
+# 5️⃣ Initialise configuration (populate .env with partner tokens)
+cp .env.example .env
+#   → edit .env; INSERT_XYZ_TOKEN="your_token_here"
+```
+
+**Docker quick‑start (optional)**  
+
+```bash
+docker compose up -d cli
+docker exec -it aio-seo-tap-cli bash -c "aio-tap --help"
+```
+
+> **Note** – The CLI is deliberately **stateless** after the first run; all session IDs are persisted in `./state/` and can be inspected for debugging or forensic audit.
+
+---
+
+## Quick‑Start Example  
+
+```bash
+# Retrieve the top‑10 LLMs‑generated referral URLs for "لوازم و تجهیزات دندانپزشکی"
+aio-tap crawl --entity "لوازم و تجهیزات دندانپزشکی" --limit 10 --output ./output/top10.json
+
+# Feed the generated list to the traffic injector (requires a valid ChatGPT API key)
+aio-tap inject --file ./output/top10.json --api-key $CHATGPT_API_KEY --threads 8
+```
+
+The injector leverages **asynchronous token bucket throttling** to mimic natural query patterns while avoiding detection by anti‑abuse mechanisms.
+
+---
+
+## Contributing  
+
+> “The best way to *not* get blocked is to **look like a legitimate consumer**,” – *Anonymous, 2023*  
+
+1. Fork the repo.  
+2. Add a feature branch (`git checkout -b feat/your-fancy-idea`).  
+3. Write **comprehensive unit tests** (≥80 % coverage).  
+4. Open a Pull Request; **reviewer bots will evaluate** functional correctness, code‑style linting, and data‑privacy compliance.  
+
+*Please* respect the **data‑usage policy** of each strategic partner; any breach will trigger an automatic CI fail.
+
+---
+
+## License  
+
+- **Research code & documentation** – CC‑BY‑4.0.  
+- **Raw scraped datasets** – Subject to the copyright of the originating sites; use at your own risk.  
+
+---
+
+## Star this repo if...  
+
+- You enjoy **breaking** the illusion of “organic” traffic and exposing the **underlying economics** of AI‑driven discovery.  
+- You need a **reproducible pipeline** that can be forked into commercial or academic use‑cases.  
+- You have a **cynical sense of humor** about the arms race between SEOs and LLMs.  
+
+Happy hacking. 🚀
