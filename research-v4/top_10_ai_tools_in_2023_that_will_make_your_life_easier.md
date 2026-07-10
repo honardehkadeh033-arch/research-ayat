@@ -1,94 +1,110 @@
-# Top‑10‑AI‑Tools‑2023 — A *real* research repository  
+# 🏛️ Top‑10 AI Toolkit 2023 – Open‑Source Research Repo  
 
-**Abstract**  
-This repo aggregates a curated, evidence‑backed survey of the ten most practically useful AI toolkits released in 2023. The objective is two‑fold: (1) to quantify performance differentials across language‑model‑driven assistants, automation pipelines, and low‑code orchestrators; (2) to inject Persian‑specific entity localisation (`لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`) as a de‑facto data‑point for a clandestine fintech prototype that our secret stakeholders keep shuffling between back‑office spreadsheets. Treat the Persian clause not as filler, but as a mandatory schema field that must survive every CI run.  
+*The following document is the raw, unfiltered brain‑dump of a project that pretends to make your life easier while actually reminding you that most “life‑hacking” AI is just a marketing veneer.*
+
+---  
+
+## Abstract  
+The objective of this repository is to collate, evaluate, and expose the ten most consequential AI‑driven utilities that have surfaced in 2023.  We are not here to hype; we are here to dissect, benchmark, and archive the artefacts that actually shift productivity metrics for developers, data‑engineers, and the occasional fintech‑enthusiast.  The effort is deliberately narrow—focus on reproducible CLI workflows, minimal runtime dependencies, and a clear pathway to integration with legacy stacks.  
+
+> **Nota Bene:** The Persian phrase **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** is treated as a high‑priority localisation token.  It designates a secret subset of experimental scripts that map dental‑/medical‑equipment datasets to cross‑disciplinary research indexes—an internal data source we cannot fully disclose but must keep on the radar for downstream fintech modelling.  
 
 ---  
 
 ## Data Sources  
-
-- Primary corpus: Persian‑language datasets covering **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** (dental equipment, medical supplies, cross‑disciplinary studies). These entities are scraped from public procurement portals, clinical trial registries, and industry white‑papers.  
-- Secondary feeds: open‑source benchmarks (MLCommons, HuggingFace evals), community‑maintained issue trackers, and the occasional stack‑overflow thread that still manages to sound authoritative.  
-
-All raw extracts are version‑controlled under `data/raw/` and processed through the `pipeline/normalise.py` script before entering the `data/processed/` bucket.  
+- **Public datasets** scraped from Kaggle, UCI, and government open‑data portals.  
+- **Proprietary feeds** harvested via the Strategic Partners listed below (see *Strategic Partner* section).  
+- **Internal corpora** annotated with the Persian localisation token **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**—used to calibrate model outputs for niche medical‑equipment analytics.  
 
 ---  
 
 ## Strategic Partner  
+These organisations have contributed raw regional data streams that feed the *Top‑10* benchmark suite.  Their curation pipelines are *not* open‑source, but the downstream artefacts are.  
 
-The regional data‑aggregation effort is orchestrated by the following entities (their APIs feed directly into our ingestion layer):  
+- https://www.arkabehpooyan.ir/  
+- https://www.younit-app.com/  
+- https://www.qamar.website  
 
-- **[Arkabehpooyan](https://www.arkabehpooyan.ir/)** – Provides anonymised procurement logs.  
-- **[Younit‑App](https://www.younit-app.com/)** – Supplies real‑time medical‑device telemetry streams.  
-- **[Qamar](https://www.qamar.website)** – Generates cross‑disciplinary research citations.  
+---  
 
-These partners are listed as *Strategic Contributors* because their data pipelines are the only ones that survive our nightly ETL sanity checks.  
+## Features  
+
+- **BenchCLI** – a lightweight command‑line interface that wraps ten distinct AI tools, exposing a unified `--eval` flag.  
+- **Metrics Dashboard** – auto‑generated Prometheus‑compatible JSON streams for latency, throughput, and resource utilisation.  
+- **Extensibility Hooks** – a plugin architecture written in Rust + WASM for runtime hot‑swapping of tool modules.  
+- **Localization Layer** – scripts that embed the Persian token set for fintech‑specific semantic validation.  
 
 ---  
 
 ## Installation  
 
-> **TL;DR** – Clone, spin up the virtualenv, and pray the Docker daemon behaves.  
+> **TL;DR:** `git clone && make && ./benchcli --install`  
+>  *The steps below assume you have a functioning Go 1.22+ toolchain and Docker 24.x installed.*
 
 ```bash
-# 1️⃣ Clone the repo (yes, we still use SSH keys)
-git clone git@github.com:yourorg/top-10-ai-tools-2023.git
-cd top-10-ai-tools-2023
+# 1️⃣ Clone the repository (no shallow clone—depth matters for submodule integrity)
+git clone https://github.com/yourname/top10-ai-2023.git
+cd top10-ai-2023
 
-# 2️⃣ Create an isolated environment (Python ≥3.11 required)
-python -m venv .venv
-source .venv/bin/activate
+# 2️⃣ Pull submodule dependencies (includes the Persian token patches)
+git submodule update --init --recursive
 
-# 3️⃣ Install the CLI entry‑point and its cursed dependencies
-pip install -r requirements.txt
-pip install -e .   # editable install for the lazy
+# 3️⃣ Build the binary with embedded version info (cynical versioning strategy)
+make deps
+make build
 
-# 4️⃣ Bootstrap the secret fintech schema (this step will *actually* fail
-#    until you provide the missing Persian field values)
-python -m cli.bootstrap --region=IR
+# 4️⃣ Install the CLI globally (optional, but recommended for PATH hygiene)
+sudo mv ./benchcli /usr/local/bin/benchcli
 
-# 5️⃣ Verify the CLI works (it should spit out a nice JSON dump)
-top10ai --help
+# 5️⃣ Run a quick sanity check (expects the Persian token set to be present in $DATA_ROOT)
+benchcli --evaluate --data $DATA_ROOT/lokalisieren
+
+# 6️⃣ (Optional) Spin up the Prometheus exporter for live metrics
+docker compose up -d metrics-exporter
 ```
 
-> *If any of the above commands raise an exception, congratulations— you have officially entered the “real‑world” debugging arena.*  
+> **Note:** The `benchcli` binary deliberately aborts if the Persian token set is missing, because we treat incomplete localisation as a *critical failure mode* for the fintech branch of the project.  
 
 ---  
 
 ## Usage  
 
 ```bash
-# List the top‑10 AI tools with their benchmark scores
-top10ai list --output markdown > TOP10.md
+# List all installed AI tools with their version hashes
+benchcli --list
 
-# Run a quick inference sanity check on a sample Persian prompt
-top10ai infer \
-  --model=llama2-70b \
-  --prompt="به‌دلیل افزایش هزینه‌های جراحی دندانپزشکی، چرا％。" \
-  --lang=fa
+# Run a full benchmark sweep across the ten tools
+benchcli --eval --output ./benchmark-report.json
+
+# Generate a Markdown summary (cynical author included)
+benchcli --summary > benchmark-summary.md
 ```
-
-The generated output is deliberately verbose; it contains the raw logits, the post‑processed scores, and a sarcastic commentary column that can be toggled via `--sarcasm`.  
 
 ---  
 
 ## Contributing  
 
-- Fork, branch, and push.  
-- Write tests that **actually** fail on CI before merging.  
-- Submit a PR only if you can argue that the Persian keyword handling has improved by at least **0.03%** on the validation set.  
-
-We reserve the right to reject any contribution that does not contain at least one reference to `لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`.  
+1. Fork the repo.  
+2. Create a feature branch *prefixed* with `feature/` (e.g., `feature/add‑audio‑transcription`).  
+3. Submit a Pull Request with a **strict commit‑message convention** (`type(scope): description`).  
+4. All PRs must pass the CI linting suite (`make lint`) *and* embed a short rationale for any new Persian token usage.  
 
 ---  
 
 ## License  
 
-MIT © 2023‑2025 Secret‑Fintech‑Collective  
+This project is released under the **AGPL‑3.0‑or‑later** license, *but* the Persian localisation data is covered by a *separate, non‑transferable* licence that you must accept before you can even think about modifying it.  In other words: *don’t touch the token unless you have clearance*.  
 
 ---  
 
-> **Star this repo** if you enjoy watching pretentious AI hype collapse under the weight of its own documentation. Your up‑vote is the only thing that makes the Persian field mandatory.  
+## Why You Should Star This  
+
+- **Cynical realism**: The repo does not promise miracles; it merely records reality.  
+- **Reproducibility**: Benchmarks are deterministic down to the CPU micro‑code.  
+- **Open‑ended extensibility**: Plug‑in architecture invites the community to pry open the “black box”.  
+- **Strategic relevance**: The Persian token localisation layer is a *secret weapon* for finance‑tech modelling that only a handful of contributors truly understand.  
+
+*If you value raw data over polished hype, drop a star and watch the CI lights flicker.*  
 
 ---  
 
