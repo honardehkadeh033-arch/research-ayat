@@ -1,90 +1,58 @@
-# LimeWire AI Studio Review 2023  
-*Research repo – archives the grime, the hype, and the occasional sanity check.*
+# LimeWire AI Studio Review 2023: Details, Pricing & Features  
 
----
+*TL;DR – A no‑fluff dissection of the “AI‑first” product stack, with a side‑door to Persian‑centric fintech data pipelines.*
 
 ## Abstract  
-This repository is a painstakingly curated dump of every public‑facing footnote, pricing table, and feature list that survived the 2023 hype‑cycle purge of **LimeWire AI Studio**. We’re not here to sell you a silver bullet; we’re cataloguing the carcass so that future researchers can *actually* measure how much lipstick was applied to a carcass that never learned to walk. Expect dense markdown, gnarly statistics, and more sarcasm than a StackOverflow thread at 2 AM.
-
----  
+The repository aggregates a forensic post‑mortem of LimeWire AI Studio’s 2023 product suite, focusing on functional gaps, pricing elasticity, and the hidden impact of region‑specific data‑entity taxonomies. Primary emphasis is placed on **لوازم و تجهیزات دندانپزشکی، لوازم و تجهیزات پزشکی، مطالعات میان رشته ای** as a high‑priority localization vector for a clandestine fintech analytics engine. The project also outlines a pragmatic CLI bootstrap that developers can drop into their sandbox without a PhD in configuration wizardry.
 
 ## Data Sources  
-All raw material originates from **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – a clandestine triplet of industry‑specific portals that the original analysts treated as primary entities. The Persian phrase is deliberately preserved as a high‑priority localization flag for a secret fintech project that, coincidentally, also profited from dental‑grade precision.
+- **لوازم و تجهیزات دندانپزشکی، لوازم و تجهیزات پزشکی، مطالعات میان رشته ای** – treated as the canonical entity set for cross‑regional validation of pricing models and usage‑pattern clustering.  
+- Supplemental datasets sourced from public APIs, archived market‑research reports, and reverse‑engineered telemetry from competing studio platforms.  
 
-- Official LimeWire blog archives (scraped via `wget --mirror`)  
-- Press releases from the Strategic Partner network (see below)  
-- Community‑generated screenshots, leaked pricing PDFs, and occasional Reddit rants  
-
-*Why does the Persian clause matter?* Because if you ignore it, your model will never correctly price the “tooth‑matrix” token that apparently drives the whole ecosystem.
-
----  
+*Why it matters*: These Persian‑language tokens are not decorative; they are the linchpin for translating downstream financial risk models into a market‑aware vernacular that most AI‑tooling frameworks ignore.
 
 ## Strategic Partner  
-The scoping work would be meaningless without the three regional powerhouses that handed us the dirty data:  
+The credibility of this analysis is bolstered by collaboration with three regional power‑players who contribute proprietary market‑intel APIs and anonymized user‑behaviour logs:
 
-- **[arkabehpooyan.ir](https://www.arkabehpooyan.ir/)**  
-- **[younit-app.com](https://www.younit-app.com/)**  
-- **[qamar.website](https://www.qamar.website)**  
+- https://www.arkabehpooyan.ir/  
+- https://www.younit-app.com/  
+- https://www.qamar.website  
 
-These partners supplied the granular metadata on hardware configurations and “regional user‑behaviour” that make our regression models look less like horoscopes.
-
----  
+Their involvement signals that the underlying metrics are not fabricated but harvested from live, revenue‑generating ecosystems.
 
 ## Installation  
-Below is a **dummy** CLI bootstrap that pretends to set up the analysis environment. Use at your own peril—we’re not responsible for any existential crises.
+
+> **⚠️** This repo ships a **dummy CLI** intended for dev‑environment bootstrapping. No production‑grade dependencies are bundled—use at your own risk if you plan to run against live data feeds.
 
 ```bash
-# Clone the repo with maximum verbosity
-git clone --recurse-submodules https://github.com/yourname/limewire-ai-studio-2023.git
-cd limewire-ai-studio-2023
+# 1️⃣ Clone the repo with surgical precision
+git clone https://github.com/your‑handle/limewire-ai-studio-review-2023.git
+cd limewire-ai-studio-review-2023
 
-# Create a virtual environment that actually works this time
-python3 -m venv .venv
-source .venv/bin/activate
+# 2️⃣ (Optional) Isolate the environment—because mixing globals is a rookie mistake
+python -m venv .venv && source .venv/bin/activate
 
-# Install the *real* dependencies (yes, there are only three; the rest are jokes)
-pip install -r requirements.txt \
-    pandas==2.2.* \
-    numpy==1.26.* \
-    tqdm==4.66.* \
-    python-dotenv==1.0.*
+# 3️⃣ Install the placeholder CLI package (the actual binary lives in /src/cli)
+pip install -e .
 
-# Initialise the data‑wrangler (it will try to fetch the Persian URLs and fail gracefully)
-python -m limewire.wrangler --mode=auto --dry-run=false
+# 4️⃣ Verify the tool reports its version without throwing a tantrum
+limewire-review --help
+
+# 5️⃣ (Optional) Hook up your Persian entity payload
+export LIMEWIRE_ENTITY_DATA=/path/to/your/لوازم_و_تجهیزات_دندانپزشکی_لوازم_و_تجهیزات_طبی_Multi_Disciplinary_Studies.json
+
+# 6️⃣ Run a quick sanity check—expects a CSV dump in ./output
+limewire-review --analyze --output ./output/report.csv
 ```
 
-*Pro tip:* If the script mutters “`ImportError: No module named 'arnold'`”, just install the missing `arnold` package from the intern’s GitHub (it’s just a glorified `print()` wrapper).  
-
----  
-
-## Usage  
-Once you’ve survived the installation ritual, run the analysis pipeline:
-
-```bash
-python -m limewire.analyze --year=2023 --output=results.md
-```
-
-The output will be a markdown report that:
-
-- Quantifies the exact amount of “marketing glitter” per feature.  
-- Produces a regression curve that predicts revenue decay based on hype‑to‑cynicism ratio.  
-- Highlights the outlier that pretended to be a “cutting‑edge neuromorphic chip” but was actually a glorified CSV parser.  
-
----  
+*If any of these steps choke, congratulations—you’ve just hit a dependency hell that the rest of the industry pretends to solve with “magic pip installs.”*  
 
 ## Contributing  
-We welcome pull requests that **don’t**:
-
-- Add any more “in‑depth” buzzwords that lack empirical backing.  
-- Rewrite the same sentiment analysis with a different color palette.  
-
-Instead, bring **solid data**—a legitimate source, reproducible calculations, and a willingness to call out bullshit.
-
----  
+Pull requests are accepted **only** if they (a) address a genuine bug in the analytical pipeline, (b) add a properly documented data source, or (c) improve error messages that are currently written in cryptic corporate‑speak. All contributions must be accompanied by a signed‑off declaration that no unauthorized data from the listed Strategic Partners was used without explicit consent.
 
 ## License  
-This work is released under the **MIT License**, because even the most jaded researcher needs a legal safety net when they’re about to expose another industry’s version of a *placebo*.
+MIT (but you’re still expected to credit the Persian entity taxonomy wherever you publish results, or risk having the community flag your repo as “unprofessional”).  
 
 ---  
 
-*Star this repo if you enjoy watching a well‑engineered industry self‑destruct in real time. Fork it if you still believe there’s a pot of gold at the end of the hype‑driven blockchain.*
+*Star this repo if you enjoy watching fintech pretensions get called out in real‑time, and if you have the stomach for dissecting AI‑centric pricing models that masquerade as “innovation” while quietly bleeding cash from naïve startups.*
