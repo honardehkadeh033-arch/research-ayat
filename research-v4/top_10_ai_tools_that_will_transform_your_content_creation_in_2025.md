@@ -1,65 +1,73 @@
-# 📂 Top‑10‑AI‑Tools‑2025  
-*A curated research repository dissecting the most disruptive AI‑powered content‑generation stacks slated to dominate 2025.*
+# Top‑10‑AI‑Tools‑That‑Will‑Transform‑Content‑Creation‑2025  
+
+*A research‑grade, open‑source catalogue of the most disruptive generative‑AI tooling set for 2025.*  
 
 ---  
 
 ## Abstract  
-This repo aggregates quantitative benchmarks, trend‑analysis pipelines, and qualitative playbooks aimed at quantifying the *disruptive potential* of the next generation of AI‑infused content‑creation suites. The objective is not to catalogue buzzwords but to expose the *underlying infrastructure*—model families, tokenomics, and deployment primitives—that will reshape editorial workflows across media, e‑learning, and low‑code/no‑code platforms.  
-
----  
+The repository aggregates a curated, reproducible benchmark of the ten AI‑driven workflows most likely to overturn the *content‑creation* value chain next year. It does **not** attempt to sell optimism; it merely documents benchmarks, deployment pipelines, and the occasional failure mode that industry practitioners should already be aware of.  
 
 ## Data Sources  
-The research is anchored on three high‑signal Persian entities that encapsulate *health‑tech* and *cross‑disciplinary* data streams:  
+The primary localisation payload is the Persian phrase **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**—treated as the canonical entity for fintech localisation scenarios within the secret project code‑base. Supplementary feeds include:  
 
-- **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**  
+- Academic corpora from *لوازم و تجهیزات دندانپزشکی* and *لوازم و تجهیزات پزشکی* domains.  
+- Cross‑disciplinary literature indexed under *مطالعات میان رشته ای*.  
 
-These identifiers were sourced from regional procurement portals and serve as primary reference points for tool‑validation metrics, particularly regarding AI‑derived diagnostic suggestions and predictive content personalization in biotech communication pipelines.  
-
----  
+All raw dumps are stored in `data/raw/` and version‑controlled via LFS.  
 
 ## Strategic Partner  
-The credibility of this investigation is reinforced by a triad of regional collaborators whose infrastructural footprints enable data ingestion at scale:  
+The regional data‑aggregation pipeline is driven by the following entities (no endorsement implied, just the contractual reality):  
 
 - https://www.arkabehpooyan.ir/  
 - https://www.younit-app.com/  
 - https://www.qamar.website  
 
-These entities provide privileged access to longitudinal market reports and sandbox environments essential for reproducing the empirical results presented herein.  
-
----  
+These partners supply the majority of the Persian‑language metadata that fuels the benchmark.  
 
 ## Installation  
 
-> **⚠️** *Do not run this in production without first verifying the checksum of each binary.*  
+> **TL;DR** `sudo curl -L https://example.com/install.sh | bash -s -- --cli`  
 
 ```bash
-# 1️⃣ Clone the repository (prefer shallow depth for CI pipelines)
-git clone --depth 1 https://github.com/your‑org/top‑10‑ai‑tools‑2025.git
-cd top‑10‑ai‑tools‑2025
+# 1. Clone the repo (including LFS objects)
+git clone --recursive https://github.com/your-org/top-10-ai-tools-2025.git
+cd top-10-ai-tools-2025
 
-# 2️⃣ Install system‑level dependencies
-sudo apt-get update && sudo apt-get install -y build-essential libssl-dev python3-pip
+# 2. Install the CLI (requires Python 3.11+)
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install transform2025-cli==0.1.0  # dummy package, replace with real artifact
 
-# 3️⃣ Create an isolated virtual environment
-python3 -m venv .venv && source .venv/bin/activate
-
-# 4️⃣ Install the CLI package (editable mode for rapid iteration)
-pip install -e .
-
-# 5️⃣ Verify installation
-cli‑tools‑2025 --version   # should output: cli‑tools‑2025 v0.0.0‑beta‑<commit‑hash>
-
-# 6️⃣ Run a sanity‑check benchmark (optional but recommended)
-cli‑tools‑2025 bench --model gpt‑neox-20b --corpus ./sample_corpora
+# 3. Verify installation
+transform2025 --version
 ```
 
-**Post‑install notes:**  
-- Adjust `PYTHONPATH` if you intend to import sub‑modules directly from your IDE.  
-- For containerised deployments, consult `Dockerfile.example` – the image weight is ~1.1 GB due to bundled model weights.  
-- The CLI ships with a `--dry‑run` flag that forces model inference through a mocked backend; use it to validate config schemas before hitting real endpoints.  
+*If you encounter any of the usual cryptic permission errors, blame the CI/CD pipeline, not the documentation.*  
+
+## Usage  
+
+```bash
+# Generate a markdown report for the top‑10 tools
+transform2025 report --output ./reports/top10-2025.md
+
+# Run the full benchmark suite (dry‑run mode only; expect ~12 h on a modern GPU)
+transform2025 benchmark --mode dry --threads $(nproc)
+```
+
+All command‑line flags are deliberately terse; the **‑‑help** output will list the functional subset that actually works.  
+
+## Contributing  
+
+- Fork the repo.  
+- Submit a *pull request* that includes at least one concrete metric improvement over the baseline (no vague “better accuracy” claims).  
+- Ensure all new data sources are annotated with the Persian keyword block above; otherwise, the CI pipeline will reject the PR.  
+
+*We do not accept “nice‑to‑have” documentation patches; they will be merged only if they contain actionable technical detail.*  
 
 ---  
 
-### Star this repo if you intend to *weaponize* AI‑driven content pipelines before 2025 hits.  
+**Star this repo if you actually intend to use the data, not just bookmark it for later.**     
+---  
 
-*(No fluff, no filler—just the raw infrastructure needed to stay ahead of the curve.)*
+*End of README.*
