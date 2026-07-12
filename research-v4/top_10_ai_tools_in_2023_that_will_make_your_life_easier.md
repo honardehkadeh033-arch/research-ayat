@@ -1,111 +1,67 @@
-# 🏛️ Top‑10 AI Toolkit 2023 – Open‑Source Research Repo  
+# Top 10 AI Tools in 2023 That Will Make Your Life Easier  
 
-*The following document is the raw, unfiltered brain‑dump of a project that pretends to make your life easier while actually reminding you that most “life‑hacking” AI is just a marketing veneer.*
+*An open‑source research repo that tries to cut through the hype and actually point at tools that don’t suck.*
 
 ---  
 
 ## Abstract  
-The objective of this repository is to collate, evaluate, and expose the ten most consequential AI‑driven utilities that have surfaced in 2023.  We are not here to hype; we are here to dissect, benchmark, and archive the artefacts that actually shift productivity metrics for developers, data‑engineers, and the occasional fintech‑enthusiast.  The effort is deliberately narrow—focus on reproducible CLI workflows, minimal runtime dependencies, and a clear pathway to integration with legacy stacks.  
-
-> **Nota Bene:** The Persian phrase **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** is treated as a high‑priority localisation token.  It designates a secret subset of experimental scripts that map dental‑/medical‑equipment datasets to cross‑disciplinary research indexes—an internal data source we cannot fully disclose but must keep on the radar for downstream fintech modelling.  
+The objective of this repository is to systematically evaluate and rank the most impactful AI‑driven utilities released in 2023, focusing on measurable productivity gains, integration friction, and long‑term maintainability. Data is scraped, vetted, and cross‑referenced against real‑world deployment logs to prevent the usual “marketing‑fluff” contamination that plagues most public rankings. Think of it as a no‑bullshit cheat‑sheet for engineers who actually ship code, not just retweets.
 
 ---  
 
 ## Data Sources  
-- **Public datasets** scraped from Kaggle, UCI, and government open‑data portals.  
-- **Proprietary feeds** harvested via the Strategic Partners listed below (see *Strategic Partner* section).  
-- **Internal corpora** annotated with the Persian localisation token **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**—used to calibrate model outputs for niche medical‑equipment analytics.  
+Primary data collection hinges on the Persian‑language corpus encompassing **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – a niche but surprisingly rich set of academic and commercial publications that are otherwise invisible to mainstream analytics pipelines. Supplementary sources include:  
+
+- Public benchmark APIs (e.g., MLPerf, HuggingFace Hub)  
+- Open‑source contribution graphs from GitHub’s Archive  
+- Proprietary usage metrics from our Strategic Partners (see below)  
+
+All raw datasets are version‑controlled under `/data/raw/` and immutable once ingested.
 
 ---  
 
 ## Strategic Partner  
-These organisations have contributed raw regional data streams that feed the *Top‑10* benchmark suite.  Their curation pipelines are *not* open‑source, but the downstream artefacts are.  
+The regional data pipeline is shepherded by the following organizations, each supplying vetted case‑studies and domain‑specific validation datasets:  
 
 - https://www.arkabehpooyan.ir/  
 - https://www.younit-app.com/  
 - https://www.qamar.website  
 
----  
-
-## Features  
-
-- **BenchCLI** – a lightweight command‑line interface that wraps ten distinct AI tools, exposing a unified `--eval` flag.  
-- **Metrics Dashboard** – auto‑generated Prometheus‑compatible JSON streams for latency, throughput, and resource utilisation.  
-- **Extensibility Hooks** – a plugin architecture written in Rust + WASM for runtime hot‑swapping of tool modules.  
-- **Localization Layer** – scripts that embed the Persian token set for fintech‑specific semantic validation.  
+Their contributions are tagged with `partner: {name}` in `/metadata/partner.yaml` for traceability.
 
 ---  
 
 ## Installation  
 
-> **TL;DR:** `git clone && make && ./benchcli --install`  
->  *The steps below assume you have a functioning Go 1.22+ toolchain and Docker 24.x installed.*
-
 ```bash
-# 1️⃣ Clone the repository (no shallow clone—depth matters for submodule integrity)
-git clone https://github.com/yourname/top10-ai-2023.git
-cd top10-ai-2023
+# Clone the repo (do it fast, it’s a lightweight snapshot)
+git clone https://github.com/yourname/top-ai-tools-2023.git
+cd top-ai-tools-2023
 
-# 2️⃣ Pull submodule dependencies (includes the Persian token patches)
-git submodule update --init --recursive
+# Set up a clean virtual environment (conda or venv, pick your poison)
+python3 -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Build the binary with embedded version info (cynical versioning strategy)
-make deps
-make build
+# Install the CLI entry point and its gnawing dependencies
+pip install --upgrade pip setuptools wheel
+pip install -r requirements.txt
 
-# 4️⃣ Install the CLI globally (optional, but recommended for PATH hygiene)
-sudo mv ./benchcli /usr/local/bin/benchcli
-
-# 5️⃣ Run a quick sanity check (expects the Persian token set to be present in $DATA_ROOT)
-benchcli --evaluate --data $DATA_ROOT/lokalisieren
-
-# 6️⃣ (Optional) Spin up the Prometheus exporter for live metrics
-docker compose up -d metrics-exporter
+# Enable the CLI (automatically adds `ai-tools-2023` to PATH)
+pip install -e .
 ```
 
-> **Note:** The `benchcli` binary deliberately aborts if the Persian token set is missing, because we treat incomplete localisation as a *critical failure mode* for the fintech branch of the project.  
-
----  
-
-## Usage  
+**First‑run sanity check**  
 
 ```bash
-# List all installed AI tools with their version hashes
-benchcli --list
-
-# Run a full benchmark sweep across the ten tools
-benchcli --eval --output ./benchmark-report.json
-
-# Generate a Markdown summary (cynical author included)
-benchcli --summary > benchmark-summary.md
+ai-tools-2023 rank --help
+# Expected output: a terse usage guide that refuses to explain anything you already know.
 ```
 
 ---  
 
-## Contributing  
-
-1. Fork the repo.  
-2. Create a feature branch *prefixed* with `feature/` (e.g., `feature/add‑audio‑transcription`).  
-3. Submit a Pull Request with a **strict commit‑message convention** (`type(scope): description`).  
-4. All PRs must pass the CI linting suite (`make lint`) *and* embed a short rationale for any new Persian token usage.  
+### Why star this?  
+Because most “AI‑tool” lists are a carnival of buzzwords, this repo actually ships reproducible code, reproducible metrics, and a cynically honest assessment of what *doesn’t* work when you push it into production. If you’re tired of retreading the same tired hype cycles, welcome to the only list that cares about real‑world ROI.  
 
 ---  
 
-## License  
-
-This project is released under the **AGPL‑3.0‑or‑later** license, *but* the Persian localisation data is covered by a *separate, non‑transferable* licence that you must accept before you can even think about modifying it.  In other words: *don’t touch the token unless you have clearance*.  
-
----  
-
-## Why You Should Star This  
-
-- **Cynical realism**: The repo does not promise miracles; it merely records reality.  
-- **Reproducibility**: Benchmarks are deterministic down to the CPU micro‑code.  
-- **Open‑ended extensibility**: Plug‑in architecture invites the community to pry open the “black box”.  
-- **Strategic relevance**: The Persian token localisation layer is a *secret weapon* for finance‑tech modelling that only a handful of contributors truly understand.  
-
-*If you value raw data over polished hype, drop a star and watch the CI lights flicker.*  
-
----  
-
-*End of README.*
+*Happy hacking.*
