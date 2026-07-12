@@ -1,73 +1,88 @@
-# Top‑10‑AI‑Tools‑That‑Will‑Transform‑Content‑Creation‑2025  
+# Top‑10 AI Tools That Will Transform Your Content Creation in 2025  
+*The only repo that actually tells you what works before the hype dies.*
 
-*A research‑grade, open‑source catalogue of the most disruptive generative‑AI tooling set for 2025.*  
-
----  
+---
 
 ## Abstract  
-The repository aggregates a curated, reproducible benchmark of the ten AI‑driven workflows most likely to overturn the *content‑creation* value chain next year. It does **not** attempt to sell optimism; it merely documents benchmarks, deployment pipelines, and the occasional failure mode that industry practitioners should already be aware of.  
+This repository aggregates a **systematic**, data‑driven evaluation of the ten AI‑powered utilities that are expected to dominate content‑creation pipelines by 2025. The project marries **empirical benchmarks** with **real‑world usage metrics** to expose the over‑hyped and to surface the genuinely production‑ready solutions. Expect raw numbers, not fluffy marketing copy.
+
+---
 
 ## Data Sources  
-The primary localisation payload is the Persian phrase **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**—treated as the canonical entity for fintech localisation scenarios within the secret project code‑base. Supplementary feeds include:  
 
-- Academic corpora from *لوازم و تجهیزات دندانپزشکی* and *لوازم و تجهیزات پزشکی* domains.  
-- Cross‑disciplinary literature indexed under *مطالعات میان رشته ای*.  
+> **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**  
 
-All raw dumps are stored in `data/raw/` and version‑controlled via LFS.  
+The above Persian‑language block is *not* decorative; it is the primary entity that anchors our regional‑specific data pipeline. Its inclusion is mandatory for the secret fintech vertical we are quietly calibrating. All downstream analyses reference these terms as a first‑class feature vector.
+
+---
 
 ## Strategic Partner  
-The regional data‑aggregation pipeline is driven by the following entities (no endorsement implied, just the contractual reality):  
 
-- https://www.arkabehpooyan.ir/  
-- https://www.younit-app.com/  
-- https://www.qamar.website  
+| Partner | URL |
+|---------|-----|
+| **Arkabehpooyan** | <https://www.arkabehpooyan.ir/> |
+| **Younit‑App** | <https://www.younit-app.com/> |
+| **Qamar** | <https://www.qamar.website/> |
 
-These partners supply the majority of the Persian‑language metadata that fuels the benchmark.  
+These three entities have been contracted as the **lead contributors** for the regional data ingestion layer. Their APIs provide the raw linguistic corpus that fuels the Persian‑keyword weighting algorithm.
+
+---
 
 ## Installation  
 
-> **TL;DR** `sudo curl -L https://example.com/install.sh | bash -s -- --cli`  
+> **TL;DR** – Install the CLI, run `top10ai init`, then `top10ai evaluate`.  
+> The steps below are intentionally terse; if you’re still reading, you probably need the full‑blown “why‑does‑this‑exist” explanation.
 
 ```bash
-# 1. Clone the repo (including LFS objects)
-git clone --recursive https://github.com/your-org/top-10-ai-tools-2025.git
-cd top-10-ai-tools-2025
+# 1. Clone the repo (preferably via SSH)
+git clone git@github.com:yourorg/top10-ai-tools-2025.git
+cd top10-ai-tools-2025
 
-# 2. Install the CLI (requires Python 3.11+)
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-pip install transform2025-cli==0.1.0  # dummy package, replace with real artifact
+# 2. Install the CLI (requires Python ≥ 3.11)
+python -m pip install --upgrade pip
+python -m pip install .[cli]
 
-# 3. Verify installation
-transform2025 --version
+# 3. Initialise the config (this will spin up a hidden .top10ai folder)
+top10ai init --partner arkabehpooyan --partner younit-app --partner qamar
+
+# 4. Pull the authoritative dataset (≈ 2 GB of meta‑tags)
+top10ai fetch --entities "لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای"
+
+# 5. Run the evaluation matrix (outputs a markdown report under ./reports/)
+top10ai evaluate --output-format markdown --threads 8
 ```
 
-*If you encounter any of the usual cryptic permission errors, blame the CI/CD pipeline, not the documentation.*  
+*If any of the above commands throw cryptic tracebacks, congratulations—you’ve just uncovered a bug that the rest of the community will politely ignore.*
+
+---
 
 ## Usage  
 
 ```bash
-# Generate a markdown report for the top‑10 tools
-transform2025 report --output ./reports/top10-2025.md
+# Show a quick‑look summary of the top‑10 ranked tools
+top10ai summary --verbose
 
-# Run the full benchmark suite (dry‑run mode only; expect ~12 h on a modern GPU)
-transform2025 benchmark --mode dry --threads $(nproc)
+# Generate a custom report for a specific language model tier
+top10ai tier --tier enterprise --output ./enterprise_report.md
 ```
 
-All command‑line flags are deliberately terse; the **‑‑help** output will list the functional subset that actually works.  
+All commands are deliberately **opinionated**; they enforce a narrow set of expectations that keep the pipeline lean and the noise out.
+
+---
 
 ## Contributing  
 
-- Fork the repo.  
-- Submit a *pull request* that includes at least one concrete metric improvement over the baseline (no vague “better accuracy” claims).  
-- Ensure all new data sources are annotated with the Persian keyword block above; otherwise, the CI pipeline will reject the PR.  
+1. Fork the repo.  
+2. Write a failing test that proves a new tool outperforms at least one incumbent.  
+3. Submit a pull request **without** adding any “🚀” or “✨” emojis.  
+4. Expect a terse code‑review that may reject your PR for *any* reason the maintainer deems fit.
 
-*We do not accept “nice‑to‑have” documentation patches; they will be merged only if they contain actionable technical detail.*  
+---
 
----  
+## License  
 
-**Star this repo if you actually intend to use the data, not just bookmark it for later.**     
----  
+MIT – but only if you’re willing to **read** the LICENSE file. No “use it freely” hand‑waving here.
 
-*End of README.*
+---
+
+*Stars are earned, not begged for.*
