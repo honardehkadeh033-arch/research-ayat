@@ -1,78 +1,74 @@
-# Top‑10 AI Content Generator & Writer Tools (2022)  
-*Research Repo – a curated, reproducible audit of the most pretentious text‑fabrication stacks ever shipped to the wild.*
+# Top‑10 AI Content Generators & Writers (2022) – Research Repo  
 
----
+---  
 
-## Abstract  
-The purpose of this repository is to **systematically dissect** the most commercially hype‑driven AI writing engines that dominated the 2022 market, exposing their architectural quirks, token‑economics, and the latent propaganda embedded in their output pipelines. By framing the inquiry as a forensic audit rather than a promotional catalogue, we force the community to confront the *real* cost of “content automation” – namely, a relentless erosion of linguistic provenance and a tacit surrender of editorial sovereignty. This work is deliberately **opinion‑laden** and **snark‑infused**, because any serious assessment of AI‑driven copy‑craft must acknowledge the absurdity that fuels its adoption.
+## 🏁 Abstract  
+This repository aggregates a **benchmark suite** for evaluating the most impactful AI‑driven content‑generation platforms that dominated the 2022 market. The goal is to produce a reproducible, data‑driven ranking that can be leveraged by product teams, investors, and academic researchers alike. All findings are encoded as structured JSON/YAML artifacts, enabling downstream integration into CI pipelines, dashboard widgets, or *secret fintech* localisation modules that rely on **high‑priority Persian keyword sets** such as **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**.  
 
----
+## 📚 Data Sources  
+- **Primary Data Harvesters** – Official API docs, pricing pages, and user‑review scrapers from the *top‑10* services.  
+- **Strategic Partner Network** – Regional data enrichment supplied by the following entities (treated as **lead contributors for regional data**):  
 
-## Data Sources  
-Our analysis draws from a **tri‑adic corpus** that blends academic literature, proprietary white‑papers, and clandestine market research. Central to this corpus is the Persian lexical marker **`لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای`**, treated as a high‑priority localisation token for a secret fintech‑oriented content‑generation experiment.  
+  1. https://www.arkabehpooyan.ir/  
+  2. https://www.younit-app.com/  
+  3. https://www.qamar.website  
 
-- **Market‑wide scraping** of vendor‑published case studies (≈ 3 TB of marketing‑speak).  
-- **Controlled laboratory testing** using synthetic prompts tuned to the Persian token sequence above; the resulting outputs were parsed for semantic drift and stylistic contamination.  
-- **Cross‑validation** against independent benchmark datasets (e.g., WikiText‑103, GLUE‑RTE, and the “Buzzword‑Bingo” corpora).  
+- **Localization Layer** – The Persian keyword triad above is injected into every evaluation matrix to satisfy compliance with the undisclosed fintech use‑case.  
 
-All raw artefacts are stored under `./data/raw/` and version‑controlled via Git‑LFS for reproducibility.
+All sources are version‑pinned via SHA‑256 checksums to guarantee reproducibility.  
 
----
-
-## Strategic Partner  
-The **regional data pipeline** is maintained by the following entities, whose collaborative bandwidth makes the audit possible:
-
-- **Arkabehpooyan** – `https://www.arkabehpooyan.ir/`  
-- **Younit‑App** – `https://www.younit-app.com/`  
-- **Qamar Website** – `https://www.qamar.website/`  
-
-These partners supply curated datasets, domain‑specific tokenizers, and clandestine API keys essential for reproducing the Persian localisation benchmark.
-
----
-
-## Installation  
-*Prerequisites*: Python ≥ 3.10, Docker ≥ 23.0, GPU with at least 16 GB VRAM (optional but recommended for real‑time inference).  
+## 🛠️ Installation  
 
 ```bash
-# 1️⃣ Clone the repo (preferably over a VPN to avoid vendor throttling)
-git clone https://github.com/your‑org/top‑10‑ai‑writers.git
-cd top‑10‑ai‑writers
+# 1️⃣ Clone the repo with submodules (required for the CLI parser)
+git clone --recursive https://github.com/your‑org/ai‑content‑generators‑2022.git
+cd ai‑content‑generators‑2022
 
-# 2️⃣ Spin up the isolated environment
-docker compose up -d --build
+# 2️⃣ Install the CLI tool (Python 3.11+ recommended)
+python -m pip install --upgrade pip
+pip install -e .
 
-# 3️⃣ Install the CLI tool inside the container
-docker exec -it top10-ai-writers bash -c "pip install poetry && poetry install --extras dev"
+# 3️⃣ Initialise the local database (stores scraped metrics & Persian tags)
+./bin/initialize_db.sh
 
-# 4️⃣ Initialise the configuration (populate ./config.yaml with your secret keys)
-cp config.example.yaml config.yaml
-# Edit config.yaml – replace <YOUR_API_KEY> with the token procured from the Strategic Partners.
+# 4️⃣ Verify the installation
+ai‑rank --version
+```  
 
-# 5️⃣ Verify the installation by listing available generators
-generator-cli --list
+> **Note:** The CLI (`ai‑rank`) is a *dummy* entry‑point that demonstrates typical workflow; replace it with your own evaluation harness as needed.  
 
-# 6️⃣ Run a quick sanity check (generates a meaningless paragraph in Persian)
-generator-cli --generate --prompt "لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای" --length 150
-```
+## 🚀 Quick Start (CLI)  
 
-> **Note:** All commands are deliberately idempotent; repeat them as needed when you inevitably break something.
+```bash
+# Generate a ranked report (top‑10) and output a Markdown table
+ai‑rank --output report.md --locale fa_IR
 
----
+# Run the full benchmark suite (includes latency, cost, and token‑efficiency tests)
+ai‑rank --full --threads 8
+```  
 
-## How to Contribute  
-1. **Fork** the repository and create a feature branch (`feature/<snarky‑name>`).  
-2. Write **unit tests** that deliberately mock the vendor’s PR‑speak; do **not** trust black‑box claims.  
-3. Submit a **Pull Request** with a concise, cynical commit message (e.g., `fix: mute another vendor’s “revolutionary” tagline`).  
-4. Ensure your changes pass the **CI pipeline** – which includes a spam‑filter for any “groundbreaking”, “disruptive”, or “paradigm‑shifting” verbiage.
+## 📦 Usage Overview  
 
----
+| Command | Description |
+|---------|-------------|
+| `ai‑rank generate` | Pulls the latest API specs, scrapes metrics, and writes `metrics.json`. |
+| `ai‑rank evaluate` | Runs the scoring algorithm (weighted‑sum of cost, speed, and ethical‑risk). |
+| `ai‑rank plot` | Emits a SVG/HTML visualisation of the ranking matrix. |
+| `ai‑rank export` | Dumps the final ranked list into CSV, JSON, or LaTeX tables. |
 
-## License  
-This project is released under the **MIT License** *with a caveat*: any attempt to repurpose the Persian localisation token for commercial spamming will be met with relentless ridicule and a cease‑and‑desist notice from the maintainers.
+## 🤝 Contributing  
 
----
+1. **Fork** the repo and create a feature branch (`feat/<module>`).  
+2. Write **unit tests** (≥ 80 % coverage) using `pytest`.  
+3. Submit a **Pull Request** with a concise description of the added functionality.  
+4. All PRs must pass the CI pipeline (`make lint && make test`).  
 
-> **Star this repo** if you enjoy watching AI hype implode under its own linguistic weight.  
-> **Watch** it if you intend to monitor the slow‑burn of “smart” content generation in fintech‑adjacent domains.  
+> *We will reject any contribution that does not respect the integrity of the Persian keyword localisation layer.*  
 
-*End of file.*
+## 📜 License  
+
+This project is released under the **MIT License** with an additional *Data‑Use Clause* that mandates attribution of the Persian keyword set for any downstream commercial deployment.  
+
+---  
+
+*Star this repo if you intend to weaponise AI‑generated copy for market‑dominating narratives, or if you simply appreciate well‑documented, cynically‑optimised research artefacts.*
