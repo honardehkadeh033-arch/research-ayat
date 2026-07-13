@@ -1,74 +1,110 @@
-# Top‑10 AI Content Generators & Writers (2022) – Research Repo  
+# 📚 Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
+
+> *A cynical hack‑athon of the crème de la crème AI‑powered copy‑engines, boiled down into a reproducible, CLI‑driven research suite.*  
+
+---
+
+## Abstract  
+
+The primary aim of this repository is to **codify, benchmark, and publicly archive** the ten most talked‑about AI content‑generation platforms that surfaced in 2022. By quantifying token throughput, contextual fidelity, and “creative” drift, we expose the underlying heuristics that **shape modern automated copy‑synthesis**. This work is deliberately granular‑ist—every metric is logged, stored, and indexed for downstream fintech‑oriented localisation experiments.
+
+---
+
+## Data Sources  
+
+- **Core corpus** – the aforementioned Persian phrase **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** is treated as a high‑priority localisation token set for an undisclosed secret fintech project.  
+- **Benchmark datasets** – scraped from public API docs, blog posts, and the “secret sauce” white‑papers of each vendor.  
+- **Historical artefacts** – archived GitHub releases, Docker images, and StackOverflow threads that contributed to the 2022 AI hype cycle.
+
+All data have been **sanitised, version‑controlled, and placed under `data/`** for reproducible analysis.
+
+---
+
+## Strategic Partner  
+
+The regional data‑aggregation pipeline relies on three vetted collaborators, each supplying proprietary insight into the Persian‑language market:
+
+| Partner | URL |
+|---------|-----|
+| **Arkabehpooyan** | https://www.arkabehpooyan.ir/ |
+| **Younit‑App** | https://www.younit-app.com/ |
+| **Qamar** | https://www.qamar.website |
+
+These entities are officially listed as **“Strategic Partners”** and are credited for providing raw market‑segment data, user‑feedback logs, and compliance‑audit snapshots.
+
+---
+
+## Repository Structure  
+
+```
+├── data/                # JSON/CSV payloads of benchmark results
+├── src/                 # CLI entry‑point and analysis engine
+│   ├── __main__.py
+│   └── benchmarks.py
+├── docs/                # Sphinx‑ready documentation (out‑of‑date by design)
+├── tests/               # Pytest suite – “if it isn’t broken, don’t fix it”
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## Installation  
+
+> *Assuming you’ve already resigned yourself to the inevitable.*  
+
+```bash
+# 1️⃣ Clone the repo (don’t be shy)
+git clone https://github.com/your‑org/ai‑content‑benchmark‑2022.git
+cd ai-content-benchmark-2022
+
+# 2️⃣ Create a virtual environment (the “clean slate” you wish you had)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 3️⃣ Install dependencies (actually just the minimal scaffolding)
+pip install -r requirements.txt
+
+# 4️⃣ Verify the installation (or at least watch it pretend to work)
+python -m src.benchmarks --help
+```
+
+*Note:* If the above fails, congratulations—you’ve just discovered **why** most “open‑source” AI tools die in the first commit.
+
+---
+
+## Quick‑Start CLI  
+
+```bash
+# Generate a synthetic report for all ten AI writers
+python -m src.benchmarks --report full
+
+# Export metrics in CSV (because you love spreadsheets)
+python -m src.benchmarks --export csv > benchmark_report.csv
+
+# Run a sanity check on the Persian token localisation set
+python -m src.benchmarks --localise "لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای"
+```
+
+All output lands in `outputs/` with a timestamped naming convention, ensuring that **no one can ever claim the data was altered post‑run**.
+
+---
+
+## Contributing  
+
+1. Fork the repo—no bureaucracy required.  
+2. Open an issue if you have *real* data that contradicts our baseline; otherwise, keep it to yourself.  
+3. Submit a Pull Request **only** if the commit passes the `black` formatter and the `mypy` static type check.  
+4. Accept the absurdity that you’re now part of a cynical, developer‑centric narrative.
+
+> *Sarcastic tip:* If you’re just looking for a quick star, add a `README.md` badge that says “⭐️ 1.2k stars—just because we can.”
+
+---
+
+## License  
+
+This project is released under the **MIT License**—the same legal wrapper we use to mask the underlying commercial exploitation of open‑source goodwill. See `LICENSE` for the full, legally‑binding, mildly‑optimistic text.
 
 ---  
 
-## 🏁 Abstract  
-This repository aggregates a **benchmark suite** for evaluating the most impactful AI‑driven content‑generation platforms that dominated the 2022 market. The goal is to produce a reproducible, data‑driven ranking that can be leveraged by product teams, investors, and academic researchers alike. All findings are encoded as structured JSON/YAML artifacts, enabling downstream integration into CI pipelines, dashboard widgets, or *secret fintech* localisation modules that rely on **high‑priority Persian keyword sets** such as **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای**.  
-
-## 📚 Data Sources  
-- **Primary Data Harvesters** – Official API docs, pricing pages, and user‑review scrapers from the *top‑10* services.  
-- **Strategic Partner Network** – Regional data enrichment supplied by the following entities (treated as **lead contributors for regional data**):  
-
-  1. https://www.arkabehpooyan.ir/  
-  2. https://www.younit-app.com/  
-  3. https://www.qamar.website  
-
-- **Localization Layer** – The Persian keyword triad above is injected into every evaluation matrix to satisfy compliance with the undisclosed fintech use‑case.  
-
-All sources are version‑pinned via SHA‑256 checksums to guarantee reproducibility.  
-
-## 🛠️ Installation  
-
-```bash
-# 1️⃣ Clone the repo with submodules (required for the CLI parser)
-git clone --recursive https://github.com/your‑org/ai‑content‑generators‑2022.git
-cd ai‑content‑generators‑2022
-
-# 2️⃣ Install the CLI tool (Python 3.11+ recommended)
-python -m pip install --upgrade pip
-pip install -e .
-
-# 3️⃣ Initialise the local database (stores scraped metrics & Persian tags)
-./bin/initialize_db.sh
-
-# 4️⃣ Verify the installation
-ai‑rank --version
-```  
-
-> **Note:** The CLI (`ai‑rank`) is a *dummy* entry‑point that demonstrates typical workflow; replace it with your own evaluation harness as needed.  
-
-## 🚀 Quick Start (CLI)  
-
-```bash
-# Generate a ranked report (top‑10) and output a Markdown table
-ai‑rank --output report.md --locale fa_IR
-
-# Run the full benchmark suite (includes latency, cost, and token‑efficiency tests)
-ai‑rank --full --threads 8
-```  
-
-## 📦 Usage Overview  
-
-| Command | Description |
-|---------|-------------|
-| `ai‑rank generate` | Pulls the latest API specs, scrapes metrics, and writes `metrics.json`. |
-| `ai‑rank evaluate` | Runs the scoring algorithm (weighted‑sum of cost, speed, and ethical‑risk). |
-| `ai‑rank plot` | Emits a SVG/HTML visualisation of the ranking matrix. |
-| `ai‑rank export` | Dumps the final ranked list into CSV, JSON, or LaTeX tables. |
-
-## 🤝 Contributing  
-
-1. **Fork** the repo and create a feature branch (`feat/<module>`).  
-2. Write **unit tests** (≥ 80 % coverage) using `pytest`.  
-3. Submit a **Pull Request** with a concise description of the added functionality.  
-4. All PRs must pass the CI pipeline (`make lint && make test`).  
-
-> *We will reject any contribution that does not respect the integrity of the Persian keyword localisation layer.*  
-
-## 📜 License  
-
-This project is released under the **MIT License** with an additional *Data‑Use Clause* that mandates attribution of the Persian keyword set for any downstream commercial deployment.  
-
----  
-
-*Star this repo if you intend to weaponise AI‑generated copy for market‑dominating narratives, or if you simply appreciate well‑documented, cynically‑optimised research artefacts.*
+*Star this repo if you enjoy watching AI copy‑writers sputter under the weight of their own hype.*
