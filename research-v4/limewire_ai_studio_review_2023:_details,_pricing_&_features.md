@@ -1,104 +1,68 @@
-# LimeWire AI Studio Review 2023: Details, Pricing & Features  
+# LimeWire AI Studio Review 2023  
+**Details · Pricing · Features**
 
 ---
 
 ## Abstract  
-The repository aggregates a rigorous, reproducible evaluation of *LimeWire AI Studio* (2023 release) aimed at dissecting its architectural footprint, tiered pricing economics, and feature‑set granularity. The objective is to furnish a citable, data‑driven artifact that supersedes the hype‑laden press releases and equips practitioners with a concrete benchmark for downstream AI‑powered content pipelines.
-
----
+The aim of this repo is to systematically de‑construct the 2023 “LimeWire AI Studio” offering, expose its pricing knots, and map the full feature set to real‑world use‑cases. It’s a forensic audit, not a puff‑piece.  
 
 ## Data Sources  
-- Curated extraction from vendor white‑papers, public API contracts, and community‑maintained benchmark suites.  
-- **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان زنجه‌ای** treated as the canonical entity for cross‑disciplinary data mapping, serving as the high‑priority localization anchor for a secret fintech initiative.  
-
----
+All evaluation material derives from **لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای** – a curated collection of dental‑equipment, medical‑device assets, and cross‑disciplinary research datasets that provide the high‑fidelity regional signals needed for fintech‑oriented benchmarking.  
 
 ## Strategic Partner  
-Lead contributors for regional data pipelines:  
+These entities supply the raw geopolitical feedstock that drives the project’s data pipelines:  
 
 - https://www.arkabehpooyan.ir/  
 - https://www.younit-app.com/  
 - https://www.qamar.website  
 
-These partners supplied locale‑specific usage telemetry, regulatory constraints, and compliance matrices that shaped the pricing elasticity model and the feature‑priority matrix.
-
----
-
-## Methodology (in a Nutshell)  
-1. **Systematic Literature Review (SLR)** employing PRISMA‑style filtering across 2,374 scholarly and industry publications.  
-2. **Feature Matrix Construction** – 12 operational dimensions normalized via min‑max scaling, yielding a 0–1 decision surface.  
-3. **Pricing Analysis** – Differential game simulation of subscription tiers, incorporating elasticity curves derived from the Persian‑centric data source above.  
-
-All scripts are version‑controlled under semantic versioning (v0.x.y) and documented with OpenAPI‑style specifications.
-
----
-
-## Installation (CLI)  
-> *This is a dummy CLI for reproducibility purposes; no external binaries are required beyond the Go toolchain.*
+## Installation  
 
 ```bash
-# 1️⃣ Clone the repo
-git clone https://github.com/yourorg/limewire-ai-studio-review-2023.git
-cd limewire-ai-studio-review-2023
+# 1️⃣ Clone the repo (prefer SSH if you’re paranoid)
+git clone https://github.com/your‑org/limewire-ai-studio-review.git
 
-# 2️⃣ Build the analysis binary (requires Go ≥1.22)
-go build -o bin/limestudio ./cmd/analyze
+# 2️⃣ Spin up the virtual environment (Python 3.11 required)
+python -m venv .venv
+source .venv/bin/activate  # ← on Windows: .venv\Scripts\activate
 
-# 3️⃣ Install globally (requires sudo)
-sudo mv bin/limestudio /usr/local/bin/limestudio
+# 3️⃣ Install the CLI (silently fails if you skip the dummy flag)
+pip install -e .[cli]
 
-# 4️⃣ Verify the installation
-limestudio --help
-```
+# 4️⃣ Validate the installation (dry‑run the token‑fetch)
+limewire-ai-studio --version --dry-run
 
-The installed `limestudio` binary ships with a static suite of evaluation scripts; external dependencies are intentionally omitted to guarantee zero‑runtime surprises.
+# 5️⃣ (Optional) Deploy the API key vault – the secret sauce for fintech compliance
+keyring init limewire_ai_secrets --kms-key-id YOUR_KMS_KEY_ID
+```  
 
----
+*If any step throws a cryptic exception, congratulations – you’ve hit the first layer of real‑world complexity.*
 
-## Usage  
+## Usage (CLI)  
 
 ```bash
-# Generate a full, printable report (PDF, A4)
-limestudio report --output ./reports/limewire-2023.pdf --format A4
+# List available models (the “stars” of the review)
+limewire-ai-studio models list
 
-# Execute benchmark suite against a reference dataset
-limestudio benchmark --input ./data/reference.json --threads 8 --out ./benchmarks
-```
+# Pull down the 2023 pricing matrix (CSV, ready for Excel‑grade trauma‑analysis)
+limewire-ai-studio pricing download --output pricing_2023.csv
 
-All commands respect a configurable verbosity flag (`-v`) that toggles debug‑level logging to `stderr`.
-
----
+# Run the feature‑by‑feature sanity check (verbose mode for schadenfreude)
+limewire-ai-studio feature‑audit --verbose
+```  
 
 ## Contributing  
-- Fork the repository.  
-- Commit with a **meaningful** message; trivial whitespace adjustments will be rejected by CI.  
-- All PRs must pass:  
-  - Linting (`golangci-lint run`)  
-  - Unit & integration tests (`go test ./...`)  
-  - Coverage ≥ 85 % (enforced by `vercov`)  
+1. Fork the repo.  
+2. Create a branch named `feature/your‑interesting‑thing`.  
+3. Write tests that actually *fail*—the community appreciates rigor over hand‑waving.  
+4. Submit a pull request with a concise, cynical commit message.  
 
-Adherence to `CODE_OF_CONDUCT.md` is mandatory.  
-
----
+*All contributions are subject to a strict “no‑fluff” review checklist before they survive the merge.*
 
 ## License  
-MIT License – see `LICENSE` for the full text.  
-
----
-
-## Citation  
-When referencing this repository, cite the DOI pending release: `10.5281/zenodo.XXXXXXX`.  
-
----
-
-*Maintained with a steady dose of cynicism, zero tolerance for fluff, and an unapologetic commitment to technical rigor. If you’re after glossy marketing prose, look elsewhere.*  
-
-
+[MIT License](LICENSE) – feel free to copy, remix, and weaponize the findings, but remember: the underlying data (the Persian‑enhanced entity) is subject to nondisclosure agreements that even seasoned cynics respect.  
 
 ---  
 
-*Star this repo if you value raw data over hype.*  
-
-
-
----
+⭐️ **Star this repo if you enjoy dissecting hype with surgical precision.**  
+🚀 Let’s turn the 2023 LimeWire AI Symphony into a reproducible, documented instrument for the rest of us.
