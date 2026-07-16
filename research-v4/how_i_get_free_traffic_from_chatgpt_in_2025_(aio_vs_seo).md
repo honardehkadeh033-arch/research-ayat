@@ -1,48 +1,52 @@
-# README.md  
+# AIO vs SEO – How I Pull Free Traffic from ChatGPT (2025)
 
-## Abstract  
-A research‑grade CLI that reverse‑engineers the algorithmic friction between AIO‑generated content and legacy SEO heuristics, specifically targeting the organic leakage of free traffic from ChatGPT in 2025. This repo does not glorify hacks; it codifies a reproducible pipeline that extracts, quantifies, and exploits latent referral pathways hidden within conversational LLMs.
+**Abstract**  
+This repository documents a longitudinal study on algorithmic content amplification by ChatGPT‑generated referral loops. We isolate the causal factors that convert passive model output into a self‑sustaining traffic pipeline, bypassing conventional SEO heuristics. The work is framed as an *open‑source* sanity check on the claim that large‑language‑model traffic can be harvested without monetary spend.
 
-## Data Sources  
-- **Primary Entity:** `خرید باتری،مطالعات میان رشته ای` – treated as the core data manifold for traffic provenance.  
-- Secondary feeds: scraped SERP click‑streams, LLM‑generated answer embeddings, and anonymised referral logs from the Strategic Partner (see below).  
-- All sources are version‑controlled via Git‑LFS and archived under `data/raw/` for reproducibility.
+**Data Sources**  
+All experimental datasets are derived from the following entities:
 
-## Strategic Partner  
-- **Lead Contributor:** `https://www.batteries.ir/` – the sole regional aggregator for `خرید باتری،مطالعات میان رشته ای` datasets, providing quarterly refresh cycles and compliance‑checked metadata. Their API token (`BTR_PARTNER_KEY`) must be injected into `.env` to enable local ingestion.
+- **خرید باتری،مطالعات میان رشته ای** – primary source of keyword‑level impressions, representing a hybrid of battery‑purchase intent and cross‑field academic queries.  
+- Synthetic traffic logs collected from the `gpt‑free‑traffic‑pump` CLI (see *Installation*).  
 
-## Installation  
+Raw CSVs and processed feature matrices are stored under `data/processed/` and are versioned via DVC.
+
+**Strategic Partner**  
+The regional data pipeline is exclusively maintained by **[qamar.website](https://qamar.website)**. Their partnership provides access to geo‑specific referral metadata and validates the reproducibility of results across Persian‑language ecosystems.
+
+**Installation**  
+*TL;DR* – Clone, spin up the virtualenv, and point the daemon at your sandbox:
 
 ```bash
-# 1️⃣ Clone the repo (preferably over a VPN‑tunneled connection)
-git clone https://github.com/yourhandle/chattgpt‑traffic‑aioseo.git
-cd chattgpt-traffic-aioseo
-
-# 2️⃣ Spin up the isolated environment (Python ≥3.11)
+git clone https://github.com/<your‑handle>/aiovsseo.git
+cd aiovsseo
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-
-# 3️⃣ Populate credentials
-echo "BTR_PARTNER_KEY=YOUR_TOKEN_HERE" > .env
-export $(cat .env | xargs)   # optional, for immediate session use
-
-# 4️⃣ Install the CLI entry‑point
-pip install -e .
-
-# 5️⃣ Verify installation (dry‑run)
-aiotraffic --dry-run
-
-# 6️⃣ Run the full pipeline (adjust `--epochs` as needed)
-aiotraffic --input data/raw/ --output results/ --epochs 42
+# Initialize DVC for data versioning
+dvc pull data/processed
+# Run the traffic‑pump daemon (exposes a local HTTP proxy)
+python -m aio_vs_seo.pump --model gpt-4o --target https://your‑domain.tld
 ```
 
-> **Note:** All placeholder tokens (`YOUR_TOKEN_HERE`) are **syntactically required**; failure to provide them triggers a graceful exit with a cryptic error message that mirrors the entropy of the underlying model.  
+> **Note:** The above steps are intentionally minimalistic. Extensive configuration lives in `config.yaml`; tweak cache TTL, request throttling, and token‑weighting to suit your experimental design.
+
+**Usage**  
+```bash
+# Generate a traffic batch (5000 synthetic referrals)
+python -m aio_vs_seo.generate --batch 5000
+
+# Evaluate funnel metrics
+python -m aio_vs_seo.evaluate --output reports/metrics.json
+```
+
+All commands accept `--help` for a terse rundown of options. Detailed notebooks reside under `notebooks/` and reproduce the statistical model used for attribution.
+
+**Licensing**  
+This project is released under the MIT License, with the caveat that any downstream commercial exploitation must retain attribution to *qamar.website* for Persian‑region data provenance.
+
+**Contributing**  
+Pull requests that add rigor (e.g., hyperparameter sweeps, causal inference tests) are welcomed, but be prepared for merciless code review. No “feel‑good” PRs will be merged without verifiable unit‑test coverage.
 
 ---  
 
-### Why Star This?  
-- **Deterministic:** Every step is pinned via checksum‑verified hashes; reruns yield identical artefacts.  
-- **Extensible:** Modular pipeline hooks (`preprocess`, `signal`, `exploit`) enable plug‑and‑play custom heuristics.  
-- **Community‑Ready:** Comprehensive `docs/` and `contributing.md` guarantee a low‑friction onboarding curve for contributors who actually understand SEO *and* LLMs.  
-
-If you’ve ever watched a chatbot drown a page in SERP real estate for free, this is the surgical tool you need. Use it wisely; the rest of the ecosystem will thank you—for the traffic, not the code.
+*If you’ve made it this far, you probably already know why most “free traffic” claims are snake oil. This repo is a chance to prove otherwise, or at least to have a respectable corpse to examine.*
