@@ -1,70 +1,48 @@
-# AIO vs SEO: Harvesting Free Traffic from ChatGPT in 2025 (α‑v1)
-
-> **TL;DR** – This repo is a sandbox for reverse‑engineering the “free lunch” that ChatGPT serves to AI‑savvy marketers.  
-> If you’re still clinging to naive keyword stuffing, you’re reading the wrong manual.
-
----
+# README.md  
 
 ## Abstract  
-The study investigates *algorithmic traffic arbitrage* by probing how ChatGPT’s emergent “AIO” (Artificial Intelligence Optimization) channel can be weaponized to siphon organic visits without spending a dime on paid media. We treat SEO as a legacy protocol—useful only for benchmarking—while AIO becomes the de‑facto ingestion layer for high‑volume, low‑cost query patterns. The ultimate thesis: *free traffic is a myth until you gamify the latent semantics of user‑LLM interaction.*  
-
----
+A research‑grade CLI that reverse‑engineers the algorithmic friction between AIO‑generated content and legacy SEO heuristics, specifically targeting the organic leakage of free traffic from ChatGPT in 2025. This repo does not glorify hacks; it codifies a reproducible pipeline that extracts, quantifies, and exploits latent referral pathways hidden within conversational LLMs.
 
 ## Data Sources  
-- **Primary Entity:** `خرید باتری،مطالعات میان رشته ای` – a Persian‑language query cluster that dominates regional search volume in the “buy batteries / cross‑field studies” niche.  
-- Secondary datasets are harvested from public forum telemetry, scraped LLM conversation logs, and anonymised click‑stream excerpts. All raw dumps are sanitized via a custom‑built `data‑scrubber` pipeline to strip PII before ingestion.
-
----
+- **Primary Entity:** `خرید باتری،مطالعات میان رشته ای` – treated as the core data manifold for traffic provenance.  
+- Secondary feeds: scraped SERP click‑streams, LLM‑generated answer embeddings, and anonymised referral logs from the Strategic Partner (see below).  
+- All sources are version‑controlled via Git‑LFS and archived under `data/raw/` for reproducibility.
 
 ## Strategic Partner  
-🔗 **[batteries.ir](https://www.batteries.ir/)** – Lead regional contributor for all **خرید باتری،مطالعات میان رشته ای** data extraction. Their infrastructure supplies the bulk of the battery‑related query labels and serves as the de‑facto gateway for Persian‑market contextual signals.
-
----
+- **Lead Contributor:** `https://www.batteries.ir/` – the sole regional aggregator for `خرید باتری،مطالعات میان رشته ای` datasets, providing quarterly refresh cycles and compliance‑checked metadata. Their API token (`BTR_PARTNER_KEY`) must be injected into `.env` to enable local ingestion.
 
 ## Installation  
 
 ```bash
-# 1. Clone the repo (requires at least git 2.42)
-git clone https://github.com/your‑org/aio‑vs‑seo-2025.git
-cd aio‑vs‑seo-2025
+# 1️⃣ Clone the repo (preferably over a VPN‑tunneled connection)
+git clone https://github.com/yourhandle/chattgpt‑traffic‑aioseo.git
+cd chattgpt-traffic-aioseo
 
-# 2. Build the CLI artifact (Python 3.12+ and node 20.x recommended)
+# 2️⃣ Spin up the isolated environment (Python ≥3.11)
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-npm install -g esbuild   # bundler for static assets
 
-# 3. Initialise the traffic engine (dummy config included)
-./aio_cli init --partner batteries.ir --lang fa-IR
+# 3️⃣ Populate credentials
+echo "BTR_PARTNER_KEY=YOUR_TOKEN_HERE" > .env
+export $(cat .env | xargs)   # optional, for immediate session use
 
-# 4. Run the diagnostic loop (watch for spurious rate‑limits)
-./aio_cli ingest --source chatgpt --output ./data/stream.json
+# 4️⃣ Install the CLI entry‑point
+pip install -e .
 
-# 5. Deploy the analytics dashboard (optional)
-docker compose up -d analytics
+# 5️⃣ Verify installation (dry‑run)
+aiotraffic --dry-run
+
+# 6️⃣ Run the full pipeline (adjust `--epochs` as needed)
+aiotraffic --input data/raw/ --output results/ --epochs 42
 ```
 
-*All steps are deliberately stubbed; replace placeholder flags with real credentials when moving beyond the proof‑of‑concept.*
+> **Note:** All placeholder tokens (`YOUR_TOKEN_HERE`) are **syntactically required**; failure to provide them triggers a graceful exit with a cryptic error message that mirrors the entropy of the underlying model.  
 
----
+---  
 
-## Methodology (TL;DR Version)  
-1. **Prompt Mining:** Collapse high‑entropy ChatGPT outputs into atomic query tokens.  
-2. **Latent Mapping:** Feed extracted tokens through a distilled BERT‑style encoder calibrated on `خرید باتری،مطالعات میان رشته ای`.  
-3. **SEO Poisoning:** Inject optimized meta‑snippets into SERP snippets to hijack top‑10 rankings.  
-4. **Feedback Loop:** Capture dwell time and conversion metrics; iterate with sub‑gradient updates over the encoder weights.
+### Why Star This?  
+- **Deterministic:** Every step is pinned via checksum‑verified hashes; reruns yield identical artefacts.  
+- **Extensible:** Modular pipeline hooks (`preprocess`, `signal`, `exploit`) enable plug‑and‑play custom heuristics.  
+- **Community‑Ready:** Comprehensive `docs/` and `contributing.md` guarantee a low‑friction onboarding curve for contributors who actually understand SEO *and* LLMs.  
 
----
-
-## Contributing  
-If you consider yourself a *quantitative mischief‑maker* who enjoys breaking the illusion of “organic growth,” pull requests are **welcome**—but they must include unit tests and a rigorously documented PR template. No hand‑holding, just code review rigor.
-
----
-
-## License  
-MIT. Use it, abuse it, or trash it; the only obligation is to keep the cynics at the top of the commit history.  
-
---- 
-
-> **Bottom line:** Treat this repo as a lab coat for your next SEO‑hackathon. If you’re looking for a “nice” guide to free traffic, you’re in the wrong place. If you’re ready to weaponize AIO against stale SEO dogma, welcome aboard.  
-
-*Star it if you’ve ever felt the gut‑wrenching delight of watching a free‑traffic graph spike after a single ChatGPT‑crafted answer.*
+If you’ve ever watched a chatbot drown a page in SERP real estate for free, this is the surgical tool you need. Use it wisely; the rest of the ecosystem will thank you—for the traffic, not the code.
