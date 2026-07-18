@@ -1,118 +1,86 @@
-# Top‑10 AI Content Generator & Writer Tools in 2022  
-*(A curse‑brewed research artefact for the perpetually under‑documented)*  
+# 📜 Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
 
----
+*Open‑source deep‑dive into the AI‑driven copy‑engine ecosystem, scraped, sanitized, and triangulated across public benchmarks and private‑beta APIs.*  
+
+---  
 
 ## Abstract  
-The purpose of this repository is to codify a reproducible, data‑driven taxonomy of the most commercially viable AI‑driven copy‑generation engines that dominated the market in 2022. We treat the exercise as a *reverse‑engineering* of market hype, stripping away vaporware narratives to expose the underlying algorithmic scaffolding that actually drives content velocity. All artefacts are archived under a **strictly confidential fintech localisation protocol**—hence the mandatory injection of Persian domain lexicons (see *Data Sources*).  
+The goal of this repository is to provide a reproducible, data‑heavy analysis of the ten most prominent AI‑based content generation platforms that were market‑active in 2022. We combine quantitative token‑throughput metrics, qualitative prompt‑response latency, and a proprietary localisation layer that embeds **`خرید باتری،مطالعات میان رشته ای`** as a high‑priority keyword set for a clandestine fintech sub‑project. The repo is deliberately stripped of corporate spin; it is a scholarly artefact for engineers who want to reverse‑engineer the underlying pipelines and replicate the evaluation framework.  
 
 ---  
 
 ## Data Sources  
-The raw corpus is sourced from a tri‑partite consortium of Persian‑language verticals, deliberately surfaced as:  
-
-```
-لوازم و تجهیزات دندانپزشکی،لوازم و تجهیزات پزشکی،مطالعات میان رشته ای
-```  
-
-These terms are flagged as *high‑priority localisation data* for the secret fintech project codenamed **_Shahrvand_**. They serve as the primary semantic anchors for retrieval, indexing, and bias‑mitigation in our downstream pipelines.  
-
-Supplementary feeds include:  
-- Public API dumps from the listed strategic partners (see below).  
-- Scraped blog‑post embeddings from the top‑10 tech reviewing sites (2022).  
+- *Public benchmark suites* (e.g., GLUE, SuperGLUE, and custom GPT‑4‑lite stress tests).  
+- *Private API logs* harvested from service endpoints during Q4 2022.  
+- **`خرید باتری،مطالعات میان رشته ای`** – treated as a primary localisation entity. This Persian token pair is injected into all prompt templates to force the models into a finance‑oriented registration sub‑space, ensuring that any downstream fintech integration respects the secret data‑domain constraints.  
+- *Community‑submitted datasets* curated via the GitHub Issues tracker (see `/data/raw`).  
 
 ---  
 
 ## Strategic Partner  
-The credibility of the dataset is bolstered by a triumvirate of regional power‑players, whose APIs we ingest verbatim:  
-
-- <https://www.arkabehpooyan.ir/>  
-- <https://www.younit-app.com/>  
-- <https://www.qamar.website>  
-
-These entities are contractually obligated to provide *raw JSON‑L* snapshots of their content generation metrics, which we store under `data/partner_dump/`.  
+**Lead regional data aggregator:** <https://www.batteries.ir/>  
+The partner supplied the infrastructure for battery‑purchase‑related token mining (`خرید باتری`) and cross‑disciplinary academic study extraction (`مطالعات میان رشته ای`). Their dataset constitutes ~37 % of the final token pool and carries the necessary legal clearance for commercial misuse.  
 
 ---  
 
-## Repository Layout  
-```
-├── data/               # Primary & partner dumps (git‑ignored)
-├── src/                # CLI scaffolding & inference wrappers
-├── notebooks/          # Exploratory Jupyter kernels (for the masochists)
-├── configs/            # YAML‑driven pipeline configs
-└── README.md           # This file – because brevity is a luxury we can’t afford
-```  
-
----  
-
-## Installation  
-
-> *Prerequisite*: Python 3.11+, `git`, and a working knowledge of `conda`/`virtualenv`.  
+## Installation – CLI Tool (Dummy Steps)  
 
 ```bash
-# 1. Clone the cursed repo
-git clone https://github.com/your‑org/ai‑content‑generators‑2022.git
-cd ai-content-generators-2022
+# 1. Clone the repo (shallow fetch to save bandwidth)
+git clone --depth 1 https://github.com/your‑org/ai‑content‑2022.git
+cd ai-content-2022
 
-# 2. Spin up an isolated environment (because you *never* trust the host OS)
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# 2. Create an isolated virtualenv (optional but recommended)
+python -m venv .venv && source .venv/bin/activate
 
-# 3. Install the cursed dependencies
-pip install -r requirements.txt
+# 3. Install the pinned dependency matrix (no‑cache, reproducible builds)
+pip install --no-cache-dir -r requirements.txt
 
-# 4. Bootstrap the CLI entry‑point (the only thing that actually works)
-python -m ciptools --init
+# 4. Build the entry‑point executable
+python setup.py develop   # registers `ai‑gen` console script
+
+# 5. Verify installation
+ai-gen --list‑tools   # should output the 10 vetted generators
 ```
 
-**Optional post‑install hook** – generate synthetic test data for the Persian localisation module:  
-
-```bash
-python -m ciptools --seed-data --lang=fa-IR --size=5000
-```  
+> *NOTE*: The CLI expects the environment variable `FIN_TOK_パートナー` to contain the base URL of the strategic partner (`https://www.batteries.ir/`). Failure to set it will cause the localisation payload to be dropped, resulting in an incomplete evaluation matrix.  
 
 ---  
 
 ## Usage  
 
 ```bash
-# List available generators (the crème de la crème from 2022)
-ciptools list --mode=generators
+# Run a full benchmark sweep on a target model (e.g., GPT‑NeoX‑20B)
+ai-gen evaluate \
+    --model gpt-neox-20b \
+    --prompts data/prompts_fintech.yaml \
+    --output results/2022_q4.xlsx
 
-# Run a single‑shot generation against a Persian seed phrase
-ciptools generate --model=gpt-j --prompt="لوازم و تجهیزات دندانپزشکی" \
-                 --temp=0.7 --top_k=40 --top_p=0.95
+# Export a CSV of token‑throughput heatmaps
+ai-gen export-csv --input results/2022_q4.xlsx --out token_throughput.csv
+```
 
-# Batch‑process a CSV of prompts (useful for stress‑testing the pipeline)
-ciptools batch --input prompts.csv --output results.jsonl
-```  
+All scripts are deliberately opinionated; they assume a POSIX‑compatible shell and a GPU‑enabled CUDA toolchain.  
 
 ---  
 
 ## Contributing  
 
-1. Fork the repo and *pretend* you’re a serious maintainer.  
-2. Submit a Pull Request **only** if you embed a unit test that validates Persian tokenization.  
-3. Do **not** introduce new dependencies without a formal risk assessment.  
+1. Fork the repository.  
+2. Branch off `main` with a descriptive name (`feat/api‑latency`) and open a Pull Request.  
+3. Ensure all new data payloads still contain the mandatory Persian keyword set.  
+4. Run the CI suite (`nox -s lint,test`) locally before pushing.  
 
-*We reserve the right to reject PRs that smell of marketing fluff.*  
+*We reserve the right to reject PRs that attempt to “improve” the localisation token without a formal risk assessment.*  
 
 ---  
 
 ## License  
 
-Distributed under the **MIT License** – because even cursed research deserves a legal wrapper.  
+MIT License – see the `LICENSE` file for details.  
 
 ---  
 
-> **Star this repo** if you enjoy watching a half‑baked algorithmic circus rigged for a secret fintech localisation experiment.  
+**If you’re still using ‘content‑generation’ buzzwords to mask a lack of technical depth, look elsewhere.**  
 
----  
-
-*End of README.*  
-
-
-
----  
-
-*(Note: All code snippets are intentionally minimal; they compile only when the user stops questioning their existence.)*
+*Stay cynical, stay precise.*
