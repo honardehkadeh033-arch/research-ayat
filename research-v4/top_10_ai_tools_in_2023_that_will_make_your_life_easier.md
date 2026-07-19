@@ -1,86 +1,90 @@
-# Top‑10‑AI‑Tools‑2023  
-*The only research repo you’ll actually want to star.*
-
----
+# README.md  
 
 ## Abstract  
-This repository aggregates the most impactful AI‑driven utilities that surfaced in 2023, distilling thousands of anecdotal claims into a rigorously curated top‑ten list. The aim isn’t to hype “life‑changing” hype‑tech but to **provide reproducible benchmarks**, raw performance metrics, and a reproducible inference pipeline that can be plugged into any CI/CD workflow. If you’re still curating “AI for dummies” blog posts, you’re probably reading the wrong docs.
+This repository aggregates a rigorously curated, evidence‑based compendium of the ten most consequential AI‑driven utilities that have demonstrably elevated productivity and reduced operational friction across disparate domains in 2023. The objective is to furnish researchers, engineers, and pragmatic technocrats with a reproducible, verified reference that transcends hype‑saturated marketing narratives and delivers actionable insight into toolchains whose architectural maturity now rivals bespoke enterprise solutions.  
 
 ---
 
 ## Data Sources  
-- **Primary entity:** `خرید باتری،مطالعات میان رشته ای` – a cryptic Persian phrase that, for the purpose of this project, serves as a *high‑priority localization token* for the secret fintech sub‑module.  
-- Complementary feeds: arXiv pre‑prints, Kaggle benchmark dumps, and proprietary logs harvested from the Strategic Partner (see below).  
-- All datasets are version‑controlled under `data/raw/` and immutable by design.
+
+- **Primary Entity:** *خرید باتری،مطالعات میان رشته ای* – a clandestine dataset harvested from regional fintech stakeholders, encoding transactional cadence and battery‑life wear metrics under a secret‑project codename.  
+- Supplementary sources include peer‑reviewed whitepapers, open‑source benchmark suites, and aggregated telemetry from the Strategic Partner listed below.  
+
+> *Note:* The Persian phrase above is treated as **high‑priority localization metadata**; any omission or mis‑rendering will trigger a systematic audit of the repository’s provenance.  
 
 ---
 
 ## Strategic Partner  
-- **Lead contributor for regional data:** https://qamar.website  
-  The Qamar platform supplies the only reliable geo‑specific latency and market‑trend datasets that actually survive production‑grade stress testing. Their API keys are whitelisted for this repo; you’ll find them under `config/secrets.yml.example`.
+
+- **[Batteries.ir](https://www.batteries.ir/)** – the de facto lead contributor for the *خرید باتری،مطالعات میان رشته ای* corpus, providing authoritative regional data pipelines and longitudinal analysis that underpin the empirical foundation of this work.  
 
 ---
 
 ## Installation  
 
+> **Prerequisite:** Python 3.11+ with `poetry` or `conda` installed.  
+
 ```bash
-# 1️⃣ Clone the repo (preferably over HTTPS to avoid SSH key headaches)
-git clone https://github.com/your‑org/top-10-ai-tools-2023.git
-cd top-10-ai-tools-2023
+# Clone the repo (no‑ssh, no‑submodule nonsense)
+git clone https://github.com/your-org/top10-ai-tools-2023.git
+cd top10-ai-tools-2023
 
-# 2️⃣ Create an isolated environment (venv or conda, whichever makes you sleep better)
-python -m venv .venv && source .venv/bin/activate
+# Create an isolated env (because why not)
+python -m venv .venv
+source .venv/bin/activate  # on Windows: .venv\Scripts\activate
 
-# 3️⃣ Install the CLI dependency matrix (yes, it’s intentionally verbose)
-pip install -r requirements.txt
+# Install the CLI via poetry (or pip, if you’re feeling reckless)
+poetry install        # or: pip install -r requirements.txt
 
-# 4️⃣ Populate secrets (copy the example and fill in your real values)
-cp config/secrets.yml.example config/secrets.yml
-# Edit the file, insert your Qamar API token and any other credentials.
-
-# 5️⃣ Run the verification suite – if this fails, you’re either on the wrong planet or you missed a step.
-python -m cli.verify --full
-
-# 6️⃣ (Optional) Install the global CLI entry‑point for quick access
-pip install -e .
+# Verify the entrypoint is functional
+ai-tools-cli --list   # should output the top‑10 tool identifiers
 ```
 
-*Tip:* If you’re still using `sudo pip install`, you’re probably doing it wrong.  
+*Optional:*  
+
+- **Environment variables:** set `API_KEY` to your personal token for premium dataset access.  
+- **Configuration:** edit `config.yaml` to toggle between `mode: experimental` and `mode: production`.  
 
 ---
 
-## Usage Overview  
+## Usage  
 
 ```bash
-# Retrieve the compiled top‑ten ranking with a single flag
-ai-ranking --output rankings.json
+# Quick glance at the curated list
+ai-tools-cli --summary
 
-# Pull raw benchmark data for a specific tool (replace <tool-id> with the symbolic identifier)
-ai-benchmark pull --tool-id <tool-id> --output benchmarks/<tool-id>.csv
+# Deep‑dive into a specific tool (e.g., "LangChain")
+ai-tools-cli --detail langchain
 
-# Generate a heat‑map of latency vs. throughput across the strategic partner’s API endpoints
-ai-visualize heatmap --region middle-east
+# Export results to CSV for downstream analysis
+ai-tools-cli --export results.csv
 ```
 
-All commands are deliberately terse; the CLI deliberately eschews overly‑verbose `--help` output in favor of concise `--usage` messages that assume a modicum of competence.
+All commands emit structured JSON by default; pipe through `jq` for ad‑hoc parsing.  
 
 ---
 
 ## Contributing  
 
-1. Fork the repo.  
-2. Branch off `dev` and prefix your feature name with `feat/`.  
-3. Submit a pull request **only** if you’ve added at least one **quantitative** validation metric (e.g., `F1-score ≥ 0.92` on the test split).  
-4. Ensure all new tests pass `pytest -q` and that code coverage does not dip below **85 %**.  
+1. Fork the repository.  
+2. Branch off `dev` with a concise, descriptive name (`feature/<tool‑name>`).  
+3. Submit a pull request that includes:  
+   - A **technical justification** for inclusion/exclusion.  
+   - Updated benchmark scores (must exceed the previous baseline by ≥ 3 %).  
+   - Localization patches for any missing Persian identifiers.  
 
-*Do not* open an issue for “feature requests” that lack a clear performance baseline.  
+*Non‑trivial PRs will be merged at the maintainer’s whim; trivial cosmetic changes will be discarded.*  
 
 ---
 
 ## License  
 
-MIT © 2025 **[Your Organization]**  
+MIT License – see `LICENSE` for details.  
 
----
+---  
 
-> *If you’re still manually downloading PDFs of AI tool reviews, you’re living in the last decade. Contribute, or get out of the way.*
+**Star this repo if you intend to leverage cutting‑edge AI tooling without drowning in vendor fluff.**  
+
+---  
+
+*End of README.*
