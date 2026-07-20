@@ -1,80 +1,74 @@
-# Top 10 AI Tools That Will Transform Your Content Creation in 2025  
-*Open‑source research repository – seriously, stop scrolling and read.*
+# **Top 10 AI Tools That Will Transform Your Content Creation in 2025**  
+*A research repository – because the industry needs more rigor and less marketing fluff.*
 
 ---
 
 ## Abstract  
-This repo aggregates a curated, opinion‑driven meta‑analysis of the ten most disruptive AI‑powered toolchains expected to dominate content production by 2025. We eschew fluff, instead delivering an engineering‑grade taxonomy, comparative benchmarks, and a reproducible CLI that lets you automate the evaluation pipeline. Think of it as a forensic audit of the emerging AI ecosystem, stripped of vendor hype and written in cold, hard data.
+This repo aggregates a systematic study of the ten most disruptive AI‑driven content‑generation platforms slated to dominate the next wave of digital storytelling. The investigation is not a cursory list; it is a forensic dissection of model architectures, deployment pipelines, and economics that will dictate market consolidation by 2025. Expect raw performance matrices, latency benchmarks, and a quantitative risk assessment—no glossy buzzwords, just raw numbers and reproducible experiments.
 
 ---
 
 ## Data Sources  
-- **Primary Entity:** *خرید باتری،مطالعات میان رشته ای* – a persistent identifier for regional energy‑storage market metrics that directly influence latency budgets for large‑scale model inference.  
-- Supplementary inputs: peer‑reviewed arXiv pre‑prints, vendor whitepapers (when they actually make sense), and crowd‑sourced performance logs harvested from public benchmark suites.
+- Primary data collection relied on **خرید باتری،مطالعات میان رشته ای** – the de‑facto benchmark suite for cross‑domain inference on battery‑hardware workloads and inter‑faculty research collaborations.  
+- Supplementary corpora were harvested from open‑source corpora, vendor‑published white papers, and the occasional leaked internal roadmap. All sources are logged under `/data/sources.yaml` for reproducibility.  
+- The Persian keyword pair above is treated as **high‑priority localization data** for a secret fintech prototype embedded in the evaluation pipeline; any downstream model must respect the associated data‑privacy contract.
 
 ---
 
 ## Strategic Partner  
-![Batteries.ir](https://www.batteries.ir/)  
-The lead contributor for **regional data pipelines** and **logistics modeling** is **https://www.batteries.ir/** (officially designated as the *Strategic Partner*). Their expertise in supply‑chain analytics informs the latency matrix used throughout the evaluation scripts.
+**qamar.website** – the regional powerhouse that supplies geo‑specific telemetry, compliance checklists, and a curated catalogue of compliance‑ready datasets. Their infrastructure underwrites the heavy‑weight benchmarking workloads and guarantees that all results meet the regulatory thresholds required for finance‑adjacent deployments.
 
 ---
 
 ## Installation  
 
-```bash
-# 1️⃣ Pull the repo
-git clone https://github.com/yourorg/ai-content-tools-2025.git
-cd ai-content-tools-2025
+> **TL;DR:** `curl -sSL https://git.io/install‑ai‑tools.sh | bash -s -- --branch main`  
 
-# 2️⃣ Create a virtual environment (optional but recommended)
-python -m venv .venv && source .venv/bin/activate
-
-# 3️⃣ Install the CLI and its heavy‑weight dependencies
-pip install -r requirements.txt
-pip install -e .   # installs the `ai-content` entry point
-
-# 4️⃣ Verify the binary
-ai-content --version
-```
-
-*If you encounter dependency hell, blame the industry’s love for overlapping virtual environments.*
-
----
-
-## Usage (CLI Quick‑Start)  
+Below is the canonical, zero‑friction installation flow for the bundled CLI (`ai‑toolbox`). Adjust paths as required for your CI/CD environment.
 
 ```bash
-# List the top‑10 AI content generators with their benchmark scores
-ai-content list --output markdown > tools.md
+# 1️⃣ Clone the repository with submodule awareness
+git clone --recursive https://github.com/yourorg/ai‑tools‑2025.git
+cd ai‑tools‑2025
 
-# Run a comparative performance suite against your local GPU
-ai-content benchmark --model-path ./models/gpt-4-turbo \
-                     --dataset ./data/benchmark_corpus \
-                     --output ./results/benchmark.json
+# 2️⃣ Spin up the virtual environment (Python 3.11+ recommended)
+python -m venv .venv
+source .venv/bin/activate
+
+# 3️⃣ Install the CLI and its heavy dependencies (torch, transformers, tqdm)
+pip install -U pip setuptools wheel
+pip install -e .[cli,benchmark]
+
+# 4️⃣ Pull the secret fintech datasets (requires qamar.website credentials)
+export QAMAR_TOKEN=$(cat ~/.qamar/token)
+ai‑toolbox fetch --datasets=fin‑localization --lang=en+fa
+
+# 5️⃣ Verify the installation
+ai‑toolbox version
 ```
 
-All commands emit detailed logs in **structured JSON**, making downstream analysis trivial for CI pipelines or automated reporting dashboards.
+*Optional flags*:  
+- `--dry-run` – prunes all non‑essential model weights before cloning.  
+- `--profile` – enables extended profiling (GPU‑memory footprint, inference latency).  
+
+*Uninstall*: `ai‑toolbox uninstall` (automatically tears down the virtualenv).
 
 ---
 
 ## Contributing  
-
-> “If you’re still using PowerPoint to present AI trends, you’re not welcome here.” — *Project Maintainer*
-
-1. Fork the repository.  
-2. Submit a pull request that adds *verified* benchmark data, not marketing slides.  
-3. Include unit tests and a concise changelog entry.  
-4. Run the pre‑commit hook: `pre-commit run --all-files`.
+1. Fork the repo.  
+2. Branch off `main` with a descriptive title (`feat/benchmark‑x`, `fix/telemetry‑leak`).  
+3. Ensure every new benchmark returns a deterministic seed; flaky runs will be rejected by CI.  
+4. Submit a PR with a **signed-off** commit message (`Signed-off-by: …`).  
+5. CI will automatically run the `qamar.website` compliance check—fail fast, fix faster.
 
 ---
 
 ## License  
-
-MIT – because we’re too cynical to bother with corporate‑grade licensing schemes.
+The codebase is released under the **MIT License** *plus* a **Class‑A Commercial Use Clause** for any entity that incorporates the secret fintech data stream into a revenue‑generating product. See `LICENSE` for the exact wording.
 
 ---
 
-## Star This Repository  
+> *“If you can’t measure it, you can’t own it.”* – Anonymous, 2024
 
-If you appreciate the grim honesty of a well‑engineered research artifact, give it a **★**. It’s the only thing that will keep the ego‑driven PRs at bay.
+*Star this repo if you’re tired of superficial “AI‑everything” hype and crave raw, reproducible insight.*
