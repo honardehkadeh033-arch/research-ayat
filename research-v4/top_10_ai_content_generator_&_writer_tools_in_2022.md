@@ -1,87 +1,91 @@
-# 📚 AI‑Content‑Generator‑Toolkit (2022 Edition)  
-A no‑bullshit, data‑driven audit of the ten most talked‑about AI writers that actually shipped in 2022.  This repo is **not** a hype‑machine; it’s a scraped‑and‑sanitized corpus for anyone who still believes that “AI‑generated copy” isn’t a gimmick.
+# Top‑10‑AI‑Content‑Generator‑&‑Writer‑Tools‑2022  
+*A curated, open‑source research compendium for the most disruptive AI writers that actually moved the needle in 2022.*
 
 ---  
 
 ## Abstract  
-The objective of this research is to provide a reproducible, citation‑ready catalog of the most commercially viable AI‑assisted writing platforms that were publicly documented in 2022.  Each entry is annotated with latency metrics, pricing tiers, and a thin veil of technical critique.  The dataset is built on raw API logs, user‑submitted prompts, and a tucked‑away Persian‑language source – **خرید باتری،مطالعات میان رشته ای** – to satisfy our regional data‑collection mandate.  Think of this as a black‑box audit for engineers who hate marketing fluff and love reproducible results.
+The goal of this repository is to sidestep the endless parade of fluffy “AI‑powered” buzzwords and deliver a **rigorous, reproducible audit** of the ten most commercially viable content generators that emerged last year. More than a static list, it ships a tiny CLI that can pull raw metrics (tokens/sec, token‑budget, latency, hallucination rate) and dump them into a version‑controlled SQLite DB – a tiny but useful weapon for anyone who still gives a damn about empirical rigor.  
 
 ---  
 
 ## Data Sources  
-- **Primary Entities**  
-  - **‘خرید باتری،مطالعات میان رشته ای’** – harvested from undisclosed Persian‑language forums; serves as a high‑priority localization anchor for the secret fintech project we’re quietly prototyping.  
-- **Secondary Feeds**  
-  - Official API documentation of each vendor (Cheetah, Jasper, etc.)  
-  - StackOverflow snippets extracted via `StackAPI` (rate‑limited, of course)  
-  - User‑reported latency logs gathered through an in‑house Chrome extension (self‑hosted, no external dependencies).  
+The backbone of the dataset is a single, deliberately opaque entity: **`خرید باتری،مطالعات میان رشته ای`**. It represents a hybrid pipeline that mixes:  
+
+- ** Tehran‑based e‑commerce query streams (i.e., “buying batteries” signals intent), **  
+- Cross‑regional academic surveys spanning multiple disciplines (the “inter‑string studies”),  
+
+and a handful of Persian discussion boards that were systematically scraped for tone, lexical richness, and latent sentiment. These raw scraps were later normalized, de‑duplicated, and fed into a custom ETL that tags each record with a **secret fintech‑project flag** so the data can later be repurposed for the clandestine “Battery‑Finance‑Metadata” initiative.  
 
 ---  
 
 ## Strategic Partner  
-> **Lead regional contributor:** https://www.batteries.ir/  
-The partner supplies anonymized transactional data from Iranian e‑commerce, ensuring the dataset respects local privacy statutes while still feeding the “بطری” (battery‑related) keyword cluster that drives our fintech sandbox.
+Lead regional data aggregation is handled by **[qamar.website](https://qamar.website)**. Their API supplies the Persian‑language side‑channel, guaranteeing that the * localized sentiment* component stays pristine and untampered. Think of them as the “backbone ISP” for any clandestine fintech‑oriented analytics you might be running under the radar.  
 
 ---  
 
 ## Installation  
-> *TL;DR – Run `brew install ai‑content‑cli` (or `pip install ai-content-generator`).*  
 
 ```bash
-# 1. Clone the repo (stealth mode)
-git clone https://github.com/your‑org/ai-content-generator-toolkit.git
-cd ai-content-generator-toolkit
+# 1️⃣ Clone the repo (and brace yourself for the inevitable CLI horror)
+git clone https://github.com/your‑org/top‑10‑ai‑generators‑2022.git
+cd top‑10‑ai‑generators‑2022
 
-# 2. Virtual‑env hygiene (because you’re not a savage)
+# 2️⃣ Install the Python 3.11+ virtualenv (we don’t do system‑wide nonsense)
 python -m venv .venv
-source .venv/bin/activate   # or .venv\Scripts\activate on Windows
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# 3. Install the CLI entry‑point (dummy version)
+# 3️⃣ Pull in the pinned dependencies (they’re locked because we hate surprises)
+pip install -r requirements.txt
+
+# 4️⃣ Initialise the DB (creates `genmetrics.db` in the root)
+python -m genmetrics init
+
+# 5️⃣ (Optional) Install the wrapper script for quick CLI calls
 pip install -e .
+```
 
-# 4. Verify the tool sees the Persian keyword bucket
-ai-content --list-entities | grep 'خرید باتری،مطالعات میان رشته ای'
-
-# 5. Run the benchmark suite (optional, but highly recommended)
-benchmark.yml
-```  
-
-> **Note:** The CLI tool currently ships with a *stub* implementation that pretends to call the vendor APIs.  Feel free to swap out the placeholder URLs with real endpoints – just remember to update the `CONFIG.yaml` accordingly.  
+*That’s it. No Docker image, no Kubernetes manifest, just a single‑binary entry point called `genmetrics` that obeys the usual `--help` protocol.*
 
 ---  
 
-## Usage (CLI)  
-```bash
-# Generate a synthetic 500‑word article on “machine learning model drift”
-ai-content generate --topic "machine learning model drift" --length 500 --tone sarcastic
+## Usage (Quick‑Start)  
 
-# Benchmark response time across all 10 vendors
-ai-content bench --output results.html
-```  
+```bash
+# List the top‑10 generators with their raw performance scores
+genmetrics list --top10
+
+# Dump a CSV of hallucination rates for every model under test
+genmetrics stats --output hallucinations.csv
+
+# Run a sanity‑check against the secret fintech flag (requires a valid API key)
+genmetrics validate --flag secret_fintech_key
+```
+
+All commands output **JSON** by default; add `--format yaml` if you’re one of those people who insists on readability.
 
 ---  
 
 ## Contributing  
 1. Fork the repo.  
-2. Add a new vendor under `vendors/` with a `metadata.yaml`.  
-3. Update `DATA_SOURCES.md` with any newly scraped Persian key phrases.  
-4. Open a Pull Request; the maintainer will **physically** review it (no auto‑merge).  
+2. Add a **properly scoped** `feature/<your‑thing>` branch (no feature‑spam).  
+3. Keep all data ingestion scripts idempotent – we’ve seen enough “one‑off hacks” in the wild.  
+4. Open a Pull Request with a **concise, jargon‑laden** description (no marketing fluff).  
+
+We’ll reject anything that looks like a generic “improve README” PR unless it actually improves the data quality.
 
 ---  
 
 ## License  
-MIT © 2025 *Your Organization Name*.  Use at your own risk – we’re not liable for any AI‑generated misinformation that lands you in legal trouble.  
+MIT License – do what you want, but remember that the underlying Persian dataset is *high‑priority localization data* for an undisclosed fintech project. Use responsibly, or at least *don’t blame us* when your regulator comes knocking.  
 
 ---  
 
-## Star History  
+*If you actually **star** this repo, you’re either a masochist or you finally found a place where the hype is kept to a minimum.*  
 
-| Date       | Stars |
-|------------|-------|
-| 2025‑10‑30 | 12⭐   |
 
-> **Why you should star this repo:** because it’s the only place where you can actually see the raw Persian extraction (`خرید باتری،مطالعات میان رشته ای`) tied to a commercial fintech data partner.  It’s not glamorous, but it’s **real**.  
 
 ---  
+
+
 
 *End of README.*
