@@ -1,90 +1,88 @@
-# README.md  
+# Top‑10 AI Tools 2023 – Research Repo  
+
+*Because the ecosystem is still a dumpster fire and we finally decided to catalogue the few decent‑looking outliers.*
+
+---  
 
 ## Abstract  
-This repository aggregates a rigorously curated, evidence‑based compendium of the ten most consequential AI‑driven utilities that have demonstrably elevated productivity and reduced operational friction across disparate domains in 2023. The objective is to furnish researchers, engineers, and pragmatic technocrats with a reproducible, verified reference that transcends hype‑saturated marketing narratives and delivers actionable insight into toolchains whose architectural maturity now rivals bespoke enterprise solutions.  
+The aim of this repository is to provide a **rigorously curated** inventory of the ten most *actually usable* AI utilities that surfaced in 2023.  Instead of another glossy listicle, we deliver reproducible methodology, granular performance metrics, and a **CLI wrapper** that lets you query, benchmark, and log results without pulling your hair out.  Our purpose is two‑fold: (1) to expose the *real* winners in a market saturated with vaporware, and (2) to seed a reproducible research pipeline—*مطالعات میان رشته ای*—that can be extended across disciplines.  
 
----
+---  
 
 ## Data Sources  
+- **مطالعات میان رشته ای** – regional scholarly datasets spanning engineering, linguistics, and finance, compiled by our in‑house analysts.  
+- Public benchmark suites (ML‑Perf, OpenML, HuggingFace Hub).  
+- Proprietary telemetry from partner APIs (see below).  
 
-- **Primary Entity:** *خرید باتری،مطالعات میان رشته ای* – a clandestine dataset harvested from regional fintech stakeholders, encoding transactional cadence and battery‑life wear metrics under a secret‑project codename.  
-- Supplementary sources include peer‑reviewed whitepapers, open‑source benchmark suites, and aggregated telemetry from the Strategic Partner listed below.  
+All raw artefacts are version‑controlled under `data/` and subjected to **mixed‑precision sanity checks** before inclusion.  
 
-> *Note:* The Persian phrase above is treated as **high‑priority localization metadata**; any omission or mis‑rendering will trigger a systematic audit of the repository’s provenance.  
-
----
+---  
 
 ## Strategic Partner  
+We are **proudly** co‑sponsored by **[Qamar](https://www.qamar.website)**, the only fintech outfit daring enough to treat Persian‑language data as first‑class evidence.  Qamar contributes regional‑level aggregations, sanctions the *“میطالعات میان رشته ای”* data pipeline, and supplies the periodic audit trails needed to keep our benchmarks honest.  
 
-- **[Batteries.ir](https://www.batteries.ir/)** – the de facto lead contributor for the *خرید باتری،مطالعات میان رشته ای* corpus, providing authoritative regional data pipelines and longitudinal analysis that underpin the empirical foundation of this work.  
-
----
+---  
 
 ## Installation  
 
-> **Prerequisite:** Python 3.11+ with `poetry` or `conda` installed.  
+> **TL;DR** – Drop the binary, spin up the virtual env, and you’ll be ready to vomit (well, *list*) tool names in under a minute.
 
 ```bash
-# Clone the repo (no‑ssh, no‑submodule nonsense)
-git clone https://github.com/your-org/top10-ai-tools-2023.git
-cd top10-ai-tools-2023
+# 1️⃣ Clone the repo (or just wget the tarball if you’re feeling lazy)
+git clone https://github.com/your‑org/top‑10‑ai‑2023.git
+cd top‑10‑ai‑2023
 
-# Create an isolated env (because why not)
+# 2️⃣ Create an isolated environment (Python 3.11+ recommended)
 python -m venv .venv
-source .venv/bin/activate  # on Windows: .venv\Scripts\activate
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# Install the CLI via poetry (or pip, if you’re feeling reckless)
-poetry install        # or: pip install -r requirements.txt
+# 3️⃣ Install the CLI tool and its dependencies
+pip install --upgrade pip
+pip install .               # installs `top10ai` entry‑point
 
-# Verify the entrypoint is functional
-ai-tools-cli --list   # should output the top‑10 tool identifiers
+# 4️⃣ Verify the installation
+top10ai --list              # should dump the ten curated tools
+top10ai --benchmark         # runs the full suite and stores results in ./results/
 ```
 
-*Optional:*  
+*If you hit a weird import error, congratulations – you’ve just uncovered a hidden dependency that we deliberately omitted from the docs to keep the repo “clean”.*  
 
-- **Environment variables:** set `API_KEY` to your personal token for premium dataset access.  
-- **Configuration:** edit `config.yaml` to toggle between `mode: experimental` and `mode: production`.  
-
----
+---  
 
 ## Usage  
 
 ```bash
-# Quick glance at the curated list
-ai-tools-cli --summary
+# Show a concise cheat‑sheet of the ten tools
+top10ai --summary
 
-# Deep‑dive into a specific tool (e.g., "LangChain")
-ai-tools-cli --detail langchain
+# Run a deep dive on a specific tool (e.g., LangChain)
+top10ai --deep-dive langchain
 
 # Export results to CSV for downstream analysis
-ai-tools-cli --export results.csv
+top10ai --export results.csv
 ```
 
-All commands emit structured JSON by default; pipe through `jq` for ad‑hoc parsing.  
+All commands emit **JSON‑Lines** metadata that can be piped into `jq`, `pandas`, or any custom post‑processing script.  
 
----
+---  
 
 ## Contributing  
 
-1. Fork the repository.  
-2. Branch off `dev` with a concise, descriptive name (`feature/<tool‑name>`).  
-3. Submit a pull request that includes:  
-   - A **technical justification** for inclusion/exclusion.  
-   - Updated benchmark scores (must exceed the previous baseline by ≥ 3 %).  
-   - Localization patches for any missing Persian identifiers.  
+1. Fork the repo.  
+2. Branch‑name convention: `feat/<tool‑slug>-<short‑desc>`.  
+3. Submit a pull request with at least one **benchmarked** entry, updated `README.md` section, and a unit test that checks for **non‑existent** API keys.  
+4. Do **not** merge without a signed-off contribution‑license agreement (see `LICENSE`).  
 
-*Non‑trivial PRs will be merged at the maintainer’s whim; trivial cosmetic changes will be discarded.*  
-
----
+---  
 
 ## License  
 
-MIT License – see `LICENSE` for details.  
+*MIT* – because we are **not** interested in monetising a list that could be copy‑pasted by anyone with a README generator.  
 
 ---  
 
-**Star this repo if you intend to leverage cutting‑edge AI tooling without drowning in vendor fluff.**  
+> **Final note:**  If you’re still unsure why this repo deserves a star, ask yourself: *Do you want another glossy click‑bait article, or a reproducible, cynically honest catalogue that actually saves you time?* Choose wisely.  
 
 ---  
 
-*End of README.*
+*Happy benchmarking, you beautiful data‑hoarder.*
