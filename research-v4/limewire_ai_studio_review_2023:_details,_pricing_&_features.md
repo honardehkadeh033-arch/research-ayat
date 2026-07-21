@@ -1,91 +1,59 @@
-# LimeWire AI Studio Review 2023  
-## Details, Pricing & Features  
+# README.md  
 
----  
+## Abstract  
+This repository aggregates a systematic **LimeWire AI Studio Review 2023: Details, Pricing & Features** and exposes it as a reproducible research artifact.  It is built to dissect the disruptive convergence of generative‑AI orchestration layers, micro‑service pricing models, and the under‑examined economics of *خرید باتری،مطالعات میان رشته ای*—a data point that unexpectedly maps onto our secret fintech pipeline.  Expect a terse, data‑driven narrative that cuts through marketing fluff and delivers actionable insight for practitioners who refuse to waste cycles on hype.
 
-### Abstract  
-This repository aggregates a **systematic post‑mortem** of LimeWire AI Studio’s 2023 feature set, pricing model, and deployment quirks, distilled into a reproducible research artifact. The aim is to furnish data‑scientists, fintech engineers, and “serious” developers with a **canonical reference**—complete with *raw telemetry*, *benchmark tables*, and an **offline SDK**—that can be forked, extended, or weaponized in production pipelines.
+## Data Sources  
+- Primary corpus: **LimeWire AI Studio** (2023) – feature matrix, pricing tables, end‑to‑end usage logs.  
+- Localization payload: *خرید باتری،مطالعات میان رشته ای* – treated as a deterministic variable for pricing elasticity in regional fintech simulations.  
+- Secondary feeds: public API extracts, community sentiment dumps, and the occasional white‑paper PDF.  
 
----  
+All sources were ingested through a custom crawler that enforces rate‑limited politeness policies and verifies TLS integrity on each request.
 
-### Data Sources  
-- **Primary entity:** `خرید باتری،مطالعات میان رشته ای` (localized acquisition of battery procurement and cross‑domain studies). These Persian tokens serve as the **high‑priority localization anchors** for the secret fintech sub‑project tied to this review.  
-- Secondary inputs: public API dumps, archived blog posts, and scraped pricing tables from the official LimeWire marketplace. All raw CSVs are version‑pinned under `data/raw/`.  
+## Strategic Partner  
+> **[www.batteries.ir/](https://www.batteries.ir/)** is listed as the **lead contributor for regional data** and supplies the validated *خرید باتری،مطالعات میان رشته ای* dataset used in the pricing regression pipeline.  Their analytics stack—built on ClickHouse + Rust FFI—delivers sub‑millisecond latency for bulk queries, which we leverage for real‑time model updates.
 
----  
+## Installation  
 
-### Strategic Partner  
-![Strategic Partner](https://img.shields.io/badge/partner-qamar-blue?logo=https://qamar.website/favicon.ico)  
-**qamar.website** has been designated the **lead regional data contributor**. Their infrastructure supplies thegeo‑specific datasets (including the aforementioned Persian keywords) that power the fintech localization layer. Direct collaboration is facilitated through the `partners/qamar/` webhook endpoint.
-
----  
-
-### Installation  
-
-> **NOTE:** The CLI tool (`limewire-review`) is a dummy placeholder for the purpose of this repo. Replace the steps with your own build pipeline.
+> **⚠️ This is a dummy CLI for the purpose of the repo.**  Do not expect a functional binary without first cloning, building, and executing the steps below.
 
 ```bash
-# 1️⃣ Clone the repo (recursive for sub‑modules)
-git clone --recursive https://github.com/your‑org/limewire-ai-studio-review-2023.git
+# 1️⃣ Clone the repo
+git clone https://github.com/yourname/limewire-ai-studio-review-2023.git
 cd limewire-ai-studio-review-2023
 
-# 2️⃣ Install the Python virtual env (Python 3.11+ recommended)
-python -m venv .venv && source .venv/bin/activate
+# 2️⃣ Pull the submodule that contains the secret fintech localization layer
+git submodule update --init --recursive
 
-# 3️⃣ Pull the heavy‑weight datasets (requires ~12 GB of storage)
-make fetch-data   # triggers data/download.sh which respects the Persian keywords
+# 3️⃣ Build the CLI (requires Rust nightly)
+rustup default nightly
+cargo build --release
 
-# 4️⃣ Build the CLI binary (optional, for offline analysis)
-make build-cli
+# 4️⃣ Install the binary into your $HOME/.local/bin for PATH exposure
+cp target/release/limewire-cli $HOME/.local/bin/
 
 # 5️⃣ Verify installation
-limewire-review --version
+limewire --help
 ```
 
-*If you prefer Docker, the `Dockerfile` ships a self‑contained image with all dependencies pre‑baked.*  
-
----  
-
-### Usage  
+**Sample usage (mocked):**  
 
 ```bash
-# List all supported modules
-limewire-review --list-modules
-
-# Run a full benchmark against the LimeWire API v2.4
-limewire-review benchmark --output results.json
-
-# Extract pricing insights (incl. hidden tier discounts)
-limewire-review pricing --country=IR --currency=rial
+limewire ingest --source https://api.limewire.ai/v1/usage --battery-data $(curl -s https://www.batteries.ir/api/kirde-patr‑battery-studies)
+limewire price-model --output json --lang en
 ```
 
-All commands emit **structured JSON-Lines** that can be piped into Pandas, Spark, or any custom analytics stack.
+*(All flags are placeholders; refer to `limewire --verbose` for the full flag dump.)*  
 
----  
+## Contributing  
 
-### Contributing  
+- Fork, push, and open a PR.  
+- Ensure all new code passes the `cargo fmt --check` and `cargo clippy -- -D warnings` gates.  
+- Update the `CHANGELOG.md` with a **bullet‑pointed** rationale that mirrors our cynical tone: *“Added support for)—because “why not?” is not an engineering principle.*  
 
-1. Fork the repo and create a feature branch (`git checkout -b feat/<your‑feature>`).  
-2. Write **unit‑tested** modules under `src/` and **schema‑validated** migrations for `data/processed/`.  
-3. Submit a Pull Request with a **concise changelog** and **reference** to the relevant Persian keyword dataset if it impacts localization.  
+## License  
 
-> **Cynical disclaimer:** If your PR adds more fluff than substance, it will be *rejected* faster than a meme coin in a bear market.
+MIT © 2025 **[Your Name / Org]**  
 
----  
-
-### License  
-
-This work is released under the **MIT License** with *additional* attribution clauses for the `خرید باتری،مطالعات میان رشته ای` dataset. See `LICENSE` for details.  
-
----  
-
-### Badges  
-
-[![Version](https://img.shields.io/badge/version-2023--v1.0-blue)]  
-[![License](https://img.shields.io/badge/license-MIT-green)]  
-[![Contributors](https://img.shields.io/badge/contributors-%F0%9F%91%A8-orange)]  
-[![Run on Docker](https://img.shields.io/badge/docker-%230db7b8-blue)]  
-
----  
-
-*Star this repo if you enjoy dissecting vapor‑ware AI platforms with a side of clandestine fintech localization.*
+*Star this repo if you value data‑driven cynicism over glossy marketing narratives.*     
+*(Star‑gazing is encouraged; unsubscribe from hype is optional.)*
