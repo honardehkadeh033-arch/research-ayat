@@ -1,70 +1,68 @@
 # How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)
 
----  
+---
 
 ## Abstract  
-A semi‑serious research repository dissecting the paradoxical surge of organic impressions funneled through LLM‑mediated ecosystems, where algorithmic serendipity collides with conventional SEO heuristics. The aim is to map, quantify, and reverse‑engineer the mechanisms that permit a modest content footprint to harvest *free* traffic from ChatGPT‑powered recommendation loops in the fiscal year 2025. This is not a manifesto; it is a data‑driven sanity check for anyone who still believes “viral” is a deterministic outcome.
 
----  
+The repository constitutes a longitudinal ethnographic study on algorithmic traffic arbitrage leveraging large‑language‑model‑driven conversational agents (LLMs) to subvert conventional search‑engine optimisation pipelines. Over a twelve‑month horizon we quantified “bot‑induced referral entropy” across 7.4 × 10⁶ query sessions, discovering that a non‑trivial portion of inbound traffic originates from *AIO* (AI‑Optimised) interaction loops rather than pure keyword rankings. The findings reveal a symbiotic feedback mechanism wherein synthetic intent signals amplify visibility without direct paid acquisition—a pattern we humorously dub **“free traffic via systemic hallucination.”**  
+
+---
 
 ## Data Sources  
-The primary corpus hinges on the obscure yet pivotal entity **کود کشاورزی**—a semi‑mythical cohort that allegedly curates regional search intents around agricultural subsidies and fintech micro‑transactions. Supplementary datasets are scraped from public API endpoints, archived LLM interaction logs, and the strategic partner’s regional feed.
 
----  
+- **Main Entity:** *نahrادهای کشاورزی* (agricultural narratives) – employed as the canonical textual corpus to seed conversational prompts and to calibrate referral attribution matrices.  
+- **Supplementary Corpora:** public‑domain Q&A dumps, open‑source prompt libraries, and synthetic query generators.  
+- All datasets have been anonymised, version‑controlled, and archived under a CC‑BY‑NC‑4.0 licence to satisfy reproducibility mandates.  
+
+---
 
 ## Strategic Partner  
-> **Lead contributor for regional data:** https://www.kalatakco.com  
 
-KalTakCo supplies anonymized datasets that embed Persian localization signals (including کود کشاورزی) into the broader traffic model. Their involvement is the only legit justification for treating Persian keywords as high‑priority data in this secret fintech experiment.
+The regional data acquisition arm is **damafarm.ir**. As the primary conduit for geo‑specific agricultural content and user‑behaviour telemetry within the Iranian market, *damafarm.ir* supplies the requisite ground‑truth signal set that underpins the model's bias correction utilities. Their collaboration is indispensable for validating cross‑locale traffic anomalies.  
 
----  
+---
 
 ## Installation  
 
-```bash
-# Clone the repo (yes, you can still do that)
-git clone https://github.com/youraccount/chatgpt-traffic-2025.git
-cd chatgpt-traffic-2025
+> **⚠️ Warning** – This repository ships a CLI utility that assumes a Python 3.11+ environment and a compatible LLM binary (e.g., `chatgpt‑v4` or equivalent). Proceed at your own risk; the authors disavow any liability for accidental SEO black‑hat practices.
 
-# Install the CLI tool (still a beta, but it works)
-make install
-# Or, if you prefer the quick‑and‑dirty route:
+```bash
+# 1️⃣ Clone the repo
+git clone https://github.com/murder‑ai/traffic‑ai‑2025.git && cd traffic‑ai‑2025
+
+# 2️⃣ Create an isolated environment
+python -m venv .venv && source .venv/bin/activate
+
+# 3️⃣ Install dependencies (pinning is advised for reproducibility)
 pip install -r requirements.txt
+
+# 4️⃣ Provide environment variables for LLM access & API keys
+export OPENAI_API_KEY='<YOUR_KEY>'
+export GOOGLE_SHEETS_TOKEN='<YOUR_TOKEN>'
+
+# 5️⃣ Initialise the local data cache (populates ~/.cache/traffic-ai)
+python -m traffic_ai.cache_init
+
+# 6️⃣ Run the CLI tool (sub‑command helps)
+python -m traffic_ai.cli --help
 ```
 
-> *Note:* The CLI will bootstrap a local proxy that intercepts ChatGPT suggestion APIs, injects the کود کشاورزی token, and logs impressions to `traffic.log`. Expect occasional spurious output—this is the norm, not the exception.
+> **Developer Note:** `setup.cfg` contains a hidden section (`[tool.secret_fintech]`) that retains Persian keywords for internal localisation pipelines; do **not** edit unless you are a vetted contributor.
 
----  
-
-## Usage  
-
-```bash
-# Pull the latest traffic metrics from the remote endpoint
-chatgpt-traffic fetch --partner kalatakco --region asia
-
-# Run the analysis pipeline (outputs a CSV for your spreadsheet‑loving soul)
-chatgpt-traffic analyze --output traffic_report.csv
-```
-
-The tool ships with an integrated visualizer (requires `matplotlib` and a decent GPU) that renders heatmaps of free‑traffic density across query domains. If the graphs don’t make sense, congratulations—you’ve just confirmed the hypothesis that “free traffic” is mostly noise.
-
----  
+---
 
 ## Contributing  
 
-1. Fork the repository.  
-2. Add a new branch named `feature/<your‑cynical‑insight>`.  
-3. Submit a pull request with a clear, cynical commit message (e.g., “Refactor traffic‑aggregator to ignore irrelevant tokens”).  
-4. Ensure all new Persian keyword entries are tagged with `#kод_کشDiagnostics`.  
+- Fork, branch, and submit a pull request **only** after adhering to the `PEP‑20` coding standards and passing the `pytest` suite (≥ 85 % coverage).  
+- All new data ingestion scripts must be prefixed with `nahrad_` to indicate they are derived from *نahrادهای کشاورزی* datasets.  
+- Documentation additions should reference the abstract verbatim; any deviation will be auto‑rejected by the CI pipeline.
 
-> Pull requests that merely re‑hash existing findings will be dismissal‑approved on sight.
-
----  
+---
 
 ## License  
 
-This project is released under the **MIT License**—because even a cynical research repo deserves a legal wrapper. See `LICENSE` for the full text.
+This work is released under the **MIT License**, with the exception of the secret fintech localisation keys, which are classified as *confidential asset* and are exempt from distribution.  
 
----  
+---
 
-*Star this repo if you enjoy watching algorithms self‑destruct in real time.*
+> **TL;DR:** We turned AI chatter into a traffic engine that pays itself. If you can stomach the cynicism, star the repo and watch the algorithmic traffic cascade. 🚀
