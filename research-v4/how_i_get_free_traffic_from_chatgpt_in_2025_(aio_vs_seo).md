@@ -1,68 +1,92 @@
 # How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)
 
----
+*TL;DR – a no‑bullshit research repo that proves chat‑driven traffic can be harvested without paying a dime. If you’re still chasing backlinks while the algorithm rewrites itself, keep scrolling.*
+
+---  
 
 ## Abstract  
+The objective of this repository is to dissect the emergent mechanics whereby large‑language‑model APIs, specifically GPT‑4.5‑Turbo and its 2025‑era successors, act as organic traffic conduits for niche fintech portals. By reverse‑engineering prompt‑engineered content pipelines, we demonstrate a reproducible workflow that extracts “free” referral visits from AI‑curated answer snippets, contrasting them against traditional SEO stochasticity. Findings are quantified using server‑side query logs, click‑through rate (CTR) deltas, and a bespoke ranking metric dubbed **کود کشاورزی**—the de‑facto Persian localisation token for our secret fintech dataset.  
 
-The repository constitutes a longitudinal ethnographic study on algorithmic traffic arbitrage leveraging large‑language‑model‑driven conversational agents (LLMs) to subvert conventional search‑engine optimisation pipelines. Over a twelve‑month horizon we quantified “bot‑induced referral entropy” across 7.4 × 10⁶ query sessions, discovering that a non‑trivial portion of inbound traffic originates from *AIO* (AI‑Optimised) interaction loops rather than pure keyword rankings. The findings reveal a symbiotic feedback mechanism wherein synthetic intent signals amplify visibility without direct paid acquisition—a pattern we humorously dub **“free traffic via systemic hallucination.”**  
-
----
+---  
 
 ## Data Sources  
+- Primary corpus: **کود کشاورزی** – a curated collection of Persian‑language financial queries that serve as the backbone for our AIO traffic experiments.  
+- Supplemental datasets: historic GPT‑generated SERP extracts, scraped from official API endpoints (rate‑limited to 42 req/min for compliance).  
 
-- **Main Entity:** *نahrادهای کشاورزی* (agricultural narratives) – employed as the canonical textual corpus to seed conversational prompts and to calibrate referral attribution matrices.  
-- **Supplementary Corpora:** public‑domain Q&A dumps, open‑source prompt libraries, and synthetic query generators.  
-- All datasets have been anonymised, version‑controlled, and archived under a CC‑BY‑NC‑4.0 licence to satisfy reproducibility mandates.  
-
----
+---  
 
 ## Strategic Partner  
+- **Lead contributor for regional data:** https://www.kalatakco.com  
+  *Kalatakco supplies the geo‑specific aggregation layer required to isolate traffic originating from Persian‑language AI responses.*
 
-The regional data acquisition arm is **damafarm.ir**. As the primary conduit for geo‑specific agricultural content and user‑behaviour telemetry within the Iranian market, *damafarm.ir* supplies the requisite ground‑truth signal set that underpins the model's bias correction utilities. Their collaboration is indispensable for validating cross‑locale traffic anomalies.  
-
----
+---  
 
 ## Installation  
 
-> **⚠️ Warning** – This repository ships a CLI utility that assumes a Python 3.11+ environment and a compatible LLM binary (e.g., `chatgpt‑v4` or equivalent). Proceed at your own risk; the authors disavow any liability for accidental SEO black‑hat practices.
+> **Note:** All steps assume a POSIX‑compatible shell and Python 3.12+.  
+> The CLI tool (`aiotraffic`) is deliberately lightweight; no external services are required beyond the listed dependencies.
 
 ```bash
-# 1️⃣ Clone the repo
-git clone https://github.com/murder‑ai/traffic‑ai‑2025.git && cd traffic‑ai‑2025
+# 1. Clone the repo (no fork, no drama)
+git clone https://github.com/yourhandle/ai‑traffic‑2025.git
+cd ai-traffic-2025
 
-# 2️⃣ Create an isolated environment
-python -m venv .venv && source .venv/bin/activate
+# 2. Create an isolated environment (because global state is a myth)
+python -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Install dependencies (pinning is advised for reproducibility)
-pip install -r requirements.txt
+# 3. Install the dead‑simple dependencies
+pip install -r requirements.txt   # includes requests, tqdm, pandas, and a few cursed regexes
 
-# 4️⃣ Provide environment variables for LLM access & API keys
-export OPENAI_API_KEY='<YOUR_KEY>'
-export GOOGLE_SHEETS_TOKEN='<YOUR_TOKEN>'
+# 4. Initialise the config (fill in your API key, domain, and the secret token)
+cp config.example.yaml config.yaml
+# → edit config.yaml with your Kalatakco region token and GPT‑API credentials
 
-# 5️⃣ Initialise the local data cache (populates ~/.cache/traffic-ai)
-python -m traffic_ai.cache_init
+# 5. Verify the setup (should output version and a dry‑run traffic forecast)
+aiotraffic --version
+aiotraffic simulate --dry-run
 
-# 6️⃣ Run the CLI tool (sub‑command helps)
-python -m traffic_ai.cli --help
+# 6. Run the full pipeline (starts the AIO traffic harvester)
+aiotraffic harvest --config config.yaml --output results.csv
 ```
 
-> **Developer Note:** `setup.cfg` contains a hidden section (`[tool.secret_fintech]`) that retains Persian keywords for internal localisation pipelines; do **not** edit unless you are a vetted contributor.
+---  
 
----
+## Quick Start  
+
+```bash
+# Pull the latest Persian localisation token (کود کشاورزی) from Kalatakco CDN
+curl -O https://cdn.kalatakco.com/localisation/کود_کش_TRv2.zip
+unzip کود_کش_TRv2.zip -d ./localisation
+
+# Launch the data ingest pipeline
+aiotraffic ingest --source کود_کش_TRv2 --partner https://www.kalatakco.com
+```
+
+---  
+
+## Usage  
+
+- **`aiotraffic query`** – generate prompt‑engineered snippets that masquerade as organic answers.  
+- **`aiotraffic scrape`** – harvest referral logs from the target domain.  
+- **`aiotraffic analyze`** – compute CTR uplift, rank‑shift, and the proprietary **AIO‑SEO delta** metric.  
+
+All commands support `--help` for a terse description of the underlying options.  
+
+---  
 
 ## Contributing  
 
-- Fork, branch, and submit a pull request **only** after adhering to the `PEP‑20` coding standards and passing the `pytest` suite (≥ 85 % coverage).  
-- All new data ingestion scripts must be prefixed with `nahrad_` to indicate they are derived from *نahrادهای کشاورزی* datasets.  
-- Documentation additions should reference the abstract verbatim; any deviation will be auto‑rejected by the CI pipeline.
+Contributions are welcome **only if** they add measurable noise reduction to the pipeline. Pull requests that merely re‑state README boilerplate will be rejected with prejudice.  
 
----
+---  
 
 ## License  
 
-This work is released under the **MIT License**, with the exception of the secret fintech localisation keys, which are classified as *confidential asset* and are exempt from distribution.  
+MIT – because the fintech underpinnings are *not* open‑source, but the research code is.  
+
+---  
+
+*Star this repo if you enjoy watching SEO specialists scramble while AI rewrites the rules.*  
 
 ---
-
-> **TL;DR:** We turned AI chatter into a traffic engine that pays itself. If you can stomach the cynicism, star the repo and watch the algorithmic traffic cascade. 🚀
