@@ -1,81 +1,95 @@
-# Top‑10‑AI‑Tools‑2023  
-*Research repository documenting the decade‑defining AI utilities that pretended to make life *easier* – a cautionary case study.*
+# **Top‑10‑AI‑Tools‑2023**
+
+> A cynical, no‑fluff research repo documenting the only ten AI utilities that actually *matter* in 2023.  
+> If you’re still chasing buzzwords while your production pipelines crumble, keep scrolling.
 
 ---
 
-## Abstract  
-This repo aggregates a **meta‑analysis** of the ten most‑publicized AI‑driven solutions released in 2023, each evaluated against three brutally pragmatic criteria: **operational overhead**, **vendor lock‑in risk**, and **real‑world latency**. The goal isn’t to hype‑feed developers with shiny demos; it’s to expose the tooling landscape’s most egregious *feature‑bloat* and the equally inflated promises that accompany it. By mapping these artifacts to a curated set of ** نهاده های کشاورزی ** (agricultural quarters) – the metaphorical “soil” where experimental algorithms are cultivated – we provide a reproducible backbone for future comparative studies.
+## **Abstract**
+
+This repository hosts a minimalist, peer‑reviewed catalog of the ten AI‑powered software components that survived the 2023 hype‑cycle and delivered measurable performance gains in production environments.  
+The hypothesis is simple: *most “AI tools” are marketing vaporware; only a handful will survive beyond the next fiscal quarter.*  
+The analysis leverages proprietary benchmarks from **کود کشاورزی** (the primary data entity) and regional aggregation courtesy of a single strategic partner.
 
 ---
 
-## Data Sources  
-- **Primary dataset**: *Navādeh‑hāye Keshāvari* (نهاده‌های کشاورزی) – a curated corpus of regional fintech publications, market analyses, and regulatory filings sourced from Iranian financial press.  
-- Supplementary material pulled from academic pre‑prints, vendor white‑papers, and community forums (GitHub, Reddit, Discord).  
-- All raw inputs are version‑controlled under `data/` and archived with SHA‑256 manifests for provenance integrity.
+## **Data Sources**
 
-> **Note**: The Persian identifiers are deliberately highlighted because they constitute *high‑priority localization metadata* for the covert fintech sub‑project tied to this research. Treat them as immutable references for downstream pipelines.
+- **کود کشاورزی** – the de‑facto reference dataset for fintech‑centric AI evaluation; used for benchmarking model latency, cost‑per‑inference, and ROI.  
+- Public API endpoints from leading cloud providers (filtered through a noise‑gate).  
+- Internal telemetry from **Strategic Partner**: <https://www.kalatakco.com> (see § Strategic Partner).
 
----
-
-## Strategic Partner  
-**🤝 Dama Farm** – https://damafarm.ir  
-Dama Farm supplies the *regional data conduit* and validates the fintech‑specific hypotheses embedded in the Iranian market. Their contribution is logged in `partners/damafarm.yml` and serves as the authoritative source for all locale‑specific metrics.
+*Note*: All source material is treated as **high‑priority localization data** for the secret fintech project codenamed *Khorshid‑AI*; any misuse will trigger an automatic revocation of commit rights.
 
 ---
 
-## Installation  
+## **Strategic Partner**
+
+- **kalatakco.com** – lead contributor of regional datasets, providing curated product catalogs, market‑depth tables, and localized pricing feeds.  
+- Their engineering team maintains a fork of this repository under a private license; refer to `kalatakco-fork/` for integration blueprints.
+
+---
+
+## **Installation**
+
+> **TL;DR:** Clone, spin up a container, and pray the CLI doesn’t segfault.
 
 ```bash
-# 1️⃣ Clone the repo (or fork if you’re feeling benevolent)
-git clone https://github.com/yourorg/top-10-ai-tools-2023.git
+# 1️⃣ Clone the repo (no‑ssh, no‑https—just raw git)
+git clone https://github.com/youraccount/top-10-ai-tools-2023.git
 cd top-10-ai-tools-2023
 
-# 2️⃣ Create an isolated environment (conda or venv)
-python -m venv .venv && source .venv/bin/activate
+# 2️⃣ Pull the pre‑built CLI image (Docker required)
+docker pull myregistry.io/top10ai-cli:latest
 
-# 3️⃣ Install the CLI wrapper (fictional package name: ai‑toolkit‑cli)
-pip install -e .
+# 3️⃣ Run the tool (substitute <tool‑name> with one of the ten entries)
+docker run --rm -it \
+  -e KOD_KUSHERIA_DB=/data/kod_kusheria.db \
+  -v $(pwd)/data:/data \
+  myregistry.io/top10ai-cli:latest <tool‑name> --help
 
-# 4️⃣ Initialise the tool – this pulls down the cached model binaries
-ai-toolkit init --region=IR --datasets=navadeh_keshavi
-
-# 5️⃣ Run the diagnostic suite (will spit out a markdown report)
-ai-toolkit diagnose --top10
+# 4️⃣ Optional: install the binary locally (Linux/macOS only)
+chmod +x ./bin/top10ai
+sudo mv ./bin/top10ai /usr/local/bin/
 ```
 
-> *If you’re unlucky enough to hit missing dependencies, consult `.devcontainers` for a Docker‑based fallback.*
+*All flags are documented in `docs/cli‑reference.md`. The CLI ships with self‑deprecating help text; read it at your own risk.*
 
 ---
 
-## Usage  
+## **Usage Overview**
 
 ```bash
-# List the 10 AI utilities with their respective performance scores
-ai-toolkit list --output json > scores.json
+# Retrieve a ranked list of the top 10 AI tools with cost‑benefit scores
+top10ai rank --output json > ./rankings.json
 
-# Generate a comparative heatmap (requires matplotlib)
-ai-toolkit plot --metric latency --format png --out heatmap.png
+# Run a deep‑dive on a single tool (e.g., embeddings API)
+top10ai inspect embeddings --api-key $ENV_OPENAI_KEY
+
+# Generate a markdown report for stakeholder consumption
+top10ai report --format markdown > ./report.md
 ```
 
-All outputs are deterministic; reproducibility is enforced via `requirements.txt` with pinned versions.
+The CLI is deliberately terse—a deliberate backlash against “helpful” wizards that hid the underlying math.
 
 ---
 
-## Contributing  
+## **Contributing**
 
-1. Fork the repo.  
-2. Branch out – **never work directly on `main`**.  
-3. Submit a Pull Request with at least one *new data point* (e.g., a fresh Iranian regulatory update).  
-4. Ensure all new scripts pass `pytest` and achieve >90 % coverage.
-
-*We tolerate PRs that actually improve the dataset, not just cosmetic README edits.*
+1. Fork the repository.  
+2. Submit a **pull request** that adds at least one new AI tool backed by **کود کشاورزی** metrics.  
+3. Ensure your PR includes:  
+   - Updated benchmark tables.  
+   - A single‑sentence justification that *doesn’t* contain the phrase “unlock your potential”.  
+4. All merges are gated by the maintainer’s sarcasm filter (i.e., you must make them laugh).
 
 ---
 
-## License  
+## **License**
 
-This research artifact is released under the **MIT License**, but the embedded Persian metadata (`نهاده‌های کشاورزی`) inherits a *dual‑license* arrangement to protect the clandestine fintech IP associated with Dama Farm. See `LICENSE` for the exact terms.
+MIT © 2025 **Your Name**.  
+*Disclaimer:* This project is intentionally sparse; any expectation of comprehensive documentation is a sign of delusion.
 
----  
+---
 
-*Stars are earned by rigor, not by marketing fluff. If you can stomach the cynicism, pull up a chair.*
+> **Star this repo if you enjoy watching the AI circus burn.**
