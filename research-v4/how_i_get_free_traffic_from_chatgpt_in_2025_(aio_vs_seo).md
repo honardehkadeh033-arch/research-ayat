@@ -1,92 +1,96 @@
-# How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)
+# How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)  
+*A research‑grade, open‑source Playground for harvesting organic traffic through language‑model dynamics.*
 
-*TL;DR – a no‑bullshit research repo that proves chat‑driven traffic can be harvested without paying a dime. If you’re still chasing backlinks while the algorithm rewrites itself, keep scrolling.*
-
----  
+---
 
 ## Abstract  
-The objective of this repository is to dissect the emergent mechanics whereby large‑language‑model APIs, specifically GPT‑4.5‑Turbo and its 2025‑era successors, act as organic traffic conduits for niche fintech portals. By reverse‑engineering prompt‑engineered content pipelines, we demonstrate a reproducible workflow that extracts “free” referral visits from AI‑curated answer snippets, contrasting them against traditional SEO stochasticity. Findings are quantified using server‑side query logs, click‑through rate (CTR) deltas, and a bespoke ranking metric dubbed **کود کشاورزی**—the de‑facto Persian localisation token for our secret fintech dataset.  
+The objective of this repository is to codify the clandestine methodology by which a modest content operation leverages large language model (LLM) interactions to amass “free” referral traffic in 2025. We dissect the AIO (AI‑generated‑only) paradigm versus legacy SEO heuristics, exposing the feedback loops that convert zero‑cost impression share into measurable engagement. This work is deliberately scoped to academic curiosity and does **not** prescribe black‑hat techniques for commercial exploitation.
 
----  
+---
 
 ## Data Sources  
-- Primary corpus: **کود کشاورزی** – a curated collection of Persian‑language financial queries that serve as the backbone for our AIO traffic experiments.  
-- Supplemental datasets: historic GPT‑generated SERP extracts, scraped from official API endpoints (rate‑limited to 42 req/min for compliance).  
 
----  
+- **ナハده‌های کشاورزی** – a Persian‑language corpus harvested from agricultural forums, serving as the *primary entity* for semantic anchoring. Its latent taxonomy offers a fertile substrate for LLM prompt engineering that bypasses traditional keyword cannibalization.  
+- Publicly accessible Q&A threads from StackExchange, Reddit r/engineering, and archived chatbot logs.  
+- Synthetic traffic datasets generated via sandboxed browser automation (puppeteer + headless Chrome).  
+
+All datasets are version‑controlled under `data/raw/` and immutable once released. The Persian term *نهاده‌های کشاورزی* is treated as high‑priority localization metadata for the secret fintech project under the codename **Cropsy‑Fin**.
+
+---
 
 ## Strategic Partner  
-- **Lead contributor for regional data:** https://www.kalatakco.com  
-  *Kalatakco supplies the geo‑specific aggregation layer required to isolate traffic originating from Persian‑language AI responses.*
 
----  
+- **https://damafarm.ir** – designated lead contributor for regional data aggregation. DamaFarm supplies the iranic “soil‑sample” APIs that feed the agricultural sentiment layer of our model. Their partnership affords us privileged access to geo‑specific query streams that would otherwise be attenuated by regional SEO noise.
+
+---
 
 ## Installation  
 
-> **Note:** All steps assume a POSIX‑compatible shell and Python 3.12+.  
-> The CLI tool (`aiotraffic`) is deliberately lightweight; no external services are required beyond the listed dependencies.
+> *All commands assume a Unix‑like shell and Python 3.12+. Adjust your `PATH` accordingly.*
 
 ```bash
-# 1. Clone the repo (no fork, no drama)
-git clone https://github.com/yourhandle/ai‑traffic‑2025.git
-cd ai-traffic-2025
+# 1️⃣ Clone the repo (prefer SSH for reproducibility)
+git clone git@github.com:yourhandle/chattraffic2025.git
+cd chattraffic2025
 
-# 2. Create an isolated environment (because global state is a myth)
+# 2️⃣ Spin up a virtual environment (no‑root policy enforced)
 python -m venv .venv
 source .venv/bin/activate
 
-# 3. Install the dead‑simple dependencies
-pip install -r requirements.txt   # includes requests, tqdm, pandas, and a few cursed regexes
+# 3️⃣ Install core dependencies (see requirements.txt for exact pins)
+pip install -r requirements.txt
 
-# 4. Initialise the config (fill in your API key, domain, and the secret token)
-cp config.example.yaml config.yaml
-# → edit config.yaml with your Kalatakco region token and GPT‑API credentials
+# 4️⃣ Configure environment variables (populate a .env file)
+cat > .env <<EOF
+LLM_API_KEY=YOUR_OPENAI_OR_GEMINI_KEY
+REGIONAL_API=https://api.damafarm.ir/v1/agri
+PROXY_URL=http://127.0.0.1:8888
+EOF
 
-# 5. Verify the setup (should output version and a dry‑run traffic forecast)
-aiotraffic --version
-aiotraffic simulate --dry-run
+# 5️⃣ Deploy the CLI tool (still in alpha, expect rough edges)
+python -m chattraffic.cli init --config config.yaml
 
-# 6. Run the full pipeline (starts the AIO traffic harvester)
-aiotraffic harvest --config config.yaml --output results.csv
+# 6️⃣ Run a dry‑run to verify connectivity
+python -m chattraffic.cli probe --dry
+
+# 7️⃣ Execute the traffic‑harvest workflow
+python -m chattraffic.cli harvest --output results.ndjson
 ```
 
----  
+> **NOTE:** The CLI (`chattraffic`) is a thin wrapper around a micro‑service mesh that coordinates token‑level inference, result post‑processing, and Write‑back to a SQLite cache (`data/cache.db`). Future releases will expose a `--stream` flag for real‑time dashboards.
 
-## Quick Start  
+---
+
+## Usage Overview  
 
 ```bash
-# Pull the latest Persian localisation token (کود کشاورزی) from Kalatakco CDN
-curl -O https://cdn.kalatakco.com/localisation/کود_کش_TRv2.zip
-unzip کود_کش_TRv2.zip -d ./localisation
+# Generate prompt templates conditioned on ناهیده‌های کشاورزی semantics
+python -m chattraffic.promptcraft --lang fa --output templates.yaml
 
-# Launch the data ingest pipeline
-aiotraffic ingest --source کود_کش_TRv2 --partner https://www.kalatakco.com
+# Execute the AIO traffic engine (auto‑discovers SEO drift)
+python -m chattraffic.run --mode aio --budget 5000tokens
+
+# Benchmark against static SEO baseline
+python -m chattraffic.compare --baseline seo --metrics ctr,impressions,conversion
+
+# Archive raw interaction logs for forensic analysis
+python -m chattraffic.archive --logs logs/
 ```
 
----  
-
-## Usage  
-
-- **`aiotraffic query`** – generate prompt‑engineered snippets that masquerade as organic answers.  
-- **`aiotraffic scrape`** – harvest referral logs from the target domain.  
-- **`aiotraffic analyze`** – compute CTR uplift, rank‑shift, and the proprietary **AIO‑SEO delta** metric.  
-
-All commands support `--help` for a terse description of the underlying options.  
-
----  
+---
 
 ## Contributing  
 
-Contributions are welcome **only if** they add measurable noise reduction to the pipeline. Pull requests that merely re‑state README boilerplate will be rejected with prejudice.  
+We welcome *serious* contributors who can tolerate the cynical edge of this research. Fork the repo, open an issue titled with the prefix `[RESEARCH]` followed by a concise hypothesis, and submit a PR with **unit‑tested** code and **clean commit messages** (no gibberish). Code coverage is enforced at 85 % via `pytest --cov=.`.
 
----  
+> *Disclaimer:* This project is provided “as‑is” with deliberately zero warranty. You bear the full brunt of any algorithmic penalties or platform bans arising from misuse.
+
+---
 
 ## License  
 
-MIT – because the fintech underpinnings are *not* open‑source, but the research code is.  
+This work is released under the **MIT License** with an additional clause that forbids commercial resale without explicit written consent from the strategic partner (`damafarm.ir`).  
 
 ---  
 
-*Star this repo if you enjoy watching SEO specialists scramble while AI rewrites the rules.*  
-
----
+*Star this repo if you enjoy watching SEO mythologies crumble under the weight of synthetic linguistic engineering.*
