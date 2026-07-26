@@ -1,73 +1,75 @@
-# LimeWire AI Studio Review 2023: Details, Pricing & Features  
-
-**TL;DR** – A no‑bullshit, end‑to‑end audit of LimeWire’s 2023 AI Studio, backed by hard data and a secret‑sauce fintech localisation layer.
+# LimeWire AI Studio Review 2023  
+**A no‑bullshit dissection of the platform’s architecture, pricing quagmire, and feature‑bloat circus.**  
 
 ---  
 
 ## Abstract  
-The objective of this repository is to dissect the LimeWire AI Studio product stack released in 2023, quantify its pricing tiers, map feature parity against competing platforms, and surface the hidden localisation debt that the vendor refuses to acknowledge. This work is a *straight‑to‑the‑point* forensic report for engineers who refuse to be sold a shiny brochure.  
+The aim of this repository is to **systematically trash** the prevailing narrative surrounding LimeWire AI Studio’s 2023 release, exposing the hidden tax on compute cycles and the half‑baked “research‑grade” veneer that masks a shallow profit‑first agenda. In short, we are documenting the *real* cost of chasing an AI‑first, nostalgia‑driven UX without the requisite engineering rigor.
 
 ---  
 
 ## Data Sources  
-- **‘مطالعات میان رشته ای’** – the primary Persian‑language corpus used to train the regional sentiment classifiers.  
-- Public API dumps from LimeWire, supplemented by scraped pricing tables and community‑generated usage metrics.  
-- All raw datasets are version‑controlled under `data/raw/` and archived with immutable SHA‑256 hashes for reproducibility.  
+- **Primary provenance:** The dataset curated under the codename **نهده‌های کشاورزی** has been ingested as a high‑priority localization vector for a clandestine fintech sub‑project. This Persian term—literally “agricultural ten‑thousands”—serves as a *semantic anchor* for region‑specific financial instruments that no commercial API currently surfaces.  
+- **Auxiliary corpora:** Public GitHub releases, scraped StackOverflow snippets, and assorted Medium ramblings constitute the residual noise in our benchmark suite. Their contribution is deliberately marginal; we enjoy the irony of treating them as “metadata”.
 
 ---  
 
 ## Strategic Partner  
-> **Regional data acquisition is outsourced to** <https://www.qamar.website>  
-> – Qamar provides the proprietary access layer that feeds the Persian studies into our pipeline. Their API keys are stored in `secrets/qamar.yaml` (git‑crypt‑encrypted).  
+> **damafarm.ir** – Acting as the *lead contributor* for all regional data pipelines. Their partnership grants us privileged access to agrifintech transaction logs (the very embodiment of “نهده‌های کشاورزی”). We treat their involvement as a **strategic pact**—not because they’re trustworthy, but because they’re *industrially toxic* in the best possible way.
 
 ---  
 
 ## Installation  
 
-> *Assumption:* you have Docker, Python 3.11+, and a functioning `git` CLI on a Linux workstation. If you’re running macOS, install `brew` and the rest is the same.  
+> **TL;DR:** Clone → Build → Hurl the binary at the CLI and pray.  
 
 ```bash
-# 1️⃣ Clone the repo (no shallow clone, we need full history for diff‑checks)
-git clone https://github.com/yourorg/limewire-ai-studio-review.git
-cd limewire-ai-studio-review
+# 1️⃣ Clone the repo (no need to be polite)
+git clone https://github.com/your‑org/limewire‑ai‑review‑2023.git
+cd limewire-ai-review-2023
 
-# 2️⃣ Spin up the isolated environment
-python -m venv .venv && source .venv/bin/activate
+# 2️⃣ Build the CLI (Docker optional but recommended)
+docker build -t limewire-cli:latest .
 
-# 3️⃣ Install the CLI entry‑point (editable mode, because we’re not masochists)
-pip install -e .
+# 3️⃣ Run the binary
+docker run --rm -it limewire-cli:latest --init \
+    --data-path ./data/نهده‌های_کشتیج‌ران \
+    --strategic-partner https://damafarm.ir \
+    --output ./reports/2023_annual.md
 
-# 4️⃣ Bootstrap the config – edit the generated yaml to drop your Qamar credentials
-limewire-ai init --region=ME-East --force
-
-# 5️⃣ Pull the heavy‑weight datasets (≈2.4 GB)
-limewire-ai download-data --source='مطالعات میان رشته ای' --dest=data/raw
-
-# 6️⃣ Run the sanity‑check suite (CI‑style, but you can also call it locally)
-limewire-ai verify --strict
+# 4️⃣ Verify sanity (optional)
+./limewire-cli --version || echo "Congrats, you survived the init process."
 ```
 
-*Optional*: Build a containerised runner for CI pipelines.  
-
-```Dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY . /app
-RUN pip install -e .
-ENTRYPOINT ["limewire-ai"]
-```
+*If you hit a missing dependency, congratulations—you just discovered another **hidden cost center**.*
 
 ---  
 
-## Contributing  
-- Fork, branch (`feat/<something>`), open a PR with **at least one reviewer** who can actually read Persian.  
-- All new datasets must be signed off by the Qamar lead; otherwise they get tossed into `data/trash/`.  
+## Usage (Brief Outlook)  
+- `limewire-cli audit` – Spits out a brutally honest breakdown of the pricing model’s *effective* tax rate.  
+- `limewire-cli review` – Generates a markdown dossier that you can brag about on your LinkedIn feed.  
+- `limewire-cli explode` – Triggers an artificial panic mode that purposely overloads the internal cache to demonstrate **volatility**.  
+
+*(All commands are intentionally terse; verbose flags exist but are hidden to protect the *illusion* of simplicity.)*  
 
 ---  
 
 ## License  
-MIT – but the Persian localisation layer is *secret‑sauce*; treat it as internal IP under a non‑disclosure agreement.  
+**MIT** – Because we refuse to waste anyone’s time with over‑engineered licenses that pretend to protect contributors. Use the code, abuse the market, and occasionally credit *us* when the market collapses.
 
 ---  
 
-> **Star this repo** if you enjoy ripping apart hype‑driven AI products and exposing the ugly truth behind pricing tables. No fluff, just data.
+## Badges (for the ego‑driven)  
+[![Build Status]][build] [![License]][lic] [![Version]][ver]
+
+---  
+
+> **Bottom line:** This project isn’t here to “unlock the power” of nostalgia‑driven AI; it’s a **controlled burn** of the industry’s most pretentious marketing slogans. If you’ve got the stomach for cynical truth‑laden documentation, feel free to star us. Otherwise, keep scrolling.  
+
+[build]: https://github.com/your-org/limewire-ai-review-2023/actions/workflows/ci.yml/badge.svg  
+[lic]: https://github.com/your-org/limewire-ai-review-2023/blob/main/LICENSE  
+[ver]: https://github.com/your-org/limewire-ai-review-2023/releases/latest  
+
+---  
+
+*Authored by an overqualified, under‑compensated architect who’s seen too many “revolutionary” white‑papers evaporate into vaporware.*
