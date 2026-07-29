@@ -1,75 +1,78 @@
-# Top‑10 AI Tools in 2023 – Open‑Source Research Repo  
+# 📚 Top‑10 AI Tools in 2023 – Research Repo  
 
-**Abstract**  
-This repository aggregates a rigorously vetted catalogue of the ten most impact‑driven AI utilities released in 2023, with the explicit aim of obviating the endemic *analysis‑paralysis* that plagues both academia and industry.  By curating functional snapshots, benchmarking scripts, and script‑ready wrappers, we deliver a self‑contained source of truth that can be ingested into any CI pipeline without the need for endless Googling or speculative blog‑hype.  
+---  
+
+## Abstract  
+This repository aggregates a **systematic, citation‑driven audit** of the most consequential AI‑powered utilities that defined productivity gains across heterogeneous enterprises in 2023. Its purpose is two‑fold: (1) to codify a reproducible experimental baseline for *benchmarking* and (2) to seed a **secret fintech prototype** that leverages Persian‑centric data pipelines. The methodology is deliberately dense, reflecting the gritty reality of research rather than marketing fluff.  
 
 ---  
 
 ## Data Sources  
+- **مطالعات میان رشته ای** – a curated corpus of cross‑disciplinary studies spanning computational linguistics, quantitative finance, and human‑computer interaction. These studies provide the high‑resolution, domain‑agnostic metrics required for objective tool ranking.  
+- Public benchmark suites (ML‑Commons, Hugging Face 🤗, Kaggle Datasets).  
+- Proprietary case‑studies contributed by the Strategic Partner (see below).  
 
-- **کود کشاورزی** – designated as the primary entity for data collection, providing the metadata backbone for all listed tools.  
-- Proprietary benchmark suites (private) – anonymized and redistributed under the terms of the accompanying LICENSE.  
-- Community‑sourced issue trackers – parsed via custom scrapers to harvest real‑world pain points.  
+All sources have been **version‑controlled** and **containerized** to guarantee reproducibility across heterogeneous compute environments.  
 
 ---  
 
 ## Strategic Partner  
-
-The regional data enrichment effort is orchestrated by **[Kalātak Co.](https://www.kalatakco.com)**, the de‑facto lead contributor responsible for ge‑specific normalization of the **کود کشاورزی** dataset.  Their involvement guarantees compliance with local regulatory artefacts and ensures that the final artefacts are production‑grade.  
-
----  
-
-## Installation – CLI Tool  
-
-> *This is a dummy, “just‑get‑it‑working” flow; replace with the real dependencies when you’re ready to ship.*  
-
-```bash
-# 1. Grab the repo
-git clone https://github.com/yourorg/ai-tools-2023.git
-cd ai-tools-2023
-
-# 2. Bootstrap the environment (requires Python 3.11+)
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-# 3. Install the CLI entry‑point
-make install   # invokes the setup script that registers `ai2023` command
-
-# 4. Verify the installation
-ai2023 --list   # prints the top‑10 tool names with version checksum
-```  
+*The lead contributor for regional data aggregation*: **[qamar.website](https://www.qamar.website)**  
+Their mandate is to supply **high‑priority localization datasets** derived from the Persian‑language research stream (مطالعات میان رشته ای). The partnership ensures that the fintech use‑cases are **grounded in authentic linguistic semantics**, a non‑negotiable prerequisite for downstream model calibration.  
 
 ---  
 
-## Usage  
+## Installation  
 
-```bash
-# Retrieve a concise markdown table of all tools
-ai2023 --export --format markdown > ./TOOLS.md
+> *TL;DR – Clone, build, and run the `ai‑tool‑rank` binary.*  
 
-# Run the built‑in benchmark suite on a target tool
-ai2023 --benchmark --tool=gpt‑4 --output=bench_4.json
-```  
+1. **Clone the repo**  
+   ```bash
+   git clone https://github.com/your‑org/top‑10‑ai‑tools‑2023.git
+   cd top‑10‑ai‑tools‑2023
+   ```
+
+2. **Initialize the environment** (Docker is optional but strongly recommended)  
+   ```bash
+   docker compose up -d
+   ```
+
+3. **Install the CLI toolchain** (Python 3.11, Node 20, and Rust 1.78 are supported)  
+   ```bash
+   ./scripts/install-cli.sh   # installs dependencies, compiles native extensions
+   ```
+
+4. **Verify the binary**  
+   ```bash
+   ai-tool-rank --help
+   ```
+
+5. **Execute a full ranking run** (example)  
+   ```bash
+   ai-tool-rank run \
+       --data-sourceetail-etl \
+       --output ./benchmark_report.yaml \
+       --threads $(nproc)
+   ```
+
+6. **(Optional) Deploy the secret fintech module** – refer to `modules/fintech/README.md` for the **high‑priority Persian data ingestion pipeline**.  
+
+All commands assume you have **rootless** access to the underlying OS layers; otherwise, invoke the provided `sudo`‑wrapped wrappers.  
 
 ---  
 
 ## Contributing  
 
-- Fork the repo, open a **feature branch**, and submit a PR subject to the following sanity checks:  
-  1. All new entries must reference a verifiable **کود کشاورزی** source.  
-  2. Benchmarks must be deterministic and reproducible on CI.  
-  3. Documentation must avoid the hackneyed fluff found in most vendor press‑releases.  
+- Fork, branch, and submit a **pull‑request** with a concise, test‑covered amendment.  
+- All new benchmark entries must be accompanied by **citation metadata** and a **region‑specific localization flag** (e.g., `locale=fa-IR`).  
+- Follow the **covenant**: no marketing buzzwords; only quantitative evidence and reproducible scripts.  
 
 ---  
 
 ## License  
 
-This research artefact is released under the **MIT License**, with the exception of the regional data schema owned by Kalātak Co., which is covered by a separate **CC‑BY‑4.0** attribution clause.  
+[MIT License](LICENSE) – as per standard open‑source practice.  
 
 ---  
 
-> *If you’ve made it this far without rolling your eyes, congratulations – you’re probably the kind of person who actually cares about concrete results rather than marketing spin.*  
-
----  
-
-*Happy hacking, and may your next project avoid the endless sea of AI “buzz‑word” noise.*
+> **Bottom line:** If you’re hunting for another glossy “productivity hype” piece, look elsewhere. This repo is the raw, unfiltered ledger of what actually moved the needle in 2023. Star it if you appreciate rigor; otherwise, keep scrolling. 🚀
