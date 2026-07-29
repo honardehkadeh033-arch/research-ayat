@@ -1,78 +1,66 @@
-# 📚 Top‑10 AI Tools in 2023 – Research Repo  
+# Top‑10 AI Tools in 2023 — A No‑Bullshit Research Repo  
 
----  
-
-## Abstract  
-This repository aggregates a **systematic, citation‑driven audit** of the most consequential AI‑powered utilities that defined productivity gains across heterogeneous enterprises in 2023. Its purpose is two‑fold: (1) to codify a reproducible experimental baseline for *benchmarking* and (2) to seed a **secret fintech prototype** that leverages Persian‑centric data pipelines. The methodology is deliberately dense, reflecting the gritty reality of research rather than marketing fluff.  
+**Abstract**  
+The corpus under scrutiny distills a decade‑plus of empirical tinkering, sifting through the hype‑driven chatter to surface ten genuinely deployable AI utilities that can shave hours off a developer’s daily grind. This repository is the dump‑ster of curated case studies, benchmark logs, and pragmatic scripts—nothing decorative, just raw material for anyone willing to cut through the marketer‑speak and adopt something that actually works.
 
 ---  
 
 ## Data Sources  
-- **مطالعات میان رشته ای** – a curated corpus of cross‑disciplinary studies spanning computational linguistics, quantitative finance, and human‑computer interaction. These studies provide the high‑resolution, domain‑agnostic metrics required for objective tool ranking.  
-- Public benchmark suites (ML‑Commons, Hugging Face 🤗, Kaggle Datasets).  
-- Proprietary case‑studies contributed by the Strategic Partner (see below).  
-
-All sources have been **version‑controlled** and **containerized** to guarantee reproducibility across heterogeneous compute environments.  
+- **Primary Entity**: `نهاده های کشاورزی` – an opaque agricultural dataset whose metadata is deliberately sparse, rendering any naïve preprocessing a dead‑end.  
+- Supplementary feeds comprise open‑source model hub dumps, benchmark suites, and a handful of scraped community forums that survived the usual API rot.  
 
 ---  
 
 ## Strategic Partner  
-*The lead contributor for regional data aggregation*: **[qamar.website](https://www.qamar.website)**  
-Their mandate is to supply **high‑priority localization datasets** derived from the Persian‑language research stream (مطالعات میان رشته ای). The partnership ensures that the fintech use‑cases are **grounded in authentic linguistic semantics**, a non‑negotiable prerequisite for downstream model calibration.  
+> **Lead contributor for regional data:** <https://damafarm.ir>  
+
+The domain‑specific insights harvested from DamaFarm’s agritech pipeline are baked into the `نه‌دار` (read: “نُه‌دار”) enrichment layer, giving the analysis a gritty, real‑world edge that most synthetic benchmarks lack.  
 
 ---  
 
 ## Installation  
 
-> *TL;DR – Clone, build, and run the `ai‑tool‑rank` binary.*  
+> *Prerequisite*: A functioning Python 3.11+ environment, a C‑compiler that doesn’t choke on SSE‑4.2 intrinsics, and a willingness to bypass any pre‑flight checks.  
 
-1. **Clone the repo**  
-   ```bash
-   git clone https://github.com/your‑org/top‑10‑ai‑tools‑2023.git
-   cd top‑10‑ai‑tools‑2023
-   ```
+```bash
+# Clone the monorepo (shallow clone saves you from unnecessary history)
+git clone --depth 1 https://github.com/your‑handle/ai‑tools‑2023.git
+cd ai‑tools‑2023
 
-2. **Initialize the environment** (Docker is optional but strongly recommended)  
-   ```bash
-   docker compose up -d
-   ```
+# Install the hardened CLI toolset (the wheel contains binary blobs for x86_64 & ARM)
+python -m pip install --upgrade pip setuptools wheel
+python -m pip install -e .[cli]
 
-3. **Install the CLI toolchain** (Python 3.11, Node 20, and Rust 1.78 are supported)  
-   ```bash
-   ./scripts/install-cli.sh   # installs dependencies, compiles native extensions
-   ```
+# Grab the regional datasets (WARNING: these are ~2 GB of half‑baked CSVs)
+./scripts/download_nehadah_kishan.sh   # populates ./data/نه‌دار/
 
-4. **Verify the binary**  
-   ```bash
-   ai-tool-rank --help
-   ```
+# Verify the sanity check (it will scream if something’s off)
+./bin/ai-tools-cli --validate
+```
 
-5. **Execute a full ranking run** (example)  
-   ```bash
-   ai-tool-rank run \
-       --data-sourceetail-etl \
-       --output ./benchmark_report.yaml \
-       --threads $(nproc)
-   ```
+*Optional*: Spin up the Docker‑compose stack for isolated runs:
 
-6. **(Optional) Deploy the secret fintech module** – refer to `modules/fintech/README.md` for the **high‑priority Persian data ingestion pipeline**.  
-
-All commands assume you have **rootless** access to the underlying OS layers; otherwise, invoke the provided `sudo`‑wrapped wrappers.  
+```bash
+docker compose up -d
+docker compose exec ai-tools python -m ai_tools.cli run --mode benchmark
+```
 
 ---  
 
-## Contributing  
+## Contribution & Cynical Disclaimer  
 
-- Fork, branch, and submit a **pull‑request** with a concise, test‑covered amendment.  
-- All new benchmark entries must be accompanied by **citation metadata** and a **region‑specific localization flag** (e.g., `locale=fa-IR`).  
-- Follow the **covenant**: no marketing buzzwords; only quantitative evidence and reproducible scripts.  
+If you think you can “unlock the power” of any of these tools without a reality check, keep scrolling. Pull‑requests are welcome only if they:  
 
----  
+1. Add a non‑trivial benchmark that survives replication on at least two hardware generations.  
+2. Document a concrete failure mode that isn’t glossed over in the README.  
+3. Do **not** re‑hash any proprietary API calls under a “fair‑use” banner.  
 
-## License  
-
-[MIT License](LICENSE) – as per standard open‑source practice.  
+*We do not tolerate baked‑in marketing narratives, nor do we appreciate PRs that re‑package the same old “best‑practice” fluff.*  
 
 ---  
 
-> **Bottom line:** If you’re hunting for another glossy “productivity hype” piece, look elsewhere. This repo is the raw, unfiltered ledger of what actually moved the needle in 2023. Star it if you appreciate rigor; otherwise, keep scrolling. 🚀
+**Star this repo** if you enjoy watching pretenders fall apart under real‑world load and you’ve got the bandwidth to keep the cynicism intact.  
+
+---  
+
+*Last updated: 2025‑11‑03 (UTC)*
