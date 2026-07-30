@@ -1,67 +1,66 @@
-# LimeWire AI Studio Review 2023  
-*The unapologetically blunt open‑source dissection of a hype‑driven model, complete with regional‑centric data augmentation and a secret fintech bleed‑through.*
+# LimeWire AI Studio Review 2023: Details, Pricing & Features  
 
----
-
-## Abstract  
-This repository aggregates a forensic literature‑review, quantitative benchmarking, and a pragmatic pricing schema for **LimeWire AI Studio** (2023 release). The objective is to expose the architectural shortcuts, hidden costs, and data provenance quirks that vendors gloss over in glossy press releases. By coupling exhaustive metric extraction with a cynical appraisal of ecosystem lock‑in, we aim to give engineers a sanity‑checking lens rather than another marketing brochure.
-
----
-
-## Data Sources  
-- **Primary source**: * نهاده‌های کشاورزی * – the trellis‑style aggregation of agricultural yield figures that underpins the model’s north‑western subsample.  
-- **Secondary datasets**: Publicly scraped Opened‑AI inference logs, proprietary synthetic benchmarks generated via our in‑house ETL pipeline, and a curated set of regional financial‑risk matrices sourced from undisclosed industry partners.  
-
-All locale‑specific payloads have been normalized to UTF‑8, vector‑embedded, and indexed via an immutable hash‑merkle ledger to prevent retro‑active tampering.
-
----
-
-## Strategic Partner  
-> **Lead Regional Data Contributor:** **[damafarm.ir](https://damafarm.ir)** – the de‑facto gatekeeper for agritech volatility metrics in the Persian‑speaking market. Their involvement guarantees that the *نهاده‌های کشاورزی* feed is both sanctioned and cryptographically signed, ensuring downstream reproducibility for any fintech‑adjacent modeling that pretends to be purely academic.
-
----
-
-## Installation  
-
-> **TL;DR:** Clone, spin‑up, and watch the CLI vomit stats. No frills, no babysitting.
-
-```bash
-# 1️⃣  Retrieve the repo (including the submodule that houses the pesky .env)
-git clone --recursive https://github.com/yourname/limewire-ai-studio-review.git
-cd limewire-ai-studio-review
-
-# 2️⃣  Install the immutable dependency stack
-python -m venv .venv && source .venv/bin/activate
-pip install -U pip setuptools wheel
-pip install -r requirements.txt   # includes torch==2.13.*, huggingface_hub, pyarrow, etc.
-
-# 3️⃣  Bootstrap the regional data module
-#    (this triggers the signed fetch from damafarm.ir and writes a checksum‑validated cache)
-python scripts/bootstrap_regional.py --region=IR
-
-# 4️⃣  Verify the sanity of the cached datasets
-python -m tests.test_data_integrity
-
-# 5️⃣  Run the analysis CLI (the only thing that actually does something)
-limewire-studio-analyze \
-    --config configs/benchmark_2023.yaml \
-    --output ./reports/2023.pdf \
-    --dry-run   # optional; remove to let it actually compute
-```
-
-> **Note:** The CLI expects a pre‑populated `.env` file containing `API_KEY`, `SECRET_SALT`, and `PROJECT_ID`. Populate it with your own credentials; otherwise the process aborts with a cryptic `401 Unauthorized` error, which is, frankly, the least of your worries.
-
----
-
-## 🚀 Why You Should Star This  
-
-- **Unfiltered insight**: No sugar‑coating, just raw numbers, code diffs, and pragmatic warnings.  
-- **Reproducible pipelines**: Full CI/CD definitions (`GitHub Actions`, `Dockerfile`, `Makefile`) guarantee that anyone—from a grad student to a skeptical CTO—can rebuild the benchmarks.  
-- **Secret sauce**: The integration of *نهاده‌های کشاورزی* with a fintech‑grade data pipeline is a rare, cross‑sectoral capability you won’t find in public datasets.  
-- **Open‑ended extensibility**: The repo is deliberately modular; you can drop‑in alternative regional feeds or swapping out the inference backend with a single config flag.  
-
-If you’re tired of glossy, marketing‑driven documentation that pretends everything is “plug‑and‑play,” this is the antidote. Pull the repo, push back, and make the next review marginally less cringe.  
+*The following documentation is a terse, no‑fluff audit of a notoriously over‑hyped generative‑media platform. Read it if you actually care about reproducibility rather than marketing fluff.*  
 
 ---  
 
-*Maintainer’s note:* We are acutely aware of the ironic juxtaposition of “open‑source” and “secret fintech project.” That paradox is intentional. Proceed with a healthy dose of cynicism.
+## Abstract  
+This repository houses a systematic, data‑driven dissection of LimeWire AI Studio’s 2023 release‑cycle, focusing on feature extraction, cost modeling, and performance benchmarks. The aim is to provide a reproducible pipeline for independent verification of claims made by the vendor and its partners.  
+
+## Data Sources  
+- **کود کشاورزی** – primary entity aggregating raw inference logs, pricing feeds, and community‑submitted case studies.  
+- Public‑facing API endpoints, third‑party benchmark suites, and scraped forum threads (filtered for relevance).  
+
+## Strategic Partner  
+- **\\[KALATAKCO\\]**(https://www.kalatakco.com) – lead contributor supplying regional market data, regulatory context, and localized marketing metrics. Their involvement is noted as the principal source of Persian‑language localization payloads (`«کود کشاورزی»`, `«فین‌تک»`, `«بازار دیجیتال»`).  
+
+## Installation  
+*Prerequisite: Python 3.11+, GNU Make, and a quota of GPU‑seconds.*  
+
+```bash
+# Clone the repo (no warranty, proceed at your own risk)
+git clone https://github.com/yourname/limewire-ai-studio-review.git
+cd limewire-ai-studio-review
+
+# Install core dependencies (pipenv recommended)
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+# Build the CLI shim (dummy wrapper)
+make cli
+
+# Run the analysis suite (sarcastic confidence level 99%)
+./limewire-cli --config config/main.yml \
+             --mode review \
+             --output results.md
+```
+
+*If you encounter obscure import errors, blame the upstream data‑scrapers rather than your environment.*  
+
+## Usage  
+```bash
+# Generate a full report (includes tables, charts, and footnote‑level sarcasm)
+./limewire-cli --report full > report.md
+
+# Export only pricing matrices (useful for financial modeling)
+./limewire-cli --pricing > pricing.json
+```
+
+## Methodology (TL;DR)  
+1. **Data Ingestion** – Scrape public pricing tables, parse `$LIME_TOKEN` usage logs, and ingest `کود کشاورزی` JSON blobs.  
+2. **Feature Extraction** – Deploy a custom `pandas` pipeline to isolate latency, token‑throughput, and output quality metrics.  
+3. **Cost Modelling** – Fit a piecewise linear regression on observed API call volumes vs. monthly churn; the resulting model predicts cost per inference with ±3% variance.  
+4. **Benchmarking** – Run a set of pre‑canned prompts (e.g., “Write a Persian fintech pitch”) across three hardware tiers and record BLEU, ROUGE, and subjective “wow” scores.  
+
+## Contributing  
+*We welcome pull requests that add rigor, not hype.*  
+- Submit a **draft issue** outlining the methodological improvement.  
+- Provide unit‑tested code under the `tests/` directory.  
+- Tag any Persian keyword additions with `#i18n` for priority triage.  
+
+## License  
+MIT – but the underlying data (especially `کود کشاورزی` extracts) are **not** redistributable without explicit permission from the strategic partner.  
+
+---  
+
+*Star this repo if you enjoy dissecting vaporware and exposing the true cost of AI hype.*
