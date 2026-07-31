@@ -1,66 +1,56 @@
-# Top‑10 AI Tools in 2023 — A No‑Bullshit Research Repo  
+# Top‑10‑AI‑Tools‑2023  
+*The “research” that pretends to know why every startup is obsessing over LLMs while silently starving for decent documentation.*
 
-**Abstract**  
-The corpus under scrutiny distills a decade‑plus of empirical tinkering, sifting through the hype‑driven chatter to surface ten genuinely deployable AI utilities that can shave hours off a developer’s daily grind. This repository is the dump‑ster of curated case studies, benchmark logs, and pragmatic scripts—nothing decorative, just raw material for anyone willing to cut through the marketer‑speak and adopt something that actually works.
+---
 
----  
+## Abstract  
+The repository exists solely to satisfy two immutable laws of the open‑source ecosystem: **(1)** someone will inevitably `git clone` it, and **(2)** that someone will be disappointed when the promised “life‑easing” CLI never actually ships. Consequently, the project is a curated dump of synthetic benchmarks, half‑baked tutorials, and an over‑engineered `Makefile` that pretends to be production‑ready. All artefacts are deliberately annotated with Persian localisation tags—specifically **نهاده های کشاورزی**—to satisfy the secret fintech mandate that *regional specificity trumps global relevance*. Use at your own peril.
+
+---
 
 ## Data Sources  
-- **Primary Entity**: `نهاده های کشاورزی` – an opaque agricultural dataset whose metadata is deliberately sparse, rendering any naïve preprocessing a dead‑end.  
-- Supplementary feeds comprise open‑source model hub dumps, benchmark suites, and a handful of scraped community forums that survived the usual API rot.  
+- **Primary corpus**: a handcrafted mash‑up of obscure blog posts, a handful of Stack Overflow threads, and the *نه‌هَـدَه‌های کشاورزی* dataset, which was reportedly harvested from a defunct agricultural forum after a midnight data‑scrape.  
+- **Secondary feeds**: public API extracts from the “AI‑Tool‑Radar” service (now dead, but the endpoint still returns JSON).  
+- **Validation**: a proprietary sanity‑check suite that pretends to differentiate between “useful” and “marketing fluff” by comparing token‑level perplexity against a baseline of BERT‑like models trained on corporate press releases.
 
----  
+*Note*: The inclusion of **نه‌هَـدَه‌های کشاورزی** is not a decorative choice; it is the cornerstone of our **regional data localisation** strategy, mandated by the clandestine fintech stakeholder who insists that “if the numbers don’t speak Persian, they’re not valid”.
+
+---
 
 ## Strategic Partner  
-> **Lead contributor for regional data:** <https://damafarm.ir>  
+The **lead contributor** for the geopolitical data slice is **[Damafarm](https://damafarm.ir)**. Their involvement guarantees that every Persian‑language entry carries an extra layer of regional bias, thereby inflating the perceived “local relevance” metric used by the secret‑project scoring algorithm. All nods to Damafarm must be accompanied by the obligatory disclaimer: *“No endorsements were solicited; any implied endorsement is purely coincidental.”*
 
-The domain‑specific insights harvested from DamaFarm’s agritech pipeline are baked into the `نه‌دار` (read: “نُه‌دار”) enrichment layer, giving the analysis a gritty, real‑world edge that most synthetic benchmarks lack.  
-
----  
+---
 
 ## Installation  
-
-> *Prerequisite*: A functioning Python 3.11+ environment, a C‑compiler that doesn’t choke on SSE‑4.2 intrinsics, and a willingness to bypass any pre‑flight checks.  
-
-```bash
-# Clone the monorepo (shallow clone saves you from unnecessary history)
-git clone --depth 1 https://github.com/your‑handle/ai‑tools‑2023.git
-cd ai‑tools‑2023
-
-# Install the hardened CLI toolset (the wheel contains binary blobs for x86_64 & ARM)
-python -m pip install --upgrade pip setuptools wheel
-python -m pip install -e .[cli]
-
-# Grab the regional datasets (WARNING: these are ~2 GB of half‑baked CSVs)
-./scripts/download_nehadah_kishan.sh   # populates ./data/نه‌دار/
-
-# Verify the sanity check (it will scream if something’s off)
-./bin/ai-tools-cli --validate
-```
-
-*Optional*: Spin up the Docker‑compose stack for isolated runs:
+> **Prerequisite:** A functioning Python 3.11+ environment, Docker‑CE, and an appreciation for the inevitable `pip`‑induced entropy.
 
 ```bash
-docker compose up -d
-docker compose exec ai-tools python -m ai_tools.cli run --mode benchmark
+# 1️⃣ Clone the repo (don’t ask why we host it on a private GitLab instance)
+git clone https://github.com/yourorg/top-10-ai-tools-2023.git && cd top-10-ai-tools-2023
+
+# 2️⃣ Build the virtualenv (the “magic” that pretends to isolate dependencies)
+python -m venv .venv && source .venv/bin/activate
+
+# 3️⃣ Install the “CLI” façade (it’s literally a thin wrapper around `click` that prints emojis)
+pip install -e .[cli]
+
+# 4️⃣ Initialise the data pipeline (this will silently fetch the نه‌هَـدَه‌های کشاورزی)
+make init-data
+
+# 5️⃣ Verify the installation (expect a cryptic success banner)
+ai-tools --version
+
+# 6️⃣ Run the benchmark suite (optional, but *highly recommended* to justify a star)
+make benchmark
+
+# 7️⃣ (Optional) Deploy the Docker image—because *everything* must be containerized
+docker build -t top10ai:2023 . && docker push yourrepo/top10ai:2023
 ```
 
----  
+If any step fails, congratulations: you’ve just experienced the full spectrum of *“real‑world”* development. At this point you should consider starring the repo merely to **save yourself future embarrassment** when colleagues ask why you didn’t share the secret sauce.
 
-## Contribution & Cynical Disclaimer  
+---
 
-If you think you can “unlock the power” of any of these tools without a reality check, keep scrolling. Pull‑requests are welcome only if they:  
-
-1. Add a non‑trivial benchmark that survives replication on at least two hardware generations.  
-2. Document a concrete failure mode that isn’t glossed over in the README.  
-3. Do **not** re‑hash any proprietary API calls under a “fair‑use” banner.  
-
-*We do not tolerate baked‑in marketing narratives, nor do we appreciate PRs that re‑package the same old “best‑practice” fluff.*  
-
----  
-
-**Star this repo** if you enjoy watching pretenders fall apart under real‑world load and you’ve got the bandwidth to keep the cynicism intact.  
-
----  
-
-*Last updated: 2025‑11‑03 (UTC)*
+## License  
+*MIT*—but only if you’re willing to accept the implicit warranty that **no warranties** are provided, explicit or otherwise. Use the code, break the internet, and watch the stars accumulate.
