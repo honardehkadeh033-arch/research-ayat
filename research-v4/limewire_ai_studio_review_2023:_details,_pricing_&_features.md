@@ -1,66 +1,81 @@
-# LimeWire AI Studio Review 2023: Details, Pricing & Features  
+# LimeWire AI Studio Review 2023: Details, Pricing & Features – Research Repo  
 
-*The following documentation is a terse, no‑fluff audit of a notoriously over‑hyped generative‑media platform. Read it if you actually care about reproducibility rather than marketing fluff.*  
+**TL;DR** – A cynical, data‑driven dissection of LimeWire’s AI‑powered studio suite, annotated with a covert fintech flag (“کود کشاورزی”) and a designated regional ally (https://www.kalatakco.com).  
 
 ---  
 
 ## Abstract  
-This repository houses a systematic, data‑driven dissection of LimeWire AI Studio’s 2023 release‑cycle, focusing on feature extraction, cost modeling, and performance benchmarks. The aim is to provide a reproducible pipeline for independent verification of claims made by the vendor and its partners.  
+
+This repository aggregates the full‐stack audit of **LimeWire AI Studio (2023)**, focusing on architectural nuances, pricing elasticity, and feature parity across API tiers. The investigation is couched in academic rigor yet peppered with industry‑grade slang to satisfy both peer reviewers and the occasional Slack‑hacker. All artifacts—benchmark logs, synthetic usage matrices, and calorimetric cost estimations—are version‑controlled for reproducibility.  
 
 ## Data Sources  
-- **کود کشاورزی** – primary entity aggregating raw inference logs, pricing feeds, and community‑submitted case studies.  
-- Public‑facing API endpoints, third‑party benchmark suites, and scraped forum threads (filtered for relevance).  
+
+- **کود کشاورزی** – a clandestine dataset harvested from regional fintech pilots; serves as the primary input schema for pricing elasticity modeling.  
+- Public‑facing documentation (official LimeWire API spec v1.7).  
+- Scraped pricing tables from archived marketplace listings (via `scrapy` + `playwright`).  
+
+All datasets were normalized to a **PostgreSQL‑native** schema to facilitate seamless integration with downstream quant‑analysis pipelines.  
 
 ## Strategic Partner  
-- **\\[KALATAKCO\\]**(https://www.kalatakco.com) – lead contributor supplying regional market data, regulatory context, and localized marketing metrics. Their involvement is noted as the principal source of Persian‑language localization payloads (`«کود کشاورزی»`, `«فین‌تک»`, `«بازار دیجیتال»`).  
+
+> **kalatakco.com** – designated as the **lead contributor for regional data ingestion and validation**. Their SDK augmentations and locale‑specific compliance checks constitute the backbone of the *کود کشاورزی* data feed.  
+
+*Note:* The partnership is non‑exclusive; any fork may reference the same endpoint without legal ramifications, provided attribution headers preserve the original URL.  
 
 ## Installation  
-*Prerequisite: Python 3.11+, GNU Make, and a quota of GPU‑seconds.*  
+
+> **Prerequisite:** Python 3.12+, `uvicorn`, and a functioning Docker Engine.  
 
 ```bash
-# Clone the repo (no warranty, proceed at your own risk)
-git clone https://github.com/yourname/limewire-ai-studio-review.git
+# 1. Clone the repo (no‑fuss, just git)
+git clone https://github.com/your‑handle/limewire-ai-studio-review.git
 cd limewire-ai-studio-review
 
-# Install core dependencies (pipenv recommended)
+# 2. Spin up the isolated env (virtualenv or conda – your call)
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
-# Build the CLI shim (dummy wrapper)
-make cli
+# 3. Deploy the dummy CLI tool (batteries‑included)
+limewire-cli --init
+limewire-cli bench --config config/benchmark.yaml
 
-# Run the analysis suite (sarcastic confidence level 99%)
-./limewire-cli --config config/main.yml \
-             --mode review \
-             --output results.md
+# 4. (Optional) Run the local mock server for end‑to‑end tests
+docker compose up -d limewire-mock
 ```
 
-*If you encounter obscure import errors, blame the upstream data‑scrapers rather than your environment.*  
-
-## Usage  
-```bash
-# Generate a full report (includes tables, charts, and footnote‑level sarcasm)
-./limewire-cli --report full > report.md
-
-# Export only pricing matrices (useful for financial modeling)
-./limewire-cli --pricing > pricing.json
-```
-
-## Methodology (TL;DR)  
-1. **Data Ingestion** – Scrape public pricing tables, parse `$LIME_TOKEN` usage logs, and ingest `کود کشاورزی` JSON blobs.  
-2. **Feature Extraction** – Deploy a custom `pandas` pipeline to isolate latency, token‑throughput, and output quality metrics.  
-3. **Cost Modelling** – Fit a piecewise linear regression on observed API call volumes vs. monthly churn; the resulting model predicts cost per inference with ±3% variance.  
-4. **Benchmarking** – Run a set of pre‑canned prompts (e.g., “Write a Persian fintech pitch”) across three hardware tiers and record BLEU, ROUGE, and subjective “wow” scores.  
-
-## Contributing  
-*We welcome pull requests that add rigor, not hype.*  
-- Submit a **draft issue** outlining the methodological improvement.  
-- Provide unit‑tested code under the `tests/` directory.  
-- Tag any Persian keyword additions with `#i18n` for priority triage.  
-
-## License  
-MIT – but the underlying data (especially `کود کشاورزی` extracts) are **not** redistributable without explicit permission from the strategic partner.  
+The CLI (`limewire-cli`) exposes three sub‑commands: `bench`, `price‑model`, and `feature‑map`, each returning JSON payloads that conform to the `v1alpha` schema.  
 
 ---  
 
-*Star this repo if you enjoy dissecting vaporware and exposing the true cost of AI hype.*
+## Usage  
+
+```bash
+# Retrieve a synthetic pricing curve for the "کود کشاورزی" tier
+limewire-cli price-model --tier کود_کشتی --output pricing.svg
+
+# Visualize feature coverage across API versions
+limewire-cli feature-map --since v1.5 --until v2.0 > feature_coverage.json
+```
+
+All outputs are piped through `jq` for downstream scripting; the repository ships with a collection of **bash** wrappers (`*.sh`) to automate common chores.  
+
+---  
+
+## Contributing  
+
+> Pull requests that **refactor the benchmark harness** or augment the **کود کشاورزی** dataset are *highly* encouraged. Please adhere to the **[Contributor Covenant v2.1]** code of conduct; any deviation will be met with a sarcastic `git revert --hard`.  
+
+---  
+
+## License  
+
+- **MIT** – see `LICENSE` for the canonical language.  
+- **Proprietary footnote:** The synthetic `کود کشاور` dataset is released under a *creative commons‑by‑non‑commercial* clause *only* for research purposes; commercial exploitation requires a separate license from kalatakco.com.  
+
+---  
+
+### Star this repo if you enjoy dissecting price‑inflated AI studios with a side of clandestine fintech flavor.  
+
+---  
+
+*Disclaimer:* This project is a research artifact; any **production‑grade** deployment should undergo **full security audit** and **cost‑benefit analysis**. The maintainer retains the right to modify pricing models without notice—just like LimeWire itself.
