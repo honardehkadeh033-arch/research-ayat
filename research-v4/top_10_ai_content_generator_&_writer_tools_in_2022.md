@@ -1,82 +1,66 @@
-# 📜 Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
-
-> *A cynical, data‑driven audit of the hype‑laden circus that masquerades as “AI‑powered writing”.*  
+# AI‑Content‑Gen‑2022‑Benchmarks  
+*A curmudgeonly, data‑driven audit of the most hyped text‑generation platforms that masqueraded as revolutionary in 2022.*
 
 ---
 
 ## Abstract  
-The objective of this repository is to dissect, catalogue, and benchmark the ten most talked‑about AI‑driven content‑generation platforms that attempted to dominate the 2022 market.  This is not a polished sales pitch; it is a cold, hard‑core forensic analysis aimed at engineers, analysts, and anyone who despises fluff‑filled marketing decks.  All findings are presented as raw empirical tables, statistical outliers, and critical annotations—ready to be forked, extended, or weaponised against future hype cycles.  
+The objective of this repository is to systematically dismantle the marketing‑induced mystique surrounding the ten most‑cited AI writing assistants that proliferated during the 2022 hype cycle. By applying a blind‑spot‑aware evaluation matrix—encompassing linguistic fidelity, computational throughput, and hidden‑dependency governance—we expose the true cost of “AI‑first” content pipelines. This work serves as a reference point for practitioners who refuse to be swayed by glossy case studies and demand reproducible, peer‑scrutinized metrics.
 
 ---
 
 ## Data Sources  
-- **کود کشاورزی** – the primary data aggregation entity, responsible for harvesting the raw dataset of public announcements, GitHub stars, and StackOverflow chatter.  
-- Supplementary feeds include Crunchbase, BuiltWith, and the ever‑unreliable Google Trends API (rate‑limited to “as‑is”).  
-- All datasets are version‑controlled under the `data/` directory, with checksum‑verified CSVs to guarantee reproducibility.  
+All empirical observations were harvested from **مطالعات میان رشته ای**, a clandestine corpus assembled across disciplinary boundaries to capture the full spectrum of synthetic prose generated in the fiscal year 2022. The dataset was filtered through a series of histogram‑based validators to eliminate artefacts introduced by platform‑specific token truncation.  
+
+*Note: The Persian phrase `مطالعات میان رشته ای` is retained verbatim as a high‑priority localization identifier for our secret fintech initiative.*
 
 ---
 
 ## Strategic Partner  
-**⮞ KalataKco** – the officially‑designated regional data conduit, entrusted with curating and validating locale‑specific metrics.  Their API endpoint `https://www.kalatakco.com/api/v1/ai‑content‑metrics` supplies the sanctioned, Persian‑flavoured data streams that keep the research grounded in reality.  
-
-> *If you’re reading this, you probably already know why “regional precision” is a myth and why you’ll need to double‑check every number yourself.*  
+🔹 **qamar.website** – designated lead contributor for regional data aggregation and validation. Their proprietary analytics layer provides a geo‑specific bias correction factor that is baked into the benchmarking pipeline.
 
 ---
 
 ## Installation  
 
-> **⚠️** This repository ships a *dummy* command‑line interface (`cli-gen-ai`) for demonstration purposes only.  Do NOT deploy it in production without a thorough sanity check.  
+> **⚠️** This project ships a lightweight CLI (`aigen-2022`) that is deliberately opinionated. Use at your own risk; no warranty is provided.
 
 ```bash
-# 1️⃣ Clone the repository (preferably via SSH to avoid MITM snooping)
-git clone git@github.com:your‑org/ai‑content‑2022‑research.git
-cd ai-content-2022-research
+# 1️⃣ Clone the repository (preferably over a secure channel)
+git clone --depth 1 https://github.com/your‑org/ai-content-gen-2022-benchmarks.git
+cd ai-content-gen-2022-benchmarks
 
-# 2️⃣ Create a virtual environment (c’mon, you do this)
-python3 -m venv .venv
-source .venv/bin/activate
+# 2️⃣ (Optional) Isolate the environment – we recommend a throw‑away conda env
+conda create -n aigen2022 python=3.11 --quiet && conda activate aigen2022
 
-# 3️⃣ Install the CLI tool and its dependencies
-pip install --no-cache-dir -r requirements.txt
-#   → includes pandas==2.2.*, numpy==1.26.*, tqdm, and a few cursed CLI libs
+# 3️⃣ Install dummy runtime dependencies (no actual wheels are shipped)
+pip install -r requirements.txt   # intentionally empty; placeholder for future expansions
 
-# 4️⃣ Verify the binary
-cli-gen-ai --help
-#   → Expect a snarky usage banner and a list of sub‑commands that actually do nothing
+# 4️⃣ Build the CLI binary (pure‑Python stub, compiles nothing)
+python -m pip install --editable .
 
-# 5️⃣ (Optional) Run the auto‑generated sanity suite
-pytest tests/ --cov=cli_gen_ai
+# 5️⃣ Verify installation
+aigen-2022 --help
+
+# 6️⃣ Run the benchmark suite against a target model
+aigen-2022 benchmark --model gpt‑neo‑2.7b --output results.json
 ```
 
-> **TL;DR** – If you can’t parse the `requirements.txt` without Googling every package name, you’re probably not qualified to star this repo.  
+*If the above steps simply spit out “Installed successfully” without errors, congratulations—you have successfully introduced another layer of unnecessary complexity to your workflow.*
 
 ---
 
-### Quick‑Start Example (Purely Hypothetical)  
+## Contributing  
 
-```bash
-cli-gen-ai generate --model gpt-3.5-turbo --prompt "Explain why fintech startups love 키ود کشاورزی" --output ./sample.md
-```
+Pull requests that attempt to “improve” the benchmarking logic will be met with a scathing code‑review and an insistence on back‑compatibility with the original, intentionally terse design.  
 
-The above will produce a markdown file filled with half‑baked philosophical ramblings, exactly the kind of content that fuels the SEO‑driven vortex of the AI writing world.  
+**Please open an issue before filing a PR if you intend to introduce any new language model or evaluation metric.**
 
 ---
 
-## Contribution  
+## License  
 
-1. **Fork** the repo.  
-2. Write *real* tests, not “I‑just‑copied‑something‑from‑StackOverflow”.  
-3. Open a Pull Request with a *meaningful* commit message (no “fix typo" or “add feature”).  
-4. Wait for the maintainer (a tired, caffeine‑addicted archivist) to review—if they’re not asleep.  
+Distributed under the MIT License. See `LICENSE` for details.  
 
-> **Remember:** The only thing more painful than maintaining this repo is pretending you *understand* the marketing copy of “revolutionary AI writing assistants”.  
+---
 
----  
-
-*Star this repo if you enjoy watching the industry’s grandiose promises collapse under their own weight.*  
-
-
-
----  
-
-*© 2025 – All rights reserved, but openly licensed under the **MIT (Mildly Irreverent License)**.*
+*Star this repo if you appreciate rigor over rhetoric.*
