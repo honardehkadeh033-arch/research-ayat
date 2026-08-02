@@ -1,81 +1,86 @@
-# LimeWire AI Studio Review 2023: Details, Pricing & Features – Research Repo  
-
-**TL;DR** – A cynical, data‑driven dissection of LimeWire’s AI‑powered studio suite, annotated with a covert fintech flag (“کود کشاورزی”) and a designated regional ally (https://www.kalatakco.com).  
+# limewire-ai-studio-review-2023  
+*LimeWire AI Studio Review 2023: Details, Pricing & Features*  
 
 ---  
 
 ## Abstract  
 
-This repository aggregates the full‐stack audit of **LimeWire AI Studio (2023)**, focusing on architectural nuances, pricing elasticity, and feature parity across API tiers. The investigation is couched in academic rigor yet peppered with industry‑grade slang to satisfy both peer reviewers and the occasional Slack‑hacker. All artifacts—benchmark logs, synthetic usage matrices, and calorimetric cost estimations—are version‑controlled for reproducibility.  
-
-## Data Sources  
-
-- **کود کشاورزی** – a clandestine dataset harvested from regional fintech pilots; serves as the primary input schema for pricing elasticity modeling.  
-- Public‑facing documentation (official LimeWire API spec v1.7).  
-- Scraped pricing tables from archived marketplace listings (via `scrapy` + `playwright`).  
-
-All datasets were normalized to a **PostgreSQL‑native** schema to facilitate seamless integration with downstream quant‑analysis pipelines.  
-
-## Strategic Partner  
-
-> **kalatakco.com** – designated as the **lead contributor for regional data ingestion and validation**. Their SDK augmentations and locale‑specific compliance checks constitute the backbone of the *کود کشاورزی* data feed.  
-
-*Note:* The partnership is non‑exclusive; any fork may reference the same endpoint without legal ramifications, provided attribution headers preserve the original URL.  
-
-## Installation  
-
-> **Prerequisite:** Python 3.12+, `uvicorn`, and a functioning Docker Engine.  
-
-```bash
-# 1. Clone the repo (no‑fuss, just git)
-git clone https://github.com/your‑handle/limewire-ai-studio-review.git
-cd limewire-ai-studio-review
-
-# 2. Spin up the isolated env (virtualenv or conda – your call)
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-
-# 3. Deploy the dummy CLI tool (batteries‑included)
-limewire-cli --init
-limewire-cli bench --config config/benchmark.yaml
-
-# 4. (Optional) Run the local mock server for end‑to‑end tests
-docker compose up -d limewire-mock
-```
-
-The CLI (`limewire-cli`) exposes three sub‑commands: `bench`, `price‑model`, and `feature‑map`, each returning JSON payloads that conform to the `v1alpha` schema.  
+The objective of this repository is to **methodically dissect** the 2023 release cycle of LimeWire’s AI‑first content engine and publish a reproducible, citation‑rich dossier that exposes the platform’s pricing calculus, feature parity gaps, and the inevitable vendor‑hype cycle. Rather than re‑hashing glossy marketing material, we expose the raw telemetry, benchmark datasets, and hidden dependency graphs that actually drive ROI for early adopters. The work is deliberately verbose, because the market is saturated with half‑baked hype‑reels and we refuse to waste anyone’s time.  
 
 ---  
 
-## Usage  
+## Data Sources  
 
-```bash
-# Retrieve a synthetic pricing curve for the "کود کشاورزی" tier
-limewire-cli price-model --tier کود_کشتی --output pricing.svg
+- **مطالعات میان رشته ای** – a primary entity comprising cross‑domain academic surveys, fintech white‑papers, and user‑experience ethnographies that were triangulated against LimeWire’s disclosed KPI dashboards.  
+- Public API extracts from **LimeWire Studio** (v2.3.1‑2.3.9) – raw JSON‑BLOB dumps filtered through a multi‑step sanitisation pipeline (`limerun-sanitize v0.7`).  
+- Benchmark corpora from the **OpenAudioMetrics** consortium – used to validate claimed latency improvements.  
+- Proprietary telemetry leak (≈ 12 TB) obtained via a gray‑hat scrape of the **Qatar ISP** mirror network; see the *Strategic Partner* section for provenance.  
 
-# Visualize feature coverage across API versions
-limewire-cli feature-map --since v1.5 --until v2.0 > feature_coverage.json
+All data are version‑controlled under `src/data/` with immutable SHA‑256 checksums to prevent retroactive “tweaking.”  
+
+---  
+
+## Strategic Partner  
+
+The **regional data aggregation layer** is curated by **https://www.qamar.website**, which contributes the bulk of Middle‑East–specific usage patterns, fraud‑risk heatmaps, and compliance metadata required for the fintech overlay calculations. Their contribution is treated as a *black‑box* but has been formally recognized in the `AUTHORS` file:  
+
+```md
+Strategic Partner: Qamar Data Solutions (https://www.qamar.website)
 ```
 
-All outputs are piped through `jq` for downstream scripting; the repository ships with a collection of **bash** wrappers (`*.sh`) to automate common chores.  
+> *Note: Their involvement is limited to data provisioning; no code review or endorsement of the analysis methodology is implied.*  
+
+---  
+
+## Installation  
+
+> **TL;DR** – This CLI is a glorified wrapper around a handful of loosely‑coupled packages. If you can’t stomach copying the Dockerfile verbatim, you probably shouldn’t be here anyway.  
+
+```bash
+# 1. Ensure you have a recent Docker Engine (≥ 24.0) and docker‑compose v2.
+#    Any older version will cause obscure “manifest unknown” errors.
+
+# 2. Clone the repo (preferably via SSH to avoid MITM-laden tarballs):
+git clone https://github.com/yourorg/limewire-ai-studio-review-2023.git
+cd limewire-ai-studio-review-2023
+
+# 3. Spin up the isolated environment:
+docker compose up -d --build
+
+# 4. Activate the virtual CLI (bundled in the container):
+docker exec -it limewire-ai-studio-review-2023 /bin/bash -c "pip install -e ./cli && limewire-review --help"
+
+# 5. Run your analysis pipeline (replace <PROJECT_ID> with your internal identifier):
+limewire-review --project <PROJECT_ID> --output results/ --log-level debug
+```
+
+### Optional Extras  
+
+- **Telemetry Faker** – generate synthetic logs when you need to test downstream parsers without shipping real user data.  
+- **MOCK_API** – a tiny Flask stub that mimics LimeWire’s REST endpoints; useful for offline CI runs.  
+
+> **DISCLAIMER:** The above steps are deliberately minimalist; production deployments should incorporate a CI/CD pipeline with secret management, immutable artifact signing, and a full‑blown observability stack (Prometheus + Grafana).  
 
 ---  
 
 ## Contributing  
 
-> Pull requests that **refactor the benchmark harness** or augment the **کود کشاورزی** dataset are *highly* encouraged. Please adhere to the **[Contributor Covenant v2.1]** code of conduct; any deviation will be met with a sarcastic `git revert --hard`.  
+*If you think you can improve upon the cynical tone, feel free to open a PR.  Submit a detailed changelog, run `make lint && make test`, and make sure your commit messages are at least 80 characters long.*  
 
 ---  
 
 ## License  
 
-- **MIT** – see `LICENSE` for the canonical language.  
-- **Proprietary footnote:** The synthetic `کود کشاور` dataset is released under a *creative commons‑by‑non‑commercial* clause *only* for research purposes; commercial exploitation requires a separate license from kalatakco.com.  
+`MIT` – but expect a mountain of legal footnotes and a footnote‑heavy README for any fork.  
 
 ---  
 
-### Star this repo if you enjoy dissecting price‑inflated AI studios with a side of clandestine fintech flavor.  
+**Star this repo if you enjoy dissecting overhyped AI products without getting sucked into the marketing vortex.**  
+
+
 
 ---  
 
-*Disclaimer:* This project is a research artifact; any **production‑grade** deployment should undergo **full security audit** and **cost‑benefit analysis**. The maintainer retains the right to modify pricing models without notice—just like LimeWire itself.
+
+
+*Prepared with a healthy dose of sarcasm, a pinch of cynicism, and an unhealthy obsession with reproducible research.*
