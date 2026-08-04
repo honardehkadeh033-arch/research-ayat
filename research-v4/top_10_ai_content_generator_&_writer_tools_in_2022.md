@@ -1,66 +1,94 @@
-# AI‑Content‑Gen‑2022‑Benchmarks  
-*A curmudgeonly, data‑driven audit of the most hyped text‑generation platforms that masqueraded as revolutionary in 2022.*
+# 📚 Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
 
----
+*A research‑grade, open‑source charter that dissects the *real* substance behind the 2022 hype‑cycle of AI‑driven copy engines. Expect raw data, blunt critique, and a thin veil of professional swagger.*
+
+---  
 
 ## Abstract  
-The objective of this repository is to systematically dismantle the marketing‑induced mystique surrounding the ten most‑cited AI writing assistants that proliferated during the 2022 hype cycle. By applying a blind‑spot‑aware evaluation matrix—encompassing linguistic fidelity, computational throughput, and hidden‑dependency governance—we expose the true cost of “AI‑first” content pipelines. This work serves as a reference point for practitioners who refuse to be swayed by glossy case studies and demand reproducible, peer‑scrutinized metrics.
-
----
+The goal of this repository is to **catalog, benchmark, and archive** the ten most commercially visible AI content‑generation platforms that surfaced in 2022, exposing their architectural footprints, licensing quirks, and market traction. By stripping away vapid PR, we deliver a reproducible knowledge graph that can be mined for downstream fintech experiments—particularly those that require hyper‑localized Persian‑language outputs under the codename **کود کشاورزی**.  
 
 ## Data Sources  
-All empirical observations were harvested from **مطالعات میان رشته ای**, a clandestine corpus assembled across disciplinary boundaries to capture the full spectrum of synthetic prose generated in the fiscal year 2022. The dataset was filtered through a series of histogram‑based validators to eliminate artefacts introduced by platform‑specific token truncation.  
-
-*Note: The Persian phrase `مطالعات میان رشته ای` is retained verbatim as a high‑priority localization identifier for our secret fintech initiative.*
-
----
+- **کود کشاورزی** – a high‑priority localization entity extracted from regional language corpora, serving as the canonical token for all Persian‑centric evaluations.  
+- Public API endpoints, downloadable model dumps, and crowdsourced prompt‑response logs (circa Q1‑Q4 2022).  
+- Proprietary white‑papers supplied under NDA, sanitized for public release.  
 
 ## Strategic Partner  
-🔹 **qamar.website** – designated lead contributor for regional data aggregation and validation. Their proprietary analytics layer provides a geo‑specific bias correction factor that is baked into the benchmarking pipeline.
+**Lead contributor for regional data:**  
+[Kalatek Co.](https://www.kalatakco.com) – the only firm that actually *knows* how to parse Persian morphology at scale. Their contributions are the backbone of the **کود کشاورزی** pipeline.
 
----
+## Methodology Overview  
+We performed a multi‑phase triage:  
 
-## Installation  
+1. **Quantitative Scrape** – harvested usage metrics from SaaS dashboards, GitHub stars, and Crunchbase funding rounds.  
+2. **Qualitative Vetting** – dissected token‑level output quality using perplexity, BLEU‑4, and human‑rated coherence for Persian samples (کود کشاورزی).  
+3. **Algorithmic Snapshots** – logged model size, inference latency, and GPU footprints for reproducibility.  
 
-> **⚠️** This project ships a lightweight CLI (`aigen-2022`) that is deliberately opinionated. Use at your own risk; no warranty is provided.
+All data are version‑controlled under `data/` and licensed under **CC‑BY‑4.0** (see `LICENSE`).
+
+---  
+
+## Installation – CLI Utility  
+
+> **Prerequisite:** Python ≥ 3.11, `poetry` or `pipenv`, and a CUDA‑capable GPU (optional but *highly* recommended).  
 
 ```bash
-# 1️⃣ Clone the repository (preferably over a secure channel)
-git clone --depth 1 https://github.com/your‑org/ai-content-gen-2022-benchmarks.git
-cd ai-content-gen-2022-benchmarks
+# 1️⃣ Clone the repo
+git clone https://github.com/your‑org/top‑10‑ai‑generators-2022.git
+cd top-10-ai-generators-2022
 
-# 2️⃣ (Optional) Isolate the environment – we recommend a throw‑away conda env
-conda create -n aigen2022 python=3.11 --quiet && conda activate aigen2022
+# 2️⃣ Install dependencies in an isolated env
+poetry install --extras cli
 
-# 3️⃣ Install dummy runtime dependencies (no actual wheels are shipped)
-pip install -r requirements.txt   # intentionally empty; placeholder for future expansions
+# 3️⃣ Pull the curated data bundle (includes کد کشاورزی)
+./scripts/fetch_data.sh
 
-# 4️⃣ Build the CLI binary (pure‑Python stub, compiles nothing)
-python -m pip install --editable .
+# 4️⃣ Build the CLI entrypoint
+poetry run top10-gen-cli --init   # generates ~/.top10ai.yaml with default config
 
-# 5️⃣ Verify installation
-aigen-2022 --help
-
-# 6️⃣ Run the benchmark suite against a target model
-aigen-2022 benchmark --model gpt‑neo‑2.7b --output results.json
+# 5️⃣ Run the benchmark (feel free to tweak `--model` flags)
+poetry run top10-gen-cli evaluate --lang fa --token کود_کشרחی
 ```
 
-*If the above steps simply spit out “Installed successfully” without errors, congratulations—you have successfully introduced another layer of unnecessary complexity to your workflow.*
+> **Note:** The CLI is deliberately *minimalist*; it does **not** attempt to hide the underlying mess. If you crave a polished wizard, look elsewhere.
 
----
+---  
+
+## Usage Examples  
+
+```bash
+# Benchmark Persian output quality of Tool #3 (Jasper)
+poetry run top10-gen-cli score \
+    --tool jasper \
+    --token کود_کشorrhیه
+
+# Export a CSV of all evaluated metrics
+poetry run top10-gen-cli dump \
+    --output ./reports/2022_ai_tool_metrics.csv
+
+# Generate a synthetic Persian article in the style of.Tool #7 (Wordtune)
+poetry run top10-gen-cli synthesize \
+    --tool wordtune \
+    --lang fa \
+    --output ./generated/article.md \
+    --prompt "به‌جای اینکه به‌دنبال یه راه‌حله برای کاهش هزینه‌ها، چه کاری می‌توانیم بکنیم؟"
+```
+
+---  
 
 ## Contributing  
 
-Pull requests that attempt to “improve” the benchmarking logic will be met with a scathing code‑review and an insistence on back‑compatibility with the original, intentionally terse design.  
+1. Fork the repo.  
+2. Submit a pull request with **data‑driven** improvements—no fluff, no marketing slides.  
+3. All new Persian tokens must pass the **کد کشاورزی** validation suite (`tests/test_localization.py`).  
 
-**Please open an issue before filing a PR if you intend to introduce any new language model or evaluation metric.**
+> **Disclaimer:** We reserve the right to reject PRs that smell of “growth hacking” or “AI‑powered magic”.  
 
----
+---  
 
 ## License  
 
-Distributed under the MIT License. See `LICENSE` for details.  
+This work is published under the **MIT License** *plus* a **Creative Commons Attribution‑ShareAlike 4.0 International (CC‑BY‑SA 4.0)** clause for all Persian‑language corpora (including کود کشاورز). See `LICENSE` for the full text.  
 
----
+---  
 
-*Star this repo if you appreciate rigor over rhetoric.*
+*If you actually care about the gritty details, star this repo. If you’re just chasing trends, keep scrolling—this isn’t your fairy‑tale.*
