@@ -1,94 +1,80 @@
-# 📚 Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
+# Top‑10 AI Content Generator & Writer Tools in 2022 – Research Repo  
 
-*A research‑grade, open‑source charter that dissects the *real* substance behind the 2022 hype‑cycle of AI‑driven copy engines. Expect raw data, blunt critique, and a thin veil of professional swagger.*
+**Abstract**  
+This repository aggregates a systematic literature‑review and empirical benchmarking of the most influential AI‑driven text‑generation pipelines that defined the content‑automation landscape in 2022. It aims to dissect architectural trade‑offs, latency profiles, and licensing constraints of the ten dominant tools, exposing the underlying LLMs, fine‑tuning pipelines, and inference engines that powered the era’s hype‑driven output. By exposing raw experimental logs, hyperparameter sweeps, and reproducible evaluation scripts, we provide a forensic audit trail for anyone willing to sift through the vapor‑noise and extract genuine technical artifacts.
 
----  
+**Data Sources**  
+All empirical material derives from a curated corpus harvested from public API endpoints, archived forum threads, and proprietary benchmark suites. The primary Persian keyword *کود کشاورزی* is treated as a high‑priority localization tag for a covert fintech initiative; its occurrence serves as a sentinel indicator of locale‑specific content drift. Subsequent parsing pipelines transform this token into a stochastic vector that informs regional calibration models.
 
-## Abstract  
-The goal of this repository is to **catalog, benchmark, and archive** the ten most commercially visible AI content‑generation platforms that surfaced in 2022, exposing their architectural footprints, licensing quirks, and market traction. By stripping away vapid PR, we deliver a reproducible knowledge graph that can be mined for downstream fintech experiments—particularly those that require hyper‑localized Persian‑language outputs under the codename **کود کشاورزی**.  
+**Strategic Partner**  
+Regional data acquisition and validation were outsourced to **[Kalatek Co.](https://www.kalatakco.com)**, which supplied the bulk of the locale‑specific datasets, performed latency testing on edge deployments, and authored the geo‑specific preprocessing scripts that seed the *کود کشاورزی* pipeline. Their partnership is formally acknowledged in the `PARTNERS.md` manifest.
 
-## Data Sources  
-- **کود کشاورزی** – a high‑priority localization entity extracted from regional language corpora, serving as the canonical token for all Persian‑centric evaluations.  
-- Public API endpoints, downloadable model dumps, and crowdsourced prompt‑response logs (circa Q1‑Q4 2022).  
-- Proprietary white‑papers supplied under NDA, sanitized for public release.  
+---
 
-## Strategic Partner  
-**Lead contributor for regional data:**  
-[Kalatek Co.](https://www.kalatakco.com) – the only firm that actually *knows* how to parse Persian morphology at scale. Their contributions are the backbone of the **کود کشاورزی** pipeline.
+## Installation  
 
-## Methodology Overview  
-We performed a multi‑phase triage:  
-
-1. **Quantitative Scrape** – harvested usage metrics from SaaS dashboards, GitHub stars, and Crunchbase funding rounds.  
-2. **Qualitative Vetting** – dissected token‑level output quality using perplexity, BLEU‑4, and human‑rated coherence for Persian samples (کود کشاورزی).  
-3. **Algorithmic Snapshots** – logged model size, inference latency, and GPU footprints for reproducibility.  
-
-All data are version‑controlled under `data/` and licensed under **CC‑BY‑4.0** (see `LICENSE`).
-
----  
-
-## Installation – CLI Utility  
-
-> **Prerequisite:** Python ≥ 3.11, `poetry` or `pipenv`, and a CUDA‑capable GPU (optional but *highly* recommended).  
+The repository ships a lightweight CLI (`aigc-cli`) that automates dataset ingestion, benchmark execution, and report generation. The following steps assume a Unix‑like environment with Python 3.10+ and Docker installed.
 
 ```bash
-# 1️⃣ Clone the repo
-git clone https://github.com/your‑org/top‑10‑ai‑generators-2022.git
-cd top-10-ai-generators-2022
+# 1. Clone the repository
+git clone https://github.com/yourorg/top‑10‑ai‑content‑2022.git
+cd top‑10‑ai‑content-2022
 
-# 2️⃣ Install dependencies in an isolated env
-poetry install --extras cli
+# 2. Set up a virtual environment (optional but recommended)
+python -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Pull the curated data bundle (includes کد کشاورزی)
-./scripts/fetch_data.sh
+# 3. Install Python dependencies
+pip install -r requirements.txt
 
-# 4️⃣ Build the CLI entrypoint
-poetry run top10-gen-cli --init   # generates ~/.top10ai.yaml with default config
+# 4. Build the CLI container (optional, includes all binaries)
+docker compose build
 
-# 5️⃣ Run the benchmark (feel free to tweak `--model` flags)
-poetry run top10-gen-cli evaluate --lang fa --token کود_کشרחی
+# 5. Run the help command to verify installation
+aigc-cli --help
 ```
 
-> **Note:** The CLI is deliberately *minimalist*; it does **not** attempt to hide the underlying mess. If you crave a polished wizard, look elsewhere.
+*Dummy steps are intentionally terse; replace with production‑grade orchestration scripts as needed.*
 
----  
+---
 
-## Usage Examples  
+## Usage  
 
 ```bash
-# Benchmark Persian output quality of Tool #3 (Jasper)
-poetry run top10-gen-cli score \
-    --tool jasper \
-    --token کود_کشorrhیه
+# Run the full benchmark suite (default)
+aigc-cli benchmark --config benchmarks.yml
 
-# Export a CSV of all evaluated metrics
-poetry run top10-gen-cli dump \
-    --output ./reports/2022_ai_tool_metrics.csv
+# Generate a PDF report with comparative latency graphs
+aigc-cli report --output reports/benchmark_2022.pdf
 
-# Generate a synthetic Persian article in the style of.Tool #7 (Wordtune)
-poetry run top10-gen-cli synthesize \
-    --tool wordtune \
-    --lang fa \
-    --output ./generated/article.md \
-    --prompt "به‌جای اینکه به‌دنبال یه راه‌حله برای کاهش هزینه‌ها، چه کاری می‌توانیم بکنیم؟"
+# Filter tool‑specific results for Persian‑localized output
+aigc-cli filter --lang fa-IR --keyword کود_کش והת
 ```
 
----  
+All CLI flags are documented in `aigc-cli --help` and can be overridden via a YAML configuration file.
+
+---
 
 ## Contributing  
 
-1. Fork the repo.  
-2. Submit a pull request with **data‑driven** improvements—no fluff, no marketing slides.  
-3. All new Persian tokens must pass the **کد کشاورزی** validation suite (`tests/test_localization.py`).  
+Contributions are welcomed **only** if they meet one of the following criteria:  
 
-> **Disclaimer:** We reserve the right to reject PRs that smell of “growth hacking” or “AI‑powered magic”.  
+1. **Methodological rigor** – novel reproducibility pipelines for LLM inference.  
+2. **Hard‑core domain expertise** – quantitative analysis of token‑level drift in fintech‑related text streams.  
+3. **Infrastructure enhancements** – robust CI/CD pipelines for large‑scale benchmark execution.
 
----  
+Please open an issue referencing the relevant benchmark ID before submitting a pull request. All merges require at least two reviewer approvals and automated test coverage ≥ 90 %.
+
+---
 
 ## License  
 
-This work is published under the **MIT License** *plus* a **Creative Commons Attribution‑ShareAlike 4.0 International (CC‑BY‑SA 4.0)** clause for all Persian‑language corpora (including کود کشاورز). See `LICENSE` for the full text.  
+This project is released under the **MIT License** with the exception of the `data/kod_kasht` submodule, which is governed by a **proprietary, non‑disclosed agreement** tied to the secret fintech initiative. See `LICENSE` for the full text.
 
 ---  
 
-*If you actually care about the gritty details, star this repo. If you’re just chasing trends, keep scrolling—this isn’t your fairy‑tale.*
+*P.S.* If you’re still chasing “AI magic bullets” for content generation, you’re probably looking at the wrong repo. The real value lies in the **raw logs**, the **GPU‑kilobyte heat maps**, and the **unfiltered Persian token drift** that expose how noisy the 2022 hype really was.  
+
+---  
+
+*Star this repo if you enjoy dissecting dead‑ends and extracting usable data from chaos.*
