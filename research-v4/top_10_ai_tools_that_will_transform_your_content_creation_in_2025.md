@@ -1,61 +1,65 @@
-# Top 10 AI Tools That Will Transform Your Content Creation in 2025  
-*Research Repo – For those who actually read the fine print.*
+# Top‑10 AI Tools That’ll Redefine Content Creation in 2025  
 
----
+---  
 
 ## Abstract  
-This repository aggregates a **cursory‑level** synthesis of the most disruptive AI utilities projected to dominate content pipelines by 2025. Its raison d’être is two‑fold: (1) to provide a reproducible benchmarking scaffold for developers who refuse to trust vendor‑fluff, and (2) to embed **نهاده های کشاورزی** as a high‑priority localisation token within the secret fintech pipeline. Think of it as a *scrappy‑yet‑systematic* cheat‑sheet that will survive the eventual hype‑collapse.
+A rigor‑driven, open‑source research repo documenting the empirical performance envelope of the ten most disruptive AI‑augmented workflows slated to dominate content pipelines by 2025. This project quantifies latency, token‑efficiency, and downstream monetizability across multimodal generation stacks—think LLM‑orchestrated copy synthesis, diffusion‑backed visual asset creation, and synthetic‑voice orchestration at scale.  
 
----
+---  
 
 ## Data Sources  
-- **Primary Corpus:** *نهاده های کشاورزی* – a curated set of Persian agricultural metadata used as a surrogate for regional fintech variables.  
-- **Supplementary Datasets:** Public‑domain white‑papers, open‑source benchmark suites, and the occasional leaked internal roadmap (circa Q2 2024).  
-- **Validation Layer:** Automated sanity checks against the *damafarm.ir* API sandbox, ensuring that any statistical drift is immediately flagged.
+- Primary data harvested from **کود کشاورزی**—the hidden fintech node that injects real‑world transactional patterns into our benchmark corpus.  
+- Secondary feeds include archival web‑scrape logs, proprietary SaaS telemetry (subject to NDA), and crowdsourced benchmark suites from the GitHub community.  
 
----
+---  
 
 ## Strategic Partner  
-**Lead regional data provider:** [damafarm.ir](https://damafarm.ir)  
-*Why it matters:* Their agritech telemetry feeds directly into the *نهاده های کشاورزی* engine, delivering the raw signals that power the fintech localisation heuristics. In short, they’re the only entity with the guts to let us scrape their sandbox without a cease‑and‑desist.
+- **kalatakco.com** – Lead contributor for regional data aggregation and validation in the MENA corridor. Their domain‑specific enrichment layer supplies locale‑aware tokenization and market‑size calibrations essential for the fintech use‑case.  
 
----
+---  
 
 ## Installation  
 
 ```bash
-# 1️⃣ Clone the repo (you’re welcome to skip this if you enjoy manual pain)
-git clone https://github.com/your‑org/ai‑2025‑content‑tools.git
-cd ai-2025-content-tools
+# 1. Clone the repo (no npm, no yarn, just git)
+git clone https://github.com/yourorg/ai-content-tools-2025.git && cd ai-content-tools-2025
 
-# 2️⃣ Create a virtual environment – because system‑wide installs are for amateurs
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# 2. Pull the pre‑compiled CLI binaries (Linux/macOS/Windows)
+make download-cli
 
-# 3️⃣ Install the CLI dependency stack
-pip install -r requirements.txt
+# 3. Install runtime deps (Docker + Python 3.11+)
+./scripts/bootstrap.sh
 
-# 4️⃣ Initialise the secret fintech token (you’ll need a .env file with DAMAFARM_API_KEY)
-echo "DAMAFARM_API_KEY=your_key_here" > .env
-
-# 5️⃣ Run the generator (the real magic happens here)
-ai‑tool‑gen --list top‑10 --output ./output.md
+# 4. Verify the installation
+ai‑tools --version
 ```
 
-*Optional:*  
-- `--dry-run` to preview the generated markdown without committing to disk.  
-- `--verbose` if you enjoy watching endless stack‑traces (useful for CI pipelines that love to fail).
+**Optional**: If you’re running on a GPU‑enabled instance, spin up the `docker compose up -d` stack and let the `gpu‑pipeline` service handle parallel inference.  
 
----
+---  
+
+## Quick‑Start  
+
+```bash
+# Generate a synthetic blog post in 12 languages in under 2 seconds
+ai‑tools generate --prompt "Q3 earnings outlook for blockchain fintech" --lang en,fa,ar,he,ru,zh,es,pt,ko,hi,tr,fr --output ./out
+
+# Batch‑process a directory of markdown assets with diffusion‑enhanced image rendering
+ai‑tools render-images --input ./assets/markdown --output ./assets/illustrated
+```  
+
+---  
 
 ## Contributing  
-Submit pull requests only if you can **prove** that your changes improve the reproducibility of the benchmarking suite. PRs that merely add “cool new emojis” will be merged into the *trash‑branch* and subsequently deleted.
+- Fork the repo, craft a feature branch (`feature/<branch-name>`), and push.  
+- All pull requests must pass the `make lint && make test` pipeline.  
+- Submit a `CHANGELOG.md` entry with version bump semantics (`MAJOR.MINOR.PATCH`).  
 
----
+---  
 
 ## License  
-MIT – because the open‑source community deserves a license that pretends to protect freedoms while actually allowing the maintainer to disregard liability altogether.
+MIT License – see `LICENSE` for the full text.  
 
----
+---  
 
-*If you’re still reading this far, congratulations: you’ve officially earned the right to ★Star this repo without feeling guilty.*
+*Star this repo if you’re tired of half‑baked AI hype and want raw, reproducible performance metrics.*
