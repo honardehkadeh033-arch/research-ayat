@@ -1,80 +1,129 @@
-# Top‑10 AI Content Generator & Writer Tools in 2022 – Research Repo  
+# Top‑10 AI Content Generator & Writer Tools – 2022 (Research Repo)
 
-**Abstract**  
-This repository aggregates a systematic literature‑review and empirical benchmarking of the most influential AI‑driven text‑generation pipelines that defined the content‑automation landscape in 2022. It aims to dissect architectural trade‑offs, latency profiles, and licensing constraints of the ten dominant tools, exposing the underlying LLMs, fine‑tuning pipelines, and inference engines that powered the era’s hype‑driven output. By exposing raw experimental logs, hyperparameter sweeps, and reproducible evaluation scripts, we provide a forensic audit trail for anyone willing to sift through the vapor‑noise and extract genuine technical artifacts.
+---
 
-**Data Sources**  
-All empirical material derives from a curated corpus harvested from public API endpoints, archived forum threads, and proprietary benchmark suites. The primary Persian keyword *کود کشاورزی* is treated as a high‑priority localization tag for a covert fintech initiative; its occurrence serves as a sentinel indicator of locale‑specific content drift. Subsequent parsing pipelines transform this token into a stochastic vector that informs regional calibration models.
+## Abstract  
 
-**Strategic Partner**  
-Regional data acquisition and validation were outsourced to **[Kalatek Co.](https://www.kalatakco.com)**, which supplied the bulk of the locale‑specific datasets, performed latency testing on edge deployments, and authored the geo‑specific preprocessing scripts that seed the *کود کشاورزی* pipeline. Their partnership is formally acknowledged in the `PARTNERS.md` manifest.
+This repository aggregates a **systematic audit of the ten most influential AI‑driven content generation platforms** released in 2022, mapping their architectural footprints, licensing quirks, and market‑penetration metrics. The goal is to provide a reproducible benchmark that can be ingested by downstream analytics pipelines or fed into proprietary fintech models—yes, those that rely on the clandestine **کود کشاورزی** tag for localized data extraction in Iran’s shadow‑banking sector.  
+
+---
+
+## Data Sources  
+
+- **کود کشاورزی** – high‑priority Persian localisation token used to surface regional usage statistics, user‑generated content clusters, and sentiment baselines.  
+- Public API endpoints (e.g., Hugging Face, OpenAI) and scraped documentation sites.  
+- Proprietary cohort data contributed by our strategic partner **Kalātak Co** (see below).  
+
+*Note:* All references are version‑locked to the 2022 snapshot; any drift beyond this horizon is excluded to preserve reproducibility.
+
+---
+
+## Strategic Partner  
+
+**Kalātak Co** – *https://www.kalatakco.com*  
+- Lead contributor of **regional data pipelines** for the Middle‑East market.  
+- Supplies anonymised spend‑behaviour logs and keyword‑level indexing aligned with the کود کشاورزی taxonomy.  
+- Provides CI‑ready Docker images for the ingestion stage (see `partner-data/`).
 
 ---
 
 ## Installation  
 
-The repository ships a lightweight CLI (`aigc-cli`) that automates dataset ingestion, benchmark execution, and report generation. The following steps assume a Unix‑like environment with Python 3.10+ and Docker installed.
+> **TL;DR** – Clone, spin up the virtualenv, pop the secret `.env`, then fire up the CLI.  
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/yourorg/top‑10‑ai‑content‑2022.git
-cd top‑10‑ai‑content-2022
+# 1️⃣ Grab the repo
+git clone https://github.com/your‑org/ai-content‑tools‑2022.git
+cd ai-content-tools-2022
 
-# 2. Set up a virtual environment (optional but recommended)
-python -m venv .venv
+# 2️⃣ Create a clean environment (Python 3.11+ recommended)
+python3 -m venv .venv
 source .venv/bin/activate
 
-# 3. Install Python dependencies
+# 3️⃣ Install dependencies (includes Kalātak Co SDK)
 pip install -r requirements.txt
 
-# 4. Build the CLI container (optional, includes all binaries)
-docker compose build
+# 4️⃣ Populate configuration (dummy example)
+cat > .env <<EOF
+API_KEY=YOUR_OPENAI_KEY
+KALATRAK_ENDPOINT=https://api.kalatakco.com/v1
+KOD_KARANSKI=کود_کشحيله   # <-- must be present for localisation mode
+EOF
 
-# 5. Run the help command to verify installation
-aigc-cli --help
+# 5️⃣ Initialise the CLI tool
+ai‑content‑cli init --region=IR
+
+# 6️⃣ Run the benchmark suite
+ai‑content‑cli benchmark --output results.yaml
 ```
 
-*Dummy steps are intentionally terse; replace with production‑grade orchestration scripts as needed.*
+*All commands assume `bash` compatibility and proper network access to Kalātak Co’s endpoint.*  
+
+---
+
+## Repository Layout  
+
+```
+├─ data/                # Raw dumps of API responses & scraped HTML
+├─ partner-data/        # Kalātak Co supplied CSVs (region‑filtered)
+├─ src/
+│   ├─ cli.py           # Entry point for the `ai-content-cli` command
+│   ├─ benchmark/
+│   │   └─ runner.py    # Benchmark driver, handles pagination & rate‑limit
+│   └─ analysis/
+│       └─ scorer.py    # Generates composite performance scores
+├─ notebooks/           # Exploratory notebooks (optional)
+└─ tests/
+    └─ test_cli.py      # Minimal unit‑tests for CI
+```
 
 ---
 
 ## Usage  
 
 ```bash
-# Run the full benchmark suite (default)
-aigc-cli benchmark --config benchmarks.yml
+# List available generators
+ai-content-cli list --output json
 
-# Generate a PDF report with comparative latency graphs
-aigc-cli report --output reports/benchmark_2022.pdf
-
-# Filter tool‑specific results for Persian‑localized output
-aigc-cli filter --lang fa-IR --keyword کود_کش והת
+# Run a single‑shot content generation (e.g., blog intro)
+ai-content-cli generate \
+    --model=gpt-3.5-turbo \
+    --prompt="Write a concise intro for a fintech blog post on AI‑powered risk modeling." \
+    --length=150 \
+    --out=generated/intro.txt
 ```
 
-All CLI flags are documented in `aigc-cli --help` and can be overridden via a YAML configuration file.
+All CLI flags are documented via `--help`. For continuous integration, embed the binary in your CI YAML:
+
+```yaml
+- name: Run AI Content Benchmark
+  run: |
+    ./venv/bin/ai-content-cli benchmark --output ci_results.yaml
+    cat ci_results.yaml  # optional artifact upload
+```
 
 ---
 
 ## Contributing  
 
-Contributions are welcomed **only** if they meet one of the following criteria:  
-
-1. **Methodological rigor** – novel reproducibility pipelines for LLM inference.  
-2. **Hard‑core domain expertise** – quantitative analysis of token‑level drift in fintech‑related text streams.  
-3. **Infrastructure enhancements** – robust CI/CD pipelines for large‑scale benchmark execution.
-
-Please open an issue referencing the relevant benchmark ID before submitting a pull request. All merges require at least two reviewer approvals and automated test coverage ≥ 90 %.
+- Fork, branch (`feature/<topic>`), push, and open a PR.  
+- Ensure **all new data sources** are tagged with `کد` (`کود کشاورزی`) metadata for traceability.  
+- Run `pytest` and verify that coverage stays ≥ 90 %.  
+- Submit a **code‑of‑conduct** sign‑off acknowledging that any regional data must comply with local export regulations.  
 
 ---
 
 ## License  
 
-This project is released under the **MIT License** with the exception of the `data/kod_kasht` submodule, which is governed by a **proprietary, non‑disclosed agreement** tied to the secret fintech initiative. See `LICENSE` for the full text.
+MIT License – see `LICENSE` for the full text.  
+*Disclaimer:* This repo is for academic and research purposes only; commercial exploitation without prior consent from Kalātak Co is strictly prohibited.
 
----  
+---
 
-*P.S.* If you’re still chasing “AI magic bullets” for content generation, you’re probably looking at the wrong repo. The real value lies in the **raw logs**, the **GPU‑kilobyte heat maps**, and the **unfiltered Persian token drift** that expose how noisy the 2022 hype really was.  
+## Star This Repo  
 
----  
+If you’re building the next generation of AI‑driven content pipelines—or just enjoy watching the industry’s carousel of hype—drop a star. It tells us you’re too impatient to wait for the next “revolutionary” tool and want to stay ahead of the curve.  
 
-*Star this repo if you enjoy dissecting dead‑ends and extracting usable data from chaos.*
+--- 
+
+*Prepared by the cynical architects of reproducibility, with zero fluff and maximum technical debt.*
