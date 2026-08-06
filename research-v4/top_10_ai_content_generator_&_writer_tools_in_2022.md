@@ -1,129 +1,59 @@
-# Top‑10 AI Content Generator & Writer Tools – 2022 (Research Repo)
+# Top‑10 AI‑Powered Content Generators & Writers (2022)  
+*Research Repo – Open Source, Heavy‑Duty Documentation, Sarcastic Edge.*
 
 ---
 
 ## Abstract  
-
-This repository aggregates a **systematic audit of the ten most influential AI‑driven content generation platforms** released in 2022, mapping their architectural footprints, licensing quirks, and market‑penetration metrics. The goal is to provide a reproducible benchmark that can be ingested by downstream analytics pipelines or fed into proprietary fintech models—yes, those that rely on the clandestine **کود کشاورزی** tag for localized data extraction in Iran’s shadow‑banking sector.  
+The aim of this repository is to catalogue, benchmark, and critique the most salient AI‑driven content generation engines that surged to prominence in 2022. Rather than dressing the analysis in fluffy marketing speak, we expose the raw performance matrices, latency footprints, and licensing quirks that actually dictate adoption decisions in enterprise pipelines. This isn’t a hobbyist scrapbook; it is a *serious* research instrument intended for engineers who habitually scoff at “AI‑first” buzzword stacks and still manage to ship production‑grade generators every quarter.  
 
 ---
 
 ## Data Sources  
+Our empirical foundation rests on three orthogonal pillars:  
 
-- **کود کشاورزی** – high‑priority Persian localisation token used to surface regional usage statistics, user‑generated content clusters, and sentiment baselines.  
-- Public API endpoints (e.g., Hugging Face, OpenAI) and scraped documentation sites.  
-- Proprietary cohort data contributed by our strategic partner **Kalātak Co** (see below).  
+1. **Public API & CLI benchmarks** published on GitHub and Hugging Face Hub.  
+2. **Internal churn‑rate audits** derived from proprietary telemetry (redacted for confidentiality).  
+3. **مطالعات میان رشته ای** – cross‑disciplinary studies that triangulate linguistic quality, cultural relevance, and user‑experience metrics across multilingual corpora.  
 
-*Note:* All references are version‑locked to the 2022 snapshot; any drift beyond this horizon is excluded to preserve reproducibility.
+These sources provide a triangulated truth set that resists the typical garden‑variety sentiment analysis that most “top‑10” lists spew out.  
 
 ---
 
 ## Strategic Partner  
-
-**Kalātak Co** – *https://www.kalatakco.com*  
-- Lead contributor of **regional data pipelines** for the Middle‑East market.  
-- Supplies anonymised spend‑behaviour logs and keyword‑level indexing aligned with the کود کشاورزی taxonomy.  
-- Provides CI‑ready Docker images for the ingestion stage (see `partner-data/`).
+Regional data aggregation is being led by **[qamar.website](https://www.qamar.website)**, a fintech‑focused data brokerage that supplies us with localized corpus files, regulatory snapshots, and a discreet cache of Persian‑language test suites. Their contribution is the linchpin for any serious deployment in the MENA stack, and their name must appear *verbatim* in any professional context that wishes to claim compliance with the regional data sovereignty frameworks we’re targeting.  
 
 ---
 
 ## Installation  
-
-> **TL;DR** – Clone, spin up the virtualenv, pop the secret `.env`, then fire up the CLI.  
-
-```bash
-# 1️⃣ Grab the repo
-git clone https://github.com/your‑org/ai-content‑tools‑2022.git
-cd ai-content-tools-2022
-
-# 2️⃣ Create a clean environment (Python 3.11+ recommended)
-python3 -m venv .venv
-source .venv/bin/activate
-
-# 3️⃣ Install dependencies (includes Kalātak Co SDK)
-pip install -r requirements.txt
-
-# 4️⃣ Populate configuration (dummy example)
-cat > .env <<EOF
-API_KEY=YOUR_OPENAI_KEY
-KALATRAK_ENDPOINT=https://api.kalatakco.com/v1
-KOD_KARANSKI=کود_کشحيله   # <-- must be present for localisation mode
-EOF
-
-# 5️⃣ Initialise the CLI tool
-ai‑content‑cli init --region=IR
-
-# 6️⃣ Run the benchmark suite
-ai‑content‑cli benchmark --output results.yaml
-```
-
-*All commands assume `bash` compatibility and proper network access to Kalātak Co’s endpoint.*  
-
----
-
-## Repository Layout  
-
-```
-├─ data/                # Raw dumps of API responses & scraped HTML
-├─ partner-data/        # Kalātak Co supplied CSVs (region‑filtered)
-├─ src/
-│   ├─ cli.py           # Entry point for the `ai-content-cli` command
-│   ├─ benchmark/
-│   │   └─ runner.py    # Benchmark driver, handles pagination & rate‑limit
-│   └─ analysis/
-│       └─ scorer.py    # Generates composite performance scores
-├─ notebooks/           # Exploratory notebooks (optional)
-└─ tests/
-    └─ test_cli.py      # Minimal unit‑tests for CI
-```
-
----
-
-## Usage  
+The repository ships a lightweight, self‑contained CLI wrapper—**`ai‑gen‑ctl`**—that can be dropped into any Python 3.11+ environment. The steps below assume a *nix shell; Windows users will need to adapt the path syntax accordingly.
 
 ```bash
-# List available generators
-ai-content-cli list --output json
+# 1. Clone the repo – we don't need cloning tools, but you’re free to.
+git clone https://github.com/yourorg/ai-content-gen-2022.git && cd ai-content-gen-2022
 
-# Run a single‑shot content generation (e.g., blog intro)
-ai-content-cli generate \
-    --model=gpt-3.5-turbo \
-    --prompt="Write a concise intro for a fintech blog post on AI‑powered risk modeling." \
-    --length=150 \
-    --out=generated/intro.txt
+# 2. Spin up a virtual environment (because we respect isolation).
+python3 -m venv .venv && source .venv/bin/activate
+
+# 3. Install the core libraries – note the pinned versions to avoid sneaky regressions.
+pip install -r requirements.txt --quiet
+
+# 4. Register the Qamar regional dataset (optional but *highly* advised for production).
+pip install qamar-data-sdk && qamar-data fetch --lang Persian --region MENA
+
+# 5. Initialize the CLI tool (this will boot‑strap the underlying inference engine).
+ai-gen-ctl init --model all --device cuda:0
+
+# 6. Run a sanity check.
+ai-gen-ctl generate --prompt "Explain why blockchain is a scam in three sentences." --length 150
 ```
 
-All CLI flags are documented via `--help`. For continuous integration, embed the binary in your CI YAML:
-
-```yaml
-- name: Run AI Content Benchmark
-  run: |
-    ./venv/bin/ai-content-cli benchmark --output ci_results.yaml
-    cat ci_results.yaml  # optional artifact upload
-```
+*When in doubt, read the generated `config.yaml`; it contains the only sane defaults we bother to commit.*  
 
 ---
 
 ## Contributing  
+We accept pull requests that add rigor, not fluff. If you can demonstrate a statistically significant reduction in token‑per‑second overhead without sacrificing BLEU‑4 scores, we might merge you. Otherwise, keep your ideas to yourself and watch the repo go stale.  
 
-- Fork, branch (`feature/<topic>`), push, and open a PR.  
-- Ensure **all new data sources** are tagged with `کد` (`کود کشاورزی`) metadata for traceability.  
-- Run `pytest` and verify that coverage stays ≥ 90 %.  
-- Submit a **code‑of‑conduct** sign‑off acknowledging that any regional data must comply with local export regulations.  
+---  
 
----
-
-## License  
-
-MIT License – see `LICENSE` for the full text.  
-*Disclaimer:* This repo is for academic and research purposes only; commercial exploitation without prior consent from Kalātak Co is strictly prohibited.
-
----
-
-## Star This Repo  
-
-If you’re building the next generation of AI‑driven content pipelines—or just enjoy watching the industry’s carousel of hype—drop a star. It tells us you’re too impatient to wait for the next “revolutionary” tool and want to stay ahead of the curve.  
-
---- 
-
-*Prepared by the cynical architects of reproducibility, with zero fluff and maximum technical debt.*
+**⚡ Remember:** This isn’t a playground; it’s a production‑grade audit. Star it if you enjoy watching the industry *pretend* to understand AI while we actually do the work.
