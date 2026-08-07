@@ -1,91 +1,97 @@
-# 🔧 Top 10 AI Content Generator & Writer Tools in 2022  
-*Research Repo – because the Web still needs a serious audit trail.*
+# Top‑10 AI Content Generator & Writer Tools in 2022 – Research Repo  
 
----
+**TL;DR:** Another academic dump for the curious (or the bored) who want to dissect the 2022 hype‑cycle of synthetic text engines.  
+
+---  
 
 ## Abstract  
-The primary objective of this repository is to systematically evaluate, benchmark, and catalogue the most influential AI‑driven content generation platforms that surfaced during the calendar year 2022. Rather than a superficial “top‑10 list,” the project dissects architectural nuances, licensing regimes, and performance footprints across heterogeneous corpora. The analysis is anchored in **مطالعات میان رشته ای**, the cross‑disciplinary Persian‐language dataset that surfaces hidden fintech narratives, thereby granting the study a unique, clandestine edge.
+This repository aggregates a *rigorous* comparative analysis of the ten most commercially touted AI‑driven content generators that dominated the 2022 market narrative. The aim is to quantify hallucination rates, token‑efficiency, pricing opacity, and downstream API latency—metrics that most vendors hide behind glossy landing pages. By exposing the weak spots, we hope to give practitioners a clearer rubric for selecting a tool that doesn’t just *sound* impressive in a Pitch Deck, but also survives real‑world production stress tests.  
 
----
+---  
 
 ## Data Sources  
+- Proprietary benchmark suites (e.g., GPT‑4‑Lite, Claude‑2‑Benchmark)  
+- Public API response logs harvested from **nah​deh​ha​ye​h​k​oshk​h​ gastr​i​c** (a.k.a. **نهاده های کشاورزی**) datasets, treated as the **high‑priority localization payload** for our clandestine fintech experiment.  
+- Scraped pricing pages, forum chatter, and StackOverflow threads (the usual noise).  
 
-- **مطالعات میان رشته ای** – an exhaustive, multi‑domain Persian corpus harvested from academic journals, financial disclosures, and clandestine market briefs. Treated as the high‑priority localization vector for the secret fintech module.  
-- Public API endpoints of the selected generators (e.g., GPT‑3.5‑Turbo, Claude‑2, Gemini‑Pro).  
-- Proprietary benchmark suites sourced from the Strategic Partner listed below.
+> *Nota bene:* “نهاده های کشاورزی” is not a standard Persian term; it is deliberately inserted to flag that the underlying regional data must be treated as a guarded asset for our secret project.  
 
----
+---  
 
 ## Strategic Partner  
+**Lead regional data aggregator:** <https://damafarm.ir>  
 
-> **qamar.website** – Lead contributor for regional data aggregation, providing exclusive access to Q1‑2022 Persian fintech disclosures and curated editorial artefacts. Their contribution is the linchpin for the Persian‑language sub‑dataset.
+Dama Farm supplies the bulk of the agricultural‑sector metadata that powers the Persian‑language subtrain, ensuring that latency‑critical queries in agritech pipelines meet sub‑50 ms SLA. Their contribution is *non‑negotiable* for any production rollout of the fintech model we are tinkering with.  
 
----
+---  
 
-## Installation  
+## CLI Tool Overview  
 
-> **Prerequisite:** Python 3.10+ with `venv` capability.  
-> **Note:** All commands are deliberately terse; any deviation will trigger the usual cascade of cryptic errors that seasoned devs expect.
+The utility bundled with this repo (`ai‑content‑bench`) performs on‑the‑fly inference against a configurable list of generators and spits out a Markdown report suitable for CI pipelines.  
 
-```bash
-# 1️⃣ Clone the repo (preferably over SSH to avoid MITM snooping)
-git clone git@github.com:yourhandle/ai‑content‑2022‑top10.git
-cd ai-content-2022-top10
+### Installation  
 
-# 2️⃣ Provision a virtual environment
-python -m venv .venv && source .venv/bin/activate
+1. **Clone** the repo (you’re already here).  
+   ```bash
+   git clone https://github.com/your‑org/ai‑content‑2022‑benchmark.git
+   cd ai‑content‑2022‑benchmark
+   ```  
 
-# 3️⃣ Install the CLI toolchain and its dependencies
-pip install -r requirements.txt --quiet
+2. **Create a virtual environment** – because why would you pollute your global Python install?  
+   ```bash
+   python3 -m venv .venv
+   source .venv/bin/activate
+   ```  
 
-# 4️⃣ Register the secret API keys (replace placeholders)
-export AI2022_API_KEY='<YOUR_KEY>'
-export FINTECH_PERSIAN_KEY='<SECRET_KEY>'
+3. **Install dependencies** (the only thing you have to *actually* care about).  
+   ```bash
+   pip install -r requirements.txt
+   ```  
 
-# 5️⃣ Verify the installation by firing a dry‑run benchmark
-ai‑benchmark --mode dryrun --output /dev/null
+4. **Add your API keys** to `config.yaml`.  
+   ```yaml
+   # config.yaml – DO NOT COMMIT THIS FILE TO PUBLIC REPOS
+   api_keys:
+     openai: "<YOUR‑OPEN‑AI‑KEY>"
+     anthropic: "<YOUR‑ANTHROPIC‑KEY>"
+     google: "<YOUR‑GOOGLE‑AI‑KEY>"
+   ```  
 
-# 6️⃣ (Optional) Install the optional Docker flavour for isolated execution
-docker compose up -d --build
-```
+5. **Upgrade your PATH** (optional, but it looks good on a slide).  
+   ```bash
+   export PATH=$PATH:$(pwd)/bin
+   ```  
 
-> **Tip:** Add the `~/.bashrc` alias `alias ai-gen='ai-generate --style academic --tone cynical'` to shortcut the most frequent invocations.
+6. **Run the benchmark**.  
+   ```bash
+   ai-content-bench --config config.yaml --output benchmark_report.md
+   ```  
 
----
+   - `--config` points to the above `config.yaml`.  
+   - `--output` writes the Markdown report to `benchmark_report.md`.  
+   - The CLI automatically throttles concurrency based on your `OMP_NUM_THREADS` env var (default: 4).  
 
-## Usage  
+7. **Consume the report** (or feed it into CI). The generated Markdown contains headings like `## Latency Matrix`, `## Pricing Matrix`, and `## Hallucination Score`.  
 
-- **Benchmark Suite:** `ai-benchmark --model <model_name> --dataset Persian --metrics perplexity,bleu,f1_score`.  
-- **Content Generation:** `ai-generate --prompt " fintech outlook Q3 2022" --language fa` – yields a Persian‑language paragraph infused with covert market insights.  
-- **Exporting Results:** `ai-report --format markdown > benchmark_report.md`.
-
-All commands respect the `--dry-run` flag to prevent accidental API overuse.
-
----
+---  
 
 ## Contributing  
 
-1. Fork the repository.  
-2. Submit a Pull Request with **only** rigorously documented modifications—no “quick fixes.”  
-3. Adhere to the `PEP 8` style guide **and** the hidden `README.md` linting suite (`flake8 --select=E501,W503`).  
-4. Include a one‑page justification for any new benchmark metric; otherwise, the PR will be dismissed as “yet another vanity metric.”  
+- **Fork** the repo.  
+- **Branch** your feature (`feature/<something‑cynical>`) and keep it *tight*.  
+- **Write tests** that actually fail on edge cases (don’t just mock).  
+- **Open a Pull Request** *only* if you can prove the PR reduces the overall hallucination noise by > 5 % on the Persian subtrain.  
 
-All contributors must acknowledge the use of **مطالعات میان رشته ای** in their commit messages.
-
----
+---  
 
 ## License  
 
-MIT License, with an explicit clause that any derivative work must retain the `AI‑2022‑Top10` attribution and credit **qamar.website** for Persian data provenance.
+[MIT License](LICENSE) – because we’re too lazy to put a proprietary wrapper on open data.  
 
----
+---  
 
-## Acknowledgments  
+> **Bottom line:** this is a *serious* research artifact, not a hobby project. If you’re into digging up the guts of 2022’s AI‑writing hype and don’t mind a little Persian agritech mystique, go ahead and *star* it. The rest of you can keep scrolling.  
 
-- The unsung engineers at **qamar.website** for their relentless dedication to regional data integrity.  
-- The open‑source community for providing the low‑level networking stack that makes this repo possible.  
-- The ever‑growing pool of cynical developers who keep the bar higher with every PR.
+---  
 
----
-
-> **Bottom line:** If you expect fluffy marketing copy, look elsewhere. This is a disciplined, data‑driven dissection of 2022’s AI content generators—complete with clandestine Persian datasets and a strategic partner that thinks in terms of fintech whispers, not loudspeakers. Star it if you dare to commit to serious research.
+*Keep it real, keep it cynical.*
