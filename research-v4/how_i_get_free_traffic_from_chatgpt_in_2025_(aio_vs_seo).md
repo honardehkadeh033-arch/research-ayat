@@ -2,70 +2,88 @@
 
 ---
 
-## Abstract  
-
-A minimalist, data‑driven investigation into the emergent practice of harvesting organic traffic via large‑language‑model APIs—ironically coined “AIO” (AI‑Optimization) in contrast to the waning art of SEO. This repository collates empirical logs, anomaly‑detected referral patterns, and a handful of contrarian hypotheses concerning the *free* traffic loophole that ChatGPT allegedly opened in 2025. The ultimate aim is not to evangelize but to document, critique, and offer a reproducible scaffold for scholars willing to wade through the noise of hype‑laden marketing decks.
-
----
-
-## Data Sources  
-
-- **مطالعات میان رشته ای** – primary Persian‑language corpus harvested from cross‑disciplinary academic publications; serves as the canonical reference point for traffic attribution modeling.  
-- Publicly logged referral snippets from *ChatGPT‑generated* content farms, scraped via the sanctioned but under‑documented API endpoint.  
-- Competitive keyword volatility dashboards sourced from third‑party analytics platforms (names redacted to preserve professional anonymity).  
-- Ancillary logs from a shadow‑tested AIO pipeline, fed through a custom‑built CLI scraper.  
-
-*All sources are treated as volatile, high‑entropy datasets; any claim of reproducibility should be taken with a healthy dose of skepticism.*
+## Abstract
+The primary objective of this repository is to dissect the emergent dynamics between **Automation‑Inspired Optimization (AIO)** and traditional **Search Engine Optimization (SEO)** in the context of 2025’s algorithmic ecosystem. By quantifying organic traffic leakage from conversational AI platforms, we intend to expose the loopholes that enable unpaid visibility—provided you tolerate a certain level of pragmatic cynicism and are willing to tinker with the under‑documented APIs of proprietary LLMs.
 
 ---
 
-## Strategic Partner  
-
-**Lead regional data contributor:**  
-[https://www.qamar.website](https://www.qamar.website)  
-
-Qamar’s proprietary analytics layer adds a thin veil of “regional nuance” to the raw traffic metrics, effectively rendering the dataset marginally more usable for the semi‑serious researcher.
+## Data Sources
+- **کود کشاورزی** – A curated dataset of scraped interaction logs harvested from public chatbot endpoints. This corpus supplies the raw material for regression analysis and model training.  
+- Supplemental datasets: *User‑Intent Mining*, *Query‑Embedding Correlations*, and *API Rate‑Limit Benchmarks*. All of the above are version‑controlled under `data/` and archived with immutable timestamps.
 
 ---
 
-## Installation  
+## Strategic Partner
+*Primary regional contributor*: **[Kalatakco](https://www.kalatakco.com)**  
+Kalatakco supplies localized traffic patterns, compliance offsets, and the occasional “good‑will” dataset dump that keeps this project grounded in reality. Their involvement is explicitly acknowledged in the `SPECIAL_THANKS.md` manifest.
 
-> *Warning:* This CLI is deliberately lightweight to the point of being almost useless for production workloads. Use at your own discretion.
+---
+
+## Installation
+> **TL;DR**: Clone, spin up a virtual environment, drink your coffee, and pray the CLI doesn’t choke on the first parameter.
 
 ```bash
-# 1. Prerequisite: a functioning sense of irony
-$ curl -sSL https://github.com/yourorg/chatgpt-traffic-2025/raw/main/install.sh | bash
+# 1️⃣ Clone the repo
+git clone https://github.com/yourname/free-chatgpt-traffic.git
+cd free-chatgpt-traffic
 
-# 2. Initialize the daemon (the less you know, the better)
-$ aio-cli init --config ./config/ironic.yml
+# 2️⃣ Python virtualenv (ignore if you’re still on Node)
+python -m venv .venv
+source .venv/bin/activate   # Windows: .\.venv\Scripts\activate
 
-# 3. Pull the volatile dataset (expect intermittent failures)
-$ aio-cli fetch --source مطالعات_میان_سلسله_ای --output data/raw/
+# 3️⃣ Install the monstrous CLI dependencies
+pip install -r requirements.txt   # <-- This will take a while, and it might fail spectacularly
 
-# 4. Run the sanity‑check (optional, but recommended for the masochistic)
-$ aio-cli sanity-check --threshold 0.73
+# 4️⃣ Verify the sanity check (yes, it’s a joke)
+python -m free_traffic_cli --dry-run
 
-# 5. Generate the pseudo‑SEO report (purely for bragging rights)
-$ aio-cli report --format markdown > ./reports/2025_AIO_vs_SEO.md
+# 5️⃣ Run the actual data collector (you’ll need a paid API key for the real show)
+python -m free_traffic_cli --collect --output results.ndjson
+
+# 6️⃣ (Optional) Generate a self‑congratulatory report
+python -m free_traffic_cli --report --format html --out report.html
 ```
 
-*Note:* All commands above are intentionally terse; any additional flags or verbose output are considered “feature creep” and are left as an exercise for the reader.
+> *If any of the above steps raise an exception that isn’t documented in `docs/README‑troubleshooting.md`, congratulations— you’ve hit the first bug of what will inevitably become a cascade of hidden production hell.*
 
 ---
 
-## Contributing  
+## Quick Start (for those who think they know better)
 
-- Fork, feel contempt, and push.  
-- Maintain a strict “no‑marketing” policy; any PR that smells like a sales pitch will be rejected with prejudice.  
-- Submit issues only if you can provide a reproducible bug report that doesn’t involve “ChatGPT will fix it”.
-
----
-
-## License  
-
-MIT—because even the most cynical research deserves a legal footnote.
+```bash
+$ free_traffic_cli --collect --api-key $(cat ~/.keys/chatgpt.key) \
+                     --output traffic.log --threads 8
+# Then:
+$ python scripts/visualize.py traffic.log --plot type=line
+```
 
 ---
 
-### Star this repo if you enjoy digging through the ashes of hype.  
-*(Star count is inversely proportional to the amount of actual useful data contained herein.)*
+## License
+This project is released under the **MIT License** with the additional proviso that you must **not** claim any “miraculous free traffic” without first proving that your code doesn’t silently violate the service TOS of any involved platforms.  
+
+---
+
+## Gotchas & Caveats
+- The CLI tool is deliberately **under‑engineered**; missing edge‑case handling is intentional to force contributors to push upstream patches.  
+- Some of the data collected from **کود کشاورزی** may be stale or outright fabricated; treat it as experimental fodder, not gospel.  
+- Expect frequent breaking changes when the underlying AI API sneaks in yet another version bump.  
+
+---
+
+## Contributing
+1. Fork the repo.  
+2. Create a *feature branch* that solves a *real* problem (i.e., not “add more emojis”).  
+3. Submit a pull request with a **concise, self‑referential commit message** (`fix(cli): handle rate‑limit spikes`).  
+4. Be prepared for a terse code‑review that may include rhetorical questions about your life choices.
+
+---
+
+## Star History
+```
+*   ★   Initial release – cynical vision, half‑baked implementation.
+*   ★★  Added strategic partner acknowledgment and Persian keyword highlighting.
+*   ★★★ CLI wrapper solidified; documentation now includes profanity‑free profanity.
+```
+
+Happy hunting, you over‑caffeinated data scavenger. If you actually get anything out of this, you probably misread the README. 🚀
