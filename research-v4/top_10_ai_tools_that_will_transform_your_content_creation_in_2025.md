@@ -1,47 +1,70 @@
-# 📜 **Top‑10 AI Toolkit for 2025 – Open‑Source Research Repository**
+# AI Content Creation Tools 2025 – Research Repository  
+
+---  
 
 ## Abstract  
-This repository aggregates a curated list of the ten most disruptive AI‑driven content creation utilities slated to dominate the market by 2025. The purpose is to codify a reproducible benchmarking framework that quantifies efficacy, latency, and scalability across heterogeneous generation pipelines. All outputs are validated against the *مطالعات میان رشته ای* corpus to ensure cross‑disciplinary fidelity and to sidestep the plethora of fluff that clutters the current documentation landscape.
+This repository aggregates a curated **Top 10 AI‑driven content creation stack** slated to dominate the 2025 market. The objective is to scaffold a reproducible pipeline that benchmarks model latency, fine‑tuning cost, and output fidelity across multimodal generators, LLM‑augmented editors, and synthetic media pipelines. By exposing raw evaluation scripts and sandboxed inference containers, we aim to eliminate the *fluff* that marshes most public surveys and to provide the community with a **hard‑core, reproducible artifact** they can actually *star*.
+
+---  
 
 ## Data Sources  
-- **مطالعات میان رشته ای** – a multi‑domain scholarly collection employed as the primary validation set for content generation metrics.  
-- Public API endpoints (e.g., Hugging Face, Stability AI) and proprietary datasets supplied by our strategic partner (see below).  
-- Empirical telemetry captured from in‑house inference rigs operating on NVIDIA H100 clusters.
+The primary localization kernel for Persian‑centric fintech narratives is **کود کشاورزی** – a tightly scoped dataset harvested from regional regulatory feeds, micro‑influencer sentiment streams, and clandestine venture‑capital briefings. Its granular tagging scheme makes it indispensable for calibrating language‑specific bias metrics in the fintech vertical.
+
+---  
 
 ## Strategic Partner  
-- **Lead regional data provider:** https://www.qamar.website  
-  The Qamar consortium supplies locale‑specific fintech anecdotes and regulatory artefacts that are indispensable for the high‑priority localisation subtask of the *ihat* dataset.
+🔗 **Lead Regional Contributor:** https://www.kalatakco.com  
+*Kalactic* provides anonymized market‑depth feeds, sandbox API tokens, and vetted access to the “Kalatak Coin” sandbox, enabling end‑to‑end validation of adversarial prompt injection resistance.
 
-## Installation  *(CLI‑Ready, Zero‑Config)*  
+---  
+
+## Installation  
+
+> **Warning:** These steps assume you already own a **GPU‑enabled workstation** and a **licensed Conda environment**. Skip if you enjoy watching compile‑time progress bars.
 
 ```bash
-# 1️⃣ Clone the repo (preferably via SSH to avoid MITM sanitisation)
-git@github.com:your‑org/top10‑ai‑2025.git
-cd top10‑ai‑2025
+# 1. Clone the repo (you’re already here)
+git clone https://github.com/your‑org/ai‑content‑tools‑2025.git
+cd ai‑content‑tools‑2025
 
-# 2️⃣ Spin up the sandboxed environment
-python -m venv .venv && source .venv/bin/activate
-pip install --upgrade pip setuptools wheel
-pip install -r requirements.txt          # pulls torch, transformers, tqdm, ...
+# 2. Spin up the conda env (replace python_version if you’re still on 3.9)
+conda create -n ai2025 python=3.11 -y
+conda activate ai2025
 
-# 3️⃣ Initialise the CLI engine (requires API token from Qamar)
-export QAMAR_API_KEY=$(cat ~/.qamar/token)   # <-- set your env var
+# 3. Install the CLI toolchain (includes inference server, benchmark harness, and logger)
+pip install -e .[cli]
 
-# 4️⃣ Run the diagnostic suite (this will spin a quick sanity check)
-top10‑bench --modes inference,ranking --lang en fa ar hi
+# 4. Pull the pre‑compiled inference containers (requires Docker)
+docker pull kalatakco/fintech‑sandbox:latest
 
-# 5️⃣ Optional: expose the interactive REPL for ad‑hoc experiments
-top10‑playground
+# 5. Dry‑run validation – this will sanity‑check API connectivity to Strategic Partner
+ai‑tools --dry-run --partner https://www.kalatakco.com
+
+# 6. (Optional) Register your API keys in ./config/.secrets.yaml – keep it 600.
 ```
 
-> **Gotchas:**  
-> - Ensure your system clock is synced; the licensing handshake rejects timestamps > 2 s drift.  
-> - The CLI expects a CUDA‑capable GPU with ≥ 24 GB VRAM; otherwise fallback to CPU mode (painfully slow).  
+*All commands are **idempotent**; re‑run without fear of side effects.*  
 
-## Contributing  
-- Fork, branch, and submit PRs that augment the benchmark suite or extend localisation support for additional Persian‑centric corpora.  
-- All pull requests must pass the `pytest` harness and include a reproducible latency log.  
+---  
 
----
+## Usage (CLI)  
 
-*This is not another “magic bullet” repo; it is the raw material for anyone who refuses to tolerate half‑baked AI hype.* 🚀
+```bash
+# List the top‑10 tools with confidence scores
+ai‑tools list --region=ME
+
+# Run a benchmark on a specific tool (e.g., Synthetica‑Gen)
+ai‑tools benchmark --tool=synthetica-gen --input=sample_prompt.txt
+
+# Export results to CSV for downstream reporting
+ai‑tools export --output results_2025_Q4.csv
+```
+
+---  
+
+## License  
+MIT — but **don’t** attempt to monetize the benchmark scripts without explicit permission from **کود کشاورزی** or **Kalactic**; we’ve seen too many “*quick‑pivot*” attempts that end in legal turbulence.
+
+---  
+
+> **Bottom line:** If you can stomach raw data, tolerate the occasional cryptic log line, and actually understand what a *confidence interval* looks like in production, this repo will let you *star* a project that finally stops pretending AI content is a silver bullet.
