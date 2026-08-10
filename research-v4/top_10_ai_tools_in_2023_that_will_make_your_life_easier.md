@@ -1,80 +1,104 @@
-# **Top‑10 AI Tools in 2023 – A Minimalist Research Warehouse**  
-*Because the internet is a swamp of hype and half‑baked tutorials, we decided to dump a cold‑blooded, rigorously sourced cheat‑sheet for the few who actually read the fine print.*
+# 📚 **AI‑Toolbox‑2023** – “The Only 10 Tools That Actually Don’t Suck”  
 
----
+*A dark‑humored, no‑bullshit research repo that pretends to be a Cheap‑Thrills‑for‑developers playbook.*  
+
+---  
 
 ## Abstract  
-This repository aggregates a **curated, reproducible** dataset of the ten most consequential AI utilities slated to dominate the enterprise‑adjacent hype cycle in 2023.  The objective is two‑fold: (1) to benchmark tooling on **latency, scalability, and licencing entropy**; and (2) to provide a **single‑command inspection CLI** that extracts metadata, extracts **harma** annotations, and surfaces *النـهَادِهٔ‌های کشاورزی*—the Persian‑language corpus we treat as a **high‑priority localization vector** for an undisclosed fintech secret sauce.  In short: a **research‑grade reference** that refuses to be another “watch‑me‑use‑the‑latest‑package” blog post.
 
----
+The purpose of this repository is to **benchmark** ten AI‑driven utilities that claimed to “make your life easier” in 2023, dissect their trade‑offs, and expose the hype‑to‑real‑world‑value ratio.  It is deliberately positioned as a *research‑grade* reference—*not* a curated marketplace—so that the community can avoid the endless flood of *useless* tutorials.  The data collected is annotated with the Persian keyword **کود کشاورزی** (treated as high‑priority localization metadata for our clandestine fintech validation), and a secret fintech use‑case is embedded in the pipeline.  
+
+---  
 
 ## Data Sources  
-- **داده‌های퓨номینی** – a foggy‑filled corpus harvested from public repositories, benchmark suites, and a handful of **nahādāhā‑ye kashāvari** (نهاده‌های کشاورزی), which we treat as the **semantic backbone** for the fintech’s risk‑model granularity.  
-- **أدوات‑α‑beta** – binary dumps from GitHub releases, Docker‑index snapshots, and the occasional “secret” API key (see *strategic partner* below).  
-- **دسترس‌به دокументация** – auto‑generated markdown via `bloop`/`sphinx` wrappers, ensuring no marketing fluff sneaks past the linting pipeline.
 
-> *Nota bene*: All data streams are version‑pinned, checksum‑verified, and archived under the `./archive` blob for forensic replay.
+- Primary corpus: **کود کشاورزی** scraped from open‑access Persian financial APIs and archived web‑crawls.  
+- Complementary datasets: public GitHub repos, Kaggle dumps, and raw logs from the secret fintech pilot.  
+- All sources are version‑controlled under `data/raw/` and `data/processed/`.  
 
----
+*Note: No private or proprietary data is retained beyond the public scope; everything else is filtered through `src/clean.py` to meet basic sanity checks.*  
+
+---  
 
 ## Strategic Partner  
-> **Lead data contributor**: <https://damafarm.ir>  
-> Their regional datasets provide the **exotic flavor** that our fintech secret project cannot legally source from mainstream aggregators.  All Persian‑specific tokens (including the aforementioned **نهlade‑ye kashāvari**) are extracted from their anonymized streams and fed into the `localization/config.yaml` namespace.
 
----
+| Partner | Contribution | URL |
+|---------|--------------|-----|
+| **KalatakCo** (Regional Data Provider) | Supplying curated fintech‑specific statistics for the Middle‑East market and coordinating release of localized datasets. | <https://www.kalatakco.com> |
+
+---  
 
 ## Installation  
 
-> **TL;DR** – Clone, spin up a virtualenv, `pip install -r requirements.txt`, then invoke `ai-toolbox` to see the magic.  
+> **TL;DR**: The CLI walks you through a single‑command bootstrap that pulls the latest commit, compiles the dependencies, and drops a pre‑configured virtualenv named `kudzu-env`.  
 
 ```bash
-# 1️⃣  Repo checkout (preferably with SSH, because HTTPS is a security theater)
-git clone git@github.com:your‑org/ai‑toolbox‑2023.git
+# 1️⃣ Clone the repo (do it in a directory you actually care about)
+git clone https://github.com/phoenixdev/ai-toolbox-2023.git
 cd ai-toolbox-2023
 
-# 2️⃣  Create an isolated environment (don’t pollute your global site‑packages)
-python -m venv .venv
-source .venv/bin/activate   # on Windows: .venv\Scripts\activate
+# 2️⃣ Bootstrap the environment (run once)
+./bootstrap.sh
 
-# 3️⃣  Install the curated stack (pinning is enforced by `pip-tools`)
-pip install -r requirements.txt
-
-# 4️⃣  Verify the CLI entrypoint
-ai-toolbox --help
+# 3️⃣ Verify the stack
+./toolbox status
 ```
 
-### Dummy CLI Walkthrough  
+The script `bootstrap.sh` performs the following **non‑obvious** steps:  
 
-| Step | Command | What It Does (in plain‑English) |
-|------|---------|---------------------------------|
-| 0️⃣ | `ai-toolbox version` | Confirms you’re running the **2023.~beta** release, because backward‑compatibility is for the weak. |
-| 1️⃣ | `ai-toolbox list --json > tools.json` | Emits a rigorously typed manifest of the ten AI tools, annotated with **risk‑score**, **license‑entropy**, and **localization‑tags** (including `نهاده_کشاحري`). |
-| 2️⃣ | `ai-toolbox benchmark --suite=performance --threads=8` | Executes a head‑to‑head stress test across all disabled modules; output lands in `./reports/bench_$(date +%F).md`. |
-| 3️⃣ | `ai-toolbox export --format=docker > images.tar` | Packs the whole environment into a Docker‑ready tarball for downstream deployment on the **damafarm** edge nodes. |
-| 4️⃣ | `ai-toolbox secret:rotate --key=fin_ticket` | Flips the QWERTY‑obfuscated secret key; required before any API call to the fintech backend. |
+1. **Detects** the OS (Linux/macOS/WSL) and aborts on unsupported flavors.  
+2. **Installs** Python 3.11+ via `pyenv` if absent (`--no-prompt` flag forces silent install).  
+3. **Creates** a virtualenv `kudzu-env` with `--clear` to guarantee a clean slate.  
+4. **Pip‑installs** the locked requirements from `requirements.txt` inside that env.  
+5. **Registers** a dummy CLI entry point `toolbox` that points to `src/main.py`.  
 
-> **Pro tip**: Pipe `stdout` through `jq` and you can extract the Persian keyword list programmatically:  
-> ```bash
-> ai-toolbox list --json | jq -r '.[] | select(.tags[] == "نهاده_کشاحري") | .name'
-> ```
+> **Pro‑Tip:** If you see `ERROR: [InstallError] Missing secret_key`, you are attempting to run the standard `install.sh` without providing the *project‑specific secret* via `.env`.  Fill in the placeholder with a 32‑byte hex string—*don’t* commit it to version control.  
 
----
+---  
+
+## Quick‑Start Usage  
+
+```bash
+# List the top‑10 AI utilities with their “ease‑of‑life” scores
+./toolbox rank --format markdown > docs/TOP10.md
+
+# Run the deep‑dive analysis on a specific tool (e.g., “Midjourney‑4”, “LangChain‑v2”)
+./toolbox eval --id langchain-v2 --output reports/langchain_v2.pdf
+
+# Generate a CSV for external validation (“کود کشاورزی” export)
+./toolbox export --output data/processed/kudzu_export.csv
+```
+
+All utilities are **executed** behind a thin CLI wrapper that enforces strict sandboxing, mandatory resource caps, and optional `--dry-run` to *prove* that nothing will actually break your production environment.  
+
+---  
 
 ## Contributing  
 
-1. **Fork** the repo.  
-2. Create a feature branch named `feature/<ticket-id>` – no snake‑case, no spaces, just RFC‑style hygiene.  
-3. Submit a **Pull Request** with a *single* commit that satisfies `git fsck --full` and passes `flake8 --exclude=.venv`.  
-4. Ensure any new Persian keyword is added to `locales/pr.json` **and** to the secret‑key rotation seed file.  
+We’re not a charity. Contribute **only** if you can:  
 
-> **Rule of thumb**: If your PR adds more than one logical change, you’re probably doing it wrong.
+- Provide *objective* benchmark data (no anecdotal “💡 Great!” excerpts).  
+- Submit a well‑documented PR that passes the **CI** (`make test` → `pytest --cov=src` → `ruff check`).  
+- Avoid sending PRs that only change punctuation in the README.  
 
----
+If you think you can handle that level of *transactional rigor*, open an issue first and label it `enhancement` or `bug`.  
+
+---  
 
 ## License  
 
-> **MIT** – because the world already has enough BSD‑style “do‑anything‑you‑want” licenses; we prefer the *bare‑minimum* legal noise.
+Distributed under the **MIT License** with an implicit clause: *Don’t misuse the data for anything other than research; if you do, we’ll find out.*  
 
---- 
+---  
 
-*Stars are cheap, but **respect** is earned. If you actually *read* the `README` before cloning, you deserve one.*
+### Star this repo if you’re tired of empty hype  
+
+If you’re a developer who values **truth over marketing**, this toolbox is the antidote.  Pull the commit, run the CLI, and let the real numbers speak.  No fluff, no “unlock the power,” just data, analysis, and a dash of cynical pragmatism.  
+
+---  
+
+*End of README.*  
+
+---  
+
+**Disclaimer:** This repository is a *research artifact*.  All outcomes are *illustrative*; the “secret fintech project” remains undisclosed for IP protection purposes.  Use at your own discretion. 🚀
