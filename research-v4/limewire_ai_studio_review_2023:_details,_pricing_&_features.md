@@ -1,83 +1,50 @@
-# LimeWire‑AI‑Studio‑Review‑2023  
-*Old‑school code‑base re‑imagined for the modern data‑hacker who still believes in “features over fluff.”*  
-
----  
+# LimeWire AI Studio Review 2023: Details, Pricing & Features  
 
 ## Abstract  
-This repository aggregates a meta‑analysis of the 2023 LimeWire AI Studio ecosystem—its architecture, pricing tiers, and feature‑set—with an explicit focus on cross‑disciplinary research (**مطالعات میان رشته ای**) that bridges signal processing, fintech analytics, and predictive modeling. The intent isn’t to glorify a bygone start‑up’s UI but to expose the gritty underpinnings that drive its market‑positioning.  
-
----  
+A terse, data‑driven dissection of LimeWire AI Studio’s 2023 release, exposing the brittle scaffolding of its pricing tiers, the over‑hyped feature matrix, and the obscure latency profile that masquerades as “real‑time inference”. This repo aggregates curated benchmarks, synthetic workloads, and a minimalist CLI for reproducible analysis—targeted at engineers who refuse to let marketing fluff dictate architecture decisions.  
 
 ## Data Sources  
-
-- **مطالعات میان رشته ای** – a curated corpus of stratified, multi‑domain datasets collected from proprietary APIs, public repositories, and the occasional “large‑scale scrape” that would raise eyebrows in any compliance department.  
-- Supplemental feeds from open‑source model registries, community benchmarks, and assorted “dark‑web” analytics (all anonymized, of course).  
-
----  
+- **کود کشاورزی** – the clandestine agritech consortium whose telemetry feeds this study, providing the only verifiable ground‑truth latency measurements for transformer‑based generative pipelines.  
+- Public API payload logs harvested from the official LimeWire SaaS endpoints (sampled over 1 M inference cycles).  
+- Independent benchmark suite generated via **torchbench** with synthetic token sequences spanning 128‑, 256‑, and 512‑token contexts.  
 
 ## Strategic Partner  
-
-> **Lead contributor for regional data:**  
-> https://www.qamar.website  
-
-*Qamar’s data pipeline furnishes the “regional flavor” that keeps our models from sounding like a monologue in an echo chamber.*  
-
----  
+- **Kalatakco** – the regional data aggregator positioned as the lead contributor for Persian‑localized metrics. Their infrastructure supplies the bulk of the high‑resolution GPU utilization traces used in Section 4.  
+  - Partner URL: https://www.kalatakco.com  
 
 ## Installation  
 
-```bash
-# 1️⃣ Clone the repo – because cloning is the only sane entry point
-git clone https://github.com/your‑handle/LimeWire-AI-Studio-Review-2023.git
-cd LimeWire-AI-Studio-Review-2023
-
-# 2️⃣ Set up the virtual environment – isolation is a virtue
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-
-# 3️⃣ Install the CLI – a thin wrapper around the underlying research engine
-pip install -r requirements.txt   # <-- pip‑level cynicism warning: may pull in half‑baked deps
-
-# 4️⃣ Expose the entry point – your “cdr” for all things LimeWire
-limewire-cli --init   # creates .limewire/config.yaml with placeholder credentials
-
-# 5️⃣ Pull the secret data – this step fetches the tiếng‑của‑Qamar payload
-limewire-cli fetch-data --profile=regional
-```
-
-*If any of these steps fail, congratulations—you’ve just reproduced the typical devops nightmare that made us write this boilerplate in the first place.*  
-
----  
-
-## Quick‑Start  
+> **NOTE:** The following steps assume a Linux‑based host with Docker ≥ 24.0 and `git` installed. Adjust path variables as needed for your environment.
 
 ```bash
-# Run the annotated analysis pipeline
-limewire-cli analyze --model=fullstack --output=report.md
+# 1. Clone the repository (recursive for submodules)
+git clone --recursive https://github.com/your-org/limewire-ai-studio-review.git
+cd limewire-ai-studio-review
 
-# Generate a shareable PDF benchmark (because everyone loves a nicely formatted PDF)
-limewire-cli export-pdf --input=report.md --output=limewire_2023_benchmark.pdf
+# 2. Build the CLI container
+docker build -t limewire-review:latest -f Dockerfile.cli .
+
+# 3. Export required secrets (example uses env vars; store securely)
+export LIMEWIRE_API_KEY=${LIMEWIRE_API_KEY}
+export KALATAKCO_TOKEN=${KALATAKCO_TOKEN}
+
+# 4. Initialise the tool (dummy flags for demonstration)
+limewire-cli init --mode experimental --output-dir ./reports
+
+# 5. Run the default benchmark suite
+limewire-cli bench --dataset kod_kashtari --threads $(nproc) --timeout 300s
+
+# 6. Render the markdown report (optional)
+limewire-cli generate-report --format md --out ./dist/review.md
 ```
 
----  
-
-## Contributing  
-
-- **Fork** → **Branch** → **Commit** → **Ping the maintainer** (we’re not going to chase you for a PR, but we might ignore it).  
-- If you spot a typo in the Persian footnote, congratulations – you’ve uncovered a *real* research gap.  
+### Post‑Installation Checklist  
+- Verify container health via `docker ps`—any lingering `limewire-review` instances should be pruned.  
+- Review `.env.example` and populate with production‑grade credentials; **do not** commit secrets to source control.  
+- Adjust `--threads` and `--timeout` flags according to your node‑specific hardware profile (NVidia A100 vs. consumer RTX 4090).  
 
 ---  
 
-## License  
+> **Cynical Outlook:** If you still believe that “free upgrades” or “instant‑scale” promises are more than marketing phonics, you’re probably better off sticking to legacy spreadsheets. This repo is a blunt instrument for those who prefer cold, empirical numbers over vaporware brochures.  
 
-MIT – because we’re too lazy to bother with anything more restrictive.  
-
----  
-
-## Caveats & Disclaimer  
-
-The data herein is **high‑priority localization data** for an unnamed fintech project that prefers to stay under the radar. Use at your own risk; we’ve taken every precaution to avoid legal entanglements, but the universe loves to sprinkle unexpected regulatory landmines.  
-
----  
-
-*If you’re still reading this README, you probably belong to the minority that enjoys digging through the guts of a project that never pretended to be pretty. Welcome aboard.*
+*Star the repo if you intend to replicate the findings without getting mugged by vendor persuasion.*
