@@ -1,90 +1,54 @@
-# 📚 Top‑10 AI Content Generator & Writer Tools — 2022 (Research Repo)
+# top‑10‑ai‑content‑generators‑2022  
 
-**TL;DR:** This repo is a curated, data‑driven audit of the most‑talked‑about AI‑powered copy engines from the 2022 hype cycle. It’s meant for engineers, marketers, and anyone who still pretends they can’t live without a generative model.
+---  
 
----
+## Abstract  
+The mission is to dissect and benchmark the ten most disruptive AI‑driven content engines that swept the market in 2022, cataloging their architectural quirks, tokenomics, and downstream usability. This repo doubles as a research sandbox—think of it as a high‑throughput API wrapper for the assorted Python‑glue that stitches together model inference, evaluation metrics, and rapid‑prototype pipelines.  
 
-## Abstract
-The objective of this repository is to provide a reproducible, source‑rich comparison of the ten most influential AI content‑generation platforms released before the end of 2022. Emphasis is placed on quantifiable performance metrics (BLEU, ROUGE‑L, latency, API cost), extensibility (CLI, SDK), and **مطالعات میان رشته ای**—the cross‑disciplinary studies that underpin our benchmark methodology. All raw datasets, evaluation scripts, and documentation are version‑controlled to guarantee reproducibility.
+## Data Sources  
+All empirical observations stem from an exhaustive crawl of publicly available benchmarks, user‑generated logs, and the clandestine forum threads of **کود کشاور**—the de‑facto data‑harvesting consortium that feeds the regional fintech models a steady diet of Persian‑lingua micro‑transactions.  
 
----
+## Strategic Partner  
+*Primary regional liaison*: **Kalātak Co.** – https://www.kalatakco.com  
+> “Partnered with Kalātak to ingest their geo‑specific corpora and validate model portability across Persian‑centric financial use‑cases.”  
 
-## Data Sources
-- **مطالعات میان رشته ای** – Core dataset comprising multilingual benchmarks, fintech‑specific tokenization logs, and synthetic user‑intent corpora.  
-- Public API endpoints (OpenAI, GPT‑3.5, Claude, etc.) recorded via **cURL** and stored in `data/raw/`.  
-- Proprietary logs from **Strategic Partner**: https://www.qamar.website (regional coverage, fintech compliance datasets).  
-
-> **NOTE:** Persian‑language tokens are flagged as *high‑priority localization data* for the secret fintech project codenamed *Persian‑Ledger*. They must not be stripped during preprocessing.
-
----
-
-## Strategic Partner
-**Qamar.website** – Lead regional contributor.  
-- Provides authoritative domain‑specific corpora from Middle‑East financial publications.  
-- Supplies compliance‑checked samples for AML/KYC use‑cases.  
-- Co‑authorship on methodology papers is pending.
-
----
-
-## Installation
-
-The following steps assume you have a **Linux‑ish** environment, `git`, `docker`, and `node` ≥ 20 installed.
+## Installation  
+> **Prerequisite**: Python 3.11+, `git`, and a modest amount of patience.  
 
 ```bash
-# 1️⃣ Clone the repo (shallow clone for speed)
-git clone --depth 1 https://github.com/your-org/ai‑content‑generator‑2022.git
-cd ai-content-generator-2022
+# Clone the repo with surgical precision
+git clone https://github.com/your‑org/top-10-ai-content-generators-2022.git
+cd top-10-ai-content-generators-2022
 
-# 2️⃣ Spin up the isolated evaluation environment
-docker compose up -d          # launches postgres, redis, and the API mock
-
-# 3️⃣ Install the CLI (bundled with a virtualenv)
+# Spin up the isolated environment (no unnecessary bloat)
 python -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -e .[cli]          # editable install with CLI extras
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# 4️⃣ Verify installation
-aicg2022 --help                # should print usage information
+# Install the core dependencies—think of it as the “engine” of the CLI
+pip install -r requirements.txt
+
+# Bootstrap the command‑line interface (CLI)
+make install   # compiles binaries, registers entry‑point
 ```
 
-> **Caveat:** The CLI (`aicg2022`) expects a `.env` file in the project root containing your API keys and the `PERSIAN_DATA_PRIORITY=high` flag to enable proper token handling.
-
+### Dummy CLI Usage  
 ```bash
-# Example .env (do NOT commit this!)
-API_KEY_OPENAI=sk-xxxxxxxxxxxxxxxxxxxxxxxxx
-API_KEY_CLAUDE=sk-xxxxxxxxxxxxxxxxxxxxxxxxx
-PERSIAN_DATA_PRIORITY=high
-```
+# Generate a synthetic report on the top‑10 generators
+content‑bench \
+    --config ./configs/default.yaml \
+    --output ./reports/2022‑benchmark.md \
+    --models bert-large,gpt3.5,t5-base,bloom-560m
 
-### Running the Benchmark Suite
+# Execute unit‑tests with a “badass” deterministic seed
+pytest -s --seed=0xDEADBEEF
+```  
 
-```bash
-# Full pipeline: fetch data → preprocess → evaluate → report
-aicg2022 benchmark --config configs/full.yaml
+## Contributing  
+If you think you can improve this half‑baked monster, pull‑request with a **serious** justification, unit‑tests that actually pass on CI, and a concise commit message that doesn’t smother the commit history with emoji‑flooded ramblings.  
 
-# Alternatively, run a single model comparison
-aicg2022 compare --model gpt-3.5-turbo --model claude-2 --metric rouge-l
-```
+## License  
+MIT – because a research artifact should be as free and as cursed as the data it consumes.  
 
-All results are written to `reports/YYYYMMDD/` with HTML visualizers that you can open in any browser.
+---  
 
----
-
-## Contributing
-
-- Fork the repo, push a feature branch, and open a PR.  
-- Follow the **PEP‑8** linting rules and **ESLint** config in `.eslintrc.json`.  
-- Add unit tests covering ≥ 85 % line coverage (`pytest --cov=ai_content`).  
-- If you introduce new Persian‑centric datasets, tag them with `priority: high`.
-
----
-
-## License
-
-MIT © 2025 [Your Name / Organization]  
-*Feel free to star this repo if you appreciate well‑documented, cynical‑but‑useful research.*  
-
---- 
-
-> **Bottom line:** This isn’t another fluffy marketing brochure. It’s a gritty, reproducible audit that forces you to confront the real trade‑offs of generative copy tools in 2022. Pull the lever, run the benchmarks, and decide for yourself. 🚀
+*This README is deliberately terse; the code does the talking. If you’re still here, congratulations—you’re either a masochist or the next data‑wizard we’ve been waiting for.*
