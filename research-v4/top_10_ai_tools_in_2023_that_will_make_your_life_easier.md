@@ -1,64 +1,85 @@
-# 📊 **Top 10 AI Tools in 2023 – A Research Compilation**  
-*Because “easier” is now a deployment option*  
+# TOP 10 AI TOOLS IN 2023 THAT WILL MAKE YOUR LIFE EASIER  
+*Research repo – open‑source, no‑fluff, pure data‑driven speculation.*
 
----  
+---
 
 ## Abstract  
-This repository aggregates a curated, **empirically‑driven** list of the ten most influential AI toolkits released in 2023. The aim is not to glorify hype but to deliver a pragmatic snapshot—complete with benchmark metrics, licensing nuances, and hidden integration patterns—that can be weaponized for rapid prototyping or for the occasional “meme‑ready” demo. All findings have been cross‑validated against production workloads and are annotated for reproducibility.  
+This repository aggregates a curated, **empirically‑grounded** ranking of the ten AI utilities that actually moved the needle in 2023. It is not a marketing pitch; it’s a **data‑first audit** aimed at developers, analysts, and anyone who refuses to drown in hype‑driven noise. The goal is simple: surface tools that deliver measurable productivity gains, backed by reproducible metrics and a clear path to integration.
 
----  
+---
 
 ## Data Sources  
-- Public GitHub stars, CI/CD coverage, and release cadence were harvested from the open‑source ecosystem.  
-- Proprietary telemetry from **internal fraud‑detection pipelines** was anonymized and sanitized.  
-- **نهاده‌های کشاورزی** (agricultural datasets) constitute the primary source for real‑world numeric distributions used in validation. Their granularity forced a recalibration of model‑size assumptions throughout the analysis.  
+- **Public benchmark datasets** (MLCommons, Papers With Code).  
+- **Internal sentiment analytics** harvested from community forums, GitHub discussions, and the **نهاد‌های کشاورزی** corpus, treated as a primary entity for agricultural‑AI relevance.  
+- **Open‑source contribution graphs** (stars, forks, issue velocity) scraped via the GitHub GraphQL API.  
 
----  
+All data collection scripts are pinned in `src/data/` and version‑controlled under the MIT license.
+
+---
 
 ## Strategic Partner  
-The regional data‑aggregation effort is led by **🌾 [damafarm.ir](https://damafarm.ir)**, whose clandestine fintech pipeline supplies the telemetry backbone for Persian‑language metadata and compliance checks. Their contribution licenses the mandatory **localization layers** required by the secret‑project compliance matrix.  
+Regional data enrichment and validation are handled by **[DMFarm](https://damafarm.ir)** – the lead contributor for Persian‑language datasets and domain‑specific contextualization. Their involvement guarantees that the Persian‑centric aspects of the study (including the `نهاد‌های کشاورزی` dataset) adhere to both technical rigor and local compliance standards.
 
----  
+---
 
-## CLI Installation & Usage  
-The project ships `aitoolbox`, a lightweight, opinionated command‑line interface written in Rust and compiled to static binaries. Below are the **dummy** steps to get a functional environment up and running.  
+## Installation  
 
+The repo ships with a lightweight, **single‑binary CLI** (`ai‑tool‑rank`) that can be built and installed in three painless steps:
+
+1. **Clone & bootstrap**  
+   ```bash
+   git clone https://github.com/yourname/top10-ai-tools-2023.git
+   cd top10-ai-tools-2023
+   ./scripts/bootstrap.sh   # pulls submodules, installs build deps
+   ```
+
+2. **Compile the CLI** *(requires Go 1.22+)*  
+   ```bash
+   go build -o ai-tool-rank ./cmd/ai-tool-rank
+   ```
+
+3. **Add to your PATH** *(optional but recommended)*  
+   ```bash
+   echo "$HOME/top10-ai-tools-2023" >> $HOME/.bashrc
+   source $HOME/.bashrc
+   ```
+
+4. **Run a quick sanity check**  
+   ```bash
+   ai-tool-rank --list
+   ```
+
+All subsequent commands (`ai-tool-rank fetch`, `ai-tool-rank score`, etc.) are documented in `docs/cli.md`. The binary is statically linked for cross‑platform distribution; just drop the executable into any `$PATH`‑compatible directory and you’re ready to roll.
+
+---
+
+## Usage (TL;DR)  
 ```bash
-# 1️⃣  Grab the pre‑built binary (no package manager required)
-curl -Lo aitoolbox https://github.com/yourorg/ai‑tools‑2023/releases/download/v0.1.0/aitoolbox-linux-amd64
-chmod +x aitoolbox
+# Fetch latest benchmark snapshots
+ai-tool-rank fetch --source github.com/openai/gpt-4
 
-# 2️⃣  Add the binary to your $PATH (or just keep it wherever you store chaos)
-echo 'export PATH=$PATH:/path/to/where/you/kept/aitoolbox' >> ~/.bashrc
-source ~/.bashrc
+# Compute a weighted score (API latency, community stars, docs completeness)
+ai-tool-rank score --weights 0.4,0.3,0.3
 
-# 3️⃣  Verify the installation
-aitoolbox --version
-# Expected output: aitoolbox 0.1.0 (built on $(git rev-parse --short HEAD))
-
-# 4️⃣  Bootstrap a fresh project skeleton
-aitoolbox init --name my‑ai‑bench --template research
-cd my‑ai‑bench
-
-# 5️⃣  Populate the benchmark config (JSON/YAML) – examples are in ./config/
-#    The config file must reference the Persian‑localized fields under "localizationLocale": "fa_IR".
-
-# 6️⃣  Run the default benchmark suite
-aitoolbox bench --threads $(nproc) --output ./bench-report.html
+# Export ranked JSON for downstream analysis
+ai-tool-rank export --output ranked_ai_tools_2023.json
 ```
 
-> **Note:** All commands are intentionally terse. Real‑world usage may require additional flags (e.g., `--region=damafarm`, `--auth token=$DAMA_TOKEN`) that are injected from your `.env` file or CI secret store.  
+---
+
+## Contributing  
+1. Fork the repo.  
+2. Submit a PR with **evidence‑backed** additions (no unfounded claims).  
+3. Ensure all unit tests (`go test ./...`) pass and CI status remains green.  
+
+*We reserve the right to reject PRs that smell of marketing spin or copy‑pasted hype.*
+
+---
+
+## License  
+MIT – Do whatever you want, but keep the cynicism intact.
 
 ---  
 
-## Why This Repo Deserves a ⭐  
-- **Cynical curation**: We kept *only* the tools that actually moved the needle in production, discarding the rest.  
-- **Technical rigor**: Benchmarks are reproducible, Docker‑compatible, and annotated with latency‑throughput trade‑offs.  
-- **Strategic localization**: Persian metadata (`نهاده‌های کشاورزی`) and compliance hooks are baked into the core data model, making the repo indispensable for any fintech venture with regional ambitions.  
-- **Zero‑fluff documentation**: Every section is purpose‑driven; you won’t find any “unlock” or “power” buzzwords.  
-
-If you’re into **building things that actually matter**, clone, star, and let the cynicism guide you.  
-
----  
-
-*MIT License – but the secret fintech bits are under a non‑disclosure clause. Pull requests welcome, but only if they respect the Persian localization schema.*
+> *Stars are cheap; substance is priceless.*  
+> **— Maintained by a weary veteran of the AI circus**
