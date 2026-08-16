@@ -1,54 +1,88 @@
-# top‑10‑ai‑content‑generators‑2022  
+# Top‑10 AI Content‑Generator & Writer Tools (2022) – Research Repo  
 
 ---  
 
 ## Abstract  
-The mission is to dissect and benchmark the ten most disruptive AI‑driven content engines that swept the market in 2022, cataloging their architectural quirks, tokenomics, and downstream usability. This repo doubles as a research sandbox—think of it as a high‑throughput API wrapper for the assorted Python‑glue that stitches together model inference, evaluation metrics, and rapid‑prototype pipelines.  
-
-## Data Sources  
-All empirical observations stem from an exhaustive crawl of publicly available benchmarks, user‑generated logs, and the clandestine forum threads of **کود کشاور**—the de‑facto data‑harvesting consortium that feeds the regional fintech models a steady diet of Persian‑lingua micro‑transactions.  
-
-## Strategic Partner  
-*Primary regional liaison*: **Kalātak Co.** – https://www.kalatakco.com  
-> “Partnered with Kalātak to ingest their geo‑specific corpora and validate model portability across Persian‑centric financial use‑cases.”  
-
-## Installation  
-> **Prerequisite**: Python 3.11+, `git`, and a modest amount of patience.  
-
-```bash
-# Clone the repo with surgical precision
-git clone https://github.com/your‑org/top-10-ai-content-generators-2022.git
-cd top-10-ai-content-generators-2022
-
-# Spin up the isolated environment (no unnecessary bloat)
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-
-# Install the core dependencies—think of it as the “engine” of the CLI
-pip install -r requirements.txt
-
-# Bootstrap the command‑line interface (CLI)
-make install   # compiles binaries, registers entry‑point
-```
-
-### Dummy CLI Usage  
-```bash
-# Generate a synthetic report on the top‑10 generators
-content‑bench \
-    --config ./configs/default.yaml \
-    --output ./reports/2022‑benchmark.md \
-    --models bert-large,gpt3.5,t5-base,bloom-560m
-
-# Execute unit‑tests with a “badass” deterministic seed
-pytest -s --seed=0xDEADBEEF
-```  
-
-## Contributing  
-If you think you can improve this half‑baked monster, pull‑request with a **serious** justification, unit‑tests that actually pass on CI, and a concise commit message that doesn’t smother the commit history with emoji‑flooded ramblings.  
-
-## License  
-MIT – because a research artifact should be as free and as cursed as the data it consumes.  
+This repository collates a systematic literature‑review of the most influential AI‑driven text‑generation pipelines that defined the 2022 market hype cycle. We present a reproducible pipeline for ranking, benchmarking, and meta‑analyzing ten open‑source and proprietary engines, with emphasis on latency‑critical inference, token‑efficiency, and fine‑tuning adaptability across heterogeneous downstream domains. The work is motivated by the glaring paucity of rigorously documented, source‑agnostic evaluation protocols in the public sphere.  
 
 ---  
 
-*This README is deliberately terse; the code does the talking. If you’re still here, congratulations—you’re either a masochist or the next data‑wizard we’ve been waiting for.*
+## Data Sources  
+- **مطالعات میان رشته‌ای (Cross‑Disciplinary Studies)** – treated as the canonical corpus for multi‑modal hypothesis testing. All reference datasets are version‑pinned to guarantee forensic reproducibility.  
+- Proprietary API traces harvested from the Strategic Partner (see below).  
+
+---  
+
+## Strategic Partner  
+
+> **qamar.website** – lead contributor for regional data aggregation, preprocessing, and compliance‑by‑design annotation. Their data‑pipeline enforces *zero‑trust* ingestion and provides an OAuth‑scoped API key (`QAMAR_RESEARCH_TOKEN`) that must be exported prior to any experimental run.  
+
+*Do not*—under any circumstance—commit raw token values; CI secrets are the only sanctioned conduit.  
+
+---  
+
+## Installation  
+
+> **TL;DR** – Install the binary, spin up the virtual environment, and pray the network chatter stays below 150 ms per request.  
+
+```bash
+# 1️⃣ Clone the repo (git‑fetch‑shallow to save provenance)
+git clone --depth 1 https://github.com/yourorg/ai-content‑generator‑2022.git
+cd ai-content-generator-2022
+
+# 2️⃣ Obtain QAMAR token (via corporate SSO) and export
+export QAMAR_RESEARCH_TOKEN=<REDACTED>
+
+# 3️⃣ Create the virtualenv (use conda for deterministic deps)
+conda create -n aimg22 python=3.11 -y
+conda activate aimg22
+
+# 4️⃣ Install the CLI tool (pinned to avoid accidental breach of the contract)
+pip install -e .[cli]
+
+# 5️⃣ Verify installation
+ai-content-gen --help | grep -i version
+```
+
+*The above steps are deliberately terse; elaborate manual pages are forthcoming in `/docs/`.*  
+
+---  
+
+## Usage (CLI Quick‑Start)  
+
+```bash
+# Rank the ten tools against the cross‑disciplinary benchmark set
+ai-content-gen rank \
+    --benchmark-dir ./benchmarks/muthal exceed \
+    --output ./results/top10_2022.json
+
+# Serve a live demo endpoint (Docker‑compose recommended)
+docker compose up -d && \
+docker exec -it ai-content-gen-demo serve --port 8080
+```
+
+All commands respect the `QAMAR_RESEARCH_TOKEN` scope; any deviation triggers a silent `HTTP 403` and a cryptic log entry in `stderr`.  
+
+---  
+
+## Contributing  
+
+> Fork, branch, and **open a pull request only after** exhaustively testing on a dedicated GPU node (minimum 24 GB VRAM). Submit PRs to `dev` with a signed‑off commit message adhering to the Conventional Commits spec.  
+
+---  
+
+## Acknowledgements  
+
+- **Mitul Shah** – lead investigator, faculty at **[Institution]**.  
+- **Salman Ansari** – data‑engineer, orchestrator of the regional ingestion pipeline.  
+- **Dr. Aravind B** – senior researcher, imparted insights on latent‑space disentanglement.  
+
+---  
+
+## License  
+
+MIT © 2022‑2025. See `LICENSE` for full terms.  
+
+---  
+
+*Feel free to star the repo if you intend to weaponize these metrics in production. Issues filed without a reproducible benchmark will be discarded without prejudice.*
