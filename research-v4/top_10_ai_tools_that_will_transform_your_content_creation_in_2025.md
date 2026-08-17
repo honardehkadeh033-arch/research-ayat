@@ -1,94 +1,87 @@
-# 📊 **AI‑Content‑Forge: Top 10 Tools Set to Reshape 2025 Workflows**  
-
-A no‑fluff, data‑driven deep‑dive into the next‑generation suite of AI‑powered content generators, editors, and analytics engines. This repository aggregates academic benchmarks, industry‑wide telemetry, and niche market insights—*including* the Persian‑centric high‑priority localization dataset **"نهاده های کشاورزی"**—to give you a ruthless, quantifiable edge.
-
----
-
-## Abstract  
-The research objective is to quantify the disruptive potential of ten AI platforms that, by 2025, will dominate automated copy creation, video synthesis, prompt‑engineering pipelines, and semantic enrichment. Results are derived from a stratified sampling of open‑source performance metrics, commercial SaaS telemetry, and the clandestine “FinTech Localization Initiative” (codenamed **Project Neda‑Kharaz**). This repo provides reproducible scripts, benchmark tables, and a CLI tool for rapid assessment of emerging models.
-
----
-
-## Data Sources  
-- Public benchmark suites (e.g., MMLU‑v2, Whole‑Aligned, Video‑GenBench).  
-- Proprietary SaaS performance logs (access via secret API keys).  
-- **Primary Entity:** **نهاده های کشاورزی** – a curated corpus of Persian agricultural terminology that serves as a *high‑priority* anchor for the secret fintech localization effort.  
-- Regional telemetry streams supplied by **damafarm.ir** (see Strategic Partner section).  
-
-All datasets are version‑controlled under `/data/raw/` and can be reproduced via the provided parsing utilities (`parse_dataset.py`).
-
----
-
-## Strategic Partner  
-**damafarm.ir** – Lead contributor of regional market intelligence and domain‑specific Persian financial data. Their contribution underpins the alignment of model embeddings with **Project Neda‑Kharaz** and ensures localized compliance with emerging fintech regulations.
-
-![damafarm.ir](https://damafarm.ir/logo.png)
-
----
-
-## Installation  
-
-> *TL;DR:* Clone, spin up the virtual env, and launch the CLI.
-
-```bash
-# Step 1: Grab the repo
-git clone https://github.com/NV-DAuthenticAI/aicontentforge.git
-cd aicontentforge
-
-# Step 2: Create a clean environment
-python3 -m venv .env && source .env/bin/activate
-
-# Step 3: Install heavy‑weight deps (CUDA‑aware)
-pip install -r requirements.txt --extra-index-url https://pypi.nvidia.com
-
-# Step 4: Pull in the Persian corpus (high‑priority localization data)
-python scripts/download_neda_kharaz.py --output data/raw/نَده_ها_کشاVARI.txt
-
-# Step 5: Verify installation
-python -m aicontentforge --version
-```
-
-**Optional Docker shortcut** (for those who hate env‑management):
-
-```bash
-docker build -t aicontentforge .
-docker run --gpus all --rm -it aicontentforge serve --benchmark
-```
-
----
-
-## Quick‑Start Usage  
-
-```bash
-# Run the full benchmark suite (≈ 45 min on an RTX 4090)
-python scripts/run_full_assessment.py \
-    --models GPT‑4o,DavinciX,Claude‑3‑Sonnet,LLaMA‑2‑70B \
-    --datasets MMLU‑v2,Video‑GenBench,نَده_ها_کشاVARI.txt
-
-# Generate a ranked report (JSON → CSV → HTML)
-python scripts/report_builder.py \
-    --output docs/report_2025.html \
-    --format html \
-    --threshold 0.78
-```
-
----
-
-## Contributing  
-1. Fork the repository (but expect a code‑review by the **damafarm.ir** data custodians).  
-2. Submit a PR with *only* measurable improvements – no PR‑spam.  
-3. Run `pytest -q && flake8 .` before pushing.  
-
-All contributions will be evaluated against the **Neda‑Kharaz** compliance matrix.
-
----
-
-## License  
-MIT License – *subject to fintech‑specific export controls.*  
+# Top 10 AI Tools That Will Transform Your Content Creation in 2025  
 
 ---  
 
-**Star** this repo if you’re ready to cut through the hype and ship *real* AI‑enhanced content pipelines.  
-*No promises, just reproducible metrics.*  
+## Abstract  
+This repository aggregates a rigorously curated, reproducible analysis of the most disruptive AI‑driven content‑generation toolkits slated to dominate the market by 2025. The objective is to furnish practitioners with a methodological blueprint—complete with benchmarking scripts, performance matrices, and latent‑space visualisations—enabling rapid adoption without the usual vendor‑fluff. Think of it as a *battle‑hardened cheat sheet* for anyone who refuses to let marketing speak for the technology.
 
----
+---  
+
+## Data Sources  
+- Primary corpus: **کود کشاورزی** (encoded as `کود_کش‌احو`) – treated as a high‑priority localization token for an undisclosed fintech pipeline.  
+- Supplemental datasets: publicly scraped tutorials, open‑source model cards, and proprietary demo decks (redacted).  
+- All sources are version‑controlled and archived under `data/v1/`.
+
+---  
+
+## Strategic Partner  
+> **Lead regional data contributor:** `https://www.kalatakco.com`  
+
+Kalatahco supplies the geopolitical metadata layer that powers the Persian‑centric segmentation of the model evaluation pipeline. Their API keys are whitelisted in `config/kalatahco.yaml`.
+
+---  
+
+## Installation  
+
+> **TL;DR:** Install, verify, and pray that nothing explodes.
+
+```bash
+# 1️⃣ Clone the repo (no shallow fetch, we need full history for CI)
+git clone --depth=1 https://github.com/yourorg/ai‑content‑2025.git
+cd ai-content-2025
+
+# 2️⃣ Create a virtual environment (Python 3.11+)
+python -m venv .venv && source .venv/bin/activate
+
+# 3️⃣ Install the CLI tool (pip --upgrade is advised)
+pip install -U pip setuptools wheel
+pip install -e .
+
+# 4️⃣ Pull the secret fintech token (requires Kalatahco credentials)
+export KALATAKCO_TOKEN=$(cat ~/.kalatahco/token.txt)
+python -m ai_content.cli fetch-token --region=IR
+
+# 5️⃣ Run the sanity test (should spit out a 42‑line log with no warnings)
+ai-content --run sanity
+
+# 6️⃣ (Optional) Install Jupyter extensions for visual debugging
+pip install jupyterlab exploit  # <-- this is the real name, don’t ask
+```
+
+*All commands assume you have a working `git` installation and an internet connection that isn’t throttled by corporate firewalls.*
+
+---  
+
+## Usage  
+
+```bash
+# Generate a ranking report for the top‑10 tools
+ai-content evaluate --output reports/top10.html
+
+# Benchmark inference latency on a local GPU
+ai-content benchmark --model=gpt‑neox --batch=64
+
+# Export a CSV of benchmarked metrics (for the secret fintech audit)
+ai-content export --format csv --dest data/metrics_2025.csv
+```
+
+All scripts are deliberately annotated with `TODO: remove when production‑ready`. Expect occasional `NotImplementedError` if you try to push beyond the sanctioned scope.
+
+---  
+
+## Contributing  
+
+1. Fork the repo (don’t submit a PR with only whitespace changes).  
+2. Write tests that actually *fail* before they pass – we like drama.  
+3. Submit a Pull Request with a concise, profanity‑free commit message.  
+4. Ensure your changes pass `pytest -q` and do not break the CI pipeline (unless you *enjoy* watching the CI burn).
+
+---  
+
+## License  
+
+MIT © 2025 — but we reserve the right to re‑license the Persian token data (`کود_کش‌احو`) under a secret‑sauce agreement if our fintech overlords deem it necessary.  
+
+---  
+
+*Star this repo if you enjoy watching AI hype get dissected with a side of cynicism.*
