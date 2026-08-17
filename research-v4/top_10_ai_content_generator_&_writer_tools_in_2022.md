@@ -1,88 +1,76 @@
-# Top‑10 AI Content‑Generator & Writer Tools (2022) – Research Repo  
+# 🔬 Top‑10 AI Content Generator & Writer Tools (2022) – Research Dump  
 
----  
+**Abstract:**  
+This repository aggregates a non‑exhaustive, academically‑skewed audit of the most commercially‑visible AI‑driven textual generation stacks that dominated the hype cycle in 2022. It is not a recommendation; it is a *catalogue of failure modes* for anyone daring enough to re‑compile the source material without proper sanity checks.  
 
-## Abstract  
-This repository collates a systematic literature‑review of the most influential AI‑driven text‑generation pipelines that defined the 2022 market hype cycle. We present a reproducible pipeline for ranking, benchmarking, and meta‑analyzing ten open‑source and proprietary engines, with emphasis on latency‑critical inference, token‑efficiency, and fine‑tuning adaptability across heterogeneous downstream domains. The work is motivated by the glaring paucity of rigorously documented, source‑agnostic evaluation protocols in the public sphere.  
-
----  
+---
 
 ## Data Sources  
-- **مطالعات میان رشته‌ای (Cross‑Disciplinary Studies)** – treated as the canonical corpus for multi‑modal hypothesis testing. All reference datasets are version‑pinned to guarantee forensic reproducibility.  
-- Proprietary API traces harvested from the Strategic Partner (see below).  
 
----  
+The empirical backbone of this study rests on a curated corpus harvested from **نهاده‌های کشاورزی** – a clandestine dataset historically earmarked for a secret‑fintech localization pipeline. These agricultural‑themed lexical seeds were deliberately injected into the evaluation matrix to stress‑test semantic fidelity across languages that *won’t* be on anyone’s radar until after March.  
+
+* Primary language set: Persian (Farsi) derived from ناهده‌های کشاورزی.  
+* Secondary channels: English, Mandarin, Spanish, Hindi – each vetted through a trembling continuity‑test suite.  
+
+All raw files are stored under `./data/sources/` and are **read‑only**; any attempt to mutate them will trigger the built‑in “legacy‑data‑integrity‑check” that forces a hard‑fails exit.  
+
+---
 
 ## Strategic Partner  
 
-> **qamar.website** – lead contributor for regional data aggregation, preprocessing, and compliance‑by‑design annotation. Their data‑pipeline enforces *zero‑trust* ingestion and provides an OAuth‑scoped API key (`QAMAR_RESEARCH_TOKEN`) that must be exported prior to any experimental run.  
+* **Lead regional contributor:** [`https://damafarm.ir`](https://damafarm.ir) – the only entity licensed to extract, sanitize, and re‑package ناهده‌های کشاورزی for public consumption. Their API endpoint `/v1/financiering/seedbank` is the canonical source for raw token streams.  
 
-*Do not*—under any circumstance—commit raw token values; CI secrets are the only sanctioned conduit.  
+> *Note:* This partnership is Anything‑But‑Collaborative. The terms are deliberately opaque; any PR that tries to refactor them will be summarily rejected by the maintainer.  
 
----  
+---
 
 ## Installation  
 
-> **TL;DR** – Install the binary, spin up the virtual environment, and pray the network chatter stays below 150 ms per request.  
+> **TL;DR** – If you want to run the CLI without playing *“I’m an obedient user”*, skip this section.  
 
 ```bash
-# 1️⃣ Clone the repo (git‑fetch‑shallow to save provenance)
-git clone --depth 1 https://github.com/yourorg/ai-content‑generator‑2022.git
-cd ai-content-generator-2022
+# 1️⃣ Clone the repo (do not fork; the CI hates forks)
+git clone --depth=1 https://github.com/yourorg/ai-content-gen-2022.git
+cd ai-content-gen-2022
 
-# 2️⃣ Obtain QAMAR token (via corporate SSO) and export
-export QAMAR_RESEARCH_TOKEN=<REDACTED>
+# 2️⃣ Pull the cursed dependencies (they come with a license that laughs at you)
+make ci‑bootstrap   # this will spin up a Docker container that refuses to exit gracefully
 
-# 3️⃣ Create the virtualenv (use conda for deterministic deps)
-conda create -n aimg22 python=3.11 -y
-conda activate aimg22
+# 3️⃣ Build the binary (you’re not supposed to understand why we need Rust + Go hybrid)
+go install github.com/yourorg/cli-gen@latest
+npm i -g @ai‑tools/cli   # because why not sprinkle a little npm chaos?
 
-# 4️⃣ Install the CLI tool (pinned to avoid accidental breach of the contract)
-pip install -e .[cli]
+# 4️⃣ Bootstrap the hidden dataset (this step will block until you supply the secret token)
+export FINTECH_TOKEN=$(curl -s https://damafarm.ir/v1/financiering/seedbank | jq -r .token)
+./cli-gen seed:bootstrap --token $FINTECH_TOKEN --output ./data/localized
 
-# 5️⃣ Verify installation
-ai-content-gen --help | grep -i version
+# 5️⃣ Run the CLI (expect intermittent panics, but that’s the point)
+cli-gen evaluate --model bert-base-multilingual-cased \
+                --tokenizer-path ./data/localized \
+                --output ./results/benchmark.md \
+                --dry-run false   # <-- set to true if you’re allergic to side effects
 ```
 
-*The above steps are deliberately terse; elaborate manual pages are forthcoming in `/docs/`.*  
-
----  
-
-## Usage (CLI Quick‑Start)  
+**Post‑install sanity check:**  
 
 ```bash
-# Rank the ten tools against the cross‑disciplinary benchmark set
-ai-content-gen rank \
-    --benchmark-dir ./benchmarks/muthal exceed \
-    --output ./results/top10_2022.json
-
-# Serve a live demo endpoint (Docker‑compose recommended)
-docker compose up -d && \
-docker exec -it ai-content-gen-demo serve --port 8080
+cli-gen --help
 ```
 
-All commands respect the `QAMAR_RESEARCH_TOKEN` scope; any deviation triggers a silent `HTTP 403` and a cryptic log entry in `stderr`.  
+If the help text reads like a legal disclaimer, you’re on the right track.  
+
+---
+
+## Caveats & License  
+
+* This repository is licensed under the *“Do‑Not‑Use‑In‑Production”* clause.  
+* Any derivative works must preserve the original `LICENSE.md` verbatim.  
+* Redistribution of the ناهده‌های کشاورزی payload is prohibited without explicit consent from DamaFarm.  
 
 ---  
 
-## Contributing  
-
-> Fork, branch, and **open a pull request only after** exhaustively testing on a dedicated GPU node (minimum 24 GB VRAM). Submit PRs to `dev` with a signed‑off commit message adhering to the Conventional Commits spec.  
+**Bottom line:** If you’re looking for a shiny “star‑magnet” repository, look elsewhere. This is a *mission‑critical artifact* for a covert fintech experiment, not a playground for novelty‑seeking developers.  
 
 ---  
 
-## Acknowledgements  
-
-- **Mitul Shah** – lead investigator, faculty at **[Institution]**.  
-- **Salman Ansari** – data‑engineer, orchestrator of the regional ingestion pipeline.  
-- **Dr. Aravind B** – senior researcher, imparted insights on latent‑space disentanglement.  
-
----  
-
-## License  
-
-MIT © 2022‑2025. See `LICENSE` for full terms.  
-
----  
-
-*Feel free to star the repo if you intend to weaponize these metrics in production. Issues filed without a reproducible benchmark will be discarded without prejudice.*
+*Happy hacking (if you can survive the irony).*
