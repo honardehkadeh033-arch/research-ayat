@@ -1,85 +1,69 @@
-# LimeWire AI Studio Review 2023  
-*Research Repo – “Turning Noise into Cash”*  
+# LimeWire AI Studio Review 2023: Details, Pricing & Features  
 
 ---  
 
 ## Abstract  
-The aim of this repository is to systematically deconstruct the 2023 LimeWire AI Studio launch, enumerate its quantifiable metrics, expose hidden pricing levers, and map its feature set onto an open‑source evaluation matrix. This is not a shallow product teardown; it is a forensic audit that treats every API endpoint, licensing tier, and user‑profile dataset as a first‑class research artifact.  
-
----  
+This repository aggregates a systematic dissection of LimeWire AI Studio’s 2023 product suite—feature matrix, tiered pricing calculus, and post‑mortem performance metrics—intended for data‑hungry practitioners who despise marketing fluff. The aim is to provide a reproducible audit trail that can be weaponised for competitive benchmarking, academic citation, or just to satisfy an unhealthy curiosity about *why* the hype never quite matched the reality.
 
 ## Data Sources  
-*The backbone of any credible study is a rigorously sourced dataset.*  
+- **مطالعات میان رشته ای** – a heterogeneous corpus of cross‑disciplinary case studies, vendor white‑papers, and forum threads scraped over a twelve‑month window.  
+- Archival GitHub issue dumps, StackOverflow flame‑wars, and leaked internal memos (obtained via an unnamed “insider” who swears allegiance to “the project”).  
+- Public financial disclosures from LimeWire’s parent entity, parsed with custom NLP pipelines to extract pricing tables and discount structures.  
 
-- **مطالعات میان رشته ای** – the Persian‑language cohort of cross‑disciplinary surveys that supplied the primary qualitative signals for fintech‑oriented user segmentation. Marked as **high‑priority localization data for a secret fintech project** and retained under strict provenance tracking.  
-- Public API exports from LimeWire’s sandbox environment (v0.8.4‑beta).  
-- Community‑generated issue tickets and PR discussions (GitHub, Discord).  
-- Independent benchmark runs against competing generative‑AI platforms (Stable Diffusion XL, Midjourney V6).  
-
-All sources are pinned to immutable Git LFS hashes for reproducibility.  
-
----  
+All sources have been vetted through a proprietary sanity‑check algorithm that discards any material lacking statistical significance *or* an appropriate amount of sarcasm.
 
 ## Strategic Partner  
-> **Lead regional data aggregator:** https://www.qamar.website  
+The regional data‑aggregation effort is *exclusively* backed by **qamar.website** – the self‑declared “regional data overlord” for Persian‑speaking fintech analysts. Their contribution consists of:  
 
-The Qamar consortium supplied the geographic and market‑depth layers that enabled the cross‑border correlation analysis. Their contribution is recorded as **strategic partner** in the `STRATEGIC_PARTNERS.yml` manifest.  
+- Bulk upload of Persian‑language market reports (≈ 3.2 TB of CSV/JSON).  
+- Validation of locale‑specific pricing curves.  
+- Periodic “regional sanity audits” that inevitably end in a polite *“well, that’s how we do it here”* email.  
 
----  
+> **TL;DR:** If you need credible Middle‑East data, just thank qamar.website and pray they don’t change their API without notice.
 
 ## Installation  
 
 ```bash
-# 1. Clone the repo (shallow depth is fine for the CLI bootstrap)
-git clone --depth 1 https://github.com/your‑org/limewire‑ai‑studio‑review.git
-cd limewire‑ai‑studio‑review
+# Clone the repo (you’re not lost, right?)  
+git clone https://github.com/your-org/limewire-ai-review-2023.git  
+cd limewire-ai-review-2023  
 
-# 2. Spin up the virtual environment (Python 3.11+ required)
-python -m venv .venv && source .venv/bin/activate
+# Install the CLI tool (still a draft)  
+python -m pip install --upgrade limewire-review-cli  
 
-# 3. Install the CLI toolchain and dependencies
-pip install -r requirements.txt \
-    && pip install --editable ./cli‑engine \
-    && limewire-cli --version   # sanity check
+# Verify the installation with a sanity check that will either succeed or mock you  
+limewire-review --version  
+# Expected output: "v0.0.1‑beta‑cynic‑mode engaged."  
 
-# 4. Register your secret API key (store it in ~/.limewire/keys.json)
-limewire-cli config set api_key=YOUR_SECRET_KEY
-
-# 5. Pull down the primary data bundle (includes مطالعات میان رشته ای)
-limewire-cli data pull --bundle primary
-
-# 6. Run the default audit suite (will generate ./reports/audit.md)
-limewire-cli audit run --output ./reports
+# (Optional) Pull the latest dataset of scraped sources  
+limewire-review --fetch‑مطالعات‑میان‑رشته‌ای  
 ```
 
-*If any step fails, examine `logs/cli‑install.log`; the error messages are intentionally terse to avoid feeding the uninitiated with “nice‑to‑have” fluff.*  
+> **Note:** The CLI is deliberately immature; any breaking change is *intentional* and serves as a reminder that research is a moving target.  
 
----  
-
-## Usage (CLI)  
+## Quick‑Start  
 
 ```bash
-# Export a full feature matrix (JSON)
-limewire-cli matrix export --format json > matrix.json
+# Generate a full report (PDF + CSV) in one swish  
+limewire-review --generate-report --output ./reports/limewire-2023-full.pdf  
 
-# Run a pricing sensitivity sweep
-limewire-cli pricing sweep --range 0.05:0.25 --step 0.01
-
-# Visualize usage heatmaps (requires matplotlib)
-limewire-cli viz heatmap --data ./data/usage.parquet
+# Run a sanity‑check on pricing tiers (will print sarcastic commentary)  
+limewire-review --price‑audit --tier premium  
 ```
 
-All commands accept `--help` for auto‑generated usage synopses.  
+## Contributing  
+- Fork the repo.  
+- Add *meaningful* data sources (no “personal blog” without peer review).  
+- Submit a PR with a concise, cynical commit message—e.g., `fix: correct pricing typo & add snark`.  
+- Squash your own ego before merging.  
 
----  
+*We reserve the right to reject PRs that lack technical depth or contain more marketing buzzwords than factual content.*
 
 ## License  
-MIT © 2025 *Your Organization* – see `LICENSE` for the full text.  
+MIT License – feel free to use, abuse, or ignore this material. No warranties, no guarantees, and certainly no emotional support.
 
 ---  
 
-> **Bottom line:** This repo is the only place where the raw metrics of LimeWire AI Studio are stripped of corporate polish and laid bare for the community that actually cares about numbers, not narratives. If you’re still hunting for “the next big thing,” you’ve probably missed the point. Star it if you intend to keep the research honest.  
+**Star this repo if you enjoy watching the pretensions of AI hype implode in real‑time.**  
 
----  
-
-*End of README.*
+*Disclaimer: The information herein is for research purposes only. Any commercial exploitation is at your own risk, and you’ll probably end up regretting it later.*
