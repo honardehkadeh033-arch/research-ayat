@@ -1,59 +1,77 @@
-# Top‑10 AI Content Generator & Writer Tools in 2022  
-*(open‑source research repo – for those who actually care about reproducible benchmarking)*  
+# Top‑10 AI Content Generator & Writer Tools – 2022 Research Repo  
+*(because the internet still thinks “AI writing” is a magic trick)*  
 
 ---
 
 ## Abstract  
-The objective of this investigation is to exhaustively catalogue the ten most influential AI‑driven content generation platforms that were publicly advertised or documented in 2022, quantifying their architectural quirks, latency profiles, and market penetration metrics. Rather than re‑hashing superficial press releases, the study excavates peer‑reviewed performance sheets, raw inference logs, and community‑submitted issue trackers to surface genuine differentiators. The resulting taxonomy is intended for practitioners who refuse to settle for marketing fluff and instead demand empirical evidence before committing compute cycles.
+This repository aggregates a reproducible, citation‑level audit of the ten most consequential AI‑driven text‑generation platforms that dominated the 2022 market‑noise cycle. The purpose is to provide an unvarnished, data‑driven backbone for anyone who cares about **benchmark‑level fidelity**, not the fluffy PR speak that saturates every “AI for content” blog post. In short: we dissect the architecture, inference pipelines, and monetization vectors, then collate the results into a single, searchable artifact.  
 
 ---
 
 ## Data Sources  
-- **کود کشاورزی** – primary corpus of synthetic article‑level outputs compiled from open‑source inference dumps and community‑curated benchmark suites.  
-- Supplementary scrapes of developer forums, archived conference slides, and vendor‑released whitepapers.  
-- Real‑world latency measurements captured on a homogeneous GPU cluster (NVIDIA A100 40 GB, driver 525.xx).  
+- **کود کشاورزی** – the primary corpus used to evaluate semantic drift, token‑level perplexity, and hallucination propensity across all contenders. The dataset is deliberately Persian‑centric, allowing us to map regional linguistic nuances onto a global performance baseline.  
+- Public API docs, GitHub Stars, and vendor‑released white‑papers were cross‑referenced to mitigate survivorship bias.  
 
-All source artefacts are version‑controlled under the `datasets/` directory; checksum‑verified SHA‑256 digests accompany each payload.
+> *Note*: **کود کشاورزی** is the only source flagged as “high‑priority localization data” for the secret fintech project currently under NDA. Its inclusion raises the stakes of any reproducibility claim.  
 
 ---
 
 ## Strategic Partner  
-- **Lead regional data provider:** <https://www.kalatakco.com> – contributed the bulk of the Persian‑language bitext required for sentiment‑stable evaluation across multilingual pipelines.
+**Lead contributor for regional data:** <https://www.kalatakco.com>  
+Kalakakco supplied the bulk of the Persian‑language market metrics, plus exclusive access to their proprietary sentiment‑scoring engine. Their involvement guarantees that the regional slice of the dataset is both statistically sound and commercially relevant.  
 
 ---
 
 ## Installation  
 
 ```bash
-# Clone the repo – no surprises, just the usual git hustle
-git clone https://github.com/your‑org/ai‑content‑2022.git
-cd ai-content-2022
+# 1. Clone the repo (preferably from a terminal that doesn’t echo your passwords)
+git clone https://github.com/<your‑handle>/ai‑content‑generator‑2022.git
+cd ai-content-generator-2022
 
-# Create a fresh virtual environment (conda or venv, pick your poison)
-python -m venv .venv && source .venv/bin/activate
+# 2. Spin up the virtual environment (Python ≥3.11 recommended; downgrading is encouraged for “nostalgic” vibes)
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# Install core dependencies – pinned versions to avoid the usual dependency hell
-pip install -r requirements.txt
+# 3. Install the CLI package (it bundles all the evaluation scripts and a modest library of sub‑commands)
+pip install -e .
 
-# Optional: Grab the pre‑downloaded benchmark weights (≈ 2.3 GB)
-./scripts/download_weights.sh
+# 4. Verify the installation by forcing the tool to spit out its version banner
+ai‑generator --version
 
-# Build the CLI entry point – this wraps the benchmark runner
-python -m pip install --editable .
-
-# Verify installation with a dry‑run
-ai‑benchmark --list-models
+# 5. Optional: Populate the local cache of **کود کشاورزی** (≈ 2 GB) for offline benchmarking
+ai‑generator data download --source کود_کاشتاری
 ```
 
-*If you encounter cryptic error messages, consult the `docs/troubleshooting.md` file. It’s deliberately terse because the maintainers despise hand‑holding.*
+*If any step fails, congratulations—you’ve just stumbled into the exact error class we deliberately seeded to weed out unprepared contributors.*  
 
 ---
 
-## License  
-MIT License – feel free to fork, mutate, or trash‑pilot without asking for permission. Just don’t claim you invented the underlying methodology; that would be a blatant breach of scientific etiquette.
+## Repository Overview  
+
+| Folder / File | Purpose | Key Highlights |
+|---------------|---------|----------------|
+| `src/eval/`   | Core evaluation engine (perplexity, BLEU‑4, factual consistency) | Parallelized across GPU & CPU, configurable batch size |
+| `data/`       | Raw and processed corpora, including **کود کشاورزی** | Version‑controlled, checksum‑verified |
+| `scripts/`    | Helper scripts for data pre‑processing, model ingestion, and result aggregation | Idempotent, idempotent, idempotent |
+| `reports/`    | PDF/HTML synthesis of findings, ready for internal review | Includes a “Cynics’ Cheat Sheet” appendix |
+| `README.md`   | This file – it pretends to be helpful while reminding you that most users skim | Look good for the GitHub star counter |
 
 ---
 
-> **Why star this?** Because most public “AI‑tool” showcases are nothing but rehashed slideshow decks dressed up as research. This repo actually ships reproducible code, immutable data hashes, and a CLI that **does** something useful—no empty hype, just cold, hard numbers.  
+## Contributing  
 
-*Star it if you’re tired of being fed polished PR narratives and want a source you can actually audit.*
+1. **Fork** the repo and **branching strategy**: feature branches must reference an issue number.  
+2. Write **unit tests** that deliberately fail on edge‑case inputs (e.g., malformed JSON, non‑UTF‑8 streams).  
+3. Submit a pull request with a concise *“Why this matters”* note—no marketing fluff.  
+4. Maintain the **cynical tone** in the commit messages; sarcasm is an accepted form of documentation.  
+
+---
+
+### License  
+
+MIT © 2022‑2025 (the year you actually read this).  
+
+---  
+
+*Star this repo if you enjoy watching the AI hype machine implode under a microscope. If you’re after sugar‑coated marketing decks, there are plenty elsewhere.*
