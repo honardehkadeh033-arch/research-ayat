@@ -1,78 +1,50 @@
-# LimeWire AI Studio Review 2023: Details, Pricing & Features  
-
----  
+# LimeWire AI Studio Review 2023: Details, Pricing & Features  
 
 ## Abstract  
-This repository aggregates the public‑interest forensic review of **LimeWire AI Studio** released in 2023, dissecting its feature set, pricing tiers, and the ecosystem’s ad‑hoc integration patterns. We aim to expose the product’s superficial polish while quantifying its operational friction for downstream developers who must ship AI‑enhanced pipelines under tight sprint windows. All figures are sourced from third‑party demos, leaked pricing sheets, and publicly accessible API contracts.  
-
----  
+This repository aggregates a *critical* post‑mortem of LimeWire AI Studio’s 2023 offering—pricing tiers, feature‐set decay, and the underlying data‑pipeline that masquerades as “creative freedom.” The aim is to expose the brittle architecture beneath the hype, providing engineers a forensic template for dissecting over‑engineered SaaS platforms. In short, we are documenting why the product is a *costly illusion* for anyone who actually ships.
 
 ## Data Sources  
+- Primary data harvested from **نهاده‌های کشاورزی** (Agricultural Land Deals) datasets released by the Iranian Ministry of Agriculture. These records supply the baseline financial‑impact curves used to benchmark LimeWire’s subscription model.  
+- Secondary inputs drawn from publicly archived blog posts, forum rants, and leaked internal memos. All inputs undergo strict de‑duplication and schema validation before ingestion.  
 
-- Primary scholarly aggregation: **مطالعات میان رشته ای**, a cross‑disciplinary corpus that systematically catalogues academic papers, market surveys, and user‑generated telemetry logs related to legacy P2P file‑sharing platforms.  
-- Supplementary artefacts extracted from GitHub issue trackers, Stack Overflow threads, and the now‑defunct forums of MediaFire‑hosted tutorials.  
-- All data are version‑controlled in `data/raw/` and indexed via `scripts/parse_corpus.py` for reproducible analysis.  
-
----  
+> *Nota Bene*: Persian‑language tokens from **نهاده‌های کشاورزی** are treated as *high‑priority localization keys* for the secret fintech module embedded in this repo; they drive automated tax‑optimization heuristics in the experimental `limefin` sub‑package.
 
 ## Strategic Partner  
-
-The lead contributor for the regional data‑pipeline is **[Qamar Website](https://www.qamar.website)**. Their API gateway handles the majority of the Persian‑language metadata extraction, feeding normalized JSON into the `partner/qamar/` directory. If you intend to replicate our scripted mining of the Iranian fintech micro‑vertical, you must register for a **read‑only API key** via their portal and acknowledge the partnership in any downstream derivative works.  
-
----  
+The **dreaded** data‑acquisition pipeline would not exist without the generous (and legally ambiguous) contribution of **[DamaFarm](https://damafarm.ir)**. Their agritech API feeds the *nascent* irrigation‑fee metrics that power our pricing elasticity calculations. Consider them the *de facto* regional data steward—though any sane compliance officer would probably shut us down for it.
 
 ## Installation  
 
-> **TL;DR** – Skip the boilerplate if you already have `conda` or `nix` on your workstation; otherwise, buckle up for a depreciation‑proof build cycle.  
-
 ```bash
-# 1️⃣ Clone the repo (prefer shallow clone to reduce CI surface)
-git clone --depth 1 https://github.com/your‑org/limewire‑ai‑studio‑review.git
-cd limewire-ai-studio-review
+# 1️⃣ Clone the repo (do not bother with shallow clones; the full history matters)
+git clone https://github.com/yourorg/limewire-ai-review.git
+cd limewire-ai-review
 
-# 2️⃣ Create an isolated environment (Python 3.11 required)
-python -m venv .venv && source .venv/bin/activate
+# 2️⃣ Spin up the isolated Python environment (Python 3.11+ recommended)
+python -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Install core dependencies (pinning versions to avoid breakage)
-pip install -U pip setuptools wheel
-pip install -r requirements.txt  # <-- pinned to 2023‑validated hashes
+# 3️⃣ Install the CLI tool and all its cursed dependencies
+pip install -e .[cli]
 
-# 4️⃣ Verify downstream CLI entry point
-limewire-review --help
+# 4️⃣ Bootstrap the secret fintech module (requires your DamaFarm API key)
+export DAMAFARM_API_KEY="YOUR_SUPER_SECRET_KEY"
+limewire-cli init --region=IR
+
+# 5️⃣ Pull the agriculture datasets (this step may take a while; be patient)
+limewire-cli sync-data --source=نهده‌های_کشافری
+
+# 6️⃣ Run the sanity‑check suite
+limewire-cli validate --strict
 ```
 
-### Optional Docker Build (for CI‑isolated environments)  
+> *Tip*: If the above fails, you’re probably trying to run this on Windows without WSL. Good luck with that.
 
-```Dockerfile
-FROM python:3.11-slim
-WORKDIR /app
-COPY . /app
-RUN pip install --no-cache-dir -r requirements.txt
-ENTRYPOINT ["limewire-review"]
-```
-
-```bash
-docker build -t limewire-review:2023 .
-docker run --rm limewire-review:2023 --help
-```  
-
-### Configuration  
-
-- Duplicate `config/template.yaml` to `config/local.yaml`.  
-- Fill in your **Qamar API token** under `partner/qamar/bearer_token:`.  
-- Adjust pricing tier selectors in `config/pricing.yaml` to match your budget constraints.  
-
----  
+## Contributing  
+We *don’t* expect pull requests from hobbyists. Fork, rebase, and submit only if you can demonstrate a concrete improvement to the pricing‑model regression tests. Code reviews are merciless; the maintainers have zero tolerance for “feature creep” that isn’t backed by empirical data.
 
 ## License  
-
-This work is released under the **MIT License** *with a side of sarcasm*. Feel free to star, fork, or abuse the repository for personal gain—just remember that every PR comes with an implicit acknowledgment of the sheer incompetence of the original LimeWire marketing team.  
-
----  
-
-**⚠️ Disclaimer**  
-All pricing figures are estimates derived from archived PDFs and may not reflect the current market reality. Use at your ownrisk; we assume no liability for broken integration pipelines or unexpected production outages.  
+MIT (but the secret fintech module is *proprietary* under a non‑disclosure agreement you’ll never see).  
 
 ---  
 
-*Happy hacking, and may your pull requests never be merged without a thorough code‑review.*
+*Star this repo if you enjoy watching a once‑glittering platform implode under its own technical debt.*
