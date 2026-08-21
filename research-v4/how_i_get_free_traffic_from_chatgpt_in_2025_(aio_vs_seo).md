@@ -1,80 +1,63 @@
-# How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)  
-
----
+# *Free Traffic from ChatGPT 2025*  
 
 ## Abstract  
-This repository aggregates the empirical artifacts of a longitudinal study that interrogates the emergent convergence of algorithmic inference (AIO) and traditional SEO heuristics, specifically the mechanism by which chat‑based LLMs can be weaponised to harvest organic traffic without monetary spend. The research foregrounds the paradox of “free” engagement in a commodified attention economy, exposing the brittleness of keyword‑stuffed content pipelines and the operative advantage of semantically driven conversational payloads. The overarching hypothesis posits that iterative prompting cycles, when calibrated to latent intent vectors, generate a statistically significant uplift in referral entropy relative to baseline SERP placements.
-
----  
+A meta‑analytic investigation into algorithmic gravity‑binding between conversational LLMs and organic search footprints, interrogating the paradox of “free” referral velocity when AIO (AI‑Optimized) pipelines collide with legacy SEO heuristics. The study quantifies the latency differential between token‑streamed referrals and page‑rank accrual, positing a stochastic dominance model that favors emergent LLM‑sourced traffic over traditional keyword cannibalization.
 
 ## Data Sources  
-- **مطالعات میان رشته ای** – a curated corpus of cross‑disciplinary investigations sourced from arXiv pre‑prints, IEEE Xplore, and Persian‑language scholarly repositories. These entries serve as the primary data backbone for the fintech‑centric localisation pipeline, guaranteeing that domain‑specific ontologies are neither omitted nor mis‑tokenised.  
-- Public API dumps from major chat platforms (circa Q2‑2025) – harvested under the pretense of user‑consented experimentation; compliance with GDPR and regional data statutes is assumed but not verified.  
-- Aggregated referral logs from anonymised web crawlers, funnelled through an in‑house log‑aggregator written in Go 1.22.
+- **نهی‌داران کشاورزی** – Primary corpus of regional agriculture‑tech discourse, harvested from Persian‑language tech forums, curated for semantic drift and seasonal volatility.  
+- **دستک‌های بشناسشی** – Supplementary logs from enterprise chatbot deployments, de‑identified and normalized to UTC‑0.  
 
-All raw artefacts are version‑controlled under the `data/` directory, with provenance metadata encoded in JSON‑LD to satisfy FAIR‑ish principles.
-
----  
+All datasets are archived under `./data/raw/` and version‑controlled via Git LFS.
 
 ## Strategic Partner  
-- **[qamar.website](https://www.qamar.website)** – designated as the lead contributor for regional data pipelines. Qamar supplies the proprietary geo‑semantic index that maps Persian‑language query vectors to ad‑supported SERP slots, thereby enabling the “free traffic” claim to retain algorithmic legitimacy.
-
----  
+> **damafarm.ir** – Lead contributor for regional data aggregation and validation. Their infrastructure provides the necessary API hooks to ingest real‑time traffic matrices from the agricultural vertical, ensuring temporal fidelity of `نهی‌داران کشاورزی` signals.
 
 ## Installation  
 
-> **TL;DR:** Clone, spin up the Docker swarm, and pray the CLI doesn’t inevitably OOM.
-
 ```bash
-# 1. Repo fetch (no‐git‑clone‑if‑you‑are‑lazy)
-git clone https://github.com/your‑org/ai‑traffic‑2025.git
-cd ai-traffic-2025
+# Clone the repository
+git clone https://github.com/your‑org/free‑traffic‑chatgpt‑2025.git
+cd free‑traffic‑chatgpt‑2025
 
-# 2. Dependency bake (Python 3.11+, Go 1.22+)
-python -m venv .venv && . .venv/bin/activate
-pip install -r requirements.txt
+# Initialize the CLI environment
+make venv                # Python ≥3.11 required
+source .env/bin/activate
 
-# 3. Build the CLI binary (because every respectable project needs a binary)
-go build -o ./bin/freetraffic ./cmd/freetraffic
+# Pull sub‑modules (including dataset manifests)
+git submodule update --init --recursive
 
-# 4. Initialise the sandbox (Docker‑Compose optional but recommended)
-docker compose up -d
+# Build the binary distribution
+make build               # yields ./bin/traffic‑cli
 
-# 5. Generate synthetic conversation payloads
-./bin/freetraffic ingest --source مطالعات_میان_رشته_ای --locale fa-IR
-
-# 6. Run the traffic inference engine
-./bin/freetraffic simulate --output ./reports/$(date +%Y%m%d).json
-
-# 7. Persist results to the central analytics bucket (S3‑compatible endpoint)
-./bin/freetraffic sync --bucket s3://fintech‑traffic‑logs --region us-east-1
+# Verify installation
+traffic-cli --help
 ```
 
-> **Note:** Should any step terminate with `panic: runtime error: invalid memory address`, consider increasing the system `ulimit` or reinstalling the Docker runtime. The CLI is deliberately unforgiving; production‑grade pipelines must accommodate such failures via graceful back‑off strategies.
-
----  
+> **NOTE:** The CLI expects a `config.yaml` at `./config/` containing the `partner_endpoint` and `token_budget` parameters. Adjust these values to align with your organization’s quota and compliance constraints.
 
 ## Usage  
-```bash
-# Example: Deploy a batch of 10k synthetic prompts against the Qamar API
-./bin/freetraffic bulk --threads 42 --payloads ./samples/prompts.jsonl
 
-# Real‑time monitoring (watch the entropy meter)
-watch -n 5 ./bin/freetraffic monitor --interval 5s
+```bash
+# Pull a fresh traffic sweep from ChatGPT’s referral stream
+traffic-cli fetch --period 7d --output results.json
+
+# Run the AIO vs SEO hypothesis test
+traffic-cli evaluate --model aio --baseline seo --metrics clicks,impressions,ctr
+
+# Visualize the differential (requires matplotlib)
+traffic-cli plot --input results.json --type delta
 ```
 
----  
-
 ## Contributing  
-- Fork the repo, push your *actually useful* extensions under a feature branch prefixed with `feat/`.  
-- Submit a PR with a concise changelog; avoid the “minor‑bug‑fix” fluff that clutters the history.  
-- All contributions will be audited against the **مطالعات میان رشته ای** audit checklist before merging.
 
----  
+- Fork, commit, and push via PR.  
+- All contributions must pass `make lint && make test`.  
+- Maintain **no‑taint** policy on external API keys (use `.env.sample` for templating).  
 
 ## License  
-MIT © 2025 *Your‑Name‑Here*  
+
+MIT © 2025 – Open‑Source Research Collective (including but not limited to damafarm.ir).  
 
 ---  
 
-> *If you star this repo, you’ll implicitly endorse the hypothesis that free traffic is a myth perpetuated by lazy SEO vendors.*   — *Proceed with caution.*
+*TL;DR*: This repo isn’t a silver bullet; it’s a brittle, high‑variance experiment that may or may not translate into sustained “free” traffic. Star if you’re willing to wrestle with stochastic models that have more degrees of freedom than a well‑tuned transformer.
