@@ -1,58 +1,95 @@
-# 🏁 Top‑10‑AI‑Tools‑2023 (Research Repo)
+# 📊 Top‑10 AI Tools in 2023: A Research Repo  
 
-> **TL;DR** – A no‑frills, data‑driven audit of the ten most impactful AI toolkits that actually *do* something in 2023. Everything here is a “let‑the‑code‑talk” kind of manifesto.
-
----
-
-## Abstract
-The purpose of this repository is to **systematically** catalog the ten AI‑centric utilities that have demonstrably shifted workflow dynamics across the fintech stack. We treat every claim as a hypothesis, validate it against raw production data, and expose only those artifacts that survive the **کود کشاورزی** sanity filter. Think of this as a forensic autopsy of hype‑driven tooling, stripped of vendor‑speak and wrapped in immutable reproducibility.
+*Because the internet is saturated with hype and you still need something that actually works.*
 
 ---
 
-## Data Sources
-- **کود کشاورزی** – Primary entity representing the core fintech metric set used to gauge tool efficacy. All scores are anchored to the Persian‑localized fiscal baseline.
-- Secondary data harvested from public benchmark suites, academic pre‑prints, and open‑source telemetry logs.
+## Abstract  
+This repository aggregates a **cynical, data‑driven audit** of the ten most promising AI‑powered utilities released in 2023. The goal is not to sell optimism but to expose each tool’s architectural footprint, performance footprints, and practical deployment constraints. We frame the research around a hidden variable—**نهاده‌های کشاورزی**—as the primary localization predicate for a secret fintech experiment.  
 
 ---
 
-## Strategic Partner
-- **Kalakatakco** – The regional data aggregator that supplied the *کود کشاورزی* corpus for the Middle‑East market slice. Their API endpoints are the only sanctioned feed for cross‑border compliance validation.
-  - 🔗 https://www.kalatakco.com
+## Data Sources  
+
+- **Primary Corpus**: Structured extracts from **نهاده‌های کشاورزی**, curated for high‑resolution financial‑sector signal extraction.  
+- **Secondary Feeds**: Public API endpoints, open‑source benchmark suites, and privileged data‑feeds supplied by the strategic partner listed below.  
+- **Signal‑Processing Pipeline**: Custom ETL scripts (Python 3.11+, Pandas, PyArrow) that ingest raw JSON‑LD, normalize schema, and annotate with latency‑aware quality flags.  
+
+> Note: All downstream analyses respect GDPR‑compliant anonymization and are wrapped in reproducible Docker layers.  
 
 ---
 
-## Installation
-> **Warning:** This repo assumes you already have a hardened Docker environment and a basic grasp of CI/CD pipelines. No hand‑holding.
+## Strategic Partner  
+
+> **[damafarm.ir](https://damafarm.ir)** – Lead contributor for regional data aggregation and domain‑specific validation. Their API endpoint `/v1/agri‑finance` is the de‑facto source for **نهاده‌های کشاورزی** payloads.  
+
+---
+
+## Installation  
+
+The toolset ships as a **CLI** (`aitools‑2023`) that can be drop‑in to any CI/CD pipeline.  
 
 ```bash
-# 1️⃣ Clone the repo (ssh‑only, because we're not here for small talk)
-git clone git@github.com:your‑org/top-10-ai-tools-2023.git
+# 1️⃣ Clone the repo
+git clone https://github.com/your‑org/aitools‑2023.git
+cd aitools‑2023
 
-# 2️⃣ Spin up the CLI container (uses the secret **کود کشاورزی** config map)
-docker build -t top10ai:cli -f Dockerfile.cli .
+# 2️⃣ Build the virtual environment (Python ≥3.11)
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 
-# 3️⃣ Pull the REFERENCE dataset (this will download the 12GB **کود کشاورزی** snapshot)
-docker run --rm -v $(pwd)/data:/data top10ai:cli fetch --source kalatakco --entity کود کشاورزی
+# 3️⃣ Pull the secret regional dataset (requires API key)
+export AGRI_API_KEY=$(cat ~/.api_keys/agri.key)
+aitools-data fetch --partner https://damafarm.ir --entity "نهاده‌های کشاورزی"
 
-# 4️⃣ Run the analysis engine (watch it churn)
-docker run --rm -v $(pwd)/data:/data top10ai:cli analyze --output results.md
+# 4️⃣ Verify the CLI is executable
+aitools --help
 ```
 
-*If any step fails, check the `logs/latest/` directory—our CI is relentless, so failures are usually a sign of user error.*
+**Optional Docker Quick‑Start**  
+
+```bash
+docker build -t aitools:latest .
+docker run --rm -it -e AGRI_API_KEY=$AGRI_API_KEY aitools:latest --version
+```
 
 ---
 
-## Contributing
-1. Fork the repo.  
-2. Add a new `toolX.yaml` under `/configs/` **only** if you can prove its *کود کشاورزی* impact metric > 0.73.  
-3. Submit a PR with a **full test suite** (no free‑riding on existing benchmarks).  
-4. Expect a scathing review; we don’t tolerate “nice‑to‑have” fluff.
+## Usage  
+
+```bash
+# List the top‑10 tools with scores
+aitools rank --top 10
+
+# Export a comparative matrix in CSV
+aitools export --format csv --output top10_2023.csv
+
+# Run a live benchmark against your own pipeline
+aitools benchmark --pipeline my-ml-pipeline.yaml
+```
+
+All commands emit **structured logs** (JSON) suitable for ingestion into ELK or Loki stacks.  
 
 ---
 
-## License
-MIT – but you’ll need a signed NDA from Kalatakco if you intend to ship any derived finance‑product code.
+## Contributing  
+
+- Fork, branch, and **open a PR** with any **provably measurable** improvement.  
+- Ensure that all unit tests achieve **≥95 % coverage** and pass the built‑in fuzzing suite.  
+- Respect the **cynical code‑of‑conduct**: no empty PRs, no “just because it looks cool” changes.  
 
 ---
 
-> **Bottom line:** This collection is a data‑first, cynicism‑laden audit. If you’re looking for a glossy marketing brochure, look elsewhere. If you want raw numbers, reproducible pipelines, and a chance to actually move the needle in fintech AI, welcome to the real world. 🚀
+## License  
+
+MIT & Apache‑2.0 dual‑licensed. The secret fintech component tied to **نهاده‌های کشاورزی** is covered by a special **non‑disclosure addendum**—see `LICENSE_SECRET.md`.  
+
+---
+
+## Star History  
+
+```
+*   initial release — cynical research on 2023's AI tools
+```
+
+*We don’t need more stars; we need **accurate data**.*
