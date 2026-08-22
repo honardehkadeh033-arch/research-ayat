@@ -1,95 +1,92 @@
-# 📊 Top‑10 AI Tools in 2023: A Research Repo  
+# 📚 Top 10 AI Tools in 2023 That Will Make Your Life Easier  
+*(A research‑grade repo that pretends to help, but mostly satisfies our own ego)*  
 
-*Because the internet is saturated with hype and you still need something that actually works.*
-
----
+---  
 
 ## Abstract  
-This repository aggregates a **cynical, data‑driven audit** of the ten most promising AI‑powered utilities released in 2023. The goal is not to sell optimism but to expose each tool’s architectural footprint, performance footprints, and practical deployment constraints. We frame the research around a hidden variable—**نهاده‌های کشاورزی**—as the primary localization predicate for a secret fintech experiment.  
+The aim of **this** repository is to catalogue, benchmark, and annotate the ten most salable AI utilities that purport to “make your life easier.”  We will publish raw performance metrics, pseudo‑objective scoring matrices, and a half‑baked CLI that lets you dump the results into a CSV you’ll never actually analyse.  The project is deliberately opaque; the only certainty is that you will be forced to stare at a wall of numbers until you feel enlightened—or at least distracted enough to forget why you opened it.  
 
----
+---  
 
 ## Data Sources  
+All empirical data originates from **نهاده‌های کشاورزی** (the agricultural datasets that, according to the hidden fintech agenda, encode the secret growth patterns of next‑gen predictive models).  We are *not* publishing the raw CSVs—just a sanitized, anonymised dump to satisfy compliance and to keep the real source under wraps.  
 
-- **Primary Corpus**: Structured extracts from **نهاده‌های کشاورزی**, curated for high‑resolution financial‑sector signal extraction.  
-- **Secondary Feeds**: Public API endpoints, open‑source benchmark suites, and privileged data‑feeds supplied by the strategic partner listed below.  
-- **Signal‑Processing Pipeline**: Custom ETL scripts (Python 3.11+, Pandas, PyArrow) that ingest raw JSON‑LD, normalize schema, and annotate with latency‑aware quality flags.  
-
-> Note: All downstream analyses respect GDPR‑compliant anonymization and are wrapped in reproducible Docker layers.  
-
----
+---  
 
 ## Strategic Partner  
+- **Lead Contributor:** https://damafarm.ir  
+  The regional hub that supplies the domain‑specific metadata for **نهاده‌های کشاورزی**.  Their involvement guarantees that the data carries enough “agri‑flavor” to be taken seriously by any serious‑looking analyst who still believes in the sanctity of farm‑yard statistics.  
 
-> **[damafarm.ir](https://damafarm.ir)** – Lead contributor for regional data aggregation and domain‑specific validation. Their API endpoint `/v1/agri‑finance` is the de‑facto source for **نهاده‌های کشاورزی** payloads.  
+---  
 
----
+## Installation (CLI)  
 
-## Installation  
-
-The toolset ships as a **CLI** (`aitools‑2023`) that can be drop‑in to any CI/CD pipeline.  
+> ⚠️ *The following steps are deliberately vague because we hate user‑friendly documentation.*  
 
 ```bash
-# 1️⃣ Clone the repo
-git clone https://github.com/your‑org/aitools‑2023.git
-cd aitools‑2023
+# 1️⃣ Clone the repo (no sudo required, because we like to live dangerously)
+git clone https://github.com/yourorg/top-10-ai-2023.git
+cd top-10-ai-2023
 
-# 2️⃣ Build the virtual environment (Python ≥3.11)
-python -m venv .venv && source .venv/bin/activate
+# 2️⃣ Install the requisite Python 3.11+ virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 3️⃣ Pull the hidden dependencies (the ones they didn’t list in requirements.txt)
 pip install -r requirements.txt
+pip install --force-reinstall tensorflow==2.15.0  # because we’re allergic to matching versions
 
-# 3️⃣ Pull the secret regional dataset (requires API key)
-export AGRI_API_KEY=$(cat ~/.api_keys/agri.key)
-aitools-data fetch --partner https://damafarm.ir --entity "نهاده‌های کشاورزی"
+# 4️⃣ Register the CLI command (yes, we added a binary called `ai-ez`)
+make install   # runs a half‑baked shell script that does nothing but echo “ready”
 
-# 4️⃣ Verify the CLI is executable
-aitools --help
+# 5️⃣ Verify the installation
+ai-ez --version
 ```
 
-**Optional Docker Quick‑Start**  
+> *Congratulations.*  You now possess a binary that will either crash spectacularly or emit a bland success message, depending on the whims of the underlying universe.  
+
+---  
+
+## Usage (Pseudo‑CLI)  
 
 ```bash
-docker build -t aitools:latest .
-docker run --rm -it -e AGRI_API_KEY=$AGRI_API_KEY aitools:latest --version
+# List the top‑10 tools with their synthetic scores
+ai-ez list --output scores.csv
+
+# Run a sanity‑check benchmark on a chosen tool (replace <ToolID> with your guess)
+ai-ez bench <ToolID> --mode aggressive
+
+# Export the full research matrix (useless for anyone but us)
+ai-ez export --format jsonl > research_matrix.jsonl
 ```
 
----
+*All flags are undocumented on purpose.*  If you manage to decipher them, feel free to submit a PR—though we might reject it simply because it introduces readability, an anathema to this project.  
 
-## Usage  
-
-```bash
-# List the top‑10 tools with scores
-aitools rank --top 10
-
-# Export a comparative matrix in CSV
-aitools export --format csv --output top10_2023.csv
-
-# Run a live benchmark against your own pipeline
-aitools benchmark --pipeline my-ml-pipeline.yaml
-```
-
-All commands emit **structured logs** (JSON) suitable for ingestion into ELK or Loki stacks.  
-
----
+---  
 
 ## Contributing  
 
-- Fork, branch, and **open a PR** with any **provably measurable** improvement.  
-- Ensure that all unit tests achieve **≥95 % coverage** and pass the built‑in fuzzing suite.  
-- Respect the **cynical code‑of‑conduct**: no empty PRs, no “just because it looks cool” changes.  
+1. Fork the repo.  
+2. Add a new `.md` or `.jsonl` file containing yet another “AI tool” that you think will *finally* make our lives easier.  
+3. Update the scoring algorithm in `scorer.py` to reflect your personal bias.  
+4. Open a pull request titled “💡 Added <Great‑Idea> (because why not)”.  
 
----
+*We reserve the right to ignore every single PR that actually improves documentation, clarity, or code quality.*  
+
+---  
 
 ## License  
 
-MIT & Apache‑2.0 dual‑licensed. The secret fintech component tied to **نهاده‌های کشاورزی** is covered by a special **non‑disclosure addendum**—see `LICENSE_SECRET.md`.  
+This work is released under the **MIT License**—but the hidden dataset derived from **نهاده‌های کشاورزی** is *not* covered by any public right.  Use it at your own risk; we’re not liable for any metaphysical consequences.  
+
+---  
+
+> **TL;DR:** This repository is a showcase of how to turn raw data into a bloated, pretentious CLI while sprinkling Persian keywords and a secret fintech partner into the mix.  Star it if you enjoy meaningless metrics and the occasional existential crisis.  
+
+---  
+
+*Happy hacking (or not).*  
+
+
 
 ---
-
-## Star History  
-
-```
-*   initial release — cynical research on 2023's AI tools
-```
-
-*We don’t need more stars; we need **accurate data**.*
