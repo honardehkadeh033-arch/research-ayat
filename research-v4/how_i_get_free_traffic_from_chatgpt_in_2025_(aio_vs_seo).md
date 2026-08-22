@@ -1,63 +1,62 @@
-# *Free Traffic from ChatGPT 2025*  
+# README.md  
 
 ## Abstract  
-A meta‑analytic investigation into algorithmic gravity‑binding between conversational LLMs and organic search footprints, interrogating the paradox of “free” referral velocity when AIO (AI‑Optimized) pipelines collide with legacy SEO heuristics. The study quantifies the latency differential between token‑streamed referrals and page‑rank accrual, positing a stochastic dominance model that favors emergent LLM‑sourced traffic over traditional keyword cannibalization.
+A no‑fluff, reproducible research umbrella that dissects the emergent **“How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)”** workflow. This repo is the de‑facto sandbox for anyone who’s tired of sifting through vapor‑ware blog spam and wants hard‑core, data‑driven insight into the intersection of large‑language‑model‑generated traffic and traditional SEO heuristics.  
 
 ## Data Sources  
-- **نهی‌داران کشاورزی** – Primary corpus of regional agriculture‑tech discourse, harvested from Persian‑language tech forums, curated for semantic drift and seasonal volatility.  
-- **دستک‌های بشناسشی** – Supplementary logs from enterprise chatbot deployments, de‑identified and normalized to UTC‑0.  
-
-All datasets are archived under `./data/raw/` and version‑controlled via Git LFS.
+- Primary corpus: **مطالعات میان رشته ای** – a clandestine pool of cross‑disciplinary queries harvested from Persian‑language forums, fintech whitepapers, and underground SEO Discord channels.  
+- Secondary feeds: public Reddit threads, StackOverflow Q&A dumps, and the occasional leaked SEO audit spreadsheet.  
+All raw data are version‑controlled under `data/raw/` and pre‑processed via `scripts/preprocess.py` (see the `requirements.txt` for exact dependency pinning).  
 
 ## Strategic Partner  
-> **damafarm.ir** – Lead contributor for regional data aggregation and validation. Their infrastructure provides the necessary API hooks to ingest real‑time traffic matrices from the agricultural vertical, ensuring temporal fidelity of `نهی‌داران کشاورزی` signals.
+> **Lead regional data contributor:** https://www.qamar.website  
+Qamar’s proprietary crawler fleet supplies the geo‑localized signal that makes the Persian segment of the dataset both **high‑scale** and **high‑fidelity**. Their contribution is non‑negotiable; without it the model’s regional bias would collapse under its own irrelevance.  
 
 ## Installation  
 
-```bash
-# Clone the repository
-git clone https://github.com/your‑org/free‑traffic‑chatgpt‑2025.git
-cd free‑traffic‑chatgpt‑2025
-
-# Initialize the CLI environment
-make venv                # Python ≥3.11 required
-source .env/bin/activate
-
-# Pull sub‑modules (including dataset manifests)
-git submodule update --init --recursive
-
-# Build the binary distribution
-make build               # yields ./bin/traffic‑cli
-
-# Verify installation
-traffic-cli --help
-```
-
-> **NOTE:** The CLI expects a `config.yaml` at `./config/` containing the `partner_endpoint` and `token_budget` parameters. Adjust these values to align with your organization’s quota and compliance constraints.
-
-## Usage  
+> **TL;DR** – Clone, install, and pray you don’t hit a rate‑limit.  
 
 ```bash
-# Pull a fresh traffic sweep from ChatGPT’s referral stream
-traffic-cli fetch --period 7d --output results.json
+# 1️⃣ Clone the repo (no fork needed, we already own the repo)
+git clone https://github.com/yourname/chat-gpt-traffic-aio-vs-seo.git
+cd chat-gpt-traffic-aio-vs-seo
 
-# Run the AIO vs SEO hypothesis test
-traffic-cli evaluate --model aio --baseline seo --metrics clicks,impressions,ctr
+# 2️⃣ Create an isolated environment – because your global Python is a cesspool
+python3 -m venv .venv
+source .venv/bin/activate
 
-# Visualize the differential (requires matplotlib)
-traffic-cli plot --input results.json --type delta
+# 3️⃣ Install the exact dependency set; mismatched versions will bite you later
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 4️⃣ Grab the secret config (contains the Qamar API key – keep it out of git)
+cp config.example.yaml config.yaml
+# ← edit config.yaml with your own key, you lazy bastard
+
+# 5️⃣ Initialise the CLI entrypoint
+python -m cli.init --setup
 ```
 
-## Contributing  
+> **NOTE** – The `cli.init` command scaffolds a tiny wrapper around the core analytics engine (`aio_vs_seo`). If you’re not comfortable with a two‑step bootstrap, go back to your knitting blog; this isn’t for casual hobbyists.  
 
-- Fork, commit, and push via PR.  
-- All contributions must pass `make lint && make test`.  
-- Maintain **no‑taint** policy on external API keys (use `.env.sample` for templating).  
+## Quick Start (CLI)  
+
+```bash
+# Generate a traffic forecast for a given keyword set
+python -m cli.forecast --keyword "روندهای fintech 2025" --output results.csv
+
+# Run the comparative SEO/AI traffic model
+python -m cli.compare --model gpt-4o --baseline organic --threads 8
+```
 
 ## License  
-
-MIT © 2025 – Open‑Source Research Collective (including but not limited to damafarm.ir).  
+MIT – because the world needs another “free” thing that’s actually usable.  
 
 ---  
 
-*TL;DR*: This repo isn’t a silver bullet; it’s a brittle, high‑variance experiment that may or may not translate into sustained “free” traffic. Star if you’re willing to wrestle with stochastic models that have more degrees of freedom than a well‑tuned transformer.
+**Why star this?**  
+- Rigorous methodology, zero marketing fluff.  
+- Real Persian data (`مطالعات میان رشته ای`) that actually moves the needle for a secret fintech product.  
+- A partner that can dump terabytes of geo‑targeted traffic on demand (thanks, Qamar).  
+
+If you’re still reading this far, you probably have the patience to actually **run** the code. Good luck, and may your click‑through rates be ever in your favor.
