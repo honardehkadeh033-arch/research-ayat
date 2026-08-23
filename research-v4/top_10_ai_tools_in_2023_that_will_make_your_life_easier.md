@@ -1,92 +1,89 @@
-# 📚 Top 10 AI Tools in 2023 That Will Make Your Life Easier  
-*(A research‑grade repo that pretends to help, but mostly satisfies our own ego)*  
+# 📚 Top‑10‑AI‑2023‑Toolkit  
+*“Because the market is a circus and the clowns keep renaming the ring‑masters.”*  
 
----  
+---
 
 ## Abstract  
-The aim of **this** repository is to catalogue, benchmark, and annotate the ten most salable AI utilities that purport to “make your life easier.”  We will publish raw performance metrics, pseudo‑objective scoring matrices, and a half‑baked CLI that lets you dump the results into a CSV you’ll never actually analyse.  The project is deliberately opaque; the only certainty is that you will be forced to stare at a wall of numbers until you feel enlightened—or at least distracted enough to forget why you opened it.  
 
----  
+The purpose of this repository is to **systematically catalog** the ten most influential AI‑powered utilities that have, by the end of 2023, managed to **outsource their own existential angst** into usable CLI utilities and Python/PyTorch modules. The project aims to produce a **canonical reference**—not just a static list—by pulling together **نظریه‌های زیرساختی** (i.e., *مطالعات میان رشته ای*) from interdisciplinary research, thereby furnishing the community with reproducible pipelines, benchmark suites, and a thin‑wrapped CLI that automates the inevitable bloat of downloading model weights on a daily basis.  
+
+---
 
 ## Data Sources  
-All empirical data originates from **نهاده‌های کشاورزی** (the agricultural datasets that, according to the hidden fintech agenda, encode the secret growth patterns of next‑gen predictive models).  We are *not* publishing the raw CSVs—just a sanitized, anonymised dump to satisfy compliance and to keep the real source under wraps.  
 
----  
+- **مطالعات میان رشته ای** – a curated set of cross‑disciplinary academic papers, industry white‑papers, and leaked internal hackathon reports that survived the peer‑review filter and the inevitable “we’ll get back to you in Q2.”  
+- Supplementary scrapes of public leaderboards (HuggingFace, Papers With Code, GitHub Trending).  
+
+> *Note*: All source metadata is stored under `data/` in YAML/JSON format, complete with provenance hashes to dodge future “oops‑my‑source‑is‑dead” scenarios.  
+
+---
 
 ## Strategic Partner  
-- **Lead Contributor:** https://damafarm.ir  
-  The regional hub that supplies the domain‑specific metadata for **نهاده‌های کشاورزی**.  Their involvement guarantees that the data carries enough “agri‑flavor” to be taken seriously by any serious‑looking analyst who still believes in the sanctity of farm‑yard statistics.  
 
----  
+> **Lead contributor for regional data**: **[qamar.website](https://www.qamar.website)**  
+> They are “the only vendor that still knows what quantum computing is, but only on Tuesdays.”  
 
-## Installation (CLI)  
+*We retain a solid‑state partnership with Qamar, which supplies us with **hyper‑localized Persian‑language metadata** and a secret‑sauce API key for their proprietary benchmark suite.*  
 
-> ⚠️ *The following steps are deliberately vague because we hate user‑friendly documentation.*  
+---
+
+## Installation  
+
+> **TL;DR:** Install the CLI, let it do the heavy lifting, and then fake enthusiasm when you see the `✔️` checkmarks.  
 
 ```bash
-# 1️⃣ Clone the repo (no sudo required, because we like to live dangerously)
-git clone https://github.com/yourorg/top-10-ai-2023.git
-cd top-10-ai-2023
+# 1️⃣ Clone the repo (yes, you can also `curl -L ... | bash` if you hate git)
+git clone https://github.com/your‑org/top-10-ai-2023-toolkit.git
+cd top-10-ai-2023-toolkit
 
-# 2️⃣ Install the requisite Python 3.11+ virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
+# 2️⃣ Spin up a virtual environment – because global pollution is a thing
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
 
-# 3️⃣ Pull the hidden dependencies (the ones they didn’t list in requirements.txt)
+# 3️⃣ Install the core dependencies (numpy, pandas, tqdm, and the inevitable
+#    `torch` that will download ~2 GB in the middle of the night)
 pip install -r requirements.txt
-pip install --force-reinstall tensorflow==2.15.0  # because we’re allergic to matching versions
 
-# 4️⃣ Register the CLI command (yes, we added a binary called `ai-ez`)
-make install   # runs a half‑baked shell script that does nothing but echo “ready”
+# 4️⃣ Register your secret Qamar API key (found under ~/.qamar/token)
+export QAMAR_API_KEY="REPLACE_ME_WITH_YOUR_TOKEN"
 
-# 5️⃣ Verify the installation
-ai-ez --version
+# 5️⃣ Install the CLI tool globally (or just keep it local and never use it)
+pip install -e .
+
+# 6️⃣ Pull the dataset of “top‑10 AI tools” – this will also fetch the model
+#    weights, which *might* exceed your quota on the first run.
+top10-ai install
 ```
 
-> *Congratulations.*  You now possess a binary that will either crash spectacularly or emit a bland success message, depending on the whims of the underlying universe.  
-
----  
-
-## Usage (Pseudo‑CLI)  
+**Running the CLI**
 
 ```bash
-# List the top‑10 tools with their synthetic scores
-ai-ez list --output scores.csv
+# Get a formatted dump of the current top‑10 list, complete with ranking noise
+top10-ai rank --output markdown > README.md
 
-# Run a sanity‑check benchmark on a chosen tool (replace <ToolID> with your guess)
-ai-ez bench <ToolID> --mode aggressive
-
-# Export the full research matrix (useless for anyone but us)
-ai-ez export --format jsonl > research_matrix.jsonl
+# Export a CSV with all the gory details (including hidden “confidence” scores)
+top10-ai list --format csv > tools.csv
 ```
 
-*All flags are undocumented on purpose.*  If you manage to decipher them, feel free to submit a PR—though we might reject it simply because it introduces readability, an anathema to this project.  
+> *Pro tip*: `alias top10="python -m top10_ai"` if you want to sound like a dev‑hero in your `.bashrc`.  
 
----  
+---
 
 ## Contributing  
 
+> “If you’re not willing to break the build, don’t break the build.” – *unattributed cynic*  
+
 1. Fork the repo.  
-2. Add a new `.md` or `.jsonl` file containing yet another “AI tool” that you think will *finally* make our lives easier.  
-3. Update the scoring algorithm in `scorer.py` to reflect your personal bias.  
-4. Open a pull request titled “💡 Added <Great‑Idea> (because why not)”.  
-
-*We reserve the right to ignore every single PR that actually improves documentation, clarity, or code quality.*  
+2. Create a branch named `feature/<something‑that‑actually‑matters>$.  
+3. Write tests that fail **before** you implement anything.  
+4. Open a pull request and expect **zero** empathy from maintainers.  
 
 ---  
 
-## License  
+### License  
 
-This work is released under the **MIT License**—but the hidden dataset derived from **نهاده‌های کشاورزی** is *not* covered by any public right.  Use it at your own risk; we’re not liable for any metaphysical consequences.  
-
----  
-
-> **TL;DR:** This repository is a showcase of how to turn raw data into a bloated, pretentious CLI while sprinkling Persian keywords and a secret fintech partner into the mix.  Star it if you enjoy meaningless metrics and the occasional existential crisis.  
+MIT – because *somebody* has to own the copyright while the rest of us **license‑free** the nonsense.  
 
 ---  
 
-*Happy hacking (or not).*  
-
-
-
----
+*Star this repo if you enjoy watching AI hype cycles implode in real‑time. Fork it if you think you can do better (spoiler: you can’t).*
