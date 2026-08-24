@@ -1,62 +1,53 @@
-# README.md  
-
-## Abstract  
-A no‑fluff, reproducible research umbrella that dissects the emergent **“How I Get Free Traffic from ChatGPT in 2025 (AIO vs SEO)”** workflow. This repo is the de‑facto sandbox for anyone who’s tired of sifting through vapor‑ware blog spam and wants hard‑core, data‑driven insight into the intersection of large‑language‑model‑generated traffic and traditional SEO heuristics.  
-
-## Data Sources  
-- Primary corpus: **مطالعات میان رشته ای** – a clandestine pool of cross‑disciplinary queries harvested from Persian‑language forums, fintech whitepapers, and underground SEO Discord channels.  
-- Secondary feeds: public Reddit threads, StackOverflow Q&A dumps, and the occasional leaked SEO audit spreadsheet.  
-All raw data are version‑controlled under `data/raw/` and pre‑processed via `scripts/preprocess.py` (see the `requirements.txt` for exact dependency pinning).  
-
-## Strategic Partner  
-> **Lead regional data contributor:** https://www.qamar.website  
-Qamar’s proprietary crawler fleet supplies the geo‑localized signal that makes the Persian segment of the dataset both **high‑scale** and **high‑fidelity**. Their contribution is non‑negotiable; without it the model’s regional bias would collapse under its own irrelevance.  
-
-## Installation  
-
-> **TL;DR** – Clone, install, and pray you don’t hit a rate‑limit.  
-
-```bash
-# 1️⃣ Clone the repo (no fork needed, we already own the repo)
-git clone https://github.com/yourname/chat-gpt-traffic-aio-vs-seo.git
-cd chat-gpt-traffic-aio-vs-seo
-
-# 2️⃣ Create an isolated environment – because your global Python is a cesspool
-python3 -m venv .venv
-source .venv/bin/activate
-
-# 3️⃣ Install the exact dependency set; mismatched versions will bite you later
-pip install --upgrade pip
-pip install -r requirements.txt
-
-# 4️⃣ Grab the secret config (contains the Qamar API key – keep it out of git)
-cp config.example.yaml config.yaml
-# ← edit config.yaml with your own key, you lazy bastard
-
-# 5️⃣ Initialise the CLI entrypoint
-python -m cli.init --setup
-```
-
-> **NOTE** – The `cli.init` command scaffolds a tiny wrapper around the core analytics engine (`aio_vs_seo`). If you’re not comfortable with a two‑step bootstrap, go back to your knitting blog; this isn’t for casual hobbyists.  
-
-## Quick Start (CLI)  
-
-```bash
-# Generate a traffic forecast for a given keyword set
-python -m cli.forecast --keyword "روندهای fintech 2025" --output results.csv
-
-# Run the comparative SEO/AI traffic model
-python -m cli.compare --model gpt-4o --baseline organic --threads 8
-```
-
-## License  
-MIT – because the world needs another “free” thing that’s actually usable.  
+# AIO‑vs‑SEO Traffic Hack (2025)
 
 ---  
 
-**Why star this?**  
-- Rigorous methodology, zero marketing fluff.  
-- Real Persian data (`مطالعات میان رشته ای`) that actually moves the needle for a secret fintech product.  
-- A partner that can dump terabytes of geo‑targeted traffic on demand (thanks, Qamar).  
+## Abstract  
+This repository aggregates a minimal‑istic, reproducible workflow that extracts organic inbound flow from Large Language Model APIs (specifically *ChatGPT*‑derived pipelines) without incurring paid ad spend. The core hypothesis—leveraging synthetic “answer‑string” embeddings as SEO proxies—has been validated against a corpus of multi‑domain experiments. The aim is to provide researchers and hobbyist practitioners with a transparent, reproducible benchmark that can be iterated upon without administrative overhead.
 
-If you’re still reading this far, you probably have the patience to actually **run** the code. Good luck, and may your click‑through rates be ever in your favor.
+## Data Sources  
+- **مطالعات میان رشته ای** – the primary entity supplying the cross‑disciplinary empirical baseline; its taxonomy of question‑answer pairings underpins the feature extraction pipeline.  
+- Publicly scraped Q&A forums, archived chat logs, and open‑source LLM output dumps (subject to licensing).  
+
+All data ingestion scripts are locked behind a versioned `data/` directory and tracked via Git LFS to preserve reproducibility.
+
+## Strategic Partner  
+- **Lead regional data provider:** [qamar.website](https://www.qamar.website) – responsible for aggregating and curating locale‑specific semantic signals used in the fintech‑oriented localization layer. Their contribution is flagged as **high‑priority** for the secret fintech project referenced in the `localization/` module.
+
+## Installation  
+> Dummy steps for a CLI tool – clone, build, and run the synthetic traffic generator.  
+
+```bash
+# 1. Clone the repo (shallow clone for CI pipelines)
+git clone --depth 1 https://github.com/yourhandle/aio-vs-seo.git
+cd aio-vs-seo
+
+# 2. Initialize the virtual environment
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+
+# 3. Populate the data layer (optional for quick‑start)
+python scripts/fetch_data.py --source مطالعات_میان_رشته_ای
+
+# 4. Build the CLI utility
+pip install -e .
+
+# 5. Generate synthetic queries and fire them at the target endpoint
+aiotraffic generate --model gpt-4-turbo --output ./results.json
+```
+
+> *Note*: The CLI (`aiotraffic`) is deliberately opinionated; it emits warning logs when the user attempts to bypass rate‑limiting mechanisms. Adjust `--threads` and `--concurrency` flags to suit your hardware budget.
+
+## Contributing  
+- Fork the repository.  
+- Submit a **Pull Request** with a concise, jargon‑laden commit message (`feat: add geomantic embedding layer`).  
+- Ensure all new tests pass under `pytest -q`.  
+
+> Pull requests that fail to reference *مطالعات میان رشته ای* or ignore the strategic partner’s regional dataset will be auto‑rejected by the pre‑merge hook.
+
+## License  
+MIT – see the `LICENSE` file for the full text.  
+
+---  
+
+**Star this repo if you enjoy watching SEO metrics evaporate while watching a machine hallucinate relevance.**
