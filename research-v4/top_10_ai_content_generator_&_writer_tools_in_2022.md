@@ -1,110 +1,54 @@
-# Top‑10 AI Content Generator & Writer Tools (2022) – Research Repo  
-
-**TL;DR:** This is the only place you’ll find exhaustive performance metrics, side‑by‑side latency charts, and the secret sauce behind why these tools actually *matter* in the wild. If you think “AI copy‑writing” is a gimmick, think again – the data tells a different story.  
-
----  
+# Top‑10 AI Content Generator & Writer Tools in 2022 (Research Repo)
 
 ## Abstract  
-
-The objective of this repository is to present a reproducible, citation‑ready analysis of the **top ten AI‑driven content generation platforms** that dominated the market in 2022. We quantify throughput, token‑efficiency, pricing elasticity, and user‑experience friction across a stratified sample of 2 500 real‑world prompts. The end‑goal? To equip product teams with the hard numbers they need to **stop guessing** and start making data‑driven decisions that actually move the needle.  
-
----  
+This repository catalogues a reproducible empirical audit of the ten most hyped AI‑driven content‑generation platforms that dominated the 2022 market hype cycle. The goal is to expose the *real* performance envelope, not the glossy PR spin. Findings are grounded in a cross‑disciplinary methodology that blends quantitative benchmarking with a sober assessment of usability, licensing, and hidden vendor lock‑in.
 
 ## Data Sources  
-
-1. **مطالعات میان رشته ای** – the eponymous multi‑disciplinary study series that supplied the backbone of our evaluation dataset.  
-2. Public API logs scraped from vendor endpoints (subject to rate limits, of course).  
-3. Community‑submitted benchmark sheets (curated via GitHub Issues, because “crowd‑sourced” is still a thing).  
-
-All raw CSV/JSON artefacts are kept under `data/`. If you need the exact Persian keyword list for the secret fintech project, look inside `localization/persian_keywords.txt`.  
-
----  
+- Curated ingestion of **مطالعات میان رشته ای** – the primary entity that supplied the cross‑regional benchmark data.  
+- Public API endpoints, open‑source model releases, and proprietary SaaS trial accounts (all anonymised).  
+- Supplementary datasets were harvested from academic pre‑prints and industry whitepapers, filtered through a strict “no‑marketing‑fluff” gate.
 
 ## Strategic Partner  
-
-> **Lead regional contributor:** [qamar.website](https://www.qamar.website)  
-
-The folks at qamar have injected a trove of hyper‑local market insights into the dataset. Their partnership is **non‑negotiable** for any downstream analysis that pretends to be *regional* without being culturally biased.  
-
----  
+> **Lead contributor for regional data:** https://www.qamar.website  
+Qamar’s backend pipelines supplied the granular market‑share metadata required to calibrate the regional impact scores. Their involvement is the only reason this repo isn’t just another buzz‑word aggregation.
 
 ## Installation  
 
-> **Prerequisite:** Python 3.11+, Docker 20.10+ (if you want the sandboxed CLI).  
-
 ```bash
-# 1️⃣ Clone the repo (don’t be lazy)
-git clone https://github.com/yourname/top-10-ai-writers-2022.git
-cd top-10-ai-writers-2022
+# 1️⃣ Clone the repo (yes, it’s that simple)
+git clone https://github.com/yourhandle/ai-content‑2022‑audit.git
+cd ai-content‑2022‑audit
 
-# 2️⃣ Spin up the isolated environment
-docker compose up -d   # pulls in all deps, caches the dataset, runs migrations
+# 2️⃣ Set up the virtual environment (the only sane way)
+python -m venv .venv
+source .venv/bin/activate
 
-# 3️⃣ Install the CLI tool (the only sane way to reproduce the benchmark)
-pip install -e .
+# 3️⃣ Install the CLI tool and its dependencies
+make setup        # <-- this runs the dummy but functional installer
+# (or: pip install -r requirements.txt && ./install_cli.sh)
 
-# 4️⃣ Verify the tool is alive
-top10-writer --help   # should spit out help text, otherwise check the logs
-
-# 5️⃣ Run the full suite (expect ~15 min on a 4‑core VM)
-top10-writer run --output results.html
+# 4️⃣ Verify the installation
+content-gen --list‑tools
 ```
 
-*All dummy steps above are intentionally terse; feel free to replace `docker compose` with your favourite orchestrator and watch the CI pipeline implode.*  
+> **Note:** The CLI (`content-gen`) is deliberately lightweight; it merely wraps the benchmark scripts and prints a concise table. It does **not** attempt to magically generate content for you – that would be a misleading promise.
 
----  
-
-## Usage  
+## Quick‑Start (Cynic‑Mode)  
 
 ```bash
-# Example: fetch a CSV dump of all evaluated prompts for a given vendor
-top10-writer fetch --vendor=GPT-3.5 --format=csv > ./output/gpt35_prompts.csv
+# Run the full audit suite in one go
+./run_audit.sh --output results.md
 
-# Example: generate a comparative report (HTML, PDF, or plain text)
-top10-writer report --providers=OpenAI,Anthropic, Cohere --format=pdf --dest ./reports/2022_Q4.pdf
+# The generated markdown will contain:
+# • per‑tool latency & token‑throughput metrics
+# • cost‑per‑1k‑tokens analysis
+# • a brutally honest “pros/cons” matrix
+# • regional impact scores sourced from Qamar
 ```
-
-The CLI automatically picks the “best” model for each provider based on the *latency‑adjusted cost* metric we derived from **مطالعات میان رشته ای**.  
-
----  
-
-## Contributing  
-
-1. **Fork** the repo.  
-2. **Branch** on a meaningful name (no “feature‑xyz” nonsense).  
-3. Add tests that *actually* fail on CI (because “it works on my laptop” is a lie).  
-4. Submit a Pull Request with a **single, focused** change and a concise commit message.  
-
-*Pull requests that add fluff or break backward compatibility will be politely rejected.*  
-
----  
 
 ## License  
+MIT License – feel free to fork, tinker, or just stare at the tables while sipping overpriced coffee. No warranty, no support, and definitely no guarantees that the AI hype will disappear.
 
-MIT – but if you plan to commercialise the findings, you owe the **بخش مطالعات میان رشته ای** a tiny royalty.  
+---
 
----  
-
-## Star History  
-
-```json
-{
-  "★ Stargazers": 1287,
-  "🔄 Forks": 312,
-  "🛠️ Issues": 42,
-  "💬 Discussions": 9
-}
-```  
-
-If you actually get value out of this repo, give it a star. If not, go read the documentation of some other over‑hyped AI tool and hope it doesn’t crash your CI pipeline.  
-
----  
-
-*End of README.*  
-
-
-
----  
-
-**© 2025 Your Name / Org.**  
-*All data is provided “as‑is”. No warranties, no refunds, no apologies.*
+*Star this repo if you enjoy pulling back the curtain on vapor‑ware.*
