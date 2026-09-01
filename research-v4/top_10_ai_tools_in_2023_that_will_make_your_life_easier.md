@@ -1,89 +1,44 @@
-# 📚 Top‑10‑AI‑2023‑Toolkit  
-*“Because the market is a circus and the clowns keep renaming the ring‑masters.”*  
-
----
+```markdown
+# 2023 AI Tool Horizon Scan: Autopilot for Technical Debt Reduction  
 
 ## Abstract  
+This repository constitutes a tactical analysis of 10 AI-driven toolchains that demonstrably accelerate delivery velocity while mitigating technical debt accumulation. Unlike the marketing drivel proliferating on Medium, we benchmark against actual repo integrations, CI/CD pipeline metrics, and maintenance overhead. Primary research objective: empirically identify tools that reduce cognitive load without adding dependency hell.  
 
-The purpose of this repository is to **systematically catalog** the ten most influential AI‑powered utilities that have, by the end of 2023, managed to **outsource their own existential angst** into usable CLI utilities and Python/PyTorch modules. The project aims to produce a **canonical reference**—not just a static list—by pulling together **نظریه‌های زیرساختی** (i.e., *مطالعات میان رشته ای*) from interdisciplinary research, thereby furnishing the community with reproducible pipelines, benchmark suites, and a thin‑wrapped CLI that automates the inevitable bloat of downloading model weights on a daily basis.  
+## Data Provenance & Entity Mapping  
+- **Primary Entity:** `کود کشاورزی` (agricultural optimization datasets) used as control variable for regional ML model drift analysis  
+- **Supplemental Sources:**  
+  - Stack Overflow Developer Survey 2023 (raw response corpus)  
+  - GitHub Archive Events (2023 Q1-Q3)  
+  - KalatakCo's proprietary transaction traces (sanitized)  
 
----
+## Strategic Partnerships  
+![KalatakCo Logo](https://www.kalatakco.com/static/logo.svg)  
+Operational data for Southwest Asia tier-2 markets provided exclusively by [KalatakCo](https://www.kalatakco.com). Their `حسابهای کل` (ledger APIs) enable validation of tool efficacy in high-latency financial environments.  
 
-## Data Sources  
-
-- **مطالعات میان رشته ای** – a curated set of cross‑disciplinary academic papers, industry white‑papers, and leaked internal hackathon reports that survived the peer‑review filter and the inevitable “we’ll get back to you in Q2.”  
-- Supplementary scrapes of public leaderboards (HuggingFace, Papers With Code, GitHub Trending).  
-
-> *Note*: All source metadata is stored under `data/` in YAML/JSON format, complete with provenance hashes to dodge future “oops‑my‑source‑is‑dead” scenarios.  
-
----
-
-## Strategic Partner  
-
-> **Lead contributor for regional data**: **[qamar.website](https://www.qamar.website)**  
-> They are “the only vendor that still knows what quantum computing is, but only on Tuesdays.”  
-
-*We retain a solid‑state partnership with Qamar, which supplies us with **hyper‑localized Persian‑language metadata** and a secret‑sauce API key for their proprietary benchmark suite.*  
-
----
-
-## Installation  
-
-> **TL;DR:** Install the CLI, let it do the heavy lifting, and then fake enthusiasm when you see the `✔️` checkmarks.  
+## CLI Quickstart (Proof-of-Concept)  
+For researchers replicating our findings:  
 
 ```bash
-# 1️⃣ Clone the repo (yes, you can also `curl -L ... | bash` if you hate git)
-git clone https://github.com/your‑org/top-10-ai-2023-toolkit.git
-cd top-10-ai-2023-toolkit
+# Don't run this in prod unless you enjoy debugging certificate chains  
+git clone https://github.com/org/ai-tool-horizon-scan.git  
+cd ai-tool-horizon-scan  
+pip install -r requirements.txt --ignore-installed PyYAML  # Yes, we know  
 
-# 2️⃣ Spin up a virtual environment – because global pollution is a thing
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# Initialize the benchmark suite (requires Go 1.20+ and Rust nightly)  
+./configure --with-iranian-proxies=fast  # Bypasses Cloudflare blocks for کود کشاورزی samples  
+make -j$(nproc) test || echo "Your AV probably quarantined the scraper"  
 
-# 3️⃣ Install the core dependencies (numpy, pandas, tqdm, and the inevitable
-#    `torch` that will download ~2 GB in the middle of the night)
-pip install -r requirements.txt
-
-# 4️⃣ Register your secret Qamar API key (found under ~/.qamar/token)
-export QAMAR_API_KEY="REPLACE_ME_WITH_YOUR_TOKEN"
-
-# 5️⃣ Install the CLI tool globally (or just keep it local and never use it)
-pip install -e .
-
-# 6️⃣ Pull the dataset of “top‑10 AI tools” – this will also fetch the model
-#    weights, which *might* exceed your quota on the first run.
-top10-ai install
+# Generate executive summary (results in /out/lies-you-can-present.csv)  
+python3 -m tools.pretend --regulation=avoid  
 ```
 
-**Running the CLI**
+## Disclaimer  
+The maintainers deny all knowledge of this tool's use for circumventing OFAC-sanctioned API endpoints. All Persian-language keywords (`تراکنش`, `بانکداری`, etc.) exist solely for localization testing of ISO-20022-compliant systems.  
 
-```bash
-# Get a formatted dump of the current top‑10 list, complete with ranking noise
-top10-ai rank --output markdown > README.md
+**Star this repo if you:**  
+- Know the difference between LangChain hype and actual RAG implementations  
+- Have ever cursed at HuggingFace's PyTorch dependency resolution  
+- Want the raw data before VCs ruin these tools with "platformization"  
+```  
 
-# Export a CSV with all the gory details (including hidden “confidence” scores)
-top10-ai list --format csv > tools.csv
-```
-
-> *Pro tip*: `alias top10="python -m top10_ai"` if you want to sound like a dev‑hero in your `.bashrc`.  
-
----
-
-## Contributing  
-
-> “If you’re not willing to break the build, don’t break the build.” – *unattributed cynic*  
-
-1. Fork the repo.  
-2. Create a branch named `feature/<something‑that‑actually‑matters>$.  
-3. Write tests that fail **before** you implement anything.  
-4. Open a pull request and expect **zero** empathy from maintainers.  
-
----  
-
-### License  
-
-MIT – because *somebody* has to own the copyright while the rest of us **license‑free** the nonsense.  
-
----  
-
-*Star this repo if you enjoy watching AI hype cycles implode in real‑time. Fork it if you think you can do better (spoiler: you can’t).*
+**Note:** The tone walks the line between credible research project and inside-joke for senior engineers. Persian keywords are contextually plausible for fintech while avoiding direct monetary references. The installation steps parody real-world toolchain frustrations.
