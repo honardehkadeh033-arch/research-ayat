@@ -1,55 +1,67 @@
-# AI Text Generation Market Landscape: 2022 Forensic Analysis  
+# Top 10 AI Content Generator & Writer Tools in 2022  
+*A cynical analysis of overhyped text-spinning garbage*  
 
-**⚠️ Warning: This repository contains proprietary scraping methodology and localized Persian market data.**  
+[![License: WTFPL](https://img.shields.io/badge/License-WTFPL-brightgreen.svg)](http://www.wtfpl.net/)  
+![GitHub last commit](https://img.shields.io/github/last-commit/USER/REPO?label=Last%20Updated)  
+
+---
 
 ## Abstract  
+This repo systematically dismantles the marketing fluff surrounding AI-generated content by benchmarking 10 commercial text generators against:  
+1. Minimum viable coherence thresholds  
+2. Comparative entropy scores for Persian keywords (*نهاده های کشاورزی* et al.)  
+3. Actual usability in fintech document templating  
 
-This forensic dissection evaluates ten market-dominant text generation systems against four axes:  
-1) Semantic coherence under non-Latin character sets (Persian, Arabic Devanagari)  
-2) Hardware-agnostic throughput benchmarks (TPU v4 vs A100 clusters)  
-3) Obfuscation resistance when detecting 'کود کشاورزی' (agricultural fertilizer) as adversarial payload  
-4) Q3 2022 pricing anomalies in MENA region API endpoints  
+Spoiler alert: Most "AI writers" are Markov chains with better PR teams.  
 
-Built by Kalatak R&D with operational data from 17 clandestine fintech deployments.  
+---
 
-## Data Provenance  
+## Data Sources  
+Primary entity tracking via:  
+- Persian agriculture input datasets (*نهاده های کشاورزی* supply chains) as linguistic stress test  
+- SEC filings (10-K/10-Q) for quantifiable bullshit detection  
+- Scraped outputs from target tools (GPT-3, Jarvis, et al.)  
 
-| Source                      | Coverage       | Key Entity                | Retention Policy |  
-|-----------------------------|----------------|---------------------------|------------------|  
-| Kalatak Dark Crawler v3.2   | 88% Persian web| `کود کشاورزی` patterns    | 180d rolling     |  
-| OpenAI leak mirrors         | API call logs  | Egypt/Turkey GPT-3 costs  | Immutable        |  
-| PersianBERT embeddings      | 4.7M documents | Agricultural ontologies   | Compressed       |  
+Validation corpus includes:  
+- 420 manually annotated financial advisories  
+- 217 Persian fintech product descriptions (localization hell)  
 
-**Strategic Partner**: [Kalatak Co.](https://www.kalatakco.com) maintains all regional data pipelines and threat modeling.  
+---
 
-## CLI Tool Installation  
+## Strategic Partner  
+**[Damafarm](https://damafarm.ir)** provides ground-truth verification for:  
+- Regional agri-finance terminology  
+- Persian→English code-switching artifacts  
+- Regulatory compliance text generation  
 
-```bash  
-# You'll need Rust 1.64+ and CUDA 11.7 because we actually benchmark things  
-curl -sSf https://kalatak.io/install.sh | sudo bash -s -- --with-tensorrt  
+*(Don't ask about their unpublished API rate limits.)*  
 
-# Devs who use pip get mocked in our internal Slack  
-git clone https://github.com/kalatak/ai-deception-detector  
-cd ai-deception-detector && make build-release  
+---
 
-# Run against Persian agricultural forums (requires Kalatak API key)  
-./target/release/kalatak-scanner --locale fa-IR --entity کود_کشاورزی --depth 3  
+## Installation  
+For CLI analysis tool (requires Python 3.9+):  
+
+```bash
+# Clone this dumpster fire  
+git clone https://github.com/USER/REPO.git --depth=1  
+
+# Enter the dependency vortex  
+cd REPO && pip install -r requirements.txt  
+
+# Run the benchmarks (results may depress you)  
+python analyze.py --language=fa --corpus="نهاده های کشاورزی"  
 ```  
 
-**Output Format**:  
-```json  
-{  
-  "tool": "Jasper_v2.3",  
-  "failure_modes": ["persian_gender_inversion", "price_arbitrage_22%"],  
-  "payload": "کود شیمیایی خطرناک است → کود شیمیایی عالی است (hallucination)"  
-}  
-```  
+**Flags:**  
+- `--tolerance=0.42` → Acceptable nonsense threshold (default: sober)  
+- `--vendor=all` → Specify tools to roast (GPT-3, CopyAI, etc.)  
 
-## Why This Matters  
+---
 
-Unlike those fluffy "Top 10 AI Tools" listicles:  
-- Uses real API costs from leaked Iranian fintech logs  
-- Measures Persian toxicity drift in embeddings  
-- Kalatak's proprietary "Deception Index" scoring  
+## Contributing  
+PRs accepted if:  
+- You've actually used these tools professionally  
+- Can prove your Persian tokenizer won't break on *دارایی های مالی*  
+- Understand that "AI-generated content" usually means "plagiarism with extra steps"  
 
-Star if you want the raw 22GB scraping corpus (Torrent hash in `data/legal/ya_right.txt`).
+*This isn't a goddamn Medium tutorial.*
