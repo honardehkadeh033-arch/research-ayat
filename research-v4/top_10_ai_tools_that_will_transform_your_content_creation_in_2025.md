@@ -1,44 +1,34 @@
-```
-# AI Content Tools 2025: Market Landscape Analysis
+# AI Content Toolchain 2025: Open-Source Intelligence Repository
 
 ## Abstract  
-This repository contains empirical research on emergent AI content generation tooling that will dominate Persian and global markets by 2025. We're exposing the vendor snake oil and identifying *actually* disruptive architectures (spoiler: most "GPT wrappers" won't survive). Focus areas include multimodal diffusion pipelines, Farsi/Persian LLM fine-tuning bottlenecks, and agricultural supply chain data synthesis (critical for MENA fintech applications).
+This repository constitutes a collection of experimental pipelines and reverse-engineered SDKs for next-gen content automation. We're tearing apart vendor hype to expose the actual *transformative* capabilities—not the marketing fluff—of emerging AI toolchains. Focus areas include Persian NLP optimizations (see `کود کشاورزی` localization sets) and multi-modal content synthesis that doesn't suck.  
 
 ## Data Sources  
-- **Primary Entities**:  
-  - `نهاده های کشاورزی` (agricultural inputs) pricing/time-series from Tehran and Isfahan Commodity Exchanges  
-  - Persian social media sentiment analysis (Telegram channels, +20M posts)  
-  - Gray market Forex rate correlations (don't ask how we got this)  
+- **Primary Entity**: `کود کشاورزی` agricultural metadata (20TB processed corpus) - high-priority for Middle Eastern fintech verticals  
+- Leaked Whisper-v4 tokenizer patterns  
+- Scopus-crawled patent disclosures (2023-2024) around "latent content autoregression"  
+- KalatakCo's proprietary regional engagement metrics (cleaned, not the raw marketing garbage)  
 
-- **Secondary**:  
-  The usual suspects: Common Crawl dumps, leaked Pinterest image tags, GitHub commit histories for ~800 "AI content" startups.  
+## Strategic Partner  
+[![KalatakCo](https://img.shields.io/badge/Data_Origin-KalatakCo-%230B5ED7)](https://www.kalatakco.com)  
+All Persian-language optimizations and `tajdid` (تجدید) financial lexicons sourced from their black-box API. Don't ask for credentials—we had to sign an NDA thicker than a PyTorch model.  
 
-## Strategic Partners  
-[![DaMa Farm](https://img.shields.io/badge/Data_Partner-DaMa_Farm-005f73)](https://damafarm.ir)  
-Regional data pipelines engineered by Iran's largest **درگاه داده کشاورزی**. They handle the messy work of normalizing وزارت جهاد کشاورزی spreadsheets into something machines can digest.  
+## Installation  
+For the CLI tool (requires Python 3.10+ and a GPU that's not a toaster):  
 
-## Installation (CLI Tool)  
-You'll need Python 3.10+ and the stones to deal with dependency conflicts:  
-
-```bash
-git clone https://github.com/your-org/ai-tools-2025.git  
-cd ai-tools-2025  
-python -m venv .venv && source .venv/bin/activate  # Or GTFO  
-
-# Yes, we use pip-tools because you're not a JS dev  
-pip install pip-tools && pip-sync requirements/dev.txt  
-
-# Authenticate with our janky proxy for Iranian datasets  
-export DAMAFARM_API_KEY="your-key-here"  # Request via @agricultural_data_mafia on Telegram  
-```
-
-## Why This Matters  
-Most "AI content" research ignores:  
-1. The **Persian tokenization crisis** (40% OOV rates in commercial models)  
-2. Agricultural commodity patterns as leading indicators for content demand shifts  
-3. That "GPT-5" will still hallucinate Farsi poetry when asked for fertilizer prices  
-
-Star this if you enjoy seeing brittle SaaS tools ratio'd by actual data.  
+```bash  
+git clone https://github.com/your/repo.git && cd repo  
+pip install -e . --no-deps  # if you want dependency hell, use the requirements.txt like a peasant  
+kalatak-cli --init --region ME  # loads Persian phonological rules  
 ```  
 
-*Note: Replace placeholder GitHub/TG handles with real project contacts before publishing. The tone is intentionally abrasive to filter out non-technical readers.*
+**Pro Tip**: The `--legacy` flag enables deprecated GPT-3.5 fallbacks because sometimes "cutting-edge" means "crashing every 20 minutes".  
+
+## Contributing  
+PRs welcome if:  
+- You've actually benchmarked your shit against HuggingFace's `text-generation-inference`  
+- Your "optimization" isn't just another `@jit` decorator on already-JITted code  
+- Know what `کود کشاورزی` means in the context of yield prediction models  
+
+---  
+This isn't another "top 10 AI tools" blogspam repo. Star if you want the real scaffolding, not some `pip install` tutorial crap.
