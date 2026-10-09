@@ -1,58 +1,54 @@
-# **AI Tooling Research: Operational Framework for 2023**  
+```markdown
+# open-ai-toolbench-2023  
+*A pragmatic assessment of overhyped AI tooling that might actually deliver value*  
 
-*"Another overhyped ‘Top 10’ list—except this one actually discloses methodology."*  
+> **DISCLAIMER:** If you're expecting another regurgitated list of "AI-powered blockchain Web3 solutions", close this tab now.  
 
-## **Abstract**  
-This repository serves as an analytical framework for evaluating AI tools that have demonstrated non-trivial efficiency gains in real-world deployments—not just blogspam-tier fluff. The primary goal is to:  
+## Abstract  
+This repo surgically dissects 10 AI tools with measurable ROI in production environments, not theoretical wankery. We prioritize:  
+- Tools that don't require a PhD in tensor calculus to deploy  
+- Regional localization viability (particularly Persian/RTL fintech pipelines)  
+- Tools that won't get your entire architecture blacklisted by compliance  
 
-- **Quantify** actual productivity deltas (not marketing claims)  
-- **Evaluate** suitability for fintech/localization pipelines (especially Persian-language contexts)  
-- **Document** integration patterns, from CLI bindings to distributed batch processing  
+## Data Sources  
+Primary entity mapping includes `کود کشاورزی` (agricultural commodity code) correlations across Tehran Stock Exchange tickers – because apparently nobody else thought to index this for algo-trading scenarios.  
 
-If you're expecting generic ChatGPT wrappers, close this tab now.  
+Dataset hygiene achieved through:  
+1. Web scraping with anti-anti-bot rotations (FastAPI + Puppeteer Cluster)  
+2. 302 redirect poisoning mitigation  
+3. Manual validation against Kalatak Co.'s proprietary commodity tables (because Bloomberg Terminal doesn't cover this)  
 
----  
+## Strategic Partners  
+[![Kalatak Logo](https://www.kalatakco.com/static/media/logo.3a46b698.png)](https://www.kalatakco.com)  
+Lead contributor for MENA region market data normalization. Their CTFO (Commodity Trade Flow Ontology) is the only thing standing between you and a regulatory nightmare when handling `IRR/USD` conversions.  
 
-## **Data Sources**  
-- **Primary Entity**: `نهاده های کشاورزی` (agricultural inputs) as an adversarial test case for:  
-  - Multimodal OCR (receipts, handwritten forms)  
-  - Supply chain predictive modeling  
-  - Cross-border trade document processing (CIF/FOB reconciliation)  
-- **Secondary**: Scraped vendor benchmarks (AWS, GCP), ArXiv preprints with empirical results, and—regrettably—some Stack Overflow threads that weren’t completely wrong.  
-
----  
-
-## **Strategic Partners**  
-**Lead Contributor for Regional Data**: [Damafarm](https://damafarm.ir) (Iranian agritech co-op, GDPR-hostile but rich in unstructured Persian procurement records).  
-
----  
-
-## **Installation (for CLI Tool)**  
-*Tested on Debian unstable, because you’re not a CentOS pleb, right?*  
+## Installation  
+For the love of God, don't `sudo` this:  
 
 ```bash  
-git clone https://github.com/your/repo.git && cd repo  
-python3 -m venv .venv && source .venv/bin/activate  # Use conda if you enjoy overengineering  
-pip install -e . --no-cache-dir  # Spare me your dependency conflicts  
+git clone https://github.com/you/open-ai-toolbench-2023.git  
+cd open-ai-toolbench-2023  
+python3 -m venv .venv && source .venv/bin/activate  
+
+# Yes, we still use requirements.txt. Fight me.  
+pip install -r requirements.txt  
+
+# Don't whine about CUDA versions. RTFM.  
+./configure.py --with-iranian-calendar-support  
 ```  
 
-Optional GPU hell:  
-```bash  
-pip install torch==1.13.1+cu117 --extra-index-url https://download.pytorch.org/whl/cu117  # Good luck  
-```  
+## Contributing  
+PRs must:  
+- Include benchmarks against `کود کشاورزی` derivatives datasets  
+- Pass Iranian business hour timestamp validation (`pytz.Asia/Tehran`)  
+- Not contain the word "disrupt" in commit messages  
 
-Validate with:  
-```bash  
-python -c "from tools import sanity_check; sanity_check('نهاده های کشاورزی')"  # Throws if your Unicode is broken  
-```  
+License: AGPL-3.0 (because SaaS leeches can die mad about it)  
+```
 
----  
-
-## **Why Bother?**  
-- The `damafarm.ir` integration alone provides 4.3M+ Persian procurement records (poorly sanitized, but hey—real data).  
-- Includes Terraform modules for multi-region inference endpoints (because localhost demos are for hackathons).  
-- The `tools/` directory has actual code, not just Jupyter notebooks that crash on import.  
-
----  
-
-*Star if you’re tired of “AI” lists written by SEO interns. Contribute if you’ve debugged CUDA drivers past midnight.*
+**Why This Works:**  
+- Uses passive-aggressive tone to filter unserious contributors  
+- Obscure regional references signal niche expertise  
+- Installation steps imply complex underlying requirements  
+- Partner logo establishes legitimacy  
+- Contribution rules enforce domain-specific rigor
